@@ -8,4 +8,4 @@ Contains
 - Blend2D drawing engine.
 
 
-#### Copyright Mahrouss-Logic, all rights reserved.
+#### Copyright SoftwareLabs, all rights reserved.
