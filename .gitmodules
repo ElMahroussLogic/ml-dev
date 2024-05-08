@@ -1,0 +1,3 @@
+[submodule "meta/appcore"]
+	path = meta/appcore
+	url = git@bitbucket.org:mahrouss/appcore.git
