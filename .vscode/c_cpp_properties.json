@@ -4,7 +4,10 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/meta/appcore/Headers",
-                "${workspaceFolder}/meta/appcore/"
+                "${workspaceFolder}/meta/appcore/",
+                "${workspaceFolder}/CoreGraphics/",
+                "${workspaceFolder}/CoreAnimation/"
+                
             ],
             "defines": [],
             "macFrameworkPath": [

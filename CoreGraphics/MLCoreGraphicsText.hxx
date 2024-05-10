@@ -6,8 +6,7 @@
 
 #pragma once
 
-#include <Foundation.hxx>
+#include <MLCoreGraphicsContext.hxx>
 #include <MLFont.hxx>
 
 class MLCoreGraphicsText;
-
