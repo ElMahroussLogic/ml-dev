@@ -40,18 +40,39 @@ public:
   /// @brief Move to coord.
   /// @param T the text itself.
   /// @return the context.
-  virtual MLCoreGraphicsContext& Move(CGReal X, CGReal Y) = 0;
+  virtual MLCoreGraphicsContext &Move(CGReal X, CGReal Y) = 0;
 
   /// @brief Write Text to image.
   /// @param T the text itself.
   /// @return the context.
-  virtual MLCoreGraphicsContext& Text(const CGCharacter* T) = 0;
+  virtual MLCoreGraphicsContext &Text(const CGCharacter *T) = 0;
 
-  virtual MLCoreGraphicsContext &FontFace(const CGCharacter *T) = 0;
+  /// @brief
+  /// @param T
+  /// @return
+  virtual MLCoreGraphicsContext &Font(const CGCharacter *T,
+                                            const bool isBold) = 0;
+  /// @brief
+  /// @param T
+  /// @return
+  virtual MLCoreGraphicsContext &TextSize(const CGReal T) = 0;
 
-  virtual MLCoreGraphicsContext &FontSize(const CGReal T) = 0;
+  /// @brief
+  /// @param width
+  /// @param height
+  /// @param radius
+  /// @return
+  virtual MLCoreGraphicsContext &Rect(CGReal width, CGReal height,
+                                      CGReal radius) = 0;
 
-  virtual MLCoreGraphicsContext &WriteAs(const CGCharacter *T) = 0;
+  /// @brief Write to file as PNG using T.
+  /// @param T
+  /// @return
+  virtual MLCoreGraphicsContext &FlushAs(const CGCharacter *T) = 0;
+
+  virtual MLCoreGraphicsContext &Color(CGReal R, CGReal G, CGReal B, CGReal A) = 0;
+
+  virtual MLCoreGraphicsContext &Stroke(CGReal strokeStrength) = 0;
 };
 
 /// @brief Request a context regarding the features set.
@@ -60,7 +81,8 @@ public:
 /// @note if no, please check for feature with operator& inside
 /// MLCoreGraphicsContext.
 /// @return The new graphics context.
-ML_IMPORT MLCoreGraphicsContext *CGRequestContext(CGSizeT featureSet, bool strict);
+ML_IMPORT MLCoreGraphicsContext* CGRequestContext(CGSizeT featureSet, bool strict,
+                                                  CGReal width, CGReal height);
 
 /// @brief Releases a Core Graphics context.
 /// @param context The context itself.

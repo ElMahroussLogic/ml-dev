@@ -12,9 +12,10 @@
 /// @param strict should we require all the features to be here?
 /// @note if no, please check for feature with operator& inside MLCoreGraphicsContext.
 /// @return The new graphics context.
-ML_IMPORT MLCoreGraphicsContext* CGRequestContext(CGSizeT featureSet, bool strict)
+ML_IMPORT MLCoreGraphicsContext* CGRequestContext(CGSizeT featureSet, bool strict,
+                                                  CGReal width, CGReal height)
 {
-    MLCoreGraphicsContext* context = new MLCoreGraphicsContextCairo();
+    MLCoreGraphicsContext* context = new MLCoreGraphicsContextCairo(width, height);
     return context;
 }
 
