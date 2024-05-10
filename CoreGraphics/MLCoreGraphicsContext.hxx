@@ -1,7 +1,7 @@
 /*
  * Created on Fri May 10 2024
  *
- * Copyright (c) 2024 Oreala B.V
+ * Copyright (c) 2024 SystemLabs B.V
  */
 
 #pragma once
@@ -11,47 +11,58 @@
 
 typedef double CGReal;
 typedef size_t CGSizeT;
+typedef char CGCharacter;
 
 /// @brief Core Graphics context.
 class MLCoreGraphicsContext {
 public:
-    explicit MLCoreGraphicsContext() = default;
-    virtual ~MLCoreGraphicsContext() = default;
+  explicit MLCoreGraphicsContext() = default;
+  virtual ~MLCoreGraphicsContext() = default;
 
-    MLCoreGraphicsContext& operator=(const MLCoreGraphicsContext&) = default;
-    MLCoreGraphicsContext(const MLCoreGraphicsContext&) = default;
+  MLCoreGraphicsContext &operator=(const MLCoreGraphicsContext &) = default;
+  MLCoreGraphicsContext(const MLCoreGraphicsContext &) = default;
 
 public:
-    /// @brief Draw vertices. 
-    /// @param floatVerts ther vertices.
-    /// @param vertCnt the vertices count
-    virtual void Draw(CGReal* floatVerts, CGSizeT vertCnt) = 0;
+  /// @brief Grants a new feature to Context.
+  /// @param flag the feature flag.
+  virtual MLCoreGraphicsContext &operator|=(const CGSizeT flag) = 0;
 
-    /// @brief Draw vertices starting from an index. 
-    /// @param floatVerts ther vertices.
-    /// @param vertCnt the vertices count
-    /// @param indiceStart where to start?
-    virtual void DrawIndexed(CGReal* floatVerts, CGSizeT vertCnt,
-                            CGSizeT indiceStart) = 0;
+  /// @brief Revokes a new feature to Context.
+  /// @param flag the feature flag.
+  virtual MLCoreGraphicsContext &operator&=(const CGSizeT flag) = 0;
 
-    /// @brief Grants a new feature to Context.
-    /// @param flag the feature flag.
-    virtual MLCoreGraphicsContext& operator|=(const CGSizeT flag) = 0;
+  /// @brief Check for a feature.
+  /// @param flag The feature in question.
+  /// @retval true feature exists.
+  /// @retval false not supported by this context.
+  virtual bool operator&(const CGSizeT flag) = 0;
 
-    /// @brief Revokes a new feature to Context.
-    /// @param flag the feature flag.
-    virtual MLCoreGraphicsContext& operator&=(const CGSizeT flag) = 0;
+  /// @brief Move to coord.
+  /// @param T the text itself.
+  /// @return the context.
+  virtual MLCoreGraphicsContext& Move(CGReal X, CGReal Y) = 0;
 
-    /// @brief Check for a feature.
-    /// @param flag The feature in question.
-    /// @retval true feature exists.
-    /// @retval false not supported by this context.
-    virtual bool operator&(const CGSizeT flag) = 0;
+  /// @brief Write Text to image.
+  /// @param T the text itself.
+  /// @return the context.
+  virtual MLCoreGraphicsContext& Text(const CGCharacter* T) = 0;
+
+  virtual MLCoreGraphicsContext &FontFace(const CGCharacter *T) = 0;
+
+  virtual MLCoreGraphicsContext &FontSize(const CGReal T) = 0;
+
+  virtual MLCoreGraphicsContext &WriteAs(const CGCharacter *T) = 0;
 };
 
 /// @brief Request a context regarding the features set.
 /// @param featureSet the feature set.
 /// @param strict should we require all the features to be here?
-/// @note if no, please check for feature with operator& inside MLCoreGraphicsContext.
+/// @note if no, please check for feature with operator& inside
+/// MLCoreGraphicsContext.
 /// @return The new graphics context.
-ML_IMPORT MLCoreGraphicsContext* CGRequestContext(CGSizeT featureSet);
+ML_IMPORT MLCoreGraphicsContext *CGRequestContext(CGSizeT featureSet, bool strict);
+
+/// @brief Releases a Core Graphics context.
+/// @param context The context itself.
+/// @return This function returns void.
+ML_IMPORT void CGReleaseContext(MLCoreGraphicsContext *context);
