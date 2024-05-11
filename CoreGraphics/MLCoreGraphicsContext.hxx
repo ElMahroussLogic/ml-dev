@@ -99,7 +99,20 @@ public:
 	/// @brief draw Gaussian blur.
 	/// @param radius the radius of the blur.
 	/// @return
-	virtual MLCoreGraphicsContext* GaussianBlur(CGReal radius) = 0;
+	virtual MLCoreGraphicsContext* GaussianBlur(CGReal	radius,
+												CGSizeT width,
+												CGSizeT height) = 0;
+
+	/// @brief Load image (PNG) from disk.
+	/// @param Path PNG image.
+	/// @return context ptr.
+	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path, CGSizeT W, CGSizeT H, CGReal X, CGReal Y) = 0;
+
+	/// @brief Scale context.
+	/// @param X
+	/// @param Y
+	/// @return
+	virtual MLCoreGraphicsContext* Scale(CGReal X, CGReal Y) = 0;
 
 	/// @brief To string method.
 	/// @return the class as a string
@@ -123,7 +136,7 @@ ML_IMPORT void CGReleaseContext(MLCoreGraphicsContext* context);
 /// @brief Line cap enum.
 enum MLCoreGraphicsLineCap
 {
-	MLCoreGraphicsLineCapNormal,
-	MLCoreGraphicsLineCapRounded,
-	MLCoreGraphicsLineCapSquare
+	MLCoreGraphicsLineCapNormal,  /// no cap.
+	MLCoreGraphicsLineCapRounded, /// rounded cap.
+	MLCoreGraphicsLineCapSquare	  /// square cap.
 };
