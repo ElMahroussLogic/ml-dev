@@ -138,7 +138,7 @@ public:
   /// @brief Draws a gaussian blur, (taken from Cairo cookbook.)
   /// @param radius 
   /// @return 
-  virtual MLCoreGraphicsContext *Blur(CGReal radius) {
+  virtual MLCoreGraphicsContext *GaussianBlur(CGReal radius) {
     cairo_surface_t *tmp;
     int width, height;
     int src_stride, dst_stride;
@@ -270,12 +270,23 @@ MLCoreGraphicsContextCairo::MLCoreGraphicsContextCairo(const CGReal width,
   this->Font("serif", false)->TextSize(12.0);
 }
 
+#ifdef __MAHROUSS__
+#include <cgx.h>
+#endif
+
 MLCoreGraphicsContextCairo::~MLCoreGraphicsContextCairo() {
 
   cairo_destroy(mCairo);
 
-  if (*mOutputPath)
+#ifndef __MAHROUSS__
+  if (*mOutputPath) {
     cairo_surface_write_to_png(mSurface, mOutputPath);
+  }
+#else
+  cgx_surface_write_to_screen(mSurface);
+#endif
 
   cairo_surface_destroy(mSurface);
 }
+
+/// TODO: Port cairo as libcgx on kernel.
