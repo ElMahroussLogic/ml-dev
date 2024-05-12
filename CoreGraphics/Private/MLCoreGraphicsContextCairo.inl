@@ -139,6 +139,7 @@ public:
 	virtual MLCoreGraphicsContext* LineTo(CGReal start, CGReal finish)
 	{
 		cairo_line_to(mCairo, start, finish);
+
 		return this;
 	}
 
@@ -165,7 +166,7 @@ public:
 	/// @brief Draws a gaussian blur, (taken from Cairo cookbook.)
 	/// @param radius
 	/// @return
-	virtual MLCoreGraphicsContext* GaussianBlur(CGReal	radius,
+	virtual MLCoreGraphicsContext* Blur(CGReal	radius,
 												CGSizeT width,
 												CGSizeT height)
 	{
@@ -330,6 +331,18 @@ public:
 		return this;
 	}
 
+	/// @note placeholder for now.
+	virtual MLCoreGraphicsContext* Start() 
+	{
+		return this;
+	}
+
+	/// @note placeholder for now.
+	virtual MLCoreGraphicsContext* End() 
+	{
+		return this;
+	}
+
 private:
 	CGSizeT			 mContextFlags{0};
 	cairo_surface_t* mSurface{nullptr};
@@ -359,7 +372,6 @@ MLCoreGraphicsContextCairo::MLCoreGraphicsContextCairo(const CGReal width,
 
 MLCoreGraphicsContextCairo::~MLCoreGraphicsContextCairo()
 {
-
 	cairo_destroy(mCairo);
 
 #ifndef __MAHROUSS__

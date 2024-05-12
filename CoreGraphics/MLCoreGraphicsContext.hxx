@@ -99,7 +99,7 @@ public:
 	/// @brief draw Gaussian blur.
 	/// @param radius the radius of the blur.
 	/// @return
-	virtual MLCoreGraphicsContext* GaussianBlur(CGReal	radius,
+	virtual MLCoreGraphicsContext* Blur(CGReal	radius,
 												CGSizeT width,
 												CGSizeT height) = 0;
 
@@ -117,6 +117,10 @@ public:
 	/// @brief To string method.
 	/// @return the class as a string
 	virtual const MLString toString() override;
+
+	virtual MLCoreGraphicsContext* Start() = 0;
+	virtual MLCoreGraphicsContext* End() = 0;
+
 };
 
 /// @brief Request a context regarding the features set.
