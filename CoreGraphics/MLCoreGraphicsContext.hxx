@@ -70,7 +70,7 @@ public:
 	/// @brief Write to file as PNG using T.
 	/// @param T file name.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* FlushAs(const CGCharacter* T) = 0;
+	virtual MLCoreGraphicsContext* WriteTo(const CGCharacter* T) = 0;
 
 	/// @brief Set color or current pen.
 	/// @param R Red channel.

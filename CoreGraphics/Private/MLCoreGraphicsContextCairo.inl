@@ -4,6 +4,10 @@
 #include <cairo/cairo.h>
 #include <math.h>
 #include <string.h>
+#include <string>
+#include <filesystem>
+
+#define kRsrcProtocol "rsrc://"
 
 /// @file: MLCoreGraphicsContextCairo.inl
 /// @brief: Cairo backend for multiplatform code.
@@ -80,9 +84,17 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* FlushAs(const CGCharacter* T)
+	virtual MLCoreGraphicsContext* WriteTo(const CGCharacter* T)
 	{
-		memcpy(mOutputPath, T, strlen(T));
+		std::basic_string<CGCharacter> strPath = T;
+
+		if (strPath.find(kRsrcProtocol) != std::string::npos)
+		{
+			strPath.replace(strPath.find(kRsrcProtocol), strlen(kRsrcProtocol),
+							std::filesystem::current_path().string() + "/");
+		}
+
+		memcpy(mOutputPath, strPath.c_str(), strPath.size());
 		return this;
 	}
 
@@ -167,8 +179,8 @@ public:
 	/// @param radius
 	/// @return
 	virtual MLCoreGraphicsContext* Blur(CGReal	radius,
-												CGSizeT width,
-												CGSizeT height)
+										CGSizeT width,
+										CGSizeT height)
 	{
 		cairo_surface_t* tmp;
 		int				 src_stride, dst_stride;
@@ -176,7 +188,7 @@ public:
 		uint8_t *		 src, *dst;
 		uint32_t *		 s, *d, a, p;
 		int				 i, j, k;
-		uint8_t			 kernel[17];
+		uint8_t			 kernel[256];
 		const int		 size = ML_ARRAY_LENGTH(kernel);
 		const int		 half = size / 2;
 
@@ -225,17 +237,17 @@ public:
 		}
 
 		auto heightTmp = height;
-		auto widthTmp = width;
+		auto widthTmp  = width;
 
 		/// Apply some translations according to a magic number '64'.
 
 		constexpr auto cMagicNumber = 2; // ...?
-		
+
 		if (width > mX)
-			width = widthTmp+(((widthTmp % cMagicNumber)) + mX);
+			width = widthTmp + (((widthTmp % cMagicNumber)) + mX);
 
 		if (height > mY)
-			height = heightTmp+(((heightTmp % cMagicNumber)) + mY);
+			height = heightTmp + (((heightTmp % cMagicNumber)) + mY);
 
 		/* Horizontally blur from mSurface -> tmp */
 		for (i = mY; i < (height); i++)
@@ -311,7 +323,15 @@ public:
 
 	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path, CGSizeT W, CGSizeT H, CGReal X, CGReal Y)
 	{
-		auto image = cairo_image_surface_create_from_png(Path);
+		std::basic_string<CGCharacter> strPath = Path;
+
+		if (strPath.find(kRsrcProtocol) != std::string::npos)
+		{
+			strPath.replace(strPath.find(kRsrcProtocol), strlen(kRsrcProtocol),
+							std::filesystem::current_path().string() + "/");
+		}
+
+		auto image = cairo_image_surface_create_from_png(strPath.c_str());
 
 		cairo_set_source_surface(mCairo, image, X, Y);
 
@@ -332,14 +352,34 @@ public:
 	}
 
 	/// @note placeholder for now.
-	virtual MLCoreGraphicsContext* Start() 
+	virtual MLCoreGraphicsContext* Start()
 	{
+		mSurface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, mWidth, mHeight);
+		mCairo = cairo_create(mSurface);
+
 		return this;
 	}
 
 	/// @note placeholder for now.
-	virtual MLCoreGraphicsContext* End() 
+	virtual MLCoreGraphicsContext* End()
 	{
+		ML_MUST_PASS(mSurface);
+
+#ifndef __MAHROUSS__
+		if (*mOutputPath)
+		{
+			cairo_surface_write_to_png(mSurface, mOutputPath);
+		}
+#else
+		cgx_surface_write_to_screen(mSurface);
+#endif
+
+		cairo_surface_destroy(mSurface);
+		mSurface = nullptr;
+
+		cairo_destroy(mCairo);
+		mCairo = nullptr;
+
 		return this;
 	}
 
@@ -358,12 +398,7 @@ MLCoreGraphicsContextCairo::MLCoreGraphicsContextCairo(const CGReal width,
 													   const CGReal height)
 	: mWidth(width), mHeight(height)
 {
-	ML_MUST_PASS(width && height);
-
-	mSurface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, width, height);
-	mCairo	 = cairo_create(mSurface);
-
-	this->Font("serif", false)->TextSize(12.0);
+	ML_MUST_PASS(width > 0 && height > 0);
 }
 
 #ifdef __MAHROUSS__
@@ -373,17 +408,6 @@ MLCoreGraphicsContextCairo::MLCoreGraphicsContextCairo(const CGReal width,
 MLCoreGraphicsContextCairo::~MLCoreGraphicsContextCairo()
 {
 	cairo_destroy(mCairo);
-
-#ifndef __MAHROUSS__
-	if (*mOutputPath)
-	{
-		cairo_surface_write_to_png(mSurface, mOutputPath);
-	}
-#else
-	cgx_surface_write_to_screen(mSurface);
-#endif
-
-	cairo_surface_destroy(mSurface);
 }
 
 /// TODO: Port cairo as libcgx on kernel.
