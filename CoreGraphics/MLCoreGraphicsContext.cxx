@@ -13,7 +13,7 @@
 /// @note if no, please check for feature with operator& inside
 /// MLCoreGraphicsContext.
 /// @return The new graphics context.
-ML_IMPORT MLCoreGraphicsContext*
+ML_EXPORT MLCoreGraphicsContext*
 		  CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height)
 {
 	MLCoreGraphicsContext* context =
@@ -24,7 +24,7 @@ ML_IMPORT MLCoreGraphicsContext*
 /// @brief Releases a Core Graphics context.
 /// @param context The context itself.
 /// @return This function returns void.
-ML_IMPORT void CGReleaseContext(MLCoreGraphicsContext* context)
+ML_EXPORT void CGReleaseContext(MLCoreGraphicsContext* context)
 {
 	if (context)
 	{

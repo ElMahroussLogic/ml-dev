@@ -7,6 +7,10 @@
 #include <string>
 #include <filesystem>
 
+#ifdef __MAHROUSS__
+#include <cgx.h>
+#endif
+
 #define kRsrcProtocol "rsrc://"
 
 /// @file: MLCoreGraphicsContextCairo.inl
@@ -401,13 +405,9 @@ MLCoreGraphicsContextCairo::MLCoreGraphicsContextCairo(const CGReal width,
 	ML_MUST_PASS(width > 0 && height > 0);
 }
 
-#ifdef __MAHROUSS__
-#include <cgx.h>
-#endif
-
 MLCoreGraphicsContextCairo::~MLCoreGraphicsContextCairo()
 {
 	cairo_destroy(mCairo);
 }
 
-/// TODO: Port cairo as libcgx on kernel.
+/// TODO: Port cairo as libcgx as a kernel driver.
