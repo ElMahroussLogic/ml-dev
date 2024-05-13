@@ -1,3 +1,5 @@
+![Kernel](meta/Logo.svg)
+
 # New OS graphics stack.
 
 Contains
