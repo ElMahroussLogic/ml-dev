@@ -4,20 +4,20 @@
  * Copyright (c) 2024 SoftwareLabs B.V
  */
 
-#include <MLCoreGraphicsContext.hxx>
+#include <CoreGraphics.hxx>
 #include <MLString.hxx>
 #include <string.h>
 
 int main(int argc, char const* argv[])
 {
-	MLCoreGraphicsContext* context = CGRequestContext(0, false, 1000, 666);
+	MLCoreGraphicsContext* context = CGRequestContext(0, 0, 1000, 666);
 
 	context->Start()->Image("rsrc://CanvasBackground.png", 1000, 666, 0, 0);
 
-	context->Color(1, 1, 1, 0.200)->Move(50.0, 100.0)->Rectangle(200, 200, 0)->Blur(400, 200, 200);
+	context->Image("rsrc://CanvasLetThereBeLight.png", 300, 300, 30, 30);
 
-	context->Color(.2, .2, .2, 1);
-	context->Stroke(0.5);
+	context->Color(1.0, 1.0, 1.0, .4)->Move(0.0, 0.0)->Rectangle(1000, 666, 0)->Blur(1666, 1000, 666);
+	context->Color(1.0, 1.0, 1.0, 1.0)->Stroke(5.0);
 
 	context->WriteTo("rsrc://CanvasExample.png")->End();
 

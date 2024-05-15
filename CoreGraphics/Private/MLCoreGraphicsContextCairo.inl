@@ -179,10 +179,10 @@ public:
 		return this;
 	}
 
-	/// @brief Draws a gaussian blur, (taken from Cairo cookbook.)
-	/// @param radius
+	/// @brief Draws a gaussian blur. (taken from Cairo cookbook.)
+	/// @param radius blur's radius
 	/// @return
-	virtual MLCoreGraphicsContext* Blur(CGReal	radius,
+	virtual MLCoreGraphicsContext* Blur(CGReal radius,
 										CGSizeT width,
 										CGSizeT height)
 	{
@@ -281,7 +281,8 @@ public:
 					w += ((p >> 0) & 0xff) * kernel[k];
 				}
 
-				d[j] = (x / a << 24) | (y / a << 16) | (z / a << 8) | w / a;
+				auto rgb = (x / a << 24) | (y / a << 16) | (z / a << 8) | w / a;
+				d[j] = rgb;
 			}
 		}
 
@@ -314,7 +315,9 @@ public:
 					z += ((p >> 8) & 0xff) * kernel[k];
 					w += ((p >> 0) & 0xff) * kernel[k];
 				}
-				d[j] = (x / a << 24) | (y / a << 16) | (z / a << 8) | w / a;
+
+				auto rgb = (x / a << 24) | (y / a << 16) | (z / a << 8) | w / a;
+				d[j] = rgb;
 			}
 		}
 
@@ -325,7 +328,9 @@ public:
 		return this;
 	}
 
-	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path, CGSizeT W, CGSizeT H, CGReal X, CGReal Y)
+	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path, 
+										CGSizeT W, CGSizeT H, 
+										CGReal X, CGReal Y)
 	{
 		std::basic_string<CGCharacter> strPath = Path;
 
@@ -361,13 +366,15 @@ public:
 		mSurface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, mWidth, mHeight);
 		mCairo = cairo_create(mSurface);
 
+		cairo_set_source_surface(mCairo, mSurface, 0, 0);
+
 		return this;
 	}
 
 	/// @note placeholder for now.
 	virtual MLCoreGraphicsContext* End()
 	{
-		ML_MUST_PASS(mSurface);
+		if (!mSurface || !mCairo) return this;
 
 #ifndef __MAHROUSS__
 		if (*mOutputPath)
@@ -393,7 +400,7 @@ private:
 	cairo_t*		 mCairo{nullptr};
 	CGReal			 mWidth{0};
 	CGReal			 mHeight{0};
-	CGCharacter		 mOutputPath[255];
+	CGCharacter		 mOutputPath[255] = {0};
 	CGReal			 mX{0};
 	CGReal			 mY{0};
 };
@@ -407,7 +414,7 @@ MLCoreGraphicsContextCairo::MLCoreGraphicsContextCairo(const CGReal width,
 
 MLCoreGraphicsContextCairo::~MLCoreGraphicsContextCairo()
 {
-	cairo_destroy(mCairo);
+	this->End();
 }
 
 /// TODO: Port cairo as libcgx as a kernel driver.

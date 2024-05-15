@@ -96,15 +96,14 @@ public:
 	/// @return
 	virtual MLCoreGraphicsContext* LineTo(CGReal start, CGReal finish) = 0;
 
-	/// @brief draw Gaussian blur.
-	/// @param radius the radius of the blur.
-	/// @return
+	/// @brief Draws a gaussian blur.
+	/// @param radius blur's radius
 	virtual MLCoreGraphicsContext* Blur(CGReal	radius,
-												CGSizeT width,
-												CGSizeT height) = 0;
+										CGSizeT width,
+										CGSizeT height) = 0;
 
 	/// @brief Load image (PNG) from disk.
-	/// @param Path PNG image.
+	/// @param Path The PNG image path to read on.
 	/// @return context ptr.
 	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path, CGSizeT W, CGSizeT H, CGReal X, CGReal Y) = 0;
 
@@ -118,9 +117,19 @@ public:
 	/// @return the class as a string
 	virtual const MLString toString() override;
 
+public:
+	/// @brief Start drawing.
+	/// @return
 	virtual MLCoreGraphicsContext* Start() = 0;
+
+	/// @brief End drawing, flush.
+	/// @return
 	virtual MLCoreGraphicsContext* End() = 0;
 
+private:
+	friend class MLCoreGraphicsPen;
+	friend class MLCoreGraphicsShape;
+	friend class MLCoreGraphicsShader;
 };
 
 /// @brief Request a context regarding the features set.
