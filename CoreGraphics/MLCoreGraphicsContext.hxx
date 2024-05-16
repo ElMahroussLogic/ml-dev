@@ -14,6 +14,11 @@ typedef double CGReal;
 typedef size_t CGSizeT;
 typedef char   CGCharacter;
 
+typedef struct MLCoreGraphicsPoint
+{
+	CGReal X, Y;
+} MLCoreGraphicsPoint;
+
 /// @brief Core Graphics context.
 class MLCoreGraphicsContext : public MLObject
 {
@@ -125,6 +130,29 @@ public:
 	/// @brief End drawing, flush.
 	/// @return
 	virtual MLCoreGraphicsContext* End() = 0;
+
+public:
+	/// @brief Overloaded move, for MLCoreGraphicsPoint.
+	/// @param point the point to move to.
+	/// @return The context.
+	MLCoreGraphicsContext* Move(MLCoreGraphicsPoint& point)
+	{
+		this->Move(point.X, point.Y);
+		return this;
+	}
+
+	/// @brief Overloaded move, for MLCoreGraphicsPoint.
+	/// @param point the point to move to.
+	/// @return The context.
+	MLCoreGraphicsContext* Move(const MLCoreGraphicsPoint& point)
+	{
+		this->Move(point.X, point.Y);
+		return this;
+	}
+
+	/// @brief Overloaded ToString method to match naming convention.
+	/// @return the class name.
+	const MLString ToString() { return this->toString(); }
 
 private:
 	friend class MLCoreGraphicsPen;
