@@ -12,12 +12,12 @@ int main(int argc, char const* argv[])
 {
 	MLCoreGraphicsContext* context = CGRequestContext(0, 0, 1000, 666);
 
-	context->Filename("rsrc://CanvasExample.pdf")->Start()->Image("rsrc://CanvasBackground.png", 1000, 666, 0, 0);
+	context->PDF("rsrc://CanvasExample.pdf")->Start()->Image("rsrc://CanvasBackground.png", 1000, 666, 0, 0);
 
-	context->Color(1.0, 1.0, 1.0, .4)->Move(0.0, 0.0)->Rectangle(1000, 666, 0)->Blur(1666, 1000, 666);
+	context->Color(1.0, 1.0, 1.0, .4)->Move(0.0, 0.0)->Rectangle(1000, 666, 5);
 	context->Color(1.0, 1.0, 1.0, 1.0)->Stroke(5.0);
 
-	context->Font("SF-Pro", true)->TextSize(20.0)->Move(50.0, 50.0)->Text("Hello, CoreGraphics!");
+	context->FontFamily("SF-Pro", true)->FontSize(20.0)->Move(50.0, 50.0)->Text("Hello, CoreGraphics!");
 
 	context->End();
 

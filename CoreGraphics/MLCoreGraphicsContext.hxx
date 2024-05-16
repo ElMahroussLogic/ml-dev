@@ -6,18 +6,7 @@
 
 #pragma once
 
-#include <Foundation.hxx>
-#include <MLFont.hxx>
-#include <MLString.hxx>
-
-typedef double CGReal;
-typedef size_t CGSizeT;
-typedef char   CGCharacter;
-
-typedef struct MLCoreGraphicsPoint
-{
-	CGReal X, Y;
-} MLCoreGraphicsPoint;
+#include <Private/MLCoreGraphicsBase.hxx>
 
 /// @brief Core Graphics context.
 class MLCoreGraphicsContext : public MLObject
@@ -58,12 +47,12 @@ public:
 	/// @param T font name
 	/// @param isBold should the font be bold?
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* Font(const CGCharacter* T,
+	virtual MLCoreGraphicsContext* FontFamily(const CGCharacter* T,
 										const bool		   isBold) = 0;
 	/// @brief
 	/// @param T
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* TextSize(const CGReal T) = 0;
+	virtual MLCoreGraphicsContext* FontSize(const CGReal T) = 0;
 
 	/// @brief Draw rounded rectangle
 	/// @param width Rectangle width.
@@ -72,10 +61,10 @@ public:
 	/// @return The graphics context.
 	virtual MLCoreGraphicsContext* Rectangle(CGReal width, CGReal height, CGReal radius) = 0;
 
-	/// @brief Write to file as PNG using T.
-	/// @param T file name.
+	/// @brief Write to file as PDF using T as the filepath.
+	/// @param T file name to write.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* Filename(const CGCharacter* T) = 0;
+	virtual MLCoreGraphicsContext* PDF(const CGCharacter* T) = 0;
 
 	/// @brief Set color or current pen.
 	/// @param R Red channel.

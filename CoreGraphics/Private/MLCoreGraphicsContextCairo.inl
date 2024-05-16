@@ -75,7 +75,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* Font(const CGCharacter* T, const bool isBold)
+	virtual MLCoreGraphicsContext* FontFamily(const CGCharacter* T, const bool isBold)
 	{
 		cairo_select_font_face(mCairo, T, CAIRO_FONT_SLANT_NORMAL,
 							   isBold ? CAIRO_FONT_WEIGHT_BOLD
@@ -85,7 +85,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* TextSize(const CGReal T)
+	virtual MLCoreGraphicsContext* FontSize(const CGReal T)
 	{
 		cairo_set_font_size(mCairo, T);
 		return this;
@@ -93,17 +93,23 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* Filename(const CGCharacter* T)
+	virtual MLCoreGraphicsContext* PDF(const CGCharacter* T)
 	{
+		if (mSurface) return this;
+
 		std::basic_string<CGCharacter> strPath = T;
+
+		constexpr auto dirSeparator = "/";
 
 		if (strPath.find(kRsrcProtocol) != std::string::npos)
 		{
 			strPath.replace(strPath.find(kRsrcProtocol), strlen(kRsrcProtocol),
-							std::filesystem::current_path().string() + "/");
+							std::filesystem::current_path().string() + dirSeparator);
 		}
 
 		memcpy(mOutputPath, strPath.c_str(), strPath.size());
+		mSurface = cairo_pdf_surface_create(mOutputPath, mWidth, mHeight);
+
 		return this;
 	}
 
@@ -186,7 +192,8 @@ public:
 
 	/// @brief Draws a gaussian blur. (taken from Cairo cookbook.)
 	/// @param radius blur's radius
-	/// @return
+	/// @return the context.
+	/// @note the blur doesn't work on PDF backends.
 	virtual MLCoreGraphicsContext* Blur(CGReal radius,
 										CGSizeT width,
 										CGSizeT height)
@@ -333,16 +340,19 @@ public:
 		return this;
 	}
 
+	/// @note This only supports the PNG format.
 	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path, 
 										CGSizeT W, CGSizeT H, 
 										CGReal X, CGReal Y)
 	{
 		std::basic_string<CGCharacter> strPath = Path;
 
+		constexpr auto dirSeparator = "/";
+
 		if (strPath.find(kRsrcProtocol) != std::string::npos)
 		{
 			strPath.replace(strPath.find(kRsrcProtocol), strlen(kRsrcProtocol),
-							std::filesystem::current_path().string() + "/");
+							std::filesystem::current_path().string() + dirSeparator);
 		}
 
 		auto image = cairo_image_surface_create_from_png(strPath.c_str());
@@ -368,9 +378,8 @@ public:
 	/// @note placeholder for now.
 	virtual MLCoreGraphicsContext* Start()
 	{
-		if (mSurface || mCairo) return this;
+		if (mCairo) return this;
 
-		mSurface = cairo_pdf_surface_create(mOutputPath, mWidth, mHeight);
 		mCairo = cairo_create(mSurface);
 
 		return this;
@@ -401,6 +410,11 @@ private:
 	CGReal			 mY{0};
 };
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+/// @brief Cairo context constructor.
+/// @param width the width.
+/// @param height the height.
 MLCoreGraphicsContextCairo::MLCoreGraphicsContextCairo(const CGReal width,
 													   const CGReal height)
 	: mWidth(width), mHeight(height)

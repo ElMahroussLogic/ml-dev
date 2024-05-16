@@ -1,0 +1,6 @@
+<SourceDeploy>
+<HiddenFiles>
+    <SourceFile>Private/MLCoreGraphicsContextCairo.inl</SourceFile>
+    <SourceFile>MLCoreGraphicsContext.cxx</SourceFile>
+</HiddenFiles>
+</SourceDeploy>

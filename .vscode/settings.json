@@ -6,7 +6,6 @@
         "*.asm": "asm-intel-x86-generic",
         "*.lua": "lua",
         "*.masm": "asm-intel-x86-generic",
-        "*.xsmlx": "xml",
         "*.pp": "cpp",
         "*.32x": "vasmstd",
         "*.64x": "asm-intel-x86-generic",
@@ -19,6 +18,7 @@
         "*.mm": "cpp",
         "*.make": "makefile",
         "atomic": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "string": "cpp"
     }
 }
