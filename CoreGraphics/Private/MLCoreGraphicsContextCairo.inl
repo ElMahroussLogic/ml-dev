@@ -1,7 +1,12 @@
 #pragma once
 
 #include <MLCoreGraphicsContext.hxx>
+
+#define CAIRO_HAS_PDF_SURFACE 1
+
 #include <cairo/cairo.h>
+#include <cairo/cairo-pdf.h>
+
 #include <math.h>
 #include <string.h>
 #include <string>
@@ -88,7 +93,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* WriteTo(const CGCharacter* T)
+	virtual MLCoreGraphicsContext* Filename(const CGCharacter* T)
 	{
 		std::basic_string<CGCharacter> strPath = T;
 
@@ -363,10 +368,10 @@ public:
 	/// @note placeholder for now.
 	virtual MLCoreGraphicsContext* Start()
 	{
-		mSurface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, mWidth, mHeight);
-		mCairo = cairo_create(mSurface);
+		if (mSurface || mCairo) return this;
 
-		cairo_set_source_surface(mCairo, mSurface, 0, 0);
+		mSurface = cairo_pdf_surface_create(mOutputPath, mWidth, mHeight);
+		mCairo = cairo_create(mSurface);
 
 		return this;
 	}
@@ -375,15 +380,6 @@ public:
 	virtual MLCoreGraphicsContext* End()
 	{
 		if (!mSurface || !mCairo) return this;
-
-#ifndef __MAHROUSS__
-		if (*mOutputPath)
-		{
-			cairo_surface_write_to_png(mSurface, mOutputPath);
-		}
-#else
-		cgx_surface_write_to_screen(mSurface);
-#endif
 
 		cairo_surface_destroy(mSurface);
 		mSurface = nullptr;
