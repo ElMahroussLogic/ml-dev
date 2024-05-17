@@ -17,7 +17,7 @@ int main(int argc, char const* argv[])
 	context->Color(1.0, 1.0, 1.0, .4)->Move(0.0, 0.0)->Rectangle(1000, 666, 5);
 	context->Color(1.0, 1.0, 1.0, 1.0)->Stroke(5.0);
 
-	context->FontFamily("SF-Pro", true)->FontSize(20.0)->Move(50.0, 50.0)->Text("Hello, CoreGraphics for WSL!");
+	context->FontFamily("SF-Pro", true)->FontSize(20.0)->Move(50.0, 50.0)->Text("Hello PDF!");
 
 	context->End();
 

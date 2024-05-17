@@ -48,7 +48,7 @@ public:
 	/// @param isBold should the font be bold?
 	/// @return The graphics context.
 	virtual MLCoreGraphicsContext* FontFamily(const CGCharacter* T,
-										const bool		   isBold) = 0;
+											  const bool		 isBold) = 0;
 	/// @brief
 	/// @param T
 	/// @return The graphics context.
@@ -141,7 +141,10 @@ public:
 
 	/// @brief Overloaded ToString method to match naming convention.
 	/// @return the class name.
-	const MLString ToString() { return this->toString(); }
+	const MLString ToString()
+	{
+		return this->toString();
+	}
 
 private:
 	friend class MLCoreGraphicsPen;
@@ -156,7 +159,7 @@ private:
 /// MLCoreGraphicsContext.
 /// @return The new graphics context.
 ML_IMPORT MLCoreGraphicsContext*
-		  CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height);
+CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height);
 
 /// @brief Releases a Core Graphics context.
 /// @param context The context itself.

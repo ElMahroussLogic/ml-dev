@@ -14,7 +14,7 @@
 /// MLCoreGraphicsContext.
 /// @return The new graphics context.
 ML_EXPORT MLCoreGraphicsContext*
-		  CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height)
+CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height)
 {
 	MLCoreGraphicsContext* context =
 		new MLCoreGraphicsContextCairo(width, height);
