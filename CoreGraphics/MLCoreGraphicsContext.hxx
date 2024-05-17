@@ -82,7 +82,7 @@ public:
 	/// @brief Set line cap.
 	/// @param type type according to enum *MLCoreGraphicsLineCap*.
 	/// @return
-	virtual MLCoreGraphicsContext* LineCap(int32_t type) = 0;
+	virtual MLCoreGraphicsContext* LineCap(int type) = 0;
 
 	/// @brief Line from **start** to **finish**.
 	/// @param start Start position.

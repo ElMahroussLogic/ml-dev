@@ -1,9 +1,12 @@
 {
     "files.associations": {
+        "*.h": "cpp",
+        "*.hmm": "objective-cpp",
+        "*.hxx": "cpp",
+        "*.asm": "asm-intel-x86-generic",
         "*.embeddedhtml": "html",
         "*.htx": "html",
         "*.roxml": "xml",
-        "*.asm": "asm-intel-x86-generic",
         "*.lua": "lua",
         "*.masm": "asm-intel-x86-generic",
         "*.pp": "cpp",
@@ -13,12 +16,12 @@
         "*.s": "asm-intel-x86-generic",
         "*.plist": "xml",
         "*.rsrc": "cpp",
-        "*.hxx": "cpp",
         "*.vhdl": "vhdl",
         "*.mm": "cpp",
         "*.make": "makefile",
         "atomic": "cpp",
         "bitset": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "cwchar": "cpp"
     }
 }
