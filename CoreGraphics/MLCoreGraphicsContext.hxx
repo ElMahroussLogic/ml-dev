@@ -109,7 +109,7 @@ public:
 
 	/// @brief To string method.
 	/// @return the class as a string
-	virtual const MLString toString() override;
+	virtual const MLString toString();
 
 public:
 	/// @brief Start drawing.

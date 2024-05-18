@@ -16,8 +16,6 @@
 #include <cgx.h>
 #endif
 
-#define kRsrcProtocol "rsrc://"
-
 /// @file: MLCoreGraphicsContextCairo.inl
 /// @brief: Cairo backend for multiplatform code.
 
@@ -51,6 +49,22 @@ public:
 	virtual bool operator&(const CGSizeT flag)
 	{
 		return mContextFlags & flag;
+	}
+
+	/// @brief To string method.
+	/// @return the class as a string
+	virtual const MLString toString() override
+	{
+		std::string buffer = "{ ";
+		buffer += "URI: ";
+		buffer += "file://";
+		buffer += this->mOutputPath;
+		buffer += " }";
+
+		MLString str = MLString(buffer.size());
+		str += buffer.c_str();
+
+		return str;
 	}
 
 	///////////////////////////////////////////////////////////////////////////
