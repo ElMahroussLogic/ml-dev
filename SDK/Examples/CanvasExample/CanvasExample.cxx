@@ -20,6 +20,8 @@ int main(int argc, char const* argv[])
 	context->FontFamily("SF-Pro", true)->FontSize(20.0)->Move(50.0, 50.0)->Text("Hello PDF!");
 
 	context->End();
+	
+	MLLog("Object: %@, will be destroyed.\n", context);
 
 	CGReleaseContext(context);
 
