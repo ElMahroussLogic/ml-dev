@@ -23,6 +23,8 @@ int main(int argc, char const* argv[])
 
 	context->PDF(pdfRef.asConstBytes())->Start()->Image(imageRef.asConstBytes(), 1000, 666, 0, 0);
 
+	context->PageLabel("Object")->ThumbnailSize(64, 64);
+
 	context->Color(1.0, 1.0, 1.0, .4)->Move(0.0, 0.0)->Rectangle(1000, 666, 5);
 	context->Color(1.0, 1.0, 1.0, 1.0)->Stroke(5.0);
 

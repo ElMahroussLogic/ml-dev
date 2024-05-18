@@ -66,6 +66,16 @@ public:
 	/// @return The graphics context.
 	virtual MLCoreGraphicsContext* PDF(const CGCharacter* T) = 0;
 
+	/// @brief 
+	/// @param T 
+	/// @return 
+	virtual MLCoreGraphicsContext* PageLabel(const CGCharacter* T) = 0;
+
+	/// @brief 
+	/// @param T 
+	/// @return 
+	virtual MLCoreGraphicsContext* ThumbnailSize(const int W, const int H) = 0;
+
 	/// @brief Set color or current pen.
 	/// @param R Red channel.
 	/// @param G Green channel.

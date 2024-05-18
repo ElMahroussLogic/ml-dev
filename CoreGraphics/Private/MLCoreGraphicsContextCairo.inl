@@ -2,10 +2,12 @@
 
 #include <MLCoreGraphicsContext.hxx>
 
-#define CAIRO_HAS_PDF_SURFACE 1
-
 #include <cairo/cairo.h>
 #include <cairo/cairo-pdf.h>
+
+#ifndef CAIRO_HAS_PDF_SURFACE
+#error CairoGX needs to have a PDF backend!
+#endif // !CAIRO_HAS_PDF_SURFACE
 
 #include <math.h>
 #include <string.h>
@@ -410,6 +412,25 @@ public:
 		cairo_destroy(mCairo);
 		mCairo = nullptr;
 
+		return this;
+	}
+
+
+	/// @brief 
+	/// @param T 
+	/// @return 
+	virtual MLCoreGraphicsContext* PageLabel(const CGCharacter* T)
+	{
+		cairo_pdf_surface_set_page_label(mSurface, T);
+		return this;
+	}
+
+	/// @brief 
+	/// @param T 
+	/// @return 
+	virtual MLCoreGraphicsContext* ThumbnailSize(const int Width, const int Height)
+	{
+		cairo_pdf_surface_set_thumbnail_size(mSurface, Width, Height);
 		return this;
 	}
 
