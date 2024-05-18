@@ -76,6 +76,10 @@ public:
 	/// @return 
 	virtual MLCoreGraphicsContext* ThumbnailSize(const int W, const int H) = 0;
 
+	/// @brief 
+	/// @return 
+	virtual MLCoreGraphicsContext* Present() = 0;
+
 	/// @brief Set color or current pen.
 	/// @param R Red channel.
 	/// @param G Green channel.

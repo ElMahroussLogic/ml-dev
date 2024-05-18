@@ -401,6 +401,19 @@ public:
 		return this;
 	}
 
+	virtual MLCoreGraphicsContext* Present()
+	{
+		
+		if (!mSurface || !mCairo) return this;
+
+		cairo_surface_copy_page(mSurface);
+
+		cairo_set_source_rgb(mCairo, 0, 0, 0);
+		cairo_paint(mCairo);
+
+		return this;
+	}
+
 	/// @note placeholder for now.
 	virtual MLCoreGraphicsContext* End()
 	{
