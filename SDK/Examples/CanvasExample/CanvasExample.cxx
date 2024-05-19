@@ -49,5 +49,7 @@ int main(int argc, char const* argv[])
 	pdfRef.dispose();
 	imageRef.dispose();
 
+	MLExitWithCode(0);
+
 	return 0;
 }
