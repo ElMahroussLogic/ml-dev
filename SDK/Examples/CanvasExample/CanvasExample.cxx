@@ -8,6 +8,7 @@
 #include <MLString.hxx>
 #include <stdio.h>
 #include <string.h>
+#include <thread>
 
 int main(int argc, char const* argv[])
 {
@@ -48,8 +49,6 @@ int main(int argc, char const* argv[])
 
 	pdfRef.dispose();
 	imageRef.dispose();
-
-	MLExitWithCode(0);
 
 	return 0;
 }
