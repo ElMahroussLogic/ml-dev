@@ -36,8 +36,10 @@ ML_EXPORT void CGReleaseContext(MLCoreGraphicsContext* context)
 /// @return the class as a string
 const MLString MLCoreGraphicsContext::toString()
 {
-	MLString str = MLString(strlen("MLCoreGraphicsContext"));
-	str += "MLCoreGraphicsContext";
+	constexpr auto objectName = "MLCoreGraphicsContext";
 
-	return str;
+	MLString ctxStr = MLString(strlen(objectName));
+	ctxStr += objectName;
+
+	return ctxStr;
 }

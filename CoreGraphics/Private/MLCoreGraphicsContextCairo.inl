@@ -408,7 +408,7 @@ public:
 
 		cairo_surface_copy_page(mSurface);
 
-		cairo_set_source_rgb(mCairo, 0, 0, 0);
+		cairo_set_source_rgb(mCairo, 1, 1, 1);
 		cairo_paint(mCairo);
 
 		return this;

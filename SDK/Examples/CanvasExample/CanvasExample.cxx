@@ -12,7 +12,10 @@
 
 int main(int argc, char const* argv[])
 {
-	MLCoreGraphicsContext* context = CGRequestContext(0, 0, 1000, 666);
+	constexpr auto cWidth = 1000;
+	constexpr auto cHeight = 666;
+
+	MLCoreGraphicsContext* context = CGRequestContext(0, 0, cWidth, cHeight);
 
 	if (!context)
 	{
@@ -23,9 +26,9 @@ int main(int argc, char const* argv[])
 	auto pdfRef = r("CanvasExample.pdf");
 	auto imageRef = r("CanvasBackground.png");
 
-	context->PDF(pdfRef.asConstBytes())->Start()->Image(imageRef.asConstBytes(), 1000, 666, 0, 0);
+	context->PDF(pdfRef.asConstBytes())->Start()->Image(imageRef.asConstBytes(), cWidth, cHeight, 0, 0);
 
-	context->PageLabel("MLCoreGraphicsContext")->ThumbnailSize(64, 64);
+	context->PageLabel("Cairo")->ThumbnailSize(64, 64);
 
 	context->Color(1.0, 1.0, 1.0, .4)->Move(0.0, 0.0)->Rectangle(1000, 666, 5);
 	context->Color(1.0, 1.0, 1.0, 1.0)->Stroke(5.0);
@@ -34,7 +37,7 @@ int main(int argc, char const* argv[])
 
 	context->Present()->Image(imageRef.asConstBytes(), 1000, 666, 0, 0);
 
-	context->PageLabel("Greet")->ThumbnailSize(64, 64);
+	context->PageLabel("アジアの純真")->ThumbnailSize(64, 64);
 
 	context->Color(1.0, 1.0, 1.0, .4)->Move(0.0, 0.0)->Rectangle(1000, 666, 5);
 	context->Color(1.0, 1.0, 1.0, 1.0)->Stroke(5.0);
