@@ -58,8 +58,8 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-CanvasExample/CanvasExample
-CanvasExample/CanvasExample.png
+SDK/Examples/CanvasExample/CanvasExample
+SDK/Examples/CanvasExample/CanvasExample.pdf
 
 *.dsk
 

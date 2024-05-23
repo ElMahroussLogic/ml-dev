@@ -1,7 +1,7 @@
 /*
  * Created on Fri May 10 2024
  *
- * Copyright (c) 2024 SystemLabs B.V
+ * Copyright (c) 2024 SoftwareLabs B.V
  */
 
 #include <MLCoreGraphicsContext.hxx>
@@ -13,27 +13,33 @@
 /// @note if no, please check for feature with operator& inside
 /// MLCoreGraphicsContext.
 /// @return The new graphics context.
-ML_IMPORT MLCoreGraphicsContext *
-CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height) {
-  MLCoreGraphicsContext *context =
-      new MLCoreGraphicsContextCairo(width, height);
-  return context;
+ML_EXPORT MLCoreGraphicsContext*
+CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height)
+{
+	MLCoreGraphicsContext* context =
+		new MLCoreGraphicsContextCairo(width, height);
+	return context;
 }
 
 /// @brief Releases a Core Graphics context.
 /// @param context The context itself.
 /// @return This function returns void.
-ML_IMPORT void CGReleaseContext(MLCoreGraphicsContext *context) {
-  if (context) {
-    delete context;
-  }
+ML_EXPORT void CGReleaseContext(MLCoreGraphicsContext* context)
+{
+	if (context)
+	{
+		delete context;
+	}
 }
 
 /// @brief To string method.
 /// @return the class as a string
-const MLString MLCoreGraphicsContext::toString() {
-  MLString str = MLString(strlen("MLCoreGraphicsContext"));
-  str += "MLCoreGraphicsContext";
+const MLString MLCoreGraphicsContext::toString()
+{
+	constexpr auto objectName = "MLCoreGraphicsContext";
 
-  return str;
+	MLString ctxStr = MLString(strlen(objectName));
+	ctxStr += objectName;
+
+	return ctxStr;
 }
