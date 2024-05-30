@@ -24,7 +24,7 @@ int main(int argc, char const* argv[])
 	}
 
 	auto pdfRef = r("CanvasExample.pdf");
-	auto imageRef = r("CanvasBackground.png");
+	auto imageRef = r("Waves.png");
 
 	context->PDF(pdfRef.asConstBytes())->Start()->Image(imageRef.asConstBytes(), cWidth, cHeight, 0, 0);
 
@@ -52,6 +52,8 @@ int main(int argc, char const* argv[])
 
 	pdfRef.dispose();
 	imageRef.dispose();
+
+	MLAlertBox("Exit process?", "Exit?");
 
 	return 0;
 }
