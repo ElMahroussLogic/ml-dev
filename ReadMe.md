@@ -1,4 +1,4 @@
-![Kernel](meta/Logo.svg)
+![Stack](Misc/Logo.svg)
 
 # New OS graphics stack.
 

@@ -30,7 +30,7 @@ public:
 
 	/// @brief Grants a new feature to Context.
 	/// @param flag the feature flag.
-	virtual MLCoreGraphicsContext* operator|=(const CGSizeT flag)
+	virtual MLCoreGraphicsContext* operator|=(const CGSizeT flag) override
 	{
 		mContextFlags |= flag;
 		return this;
@@ -38,7 +38,7 @@ public:
 
 	/// @brief Revokes a new feature to Context.
 	/// @param flag the feature flag.
-	virtual MLCoreGraphicsContext* operator&=(const CGSizeT flag)
+	virtual MLCoreGraphicsContext* operator&=(const CGSizeT flag) override
 	{
 		mContextFlags &= flag;
 		return this;
@@ -48,7 +48,7 @@ public:
 	/// @param flag The feature in question.
 	/// @retval true feature exists.
 	/// @retval false not supported by this context.
-	virtual bool operator&(const CGSizeT flag)
+	virtual bool operator&(const CGSizeT flag) override
 	{
 		return mContextFlags & flag;
 	}
@@ -71,7 +71,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* Move(CGReal X, CGReal Y)
+	virtual MLCoreGraphicsContext* Move(CGReal X, CGReal Y) override
 	{
 		cairo_move_to(mCairo, X, Y);
 
@@ -83,7 +83,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* Text(const CGCharacter* T)
+	virtual MLCoreGraphicsContext* Text(const CGCharacter* T) override
 	{
 		cairo_show_text(mCairo, T);
 		return this;
@@ -91,7 +91,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* FontFamily(const CGCharacter* T, const bool isBold)
+	virtual MLCoreGraphicsContext* FontFamily(const CGCharacter* T, const bool isBold) override
 	{
 		cairo_select_font_face(mCairo, T, CAIRO_FONT_SLANT_NORMAL,
 							   isBold ? CAIRO_FONT_WEIGHT_BOLD
@@ -101,7 +101,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* FontSize(const CGReal T)
+	virtual MLCoreGraphicsContext* FontSize(const CGReal T) override
 	{
 		cairo_set_font_size(mCairo, T);
 		return this;
@@ -109,7 +109,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* PDF(const CGCharacter* T)
+	virtual MLCoreGraphicsContext* PDF(const CGCharacter* T) override
 	{
 		if (mSurface) return this;
 
@@ -131,7 +131,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* Color(CGReal R, CGReal G, CGReal B, CGReal A)
+	virtual MLCoreGraphicsContext* Color(CGReal R, CGReal G, CGReal B, CGReal A) override
 	{
 		cairo_set_source_rgba(mCairo, R, G, B, A);
 		return this;
@@ -139,7 +139,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* Stroke(CGReal strokeStrength)
+	virtual MLCoreGraphicsContext* Stroke(CGReal strokeStrength) override
 	{
 		cairo_set_line_width(mCairo, strokeStrength);
 		cairo_stroke(mCairo);
@@ -148,7 +148,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* Rectangle(CGReal width, CGReal height, CGReal radius)
+	virtual MLCoreGraphicsContext* Rectangle(CGReal width, CGReal height, CGReal radius) override
 	{
 		double aspect	  = 1.0,		   /* aspect ratio */
 			corner_radius = height / 10.0; /* and corner curvature radius */
@@ -179,7 +179,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* LineTo(CGReal start, CGReal finish)
+	virtual MLCoreGraphicsContext* LineTo(CGReal start, CGReal finish) override
 	{
 		cairo_line_to(mCairo, start, finish);
 
@@ -188,7 +188,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* LineCap(int32_t type)
+	virtual MLCoreGraphicsContext* LineCap(int32_t type) override
 	{
 		switch (type)
 		{
@@ -212,7 +212,7 @@ public:
 	/// @note the blur doesn't work on PDF backends.
 	virtual MLCoreGraphicsContext* Blur(CGReal radius,
 										CGSizeT width,
-										CGSizeT height)
+										CGSizeT height) override
 	{
 		cairo_surface_t* tmp;
 		int				 src_stride, dst_stride;
@@ -359,7 +359,7 @@ public:
 	/// @note This only supports the PNG format.
 	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path, 
 										CGSizeT W, CGSizeT H, 
-										CGReal X, CGReal Y)
+										CGReal X, CGReal Y) override
 	{
 		std::basic_string<CGCharacter> strPath = Path;
 
@@ -385,14 +385,14 @@ public:
 		return this;
 	}
 
-	virtual MLCoreGraphicsContext* Scale(CGReal X, CGReal Y)
+	virtual MLCoreGraphicsContext* Scale(CGReal X, CGReal Y) override
 	{
 		cairo_scale(mCairo, X, Y);
 		return this;
 	}
 
 	/// @note placeholder for now.
-	virtual MLCoreGraphicsContext* Start()
+	virtual MLCoreGraphicsContext* Start() override
 	{
 		if (mCairo) return this;
 
@@ -401,7 +401,7 @@ public:
 		return this;
 	}
 
-	virtual MLCoreGraphicsContext* Present()
+	virtual MLCoreGraphicsContext* Present() override
 	{
 		
 		if (!mSurface || !mCairo) return this;
@@ -415,7 +415,7 @@ public:
 	}
 
 	/// @note placeholder for now.
-	virtual MLCoreGraphicsContext* End()
+	virtual MLCoreGraphicsContext* End() override
 	{
 		if (!mSurface || !mCairo) return this;
 
@@ -432,7 +432,7 @@ public:
 	/// @brief 
 	/// @param T 
 	/// @return 
-	virtual MLCoreGraphicsContext* PageLabel(const CGCharacter* T)
+	virtual MLCoreGraphicsContext* PageLabel(const CGCharacter* T) override
 	{
 		cairo_pdf_surface_set_page_label(mSurface, T);
 		return this;
@@ -441,7 +441,7 @@ public:
 	/// @brief 
 	/// @param T 
 	/// @return 
-	virtual MLCoreGraphicsContext* ThumbnailSize(const int Width, const int Height)
+	virtual MLCoreGraphicsContext* ThumbnailSize(const int Width, const int Height) override
 	{
 		cairo_pdf_surface_set_thumbnail_size(mSurface, Width, Height);
 		return this;

@@ -1,7 +1,7 @@
 CC=c++
 CCFLAGS= -std=c++20 *.cxx -I../../CoreAnimation -I../../CoreGraphics \
-	-I../../meta/appcore/ -I../../meta/appcore/Headers \
-	../../CoreGraphics/*.cxx ../../CoreAnimation/*.cxx ../../meta/appcore/Sources/Linux/*.cxx \
+	-I../../CoreFoundation/ -I../../CoreFoundation/Headers \
+	../../CoreGraphics/*.cxx ../../CoreAnimation/*.cxx ../../CoreFoundation/Sources/Linux/*.cxx \
 	-lcairo
 
 .PHONY:
@@ -10,4 +10,4 @@ all: CanvasExample
 
 .PHONY: CanvasExample
 CanvasExample:
-	$(CC) $(CCFLAGS) ../../meta/appcore/Sources/*.cxx -o CanvasExample
+	$(CC) $(CCFLAGS) ../../CoreFoundation/Sources/*.cxx -o CanvasExample

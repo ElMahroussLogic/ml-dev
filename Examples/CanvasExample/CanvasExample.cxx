@@ -46,14 +46,12 @@ int main(int argc, char const* argv[])
 
 	context->End();
 	
-	MLLog("Object: %@, will be destroyed.\n", context);
+	MLLog("Object: %@ will be destroyed.\n", context);
 
 	CGReleaseContext(context);
 
 	pdfRef.dispose();
 	imageRef.dispose();
-
-	MLAlertBox("Exit process?", "Exit?");
 
 	return 0;
 }
