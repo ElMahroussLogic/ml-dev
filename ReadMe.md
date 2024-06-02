@@ -9,4 +9,4 @@ Contains
 - CoreGraphics-Animation framework.
 - CairoGraphics library.
 
-#### Copyright Amlal El Mahrouss, all rights reserved.
+#### Copyright SoftwareLabs, all rights reserved.
