@@ -22,9 +22,17 @@ typedef struct MLCoreGraphicsPoint final
 	CGReal X, Y;
 } MLCoreGraphicsPoint;
 
+/// @brief fallback URL in case the resource is not found.
+/// @see r()
 #define kRsrcFallbackUrl "fallback"
+
+/// @brief URL for resources that are not found.
+/// @see r()
 #define kRsrcNilUrl "nil"
 
+/// @brief Fetch resource as a string.
+/// @param input 
+/// @return the resource as a string.
 inline const MLString r(const char* input)
 {
 	if (!input)
