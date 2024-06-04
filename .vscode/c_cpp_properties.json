@@ -22,8 +22,8 @@
         {
             "name": "Hosted (Linux)",
             "includePath": [
-                "${workspaceFolder}/meta/appcore/Headers",
-                "${workspaceFolder}/meta/appcore/",
+                "${workspaceFolder}/CoreFoundation/Headers",
+                "${workspaceFolder}/CoreFoundation/",
                 "${workspaceFolder}/CoreGraphics/",
                 "${workspaceFolder}/CoreAnimation/",                
             ],
