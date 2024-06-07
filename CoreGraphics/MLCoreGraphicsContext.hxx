@@ -163,6 +163,8 @@ public:
 		return this->toString();
 	}
 
+	virtual void ProvidePrivateContext(void* pvtCtx) = 0;
+
 private:
 	friend class MLCoreGraphicsPen;
 	friend class MLCoreGraphicsShape;

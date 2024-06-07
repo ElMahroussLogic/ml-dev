@@ -428,6 +428,11 @@ public:
 		return this;
 	}
 
+	virtual void ProvidePrivateContext(void* pvtCtx)
+	{
+		mCairo = (cairo_t*)pvtCtx;
+		mCustomSurface = pvtCtx != nullptr;
+	}
 
 	/// @brief 
 	/// @param T 
@@ -454,6 +459,7 @@ private:
 	CGReal			 mWidth{0};
 	CGReal			 mHeight{0};
 	CGCharacter		 mOutputPath[255] = {0};
+	bool 			 mCustomSurface{false};
 	CGReal			 mX{0};
 	CGReal			 mY{0};
 };

@@ -58,6 +58,9 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+Examples/LockScreen/LockScreen
+Examples/LockScreen/LockScreen.pdf
+
 Examples/CanvasExample/CanvasExample
 Examples/CanvasExample/CanvasExample.pdf
 
