@@ -32,14 +32,19 @@ namespace Events
 		static CGReal index = 0;
 
 		cContext->SetContext(cr);
-		//cContext->Image("../Common/Background.png", cWidth, cHeight, 0, 0);
-		cContext->Color(0.0, 0.0, 0.0, 1.0);
-		cContext->FontFamily("Inter-Black", true)->FontSize(20.0)->Move(cur, 20.0)->Text("Hello again.");
+		cContext->Image("../Common/Background.png", cWidth, cHeight, 0, 0);
+		cContext->Color(1.0, 1.0, 1.0, 1.0);
+		cContext->FontFamily("Inter-Black", true)->FontSize(20.0)->Move(cur, 20.0)->Text("SoftwareLabs.");
 
-		if (cur <= 150.0)
+		if (cur < 150.0)
 		{
 			cur = CGLerp(cur, 150.0, index);
 			index += 0.01;
+		}
+		else
+		{
+			cur = 0.0;
+			index = 0.0;
 		}
 
 		printf("pos: %f\n", cur);

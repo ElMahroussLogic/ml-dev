@@ -16,11 +16,18 @@
 typedef double CGReal;
 typedef size_t CGSizeT;
 typedef char   CGCharacter;
+typedef bool   CGBoolean;
 
 typedef struct MLCoreGraphicsPoint final
 {
 	CGReal X, Y;
 } MLCoreGraphicsPoint;
+
+typedef struct MLCoreGraphicsRect final
+{
+	CGReal X1, Y1;
+	CGReal X2, Y2;
+} MLCoreGraphicsRect;
 
 /// @brief fallback URL in case the resource is not found.
 /// @see r()

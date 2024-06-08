@@ -379,12 +379,7 @@ public:
 
 		cairo_set_source_surface(mCairo, image, X, Y);
 
-		cairo_rectangle(mCairo, X, Y, W, H);
-		cairo_fill(mCairo);
-
-		cairo_surface_destroy(image);
-
-		cairo_set_source_surface(mCairo, mSurface, X, Y);
+		cairo_paint(mCairo);
 
 		return this;
 	}
@@ -405,6 +400,8 @@ public:
 		return this;
 	}
 
+	/// @brief Present PDF rendering of one page.
+	/// @return 
 	virtual MLCoreGraphicsContext* Present() override
 	{
 		
@@ -418,7 +415,8 @@ public:
 		return this;
 	}
 
-	/// @note placeholder for now.
+	/// @note Placeholder for now.
+	/// @brief End draw command.
 	virtual MLCoreGraphicsContext* End() override
 	{
 		if (!mSurface || !mCairo) return this;
@@ -432,6 +430,8 @@ public:
 		return this;
 	}
 
+	/// @brief Set private internal context
+	/// @param pvtCtx The cairo context.
 	virtual void SetContext(void* pvtCtx) override
 	{
 		mCairo = (cairo_t*)pvtCtx;
@@ -463,7 +463,7 @@ private:
 	CGReal			 mWidth{0};
 	CGReal			 mHeight{0};
 	CGCharacter		 mOutputPath[255] = {0};
-	bool 			 mCustomSurface{false};
+	CGBoolean 		 mCustomSurface{false};
 	CGReal			 mX{0};
 	CGReal			 mY{0};
 };
@@ -480,6 +480,7 @@ MLCoreGraphicsContextCairo::MLCoreGraphicsContextCairo(const CGReal width,
 	ML_MUST_PASS(width > 0 && height > 0);
 }
 
+/// @brief C++ destrcutor, the End() method is called as well.
 MLCoreGraphicsContextCairo::~MLCoreGraphicsContextCairo()
 {
 	this->End();
