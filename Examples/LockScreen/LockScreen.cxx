@@ -4,8 +4,6 @@
  * Copyright (c) 2024 SoftwareLabs 
  */
 
-#ifdef __linux__
-
 #include <MLCoreAnimation.hxx>
 #include <CoreGraphics.hxx>
 #include <MLString.hxx>
@@ -28,13 +26,13 @@ namespace Events
 	{
 		(void)user_data;
 
-		static CGReal cur = 0;
+		static CGReal cur = 10.0;
 		static CGReal index = 0;
 
 		cContext->SetContext(cr);
 		cContext->Image("../Common/Background.png", cWidth, cHeight, 0, 0);
 		cContext->Color(1.0, 1.0, 1.0, 1.0);
-		cContext->FontFamily("Inter-Black", true)->FontSize(20.0)->Move(cur, 20.0)->Text("SoftwareLabs.");
+		cContext->FontFamily("SF-Pro", true)->FontSize(20.0)->Move(cur, 100.0)->Text("SoftwareLabs.");
 
 		if (cur < 150.0)
 		{
@@ -43,7 +41,7 @@ namespace Events
 		}
 		else
 		{
-			cur = 0.0;
+			cur = 10.0;
 			index = 0.0;
 		}
 
@@ -96,4 +94,3 @@ int main(int argc, char const* argv[])
 
 	return 0;
 }
-#endif

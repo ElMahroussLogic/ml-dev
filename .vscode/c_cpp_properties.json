@@ -7,7 +7,9 @@
                 "${workspaceFolder}/CoreFoundation/",
                 "${workspaceFolder}/CoreGraphics/",
                 "${workspaceFolder}/CoreAnimation/",
-                "/opt/homebrew/Cellar/cairo/1.18.0/include"
+                "/opt/homebrew/Cellar/cairo/1.18.0/include",
+                "/opt/homebrew/include/gtk-3.0/",
+                "/opt/homebrew/include/glib-2.0"
                 
             ],
             "defines": [],
