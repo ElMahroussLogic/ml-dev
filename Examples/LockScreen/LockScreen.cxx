@@ -5,6 +5,8 @@
  */
 
 #ifdef __linux__
+
+#include <MLCoreAnimation.hxx>
 #include <CoreGraphics.hxx>
 #include <MLString.hxx>
 #include <stdio.h>
@@ -26,10 +28,31 @@ namespace Events
 	{
 		(void)user_data;
 
-		cContext->ProvidePrivateContext(cr);
-		cContext->Image("./Background.png", cWidth, cHeight, 0, 0);
+		static CGReal cur = 0;
+		static CGReal index = 0;
+
+		cContext->SetContext(cr);
+		//cContext->Image("../Common/Background.png", cWidth, cHeight, 0, 0);
+		cContext->Color(0.0, 0.0, 0.0, 1.0);
+		cContext->FontFamily("Inter-Black", true)->FontSize(20.0)->Move(cur, 20.0)->Text("Hello again.");
+
+		if (cur <= 150.0)
+		{
+			cur = CGLerp(cur, 150.0, index);
+			index += 0.01;
+		}
+
+		printf("pos: %f\n", cur);
 
 		return FALSE;
+	}
+
+	static gboolean update_canvas(gpointer user_data)
+	{
+    	GtkWidget *widget = GTK_WIDGET(user_data);
+		gtk_widget_queue_draw(widget);
+
+		return TRUE;
 	}
 }
 
@@ -43,24 +66,26 @@ int main(int argc, char const* argv[])
 	});
 
     GtkWidget *window;
-    GtkWidget *darea;
+    GtkWidget *drawing_area;
 
     gtk_init(&argc, (char***)&argv);
 
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    darea = gtk_drawing_area_new();
+    drawing_area = gtk_drawing_area_new();
 
-	gtk_container_add(GTK_CONTAINER(window), darea);
+	gtk_container_add(GTK_CONTAINER(window), drawing_area);
 
 	gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
 
- 	g_signal_connect(G_OBJECT(darea), "draw", G_CALLBACK(Events::on_draw), nullptr);
+ 	g_signal_connect(G_OBJECT(drawing_area), "draw", G_CALLBACK(Events::on_draw), nullptr);
     g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), nullptr);
 
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_default_size(GTK_WINDOW(window), cWidth, cHeight);
     gtk_window_set_title(GTK_WINDOW(window), "StageBoard LockScreen - Demo");
     gtk_widget_show_all(window);
+
+	g_timeout_add(24, Events::update_canvas, drawing_area); 
 
     gtk_main();
 

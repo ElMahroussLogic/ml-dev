@@ -163,7 +163,9 @@ public:
 		return this->toString();
 	}
 
-	virtual void ProvidePrivateContext(void* pvtCtx) = 0;
+	/// @brief Set graphics context.
+	/// @param pvtCtx 
+	virtual void SetContext(void* pvtCtx) = 0;
 
 private:
 	friend class MLCoreGraphicsPen;

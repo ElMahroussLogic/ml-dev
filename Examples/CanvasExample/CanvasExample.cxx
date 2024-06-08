@@ -24,7 +24,7 @@ int main(int argc, char const* argv[])
 	}
 
 	auto pdfRef = r("CanvasExample.pdf");
-	auto imageRef = r("Waves.png");
+	auto imageRef = r("../Common/Background.png");
 
 	context->PDF(pdfRef.asConstBytes())->Start()->Image(imageRef.asConstBytes(), cWidth, cHeight, 0, 0);
 
@@ -33,7 +33,7 @@ int main(int argc, char const* argv[])
 	context->Color(1.0, 1.0, 1.0, .4)->Move(0.0, 0.0)->Rectangle(1000, 666, 5);
 	context->Color(1.0, 1.0, 1.0, 1.0)->Stroke(5.0);
 
-	context->FontFamily("Arial", true)->FontSize(20.0)->Move(50.0, 50.0)->Text(context->toString().asConstBytes());
+	context->FontFamily("Inter-Black", true)->FontSize(20.0)->Move(50.0, 50.0)->Text(context->toString().asConstBytes());
 
 	context->Present()->Image(imageRef.asConstBytes(), 1000, 666, 0, 0);
 
@@ -42,7 +42,7 @@ int main(int argc, char const* argv[])
 	context->Color(1.0, 1.0, 1.0, .4)->Move(0.0, 0.0)->Rectangle(1000, 666, 5);
 	context->Color(1.0, 1.0, 1.0, 1.0)->Stroke(5.0);
 
-	context->FontFamily("Arial", true)->FontSize(20.0)->Move(50.0, 50.0)->Text("Hello again.");
+	context->FontFamily("Inter-Black", true)->FontSize(20.0)->Move(50.0, 50.0)->Text("Hello again.");
 
 	context->End();
 	

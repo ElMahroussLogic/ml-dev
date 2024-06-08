@@ -1,3 +1,9 @@
+/*
+ * Created on Fri May 10 2024
+ *
+ * Copyright (c) 2024 SoftwareLabs B.V
+ */
+
 #pragma once
 
 #include <MLCoreGraphicsContext.hxx>
@@ -159,8 +165,6 @@ public:
 
 		CGReal x = mX;
 		CGReal y = mY;
-
-		MLLog("X: %2.3f, Y: %2.3f\n", x, y);
 
 		cairo_arc(mCairo, x + width - radius, y + radius, radius, -90 * degrees,
 				  0 * degrees);
@@ -428,7 +432,7 @@ public:
 		return this;
 	}
 
-	virtual void ProvidePrivateContext(void* pvtCtx)
+	virtual void SetContext(void* pvtCtx) override
 	{
 		mCairo = (cairo_t*)pvtCtx;
 		mCustomSurface = pvtCtx != nullptr;

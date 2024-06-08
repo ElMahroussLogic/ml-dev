@@ -13,10 +13,7 @@
 /// @param start where to begin
 /// @param end where to end
 /// @param status the status
-/// @return the returned value.
-inline CGReal CGLerp(float start, float end, float status)
-{
-    return (start + status * (end - start));
-}
+/// @return the returned result of the lerp.
+ML_IMPORT CGReal CGLerp(CGReal start, CGReal end, CGReal status);
 
 // END OF HEADER.
