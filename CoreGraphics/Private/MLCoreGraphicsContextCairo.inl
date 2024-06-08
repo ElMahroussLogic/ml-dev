@@ -1,7 +1,7 @@
 /*
  * Created on Fri May 10 2024
  *
- * Copyright (c) 2024 SoftwareLabs B.V
+ * Copyright (c) 2024 SoftwareLabs 
  */
 
 #pragma once
