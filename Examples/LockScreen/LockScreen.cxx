@@ -31,18 +31,20 @@ namespace Events
 
 		cContext->SetContext(cr);
 		cContext->Image("../Common/Background.png", cWidth, cHeight, 0, 0);
-		cContext->Color(1.0, 1.0, 1.0, 1.0);
-		cContext->FontFamily("SF-Pro", true)->FontSize(20.0)->Move(cur, 100.0)->Text("SoftwareLabs.");
 
-		if (cur < 150.0)
+		cContext->Move(0.0, 0.0);
+		cContext->Color(0.2, 0.2, 0.2, index);
+
+		cContext->Rectangle(cWidth, 110.0, 0);
+
+		cContext->Color(1.0, 1.0, 1.0, 1.0);
+
+		cContext->FontFamily("HelveticaNeue", true)->FontSize(100.0)->Move(cur, 100.0)->Text("10:00");
+
+		if (cur < 160.0)
 		{
-			cur = CGLerp(cur, 150.0, index);
+			cur = CGLerp(cur, 160.0, index);
 			index += 0.01;
-		}
-		else
-		{
-			cur = 10.0;
-			index = 0.0;
 		}
 
 		printf("pos: %f\n", cur);
