@@ -33,17 +33,19 @@ namespace Events
 		cContext->Image("../Common/Background.png", cWidth, cHeight, 0, 0);
 
 		cContext->Move(0.0, 0.0);
-		cContext->Color(0.2, 0.2, 0.2, index);
+		cContext->Color(1.0, 1.0, 1.0, 0.2);
 
 		cContext->Rectangle(cWidth, 110.0, 0);
 
+		cContext->Blur(24, cWidth, 110.0);
+
 		cContext->Color(1.0, 1.0, 1.0, 1.0);
 
-		cContext->FontFamily("HelveticaNeue", true)->FontSize(100.0)->Move(cur, 100.0)->Text("10:00");
+		cContext->FontFamily("HelveticaNeue", true)->FontSize(100.0)->Move(cur, 90.0)->Text("CG:CR");
 
-		if (cur < 110.0)
+		if (cur < 90.0)
 		{
-			cur = CGLerp(cur, 110.0, index);
+			cur = CGLerp(cur, 90.0, index);
 			index += 0.01;
 		}
 		else
@@ -52,7 +54,7 @@ namespace Events
 			index = 0.0;
 		}
 
-		printf("pos: %f\n", cur);
+		MLLog("pos: %r\n", cur);
 
 		return FALSE;
 	}

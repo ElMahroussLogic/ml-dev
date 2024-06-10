@@ -228,6 +228,9 @@ public:
 		const int		 size = ML_ARRAY_LENGTH(kernel);
 		const int		 half = size / 2;
 
+		if (!mSurface)
+			mSurface = cairo_get_target(mCairo);
+
 		if (cairo_surface_status(mSurface))
 			return this;
 
