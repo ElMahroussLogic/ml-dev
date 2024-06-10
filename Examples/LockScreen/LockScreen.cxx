@@ -41,10 +41,15 @@ namespace Events
 
 		cContext->FontFamily("HelveticaNeue", true)->FontSize(100.0)->Move(cur, 100.0)->Text("10:00");
 
-		if (cur < 160.0)
+		if (cur < 110.0)
 		{
-			cur = CGLerp(cur, 160.0, index);
+			cur = CGLerp(cur, 110.0, index);
 			index += 0.01;
+		}
+		else
+		{
+			cur = 0.0;
+			index = 0.0;
 		}
 
 		printf("pos: %f\n", cur);
@@ -90,7 +95,7 @@ int main(int argc, char const* argv[])
     gtk_window_set_title(GTK_WINDOW(window), "StageBoard LockScreen - Demo");
     gtk_widget_show_all(window);
 
-	g_timeout_add(24, Events::update_canvas, drawing_area); 
+	g_timeout_add(16, Events::update_canvas, drawing_area); 
 
     gtk_main();
 
