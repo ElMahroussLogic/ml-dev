@@ -1,7 +1,7 @@
 <MLApplication>
     <!-- Application name -->
     <MLAppName>
-        nl.softwarelabs.lockscreen
+        ma.zeta.lockscreen
     </MLAppName>
     <MLAppVersion>
         1.0.0
