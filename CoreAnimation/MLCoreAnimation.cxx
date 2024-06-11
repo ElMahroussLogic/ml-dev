@@ -13,5 +13,5 @@
 /// @return the returned result of the lerp.
 ML_IMPORT CGReal CGLerp(CGReal start, CGReal end, CGReal status)
 {
-    return (start + status * (end - start));
+	return (start + status * (end - start));
 }

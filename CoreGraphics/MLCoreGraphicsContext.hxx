@@ -72,7 +72,7 @@ public:
 	/// @return The graphics context.
 	virtual MLCoreGraphicsContext* PageLabel(const CGCharacter* T) = 0;
 
-	/// @brief Set the thumbnail size.	
+	/// @brief Set the thumbnail size.
 	/// @param W width.
 	/// @param H height.
 	/// @return The graphics context.
@@ -164,7 +164,7 @@ public:
 	}
 
 	/// @brief Set graphics context.
-	/// @param pvtCtx 
+	/// @param pvtCtx
 	virtual void SetContext(void* pvtCtx) = 0;
 
 private:
@@ -180,7 +180,7 @@ private:
 /// MLCoreGraphicsContext.
 /// @return The new graphics context.
 ML_IMPORT MLCoreGraphicsContext*
-CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height);
+		  CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height);
 
 /// @brief Releases a Core Graphics context.
 /// @param context The context itself.

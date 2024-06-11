@@ -38,7 +38,7 @@ typedef struct MLCoreGraphicsRect final
 #define kRsrcNilUrl "nil"
 
 /// @brief Fetch resource as a string.
-/// @param input 
+/// @param input
 /// @return the resource as a string.
 inline const MLString r(const char* input)
 {
@@ -51,7 +51,7 @@ inline const MLString r(const char* input)
 		return text;
 	}
 
-    MLString text(strlen(input) + strlen(kRsrcProtocol));
+	MLString text(strlen(input) + strlen(kRsrcProtocol));
 	text += kRsrcProtocol;
 	text += input;
 

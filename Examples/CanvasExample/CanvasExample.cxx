@@ -12,7 +12,7 @@
 
 int main(int argc, char const* argv[])
 {
-	constexpr auto cWidth = 1000;
+	constexpr auto cWidth  = 1000;
 	constexpr auto cHeight = 666;
 
 	MLCoreGraphicsContext* context = CGRequestContext(0, 0, cWidth, cHeight);
@@ -23,7 +23,7 @@ int main(int argc, char const* argv[])
 		return -1;
 	}
 
-	auto pdfRef = r("CanvasExample.pdf");
+	auto pdfRef	  = r("CanvasExample.pdf");
 	auto imageRef = r("../Common/Background.png");
 
 	context->PDF(pdfRef.asConstBytes())->Start()->Image(imageRef.asConstBytes(), cWidth, cHeight, 0, 0);
@@ -45,7 +45,7 @@ int main(int argc, char const* argv[])
 	context->FontFamily("Inter-Black", true)->FontSize(20.0)->Move(50.0, 50.0)->Text("Hello again.");
 
 	context->End();
-	
+
 	MLLog("Object: %@ will be destroyed.\n", context);
 
 	CGReleaseContext(context);
