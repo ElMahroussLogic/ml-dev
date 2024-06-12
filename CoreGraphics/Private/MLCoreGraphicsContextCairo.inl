@@ -89,9 +89,31 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* Text(const CGCharacter* T) override
+	virtual MLCoreGraphicsContext* Text(const CGCharacter* T, CGBoolean Center, CGReal X, CGReal Y, CGReal W, CGReal H) override
 	{
+		if (Center)
+		{
+			cairo_text_extents_t extents;
+			cairo_font_extents_t font_extents;
+
+			cairo_text_extents(mCairo, T, &extents);
+			cairo_font_extents(mCairo, &font_extents);
+
+			// Calculate the position to center the text
+			double x_center = X + (W - extents.width) / 2 - extents.x_bearing;
+			double y_center = Y + (H - font_extents.height) / 2 + font_extents.ascent;
+
+			// Move to the calculated position and show the text
+			cairo_move_to(mCairo, x_center, y_center);
+		}
+
 		cairo_show_text(mCairo, T);
+
+		if (Center)
+		{
+			cairo_move_to(mCairo, mX, mY);
+		}
+
 		return this;
 	}
 
@@ -117,7 +139,8 @@ public:
 
 	virtual MLCoreGraphicsContext* PDF(const CGCharacter* T) override
 	{
-		if (mSurface) return this;
+		if (mSurface)
+			return this;
 
 		std::basic_string<CGCharacter> strPath = T;
 
@@ -214,7 +237,7 @@ public:
 	/// @param radius blur's radius
 	/// @return the context.
 	/// @note the blur doesn't work on PDF backends.
-	virtual MLCoreGraphicsContext* Blur(CGReal radius,
+	virtual MLCoreGraphicsContext* Blur(CGReal	radius,
 										CGSizeT width,
 										CGSizeT height) override
 	{
@@ -317,7 +340,7 @@ public:
 				}
 
 				auto rgb = (x / a << 24) | (y / a << 16) | (z / a << 8) | w / a;
-				d[j] = rgb;
+				d[j]	 = rgb;
 			}
 		}
 
@@ -352,7 +375,7 @@ public:
 				}
 
 				auto rgb = (x / a << 24) | (y / a << 16) | (z / a << 8) | w / a;
-				d[j] = rgb;
+				d[j]	 = rgb;
 			}
 		}
 
@@ -365,8 +388,10 @@ public:
 
 	/// @note This only supports the PNG format.
 	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path,
-										CGSizeT W, CGSizeT H,
-										CGReal X, CGReal Y) override
+										 CGSizeT			W,
+										 CGSizeT			H,
+										 CGReal				X,
+										 CGReal				Y) override
 	{
 		std::basic_string<CGCharacter> strPath = Path;
 
@@ -396,7 +421,8 @@ public:
 	/// @note placeholder for now.
 	virtual MLCoreGraphicsContext* Start() override
 	{
-		if (mCairo) return this;
+		if (mCairo)
+			return this;
 
 		mCairo = cairo_create(mSurface);
 
@@ -408,7 +434,8 @@ public:
 	virtual MLCoreGraphicsContext* Present() override
 	{
 
-		if (!mSurface || !mCairo) return this;
+		if (!mSurface || !mCairo)
+			return this;
 
 		cairo_surface_copy_page(mSurface);
 
@@ -422,17 +449,18 @@ public:
 	/// @brief End draw command.
 	virtual MLCoreGraphicsContext* End() override
 	{
-		if (!mSurface || !mCairo) return this;
+		if (!mSurface || !mCairo)
+			return this;
 
 		if (!mCustomSurface && mSurface)
 		{
-    		cairo_surface_destroy(mSurface);
-    		mSurface = nullptr;
+			cairo_surface_destroy(mSurface);
+			mSurface = nullptr;
 		}
 
 		if (!mCustomCairo && mCairo)
 		{
-		    cairo_destroy(mCairo);
+			cairo_destroy(mCairo);
 			mCairo = nullptr;
 		}
 
@@ -445,7 +473,7 @@ public:
 	{
 		mCairo = (cairo_t*)pvtCtx;
 
-		mCustomCairo = pvtCtx != nullptr;
+		mCustomCairo   = pvtCtx != nullptr;
 		mCustomSurface = pvtCtx != nullptr;
 	}
 
@@ -474,8 +502,8 @@ private:
 	CGReal			 mWidth{0};
 	CGReal			 mHeight{0};
 	CGCharacter		 mOutputPath[255] = {0};
-	CGBoolean 		 mCustomCairo{false};
-	CGBoolean        mCustomSurface{false};
+	CGBoolean		 mCustomCairo{false};
+	CGBoolean		 mCustomSurface{false};
 	CGReal			 mX{0};
 	CGReal			 mY{0};
 };

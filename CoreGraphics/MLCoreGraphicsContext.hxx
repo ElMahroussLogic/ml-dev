@@ -42,7 +42,8 @@ public:
 	/// @brief Write Text to image.
 	/// @param T the text itself.
 	/// @return the context.
-	virtual MLCoreGraphicsContext* Text(const CGCharacter* T) = 0;
+	virtual MLCoreGraphicsContext* Text(const CGCharacter* T, CGBoolean Center,
+	CGReal X = 0.0, CGReal Y = 0.0, CGReal W = 0.0, CGReal H = 0.0) = 0;
 
 	/// @brief Set font.
 	/// @param T font name

@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <thread>
+#include <ctime>
 
 extern "C"
 {
@@ -27,35 +28,53 @@ namespace Events
 	{
 		(void)user_data;
 
-		static CGReal cur	= 10.0;
-		static CGReal index = 0;
+		static CGReal cur	 = 10.0;
+		static CGReal index	 = 0.0;
+		static CGReal indexA = 1.0;
 
 		cContext->SetContext(cr);
+
+		std::time_t now = std::time(nullptr);
+		// Convert it to local time
+		std::tm* localTime = std::localtime(&now);
+
 		cContext->Image("../Common/Background.png", cWidth, cHeight, 0, 0);
 
 		cContext->Move(0.0, 0.0);
-		cContext->Color(1.0, 1.0, 1.0, 0.2);
+		cContext->Color(0.145, 0.145, 0.145, 1.0);
 
 		cContext->Rectangle(cWidth, 110.0, 0);
 
-		cContext->Blur(24, cWidth, 110.0);
-
 		cContext->Color(1.0, 1.0, 1.0, 1.0);
 
-		cContext->FontFamily("HelveticaNeue", true)->FontSize(100.0)->Move(cur, 90.0)->Text("10:00");
-
-		if (cur < 90.0)
+		if (localTime->tm_min > 9)
 		{
-			cur = CGLerp(cur, 90.0, index);
-			index += 0.01;
+			cContext->FontFamily("Inter", true)->FontSize(100.0)->Move(cur, 90.0)->Text((std::to_string(localTime->tm_hour) + ":" + std::to_string(localTime->tm_min)).c_str(), false);
 		}
 		else
 		{
-			cur	  = 0.0;
-			index = 0.0;
+			cContext->FontFamily("Inter", true)->FontSize(100.0)->Move(cur, 90.0)->Text((std::to_string(localTime->tm_hour) + ":0" + std::to_string(localTime->tm_min)).c_str(), false);
 		}
 
-		MLLog("pos: %r\n", cur);
+		constexpr auto cStopAt = 80.0;
+
+		if (cur < cStopAt)
+		{
+			cur = CGLerp(cur, cStopAt, index);
+			index += 0.001;
+			indexA -= 0.01;
+
+			MLLog("hour screen: %r\n", cur);
+		}
+		else
+		{
+			if (indexA > 0)
+				indexA = 0;
+		}
+
+		cContext->Move(0.0, 0.0);
+		cContext->Color(0, 0, 0, indexA);
+		cContext->Rectangle(cWidth, cHeight, 0);
 
 		return FALSE;
 	}
