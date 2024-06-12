@@ -1,7 +1,7 @@
 /*
  * Created on Fri May 10 2024
  *
- * Copyright (c) 2024 SoftwareLabs B.V
+ * Copyright (c) 2024 Zeta Electronics Corporation
  */
 
 #include <MLCoreGraphicsContext.hxx>
@@ -14,7 +14,7 @@
 /// MLCoreGraphicsContext.
 /// @return The new graphics context.
 ML_EXPORT MLCoreGraphicsContext*
-CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height)
+		  CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height)
 {
 	MLCoreGraphicsContext* context =
 		new MLCoreGraphicsContextCairo(width, height);

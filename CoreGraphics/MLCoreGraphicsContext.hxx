@@ -1,7 +1,7 @@
 /*
  * Created on Fri May 10 2024
  *
- * Copyright (c) 2024 SoftwareLabs B.V
+ * Copyright (c) 2024 Zeta Electronics Corporation
  */
 
 #pragma once
@@ -15,6 +15,7 @@ public:
 	explicit MLCoreGraphicsContext() = default;
 	virtual ~MLCoreGraphicsContext() = default;
 
+	/// @brief Copy constructor.
 	MLCoreGraphicsContext& operator=(const MLCoreGraphicsContext&) = default;
 	MLCoreGraphicsContext(const MLCoreGraphicsContext&)			   = default;
 
@@ -41,7 +42,8 @@ public:
 	/// @brief Write Text to image.
 	/// @param T the text itself.
 	/// @return the context.
-	virtual MLCoreGraphicsContext* Text(const CGCharacter* T) = 0;
+	virtual MLCoreGraphicsContext* Text(const CGCharacter* T, CGBoolean Center,
+	CGReal X = 0.0, CGReal Y = 0.0, CGReal W = 0.0, CGReal H = 0.0) = 0;
 
 	/// @brief Set font.
 	/// @param T font name
@@ -66,18 +68,19 @@ public:
 	/// @return The graphics context.
 	virtual MLCoreGraphicsContext* PDF(const CGCharacter* T) = 0;
 
-	/// @brief 
-	/// @param T 
-	/// @return 
+	/// @brief Set the page label.
+	/// @param T page label name.
+	/// @return The graphics context.
 	virtual MLCoreGraphicsContext* PageLabel(const CGCharacter* T) = 0;
 
-	/// @brief 
-	/// @param T 
-	/// @return 
+	/// @brief Set the thumbnail size.
+	/// @param W width.
+	/// @param H height.
+	/// @return The graphics context.
 	virtual MLCoreGraphicsContext* ThumbnailSize(const int W, const int H) = 0;
 
-	/// @brief 
-	/// @return 
+	/// @brief Present the context.
+	/// @return The graphics context.
 	virtual MLCoreGraphicsContext* Present() = 0;
 
 	/// @brief Set color or current pen.
@@ -90,29 +93,30 @@ public:
 
 	/// @brief Set stroke of pen.
 	/// @param strokeStrength Stroke strength
-	/// @return
+	/// @return The graphics context.
 	virtual MLCoreGraphicsContext* Stroke(CGReal strokeStrength) = 0;
 
 	/// @brief Set line cap.
 	/// @param type type according to enum *MLCoreGraphicsLineCap*.
-	/// @return
+	/// @return The graphics context.
 	virtual MLCoreGraphicsContext* LineCap(int type) = 0;
 
 	/// @brief Line from **start** to **finish**.
 	/// @param start Start position.
 	/// @param finish End position.
-	/// @return
+	/// @return The graphics context.
 	virtual MLCoreGraphicsContext* LineTo(CGReal start, CGReal finish) = 0;
 
 	/// @brief Draws a gaussian blur.
 	/// @param radius blur's radius
+	/// @return The graphics context.
 	virtual MLCoreGraphicsContext* Blur(CGReal	radius,
 										CGSizeT width,
 										CGSizeT height) = 0;
 
 	/// @brief Load image (PNG) from disk.
 	/// @param Path The PNG image path to read on.
-	/// @return context ptr.
+	/// @return The graphics context.
 	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path, CGSizeT W, CGSizeT H, CGReal X, CGReal Y) = 0;
 
 	/// @brief Scale context.
@@ -160,6 +164,10 @@ public:
 		return this->toString();
 	}
 
+	/// @brief Set graphics context.
+	/// @param pvtCtx
+	virtual void SetContext(void* pvtCtx) = 0;
+
 private:
 	friend class MLCoreGraphicsPen;
 	friend class MLCoreGraphicsShape;
@@ -173,7 +181,7 @@ private:
 /// MLCoreGraphicsContext.
 /// @return The new graphics context.
 ML_IMPORT MLCoreGraphicsContext*
-CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height);
+		  CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height);
 
 /// @brief Releases a Core Graphics context.
 /// @param context The context itself.

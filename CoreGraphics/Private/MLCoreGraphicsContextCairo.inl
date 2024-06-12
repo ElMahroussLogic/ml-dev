@@ -1,3 +1,9 @@
+/*
+ * Created on Fri May 10 2024
+ *
+ * Copyright (c) 2024 Zeta Electronics Corporation
+ */
+
 #pragma once
 
 #include <MLCoreGraphicsContext.hxx>
@@ -30,7 +36,7 @@ public:
 
 	/// @brief Grants a new feature to Context.
 	/// @param flag the feature flag.
-	virtual MLCoreGraphicsContext* operator|=(const CGSizeT flag)
+	virtual MLCoreGraphicsContext* operator|=(const CGSizeT flag) override
 	{
 		mContextFlags |= flag;
 		return this;
@@ -38,7 +44,7 @@ public:
 
 	/// @brief Revokes a new feature to Context.
 	/// @param flag the feature flag.
-	virtual MLCoreGraphicsContext* operator&=(const CGSizeT flag)
+	virtual MLCoreGraphicsContext* operator&=(const CGSizeT flag) override
 	{
 		mContextFlags &= flag;
 		return this;
@@ -48,7 +54,7 @@ public:
 	/// @param flag The feature in question.
 	/// @retval true feature exists.
 	/// @retval false not supported by this context.
-	virtual bool operator&(const CGSizeT flag)
+	virtual bool operator&(const CGSizeT flag) override
 	{
 		return mContextFlags & flag;
 	}
@@ -71,7 +77,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* Move(CGReal X, CGReal Y)
+	virtual MLCoreGraphicsContext* Move(CGReal X, CGReal Y) override
 	{
 		cairo_move_to(mCairo, X, Y);
 
@@ -83,15 +89,37 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* Text(const CGCharacter* T)
+	virtual MLCoreGraphicsContext* Text(const CGCharacter* T, CGBoolean Center, CGReal X, CGReal Y, CGReal W, CGReal H) override
 	{
+		if (Center)
+		{
+			cairo_text_extents_t extents;
+			cairo_font_extents_t font_extents;
+
+			cairo_text_extents(mCairo, T, &extents);
+			cairo_font_extents(mCairo, &font_extents);
+
+			// Calculate the position to center the text
+			double x_center = X + (W - extents.width) / 2 - extents.x_bearing;
+			double y_center = Y + (H - font_extents.height) / 2 + font_extents.ascent;
+
+			// Move to the calculated position and show the text
+			cairo_move_to(mCairo, x_center, y_center);
+		}
+
 		cairo_show_text(mCairo, T);
+
+		if (Center)
+		{
+			cairo_move_to(mCairo, mX, mY);
+		}
+
 		return this;
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* FontFamily(const CGCharacter* T, const bool isBold)
+	virtual MLCoreGraphicsContext* FontFamily(const CGCharacter* T, const bool isBold) override
 	{
 		cairo_select_font_face(mCairo, T, CAIRO_FONT_SLANT_NORMAL,
 							   isBold ? CAIRO_FONT_WEIGHT_BOLD
@@ -101,7 +129,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* FontSize(const CGReal T)
+	virtual MLCoreGraphicsContext* FontSize(const CGReal T) override
 	{
 		cairo_set_font_size(mCairo, T);
 		return this;
@@ -109,9 +137,10 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* PDF(const CGCharacter* T)
+	virtual MLCoreGraphicsContext* PDF(const CGCharacter* T) override
 	{
-		if (mSurface) return this;
+		if (mSurface)
+			return this;
 
 		std::basic_string<CGCharacter> strPath = T;
 
@@ -131,7 +160,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* Color(CGReal R, CGReal G, CGReal B, CGReal A)
+	virtual MLCoreGraphicsContext* Color(CGReal R, CGReal G, CGReal B, CGReal A) override
 	{
 		cairo_set_source_rgba(mCairo, R, G, B, A);
 		return this;
@@ -139,7 +168,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* Stroke(CGReal strokeStrength)
+	virtual MLCoreGraphicsContext* Stroke(CGReal strokeStrength) override
 	{
 		cairo_set_line_width(mCairo, strokeStrength);
 		cairo_stroke(mCairo);
@@ -148,7 +177,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* Rectangle(CGReal width, CGReal height, CGReal radius)
+	virtual MLCoreGraphicsContext* Rectangle(CGReal width, CGReal height, CGReal radius) override
 	{
 		double aspect	  = 1.0,		   /* aspect ratio */
 			corner_radius = height / 10.0; /* and corner curvature radius */
@@ -159,8 +188,6 @@ public:
 
 		CGReal x = mX;
 		CGReal y = mY;
-
-		MLLog("X: %2.3f, Y: %2.3f\n", x, y);
 
 		cairo_arc(mCairo, x + width - radius, y + radius, radius, -90 * degrees,
 				  0 * degrees);
@@ -179,7 +206,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* LineTo(CGReal start, CGReal finish)
+	virtual MLCoreGraphicsContext* LineTo(CGReal start, CGReal finish) override
 	{
 		cairo_line_to(mCairo, start, finish);
 
@@ -188,7 +215,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	virtual MLCoreGraphicsContext* LineCap(int32_t type)
+	virtual MLCoreGraphicsContext* LineCap(int32_t type) override
 	{
 		switch (type)
 		{
@@ -210,9 +237,9 @@ public:
 	/// @param radius blur's radius
 	/// @return the context.
 	/// @note the blur doesn't work on PDF backends.
-	virtual MLCoreGraphicsContext* Blur(CGReal radius,
+	virtual MLCoreGraphicsContext* Blur(CGReal	radius,
 										CGSizeT width,
-										CGSizeT height)
+										CGSizeT height) override
 	{
 		cairo_surface_t* tmp;
 		int				 src_stride, dst_stride;
@@ -223,6 +250,9 @@ public:
 		uint8_t			 kernel[256];
 		const int		 size = ML_ARRAY_LENGTH(kernel);
 		const int		 half = size / 2;
+
+		if (!mSurface)
+			mSurface = cairo_get_target(mCairo);
 
 		if (cairo_surface_status(mSurface))
 			return this;
@@ -310,7 +340,7 @@ public:
 				}
 
 				auto rgb = (x / a << 24) | (y / a << 16) | (z / a << 8) | w / a;
-				d[j] = rgb;
+				d[j]	 = rgb;
 			}
 		}
 
@@ -345,7 +375,7 @@ public:
 				}
 
 				auto rgb = (x / a << 24) | (y / a << 16) | (z / a << 8) | w / a;
-				d[j] = rgb;
+				d[j]	 = rgb;
 			}
 		}
 
@@ -357,9 +387,11 @@ public:
 	}
 
 	/// @note This only supports the PNG format.
-	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path, 
-										CGSizeT W, CGSizeT H, 
-										CGReal X, CGReal Y)
+	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path,
+										 CGSizeT			W,
+										 CGSizeT			H,
+										 CGReal				X,
+										 CGReal				Y) override
 	{
 		std::basic_string<CGCharacter> strPath = Path;
 
@@ -375,36 +407,35 @@ public:
 
 		cairo_set_source_surface(mCairo, image, X, Y);
 
-		cairo_rectangle(mCairo, X, Y, W, H);
-		cairo_fill(mCairo);
-
-		cairo_surface_destroy(image);
-
-		cairo_set_source_surface(mCairo, mSurface, X, Y);
+		cairo_paint(mCairo);
 
 		return this;
 	}
 
-	virtual MLCoreGraphicsContext* Scale(CGReal X, CGReal Y)
+	virtual MLCoreGraphicsContext* Scale(CGReal X, CGReal Y) override
 	{
 		cairo_scale(mCairo, X, Y);
 		return this;
 	}
 
 	/// @note placeholder for now.
-	virtual MLCoreGraphicsContext* Start()
+	virtual MLCoreGraphicsContext* Start() override
 	{
-		if (mCairo) return this;
+		if (mCairo)
+			return this;
 
 		mCairo = cairo_create(mSurface);
 
 		return this;
 	}
 
-	virtual MLCoreGraphicsContext* Present()
+	/// @brief Present PDF rendering of one page.
+	/// @return
+	virtual MLCoreGraphicsContext* Present() override
 	{
-		
-		if (!mSurface || !mCairo) return this;
+
+		if (!mSurface || !mCairo)
+			return this;
 
 		cairo_surface_copy_page(mSurface);
 
@@ -414,34 +445,51 @@ public:
 		return this;
 	}
 
-	/// @note placeholder for now.
-	virtual MLCoreGraphicsContext* End()
+	/// @note Placeholder for now.
+	/// @brief End draw command.
+	virtual MLCoreGraphicsContext* End() override
 	{
-		if (!mSurface || !mCairo) return this;
+		if (!mSurface || !mCairo)
+			return this;
 
-		cairo_surface_destroy(mSurface);
-		mSurface = nullptr;
+		if (!mCustomSurface && mSurface)
+		{
+			cairo_surface_destroy(mSurface);
+			mSurface = nullptr;
+		}
 
-		cairo_destroy(mCairo);
-		mCairo = nullptr;
+		if (!mCustomCairo && mCairo)
+		{
+			cairo_destroy(mCairo);
+			mCairo = nullptr;
+		}
 
 		return this;
 	}
 
+	/// @brief Set private internal context
+	/// @param pvtCtx The cairo context.
+	virtual void SetContext(void* pvtCtx) override
+	{
+		mCairo = (cairo_t*)pvtCtx;
 
-	/// @brief 
-	/// @param T 
-	/// @return 
-	virtual MLCoreGraphicsContext* PageLabel(const CGCharacter* T)
+		mCustomCairo   = pvtCtx != nullptr;
+		mCustomSurface = pvtCtx != nullptr;
+	}
+
+	/// @brief
+	/// @param T
+	/// @return
+	virtual MLCoreGraphicsContext* PageLabel(const CGCharacter* T) override
 	{
 		cairo_pdf_surface_set_page_label(mSurface, T);
 		return this;
 	}
 
-	/// @brief 
-	/// @param T 
-	/// @return 
-	virtual MLCoreGraphicsContext* ThumbnailSize(const int Width, const int Height)
+	/// @brief
+	/// @param T
+	/// @return
+	virtual MLCoreGraphicsContext* ThumbnailSize(const int Width, const int Height) override
 	{
 		cairo_pdf_surface_set_thumbnail_size(mSurface, Width, Height);
 		return this;
@@ -454,6 +502,8 @@ private:
 	CGReal			 mWidth{0};
 	CGReal			 mHeight{0};
 	CGCharacter		 mOutputPath[255] = {0};
+	CGBoolean		 mCustomCairo{false};
+	CGBoolean		 mCustomSurface{false};
 	CGReal			 mX{0};
 	CGReal			 mY{0};
 };
@@ -470,9 +520,10 @@ MLCoreGraphicsContextCairo::MLCoreGraphicsContextCairo(const CGReal width,
 	ML_MUST_PASS(width > 0 && height > 0);
 }
 
+/// @brief C++ destrcutor, the End() method is called as well.
 MLCoreGraphicsContextCairo::~MLCoreGraphicsContextCairo()
 {
 	this->End();
 }
 
-/// TODO: Port cairo as libcgx as a kernel driver.
+/// TODO: Cairo as GX.framework

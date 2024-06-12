@@ -1,4 +1,4 @@
-![Kernel](meta/Logo.svg)
+![Stack](Misc/Logo.svg)
 
 # New OS graphics stack.
 
@@ -9,4 +9,4 @@ Contains
 - CoreGraphics-Animation framework.
 - CairoGraphics library.
 
-#### Copyright SoftwareLabs, all rights reserved.
+#### Copyright Zeta Electronics Corporation, all rights reserved.
