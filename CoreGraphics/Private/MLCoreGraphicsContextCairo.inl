@@ -496,9 +496,12 @@ public:
 	}
 
 private:
+	typedef cairo_surface_t* CGSurfacePtr;
+	typedef cairo_t* 		 CGPtr;
+	
 	CGSizeT			 mContextFlags{0};
-	cairo_surface_t* mSurface{nullptr};
-	cairo_t*		 mCairo{nullptr};
+	CGSurfacePtr	 mSurface{nullptr};
+	CGPtr			 mCairo{nullptr};
 	CGReal			 mWidth{0};
 	CGReal			 mHeight{0};
 	CGCharacter		 mOutputPath[255] = {0};
