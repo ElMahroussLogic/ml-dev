@@ -1,7 +1,7 @@
 /*
  * Created on Fri May 10 2024
  *
- * Copyright (c) 2024 SoftwareLabs 
+ * Copyright (c) 2024 Zeta Electronics Corporation
  */
 
 #pragma once
@@ -364,8 +364,8 @@ public:
 	}
 
 	/// @note This only supports the PNG format.
-	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path, 
-										CGSizeT W, CGSizeT H, 
+	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path,
+										CGSizeT W, CGSizeT H,
 										CGReal X, CGReal Y) override
 	{
 		std::basic_string<CGCharacter> strPath = Path;
@@ -404,10 +404,10 @@ public:
 	}
 
 	/// @brief Present PDF rendering of one page.
-	/// @return 
+	/// @return
 	virtual MLCoreGraphicsContext* Present() override
 	{
-		
+
 		if (!mSurface || !mCairo) return this;
 
 		cairo_surface_copy_page(mSurface);
@@ -424,11 +424,17 @@ public:
 	{
 		if (!mSurface || !mCairo) return this;
 
-		cairo_surface_destroy(mSurface);
-		mSurface = nullptr;
+		if (!mCustomSurface && mSurface)
+		{
+    		cairo_surface_destroy(mSurface);
+    		mSurface = nullptr;
+		}
 
-		cairo_destroy(mCairo);
-		mCairo = nullptr;
+		if (!mCustomCairo && mCairo)
+		{
+		    cairo_destroy(mCairo);
+			mCairo = nullptr;
+		}
 
 		return this;
 	}
@@ -438,21 +444,23 @@ public:
 	virtual void SetContext(void* pvtCtx) override
 	{
 		mCairo = (cairo_t*)pvtCtx;
+
+		mCustomCairo = pvtCtx != nullptr;
 		mCustomSurface = pvtCtx != nullptr;
 	}
 
-	/// @brief 
-	/// @param T 
-	/// @return 
+	/// @brief
+	/// @param T
+	/// @return
 	virtual MLCoreGraphicsContext* PageLabel(const CGCharacter* T) override
 	{
 		cairo_pdf_surface_set_page_label(mSurface, T);
 		return this;
 	}
 
-	/// @brief 
-	/// @param T 
-	/// @return 
+	/// @brief
+	/// @param T
+	/// @return
 	virtual MLCoreGraphicsContext* ThumbnailSize(const int Width, const int Height) override
 	{
 		cairo_pdf_surface_set_thumbnail_size(mSurface, Width, Height);
@@ -466,7 +474,8 @@ private:
 	CGReal			 mWidth{0};
 	CGReal			 mHeight{0};
 	CGCharacter		 mOutputPath[255] = {0};
-	CGBoolean 		 mCustomSurface{false};
+	CGBoolean 		 mCustomCairo{false};
+	CGBoolean        mCustomSurface{false};
 	CGReal			 mX{0};
 	CGReal			 mY{0};
 };
@@ -489,4 +498,4 @@ MLCoreGraphicsContextCairo::~MLCoreGraphicsContextCairo()
 	this->End();
 }
 
-/// TODO: Port cairo as libcgx as a kernel driver.
+/// TODO: Cairo as GX.framework
