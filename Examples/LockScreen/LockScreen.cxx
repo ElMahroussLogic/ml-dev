@@ -14,7 +14,7 @@
 
 extern "C"
 {
-#include <gtk/gtk.h>
+#	include <gtk/gtk.h>
 }
 
 constexpr auto cWidth  = 436;
@@ -49,14 +49,16 @@ namespace Events
 
 		if (localTime->tm_min > 9)
 		{
-			cContext->FontFamily("Inter", true)->FontSize(100.0)->Move(cur, 90.0)->Text((std::to_string(localTime->tm_hour) + ":" + std::to_string(localTime->tm_min)).c_str(), false);
+			cContext->FontFamily("Inter", true)->FontSize(100.0)
+				->Move(cur, 90.0)->Text((std::to_string(localTime->tm_hour) + ":" + std::to_string(localTime->tm_min)).c_str(), false);
 		}
 		else
 		{
-			cContext->FontFamily("Inter", true)->FontSize(100.0)->Move(cur, 90.0)->Text((std::to_string(localTime->tm_hour) + ":0" + std::to_string(localTime->tm_min)).c_str(), false);
+			cContext->FontFamily("Inter", true)->FontSize(100.0)
+				->Move(cur, 90.0)->Text((std::to_string(localTime->tm_hour) + ":0" + std::to_string(localTime->tm_min)).c_str(), false);
 		}
 
-		constexpr auto cStopAt = 80.0;
+		constexpr auto cStopAt = 75.0;
 
 		if (cur < cStopAt)
 		{
@@ -64,7 +66,7 @@ namespace Events
 			index += 0.001;
 			indexA -= 0.01;
 
-			MLLog("hour screen: %r\n", cur);
+			MLLog("currrent X position: %r\n", cur);
 		}
 		else
 		{
@@ -101,6 +103,14 @@ int main(int argc, char const* argv[])
 	GtkWidget* drawing_area;
 
 	gtk_init(&argc, (char***)&argv);
+
+	GtkWidget* introDlg = gtk_message_dialog_new(
+        NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
+        "Hi!\nYou'll be introduced to the lock screen of Zeta.");
+
+	int response = gtk_dialog_run(GTK_DIALOG(introDlg));
+
+	gtk_widget_destroy(introDlg);
 
 	window		 = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	drawing_area = gtk_drawing_area_new();
