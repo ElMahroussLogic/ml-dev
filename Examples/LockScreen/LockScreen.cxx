@@ -107,7 +107,7 @@ int main(int argc, char const* argv[])
 	GtkWidget* introDlg = gtk_message_dialog_new(
         NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
         "Hi!\nYou'll be introduced to the lock screen of Zeta.");
-	
+
 	int response = gtk_dialog_run(GTK_DIALOG(introDlg));
 
 	gtk_widget_destroy(introDlg);
