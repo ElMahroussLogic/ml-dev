@@ -8,7 +8,7 @@
 
 #ifdef ML_WRAP_AROUND_NS
 /// @note this is for the purpose of having a common namespace alongside zeta's codebase.
-namespace ma::zeta::api::animation
+namespace fr::zeta::api::animation
 {
 #endif
 
