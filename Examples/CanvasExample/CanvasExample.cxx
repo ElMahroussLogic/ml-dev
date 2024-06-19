@@ -4,6 +4,8 @@
  * Copyright (c) 2024 Zeta Electronics Corporation
  */
 
+#include <CoreAnimation.hxx>
+#include <CoreFoundation/CoreFoundation.hxx>
 #include <CoreGraphics.hxx>
 #include <MLString.hxx>
 #include <stdio.h>
