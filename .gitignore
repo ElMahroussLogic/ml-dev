@@ -10,6 +10,9 @@
 *.ae
 *.lib
 
+html
+latex
+
 docs/
 
 *.c.pp
