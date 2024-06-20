@@ -4,7 +4,7 @@
  * Copyright (c) 2024 Zeta Electronics Corporation
  */
 
-#include <MLCoreAnimation.hxx>
+#include <CoreAnimation.hxx>
 #include <CoreGraphics.hxx>
 #include <MLString.hxx>
 #include <stdio.h>
@@ -38,12 +38,10 @@ namespace Events
 		// Convert it to local time
 		std::tm* localTime = std::localtime(&now);
 
-		cContext->Image("../Common/Background.png", cWidth, cHeight, 0, 0);
-
 		cContext->Move(0.0, 0.0);
-		cContext->Color(0.145, 0.145, 0.145, 1.0);
+		cContext->Color(0.0, 0.0, 0.0, 1.0);
 
-		cContext->Rectangle(cWidth, 110.0, 0);
+		cContext->Rectangle(cWidth, cHeight, 0);
 
 		cContext->Color(1.0, 1.0, 1.0, 1.0);
 
@@ -62,7 +60,7 @@ namespace Events
 
 		if (cur < cStopAt)
 		{
-			cur = CGLerp(cur, cStopAt, index);
+			cur = CALerp(cur, cStopAt, index);
 			index += 0.001;
 			indexA -= 0.01;
 
@@ -106,7 +104,7 @@ int main(int argc, char const* argv[])
 
 	GtkWidget* introDlg = gtk_message_dialog_new(
         NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
-        "Hi!\nYou'll be introduced to the lock screen of Zeta.");
+        "Hi!\nYou'll be introduced to a fake lock screen to demo Zeta OS\ncapabilities..");
 
 	int response = gtk_dialog_run(GTK_DIALOG(introDlg));
 

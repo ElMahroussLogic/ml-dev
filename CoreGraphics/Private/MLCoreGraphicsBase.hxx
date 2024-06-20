@@ -11,12 +11,18 @@
 #include <MLString.hxx>
 #include <cstring>
 
-#define kRsrcProtocol "cgx://"
+/// CORE MACROS ///
+
+#define kRsrcProtocol "cg://"
+
+/// CORE TYPES ///
 
 typedef double CGReal;
 typedef size_t CGSizeT;
 typedef char   CGCharacter;
 typedef bool   CGBoolean;
+
+/// CORE STRUCTS ///
 
 typedef struct MLCoreGraphicsPoint final
 {
@@ -29,36 +35,31 @@ typedef struct MLCoreGraphicsRect final
 	CGReal X2, Y2;
 } MLCoreGraphicsRect;
 
-/// @brief fallback URL in case the resource is not found.
-/// @see r()
-#define kRsrcFallbackUrl "fallback"
-
-/// @brief URL for resources that are not found.
-/// @see r()
-#define kRsrcNilUrl "nil"
+/// CORE FUNCTIONS ///
 
 /// @brief Fetch resource as a string.
 /// @param input
 /// @return the resource as a string.
 inline const MLString r(const char* input)
 {
+    /// if input is invalid...
 	if (!input)
 	{
-		MLString text(strlen(input) + strlen(kRsrcProtocol));
-		text += kRsrcProtocol;
-		text += kRsrcFallbackUrl;
-
-		return text;
+		MLString textNil(1);
+		return textNil;
 	}
 
-	MLString text(strlen(input) + strlen(kRsrcProtocol));
-	text += kRsrcProtocol;
-	text += input;
+	MLString textPath(strlen(input) + strlen(kRsrcProtocol));
 
 	if (*input == 0)
 	{
-		text += kRsrcNilUrl;
+	   return textPath;
+	}
+	else
+	{
+	   textPath += kRsrcProtocol;
+	   textPath += input;
 	}
 
-	return text;
+	return textPath;
 }

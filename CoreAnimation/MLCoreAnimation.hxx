@@ -7,13 +7,13 @@
 #pragma once
 
 #include <Foundation.hxx>
-#include <CoreGraphics.hxx>
+#include <Private/MLCoreAnimationBase.hxx>
 
 /// @brief Linear interop helper function.
 /// @param start where to begin
 /// @param end where to end
 /// @param status the status
 /// @return the returned result of the lerp.
-ML_IMPORT CGReal CGLerp(CGReal start, CGReal end, CGReal status);
+ML_IMPORT CAReal CALerp(CAReal start, CAReal end, CAReal status);
 
 // END OF HEADER.

@@ -11,7 +11,7 @@
 /// @param end where to end
 /// @param status the status
 /// @return the returned result of the lerp.
-ML_IMPORT CGReal CGLerp(CGReal start, CGReal end, CGReal status)
+ML_IMPORT CAReal CALerp(CAReal start, CAReal end, CAReal status)
 {
 	return (start + status * (end - start));
 }
