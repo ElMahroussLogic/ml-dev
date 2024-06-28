@@ -11,13 +11,6 @@
 
 #include <MLCoreGraphicsContext.hxx>
 
-#include <cairo/cairo.h>
-#include <cairo/cairo-pdf.h>
-
-#ifndef CAIRO_HAS_PDF_SURFACE
-#error CoreCG needs to have a PDF backend!
-#endif // !CAIRO_HAS_PDF_SURFACE
-
 extern "C" {
 
 #	include <math.h>
@@ -30,7 +23,10 @@ extern "C" {
 
 #ifdef __MAHROUSS__
 #	include <CoreCG/CoreCG.h>
-#endif
+#else
+#	include <cairo/cairo.h>
+#	include <cairo/cairo-pdf.h>
+#endif // __MAHROUSS__ || !__MAHROUSS__
 
 /// @file: MLCoreGraphicsContextCairo.inl
 /// @brief: Cairo backend for multiplatform code.
@@ -73,6 +69,7 @@ public:
 	const MLString toString() override
 	{
 		std::string bufferUrl = "{ ";
+
 		bufferUrl += "URL: ";
 		bufferUrl += "file://";
 		bufferUrl += this->mOutputPath;
