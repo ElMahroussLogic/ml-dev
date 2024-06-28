@@ -19,6 +19,7 @@ extern "C"
 
 constexpr auto cWidth  = 436;
 constexpr auto cHeight = 644;
+static auto cImageRef = r("../Common/Background.png");
 
 MLCoreGraphicsContext* cContext = CGRequestContext(0, 0, cWidth, cHeight);
 
@@ -32,16 +33,18 @@ namespace Events
 		static CGReal index	 = 0.0;
 		static CGReal indexA = 1.0;
 
+		constexpr auto cStopAt = 75.0;
+
 		cContext->SetContext(cr);
+
+		if (cur >= cStopAt)
+		{
+			cContext->Image(cImageRef.asConstBytes(), cWidth, cHeight, 0, 0);
+		}
 
 		std::time_t now = std::time(nullptr);
 		// Convert it to local time
 		std::tm* localTime = std::localtime(&now);
-
-		cContext->Move(0.0, 0.0);
-		cContext->Color(0.0, 0.0, 0.0, 1.0);
-
-		cContext->Rectangle(cWidth, cHeight, 0);
 
 		cContext->Color(1.0, 1.0, 1.0, 1.0);
 
@@ -55,8 +58,6 @@ namespace Events
 			cContext->FontFamily("Inter", true)->FontSize(100.0)
 				->Move(cur, 90.0)->Text((std::to_string(localTime->tm_hour) + ":0" + std::to_string(localTime->tm_min)).c_str(), false);
 		}
-
-		constexpr auto cStopAt = 75.0;
 
 		if (cur < cStopAt)
 		{
@@ -91,6 +92,8 @@ namespace Events
 int main(int argc, char const* argv[])
 {
 	atexit([]() -> void {
+		cImageRef.dispose();
+
 		if (!cContext)
 			return;
 
