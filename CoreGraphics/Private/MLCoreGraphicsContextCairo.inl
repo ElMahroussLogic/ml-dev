@@ -1,7 +1,10 @@
 /*
- * Created on Fri May 10 2024
+ * ========================================================
  *
- * Copyright (c) 2024 Zeta Electronics Corporation
+ * CoreGraphics
+ * Copyright Zeta Electronics Corporation, all rights reserved.
+ *
+ *  ========================================================
  */
 
 #pragma once
@@ -12,16 +15,21 @@
 #include <cairo/cairo-pdf.h>
 
 #ifndef CAIRO_HAS_PDF_SURFACE
-#error CairoGX needs to have a PDF backend!
+#error CoreCG needs to have a PDF backend!
 #endif // !CAIRO_HAS_PDF_SURFACE
 
-#include <math.h>
-#include <string.h>
+extern "C" {
+
+#	include <math.h>
+#	include <string.h>
+
+}
+
 #include <string>
 #include <filesystem>
 
 #ifdef __MAHROUSS__
-#include <cgx.h>
+#	include <CoreCG/CoreCG.h>
 #endif
 
 /// @file: MLCoreGraphicsContextCairo.inl
@@ -31,9 +39,10 @@
 class MLCoreGraphicsContextCairo : public MLCoreGraphicsContext
 {
 public:
-	explicit MLCoreGraphicsContextCairo(const CGReal widht, const CGReal height);
+	explicit MLCoreGraphicsContextCairo(const CGReal width, const CGReal height);
 	~MLCoreGraphicsContextCairo();
 
+public:
 	/// @brief Grants a new feature to Context.
 	/// @param flag the feature flag.
 	MLCoreGraphicsContext* operator|=(const CGSizeT flag) override
@@ -69,10 +78,17 @@ public:
 		bufferUrl += this->mOutputPath;
 		bufferUrl += " }";
 
-		MLString str = MLString(bufferUrl.size());
-		str += bufferUrl.c_str();
+		static MLString strUrlFile = MLString(bufferUrl.size());
 
-		return str;
+		if (strUrlFile.size() != bufferUrl.size())
+		{
+			strUrlFile.dispose();
+			strUrlFile = MLString(bufferUrl.size());
+		}
+
+		strUrlFile += bufferUrl.c_str();
+
+		return strUrlFile;
 	}
 
 	///////////////////////////////////////////////////////////////////////////
