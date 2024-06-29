@@ -1,6 +1,7 @@
 # Prerequisites
 *.d
 
+*.creator.user
 .qtc_clangd
 
 # Object files

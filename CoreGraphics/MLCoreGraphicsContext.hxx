@@ -126,7 +126,7 @@ public:
 	virtual MLCoreGraphicsContext* Scale(CGReal X, CGReal Y) = 0;
 
 	/// @brief To string method.
-	/// @return the class as a string
+	/// @return The class data as a string.
 	virtual const MLString toString();
 
 public:
