@@ -1,6 +1,5 @@
 /*
- * Created on Sat May 11 2024
- *
+ * CoreAnimation
  * Copyright (c) 2024 Zeta Electronics Corporation
  */
 
@@ -8,6 +7,7 @@
 
 #include <Foundation.hxx>
 #include <Private/MLCoreAnimationBase.hxx>
+#include <CoreGraphics.hxx>
 
 /// @brief Linear interop helper function.
 /// @param start where to begin
@@ -16,4 +16,20 @@
 /// @return the returned result of the lerp.
 ML_IMPORT CAReal CALerp(CAReal start, CAReal end, CAReal status);
 
-// END OF HEADER.
+/// @brief Fade in animation.
+/// @param r Red channel.
+/// @param g Green channel.
+/// @param b Blue channel.
+/// @param a Alpha channel.
+/// @return CAReal the returned alpha.
+ML_IMPORT CAReal CAFadeIn(CAReal r, CAReal g, CAReal b, CAReal a,
+						  MLCoreGraphicsContext* cgCtx, CAReal w, CAReal h);
+
+/// @brief Fade out animation.
+/// @param r Red channel.
+/// @param g Green channel.
+/// @param b Blue channel.
+/// @param a Alpha channel.
+/// @return CAReal the returned alpha.
+ML_IMPORT CAReal CAFadeOut(CAReal r, CAReal g, CAReal b, CAReal a,
+						   MLCoreGraphicsContext* cgCtx, CAReal w, CAReal h);

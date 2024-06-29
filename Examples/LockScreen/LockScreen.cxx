@@ -65,7 +65,7 @@ namespace Events
 			index += 0.001;
 			indexA -= 0.01;
 
-			MLLog("currrent X position: %r\n", cur);
+			MLLog("Current X position: %r\n", cur);
 		}
 		else
 		{
@@ -74,8 +74,8 @@ namespace Events
 		}
 
 		cContext->Move(0.0, 0.0);
-		cContext->Color(0, 0, 0, indexA);
-		cContext->Rectangle(cWidth, cHeight, 0);
+
+		indexA = CAFadeOut(0.0, 0.0, 0.0, indexA, cContext, cWidth, cHeight);
 
 		return FALSE;
 	}
