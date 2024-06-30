@@ -46,6 +46,10 @@ namespace Events
 		// Convert it to local time
 		std::tm* localTime = std::localtime(&now);
 
+		cContext->Move(0.0, 0.0);
+		cContext->Color(0.2, 0.2, 0.2, 1.0);
+		cContext->Rectangle(cWidth, cHeight, 0);
+
 		cContext->Color(1.0, 1.0, 1.0, 1.0);
 
 		if (localTime->tm_min > 9)
