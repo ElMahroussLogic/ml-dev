@@ -63,3 +63,5 @@ inline const MLString r(const char* input)
 
 	return textPath;
 }
+
+extern const MLInteger cColorProfile;
