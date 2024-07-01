@@ -11,3 +11,5 @@ class MLCoreGraphicsShader;
 class MLCoreGraphicsContext;
 struct MLCoreGraphicsPoint;
 struct MLCoreGraphicsRect;
+
+extern const MLInteger cColorProfile;
