@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <Foundation.hxx>
+#include <CoreFoundation/Foundation.hxx>
 
 struct MLCoreAnimationPoint;
 struct MLCoreAnimationRect;

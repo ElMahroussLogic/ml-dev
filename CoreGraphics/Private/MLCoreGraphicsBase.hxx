@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <Foundation.hxx>
-#include <MLFont.hxx>
-#include <MLString.hxx>
+#include <CoreFoundation/Foundation.hxx>
+#include <CoreFoundation/MLFont.hxx>
+#include <CoreFoundation/MLString.hxx>
 #include <cstring>
 
 /// CORE MACROS ///

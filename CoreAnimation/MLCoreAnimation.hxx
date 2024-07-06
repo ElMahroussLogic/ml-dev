@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <Foundation.hxx>
+#include <CoreFoundation/Foundation.hxx>
 #include <Private/MLCoreAnimationBase.hxx>
 #include <CoreGraphics.hxx>
 
