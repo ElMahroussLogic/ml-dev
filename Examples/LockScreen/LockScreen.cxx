@@ -95,7 +95,7 @@ namespace Events
 
 int main(int argc, char const* argv[])
 {
-	atexit([]() -> void {
+	std::atexit([]() -> void {
 		cImageRef.dispose();
 
 		if (!cContext)
@@ -109,8 +109,7 @@ int main(int argc, char const* argv[])
 
 	gtk_init(&argc, (char***)&argv);
 
-	MLAlertBox("Hello!",
-        "Hi!\nYou'll be introduced to a fake lock screen to demo Zeta OS\ncapabilities..");
+	MLAlertBox("Hi!\nYou'll be introduced to a fake lock screen to demo Zeta OS\ncapabilities..", "Hello!");
 
 	window		 = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	drawing_area = gtk_drawing_area_new();

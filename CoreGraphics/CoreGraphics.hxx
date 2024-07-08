@@ -7,5 +7,5 @@
 
 #pragma once
 
-#include <MLCoreGraphicsPrelude.hxx>
-#include <MLCoreGraphicsContext.hxx>
+#include <CoreGraphics/MLCoreGraphicsPrelude.hxx>
+#include <CoreGraphics/MLCoreGraphicsContext.hxx>
