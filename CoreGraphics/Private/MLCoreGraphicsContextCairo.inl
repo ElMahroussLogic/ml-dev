@@ -2,7 +2,7 @@
  * ========================================================
  *
  * CoreGraphics
- * Copyright Zeta Electronics Corporation, all rights reserved.
+ * Copyright ZKA Technologies, all rights reserved.
  *
  *  ========================================================
  */

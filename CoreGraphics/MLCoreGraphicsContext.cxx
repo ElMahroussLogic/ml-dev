@@ -1,7 +1,7 @@
 /*
  * Created on Fri May 10 2024
  *
- * Copyright (c) 2024 Zeta Electronics Corporation
+ * Copyright (c) 2024 ZKA Technologies
  */
 
 #include <MLCoreGraphicsContext.hxx>

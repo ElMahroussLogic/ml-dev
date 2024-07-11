@@ -1,7 +1,7 @@
 /*
  * Created on Thu May 16 2024
  *
- * Copyright (c) 2024 Zeta Electronics Corporation
+ * Copyright (c) 2024 ZKA Technologies
  */
 
 #pragma once

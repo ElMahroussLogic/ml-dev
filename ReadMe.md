@@ -4,9 +4,8 @@
 
 Contains
 
-- CoreGraphics-Base framework.
-- CoreGraphics-2D framework.
-- CoreGraphics-Animation framework.
-- CairoGraphics library.
+- CoreGraphics framework.
+- CoreAnimation framework.
+- CoreFoundation framework.
 
-#### Copyright Zeta Electronics Corporation, all rights reserved.
+#### Copyright ZKA Technologies, all rights reserved.
