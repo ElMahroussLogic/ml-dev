@@ -21,7 +21,7 @@ int main(int argc, char const* argv[])
 
 	if (!context)
 	{
-		printf("Out of memory!\n");
+		perror("context");
 		return -1;
 	}
 
