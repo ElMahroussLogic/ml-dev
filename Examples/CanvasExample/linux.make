@@ -1,5 +1,5 @@
 CC=c++
-CCFLAGS= -std=c++20 *.cxx -I../../CoreAnimation -I../../CoreGraphics \
+CCFLAGS= -std=c++20 *.cxx -I../../CoreAnimation -I../../ -I../../CoreGraphics \
 	-I../../CoreFoundation/ -I../../CoreFoundation/Headers \
 	../../CoreGraphics/*.cxx ../../CoreAnimation/*.cxx ../../CoreFoundation/Sources/Linux/*.cxx \
 	-lcairo

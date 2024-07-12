@@ -4,10 +4,10 @@
  * Copyright (c) 2024 ZKA Technologies
  */
 
-#include <CoreAnimation.hxx>
+#include <CoreAnimation/CoreAnimation.hxx>
 #include <CoreFoundation/CoreFoundation.hxx>
 #include <CoreGraphics.hxx>
-#include <MLString.hxx>
+#include <CoreFoundation/MLString.hxx>
 #include <stdio.h>
 #include <string.h>
 #include <thread>
