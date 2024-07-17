@@ -1,12 +1,12 @@
 <MLApplication>
     <!-- Application name -->
     <MLAppName>
-        ma.zeta.lockscreen
+        com.zka.generate_qr
     </MLAppName>
     <MLAppVersion>
         1.0.0
     </MLAppVersion>
     <MLExecutable>
-        LockScreen
+        CanvasExample
     </MLExecutable>
 </MLApplication>

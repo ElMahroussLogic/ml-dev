@@ -1,0 +1,12 @@
+<MLApplication>
+    <!-- Application name -->
+    <MLAppName>
+        com.zka.canvasexample
+    </MLAppName>
+    <MLAppVersion>
+        1.0.0
+    </MLAppVersion>
+    <MLExecutable>
+        CanvasExample
+    </MLExecutable>
+</MLApplication>

@@ -13,6 +13,9 @@
 *.ae
 *.lib
 
+Examples/GenerateQR/GenerateQR
+Examples/GenerateQR/QR.pdf
+
 html
 latex
 
