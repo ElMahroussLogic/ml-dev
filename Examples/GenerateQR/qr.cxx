@@ -14,8 +14,8 @@
 
 int main(int argc, char const* argv[])
 {
-	constexpr auto cWidth  = 1000;
-	constexpr auto cHeight = 666;
+	cWidth  = 204;
+	cHeight = 204;
 
 	if (!argv[1])
 	{
@@ -33,17 +33,20 @@ int main(int argc, char const* argv[])
 
 	auto pdfRef = r("QR.pdf");
 
-	cContext->PDF(pdfRef.asConstBytes())->Start();
-
-	cContext->PageLabel("QR")->ThumbnailSize(cWidth, cHeight);
+	cContext->PDF(pdfRef.asConstBytes())->Start()->PageLabel("#QR_CODE");
 
 	cContext->Move(0, 0);
 
-	qr::Qr<8> qrCode;
-	qrCode.encode(argv[1], strlen(argv[1]), qr::Ecc::H, 0);
+	constexpr auto cVer = 4;
+	constexpr auto cECC = qr::Ecc::H;
+
+	qr::Qr<cVer> qrCode;
+	qrCode.encode(argv[1], strlen(argv[1]), cECC, 0);
 
 	qr::QrDelegate delegate;
-	delegate.draw(qrCode, 0, 0);
+	delegate.draw<cVer>(qrCode, 0, 0, argv[1]);
+
+	cContext->Present();
 
 	MLLog("Object: %@ will be destroyed.\n", cContext);
 

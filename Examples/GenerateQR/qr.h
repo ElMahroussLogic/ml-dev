@@ -12,6 +12,8 @@
 #include "bit.h"
 
 inline MLCoreGraphicsContext* cContext = nullptr;
+inline auto					  cWidth   = 1000;
+inline auto					  cHeight  = 666;
 
 /// @note the QR code is still code 128, it utilizes the same concept of having it's own character set.
 
@@ -280,14 +282,10 @@ namespace qr
 	{
 	private:
 		friend class QrDelegate;
-		bool draw(int x, int y) noexcept;
+		bool draw(int x, int y, const char* title) noexcept;
 
 	public:
-		constexpr auto side_size() const
-		{
-			return SIDE;
-		}
-
+		constexpr auto side_size() const;
 		bool module(int x, int y);
 		bool encode(const char* str, size_t len, Ecc ecc, int mask = -1);
 
@@ -360,29 +358,39 @@ namespace qr
 		return get_arr_bit(code, y * SIDE + x);
 	}
 
+	template <int V>
+	constexpr auto Qr<V>::side_size() const
+	{
+		return SIDE;
+	}
+
 	/// @brief draw a new QR code.
 	template <int V>
-	bool Qr<V>::draw(int whereX, int whereY) noexcept
+	bool Qr<V>::draw(int whereX, int whereY, const char* title) noexcept
 	{
 		if (!this->status)
 			return false; // it may be invalid.
 
-		for (int y = 0; y < (this->side_size()); ++y)
+			cContext->Move(
+					 whereX, whereY);
+
+		for (int y = 0; y < this->side_size(); ++y)
 		{
-			for (int x = 0; x < (this->side_size()); ++x)
+			for (int x = 0; x < this->side_size(); ++x)
 			{
-				cContext->Move(whereX + x, whereY + y);
-
 				if (this->module(x, y))
-					cContext->Color(0x00, 0x00, 0x00, 0xFF);
+					cContext->Color(0.0, 0.0, 0.0, 1.0);
 				else
-					cContext->Color(0xFF, 0xFF, 0xFF, 0xFF);
+					cContext->Color(1.0, 1.0, 1.0, 1.0);
 
-				cContext->Rectangle(1, 1, 1);
+				cContext->Rectangle(
+					1, 1, 0)->Move(
+						x + whereX + 1, y + whereY + 1);
+
 			}
 		}
 
-		return false;
+		return true;
 	}
 
 	// Create Qr code with given error correction level. If mask == -1,
@@ -960,9 +968,9 @@ namespace qr
 
 		/// @brief Draw method delegate.
 		template <int V>
-		bool draw(Qr<V>& subject, int x, int y) noexcept
+		bool draw(Qr<V>& subject, int x, int y, const char* title) noexcept
 		{
-			return subject.draw(x, y);
+			return subject.draw(x, y, title);
 		}
 	};
 } // namespace qr

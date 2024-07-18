@@ -6,6 +6,8 @@
 
 #pragma once
 
+class MLString;
+
 #include <Private/MLCoreGraphicsBase.hxx>
 
 /// @brief Core Graphics context.
@@ -42,8 +44,7 @@ public:
 	/// @brief Write Text to image.
 	/// @param T the text itself.
 	/// @return the context.
-	virtual MLCoreGraphicsContext* Text(const CGCharacter* T, CGBoolean Center,
-	CGReal X = 0.0, CGReal Y = 0.0, CGReal W = 0.0, CGReal H = 0.0) = 0;
+	virtual MLCoreGraphicsContext* Text(const CGCharacter* T, CGBoolean Center, CGReal X = 0.0, CGReal Y = 0.0, CGReal W = 0.0, CGReal H = 0.0) = 0;
 
 	/// @brief Set font.
 	/// @param T font name
@@ -62,6 +63,11 @@ public:
 	/// @param radius Rectangle radius.
 	/// @return The graphics context.
 	virtual MLCoreGraphicsContext* Rectangle(CGReal width, CGReal height, CGReal radius) = 0;
+
+	/// @brief Write to file as SVG using T as the filepath.
+	/// @param T file name to write.
+	/// @return The graphics context.
+	virtual MLCoreGraphicsContext* SVG(const CGCharacter* T) = 0;
 
 	/// @brief Write to file as PDF using T as the filepath.
 	/// @param T file name to write.
@@ -120,10 +126,10 @@ public:
 	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path, CGSizeT W, CGSizeT H, CGReal X, CGReal Y) = 0;
 
 	/// @brief Scale context.
-	/// @param X
-	/// @param Y
+	/// @param width the view's width.
+	/// @param height the view's height.
 	/// @return
-	virtual MLCoreGraphicsContext* Scale(CGReal X, CGReal Y) = 0;
+	virtual MLCoreGraphicsContext* Scale(CGReal width, CGReal height) = 0;
 
 	/// @brief To string method.
 	/// @return The class data as a string.
@@ -159,10 +165,7 @@ public:
 
 	/// @brief Overloaded ToString method to match naming convention.
 	/// @return the class name.
-	const MLString ToString()
-	{
-		return this->toString();
-	}
+	const MLString ToString();
 
 	/// @brief Set graphics context.
 	/// @param pvtCtx
@@ -181,7 +184,7 @@ private:
 /// MLCoreGraphicsContext.
 /// @return The new graphics context.
 ML_IMPORT MLCoreGraphicsContext*
-		  CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height);
+CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height);
 
 /// @brief Releases a Core Graphics context.
 /// @param context The context itself.

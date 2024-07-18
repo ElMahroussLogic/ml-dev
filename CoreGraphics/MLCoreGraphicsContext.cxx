@@ -13,7 +13,7 @@
 /// @note if no, please check for feature with operator& inside
 /// MLCoreGraphicsContext.
 /// @return The new graphics context.
-ML_EXPORT MLCoreGraphicsContext*
+MLCoreGraphicsContext*
 		  CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height)
 {
 	MLCoreGraphicsContext* context =
@@ -24,7 +24,7 @@ ML_EXPORT MLCoreGraphicsContext*
 /// @brief Releases a Core Graphics context.
 /// @param context The context itself.
 /// @return This function returns void.
-ML_EXPORT void CGReleaseContext(MLCoreGraphicsContext* context)
+void CGReleaseContext(MLCoreGraphicsContext* context)
 {
 	if (context)
 	{
@@ -32,14 +32,33 @@ ML_EXPORT void CGReleaseContext(MLCoreGraphicsContext* context)
 	}
 }
 
+#if 1
+#include <string>
+
+typedef size_t platform_size_t;
+typedef std::string platform_string_t;
+
+#else
+typedef MLStrongString platform_string_t;
+#endif
+
 /// @brief To string method.
 /// @return the class as a string
 const MLString MLCoreGraphicsContext::toString()
 {
-	constexpr auto objectName = "MLCoreGraphicsContext";
+	platform_string_t objectName = "{ \'MLCoreGraphicsContext\': {";
+	platform_size_t defaultSz = 4096;
 
-	MLString ctxStr = MLString(strlen(objectName));
-	ctxStr += objectName;
+	MLString ctxStr = MLString(defaultSz);
+	ctxStr += objectName.c_str();
+	ctxStr += "\'Renderer\': \'Hardware Accelerated Cairo based PDF renderer\' } }";
 
 	return ctxStr;
+}
+
+/// @brief => string method, same as before..
+/// @return the class as a string
+const MLString MLCoreGraphicsContext::ToString()
+{
+	return this->toString();
 }

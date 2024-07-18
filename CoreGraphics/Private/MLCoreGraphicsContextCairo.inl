@@ -25,6 +25,7 @@ extern "C" {
 #	include <CoreCG/CoreCG.h>
 #else
 #	include <cairo/cairo.h>
+#	include <cairo/cairo-svg.h>
 #	include <cairo/cairo-pdf.h>
 #endif // __MAHROUSS__ || !__MAHROUSS__
 
@@ -167,6 +168,27 @@ public:
 
 		memcpy(mOutputPath, strPath.c_str(), strPath.size());
 		mSurface = cairo_pdf_surface_create(mOutputPath, mWidth, mHeight);
+
+		return this;
+	}
+
+	MLCoreGraphicsContext* SVG(const CGCharacter* T) override
+	{
+		if (mSurface)
+			return this;
+
+		std::basic_string<CGCharacter> strPath = T;
+
+		constexpr auto dirSeparator = "/";
+
+		if (strPath.find(kRsrcProtocol) != std::string::npos)
+		{
+			strPath.replace(strPath.find(kRsrcProtocol), strlen(kRsrcProtocol),
+							std::filesystem::current_path().string() + dirSeparator);
+		}
+
+		memcpy(mOutputPath, strPath.c_str(), strPath.size());
+		mSurface = cairo_svg_surface_create(mOutputPath, mWidth, mHeight);
 
 		return this;
 	}
@@ -526,7 +548,7 @@ public:
 private:
 	typedef cairo_surface_t* CGSurfacePtr;
 	typedef cairo_t* 		 CGPtr;
-	
+
 	CGSizeT			 mContextFlags{0};
 	CGSurfacePtr	 mSurface{nullptr};
 	CGPtr			 mCairo{nullptr};

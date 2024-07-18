@@ -7,6 +7,6 @@
         1.0.0
     </MLAppVersion>
     <MLExecutable>
-        CanvasExample
+        GenerateQR
     </MLExecutable>
 </MLApplication>
