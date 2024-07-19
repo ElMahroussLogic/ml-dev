@@ -4,8 +4,8 @@
  * Copyright (c) 2024 ZKA Technologies
  */
 
-#include <MLCoreGraphicsContext.hxx>
-#include <Private/MLCoreGraphicsContextCairo.inl>
+#include <CoreGraphics/MLCoreGraphicsContext.hxx>
+#include <CoreGraphics/Private/MLCoreGraphicsContextCairo.inl>
 
 /// @brief Request a context regarding the features set.
 /// @param featureSet the feature set.

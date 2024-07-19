@@ -5,9 +5,9 @@
 
 #pragma once
 
-#include <CoreFoundation/Foundation.hxx>
-#include <Private/MLCoreAnimationBase.hxx>
-#include <CoreGraphics.hxx>
+#include <CoreFoundation/CoreFoundation.hxx>
+#include <CoreAnimation/Private/MLCoreAnimationBase.hxx>
+#include <CoreGraphics/CoreGraphics.hxx>
 
 /// @brief Linear interop helper function.
 /// @param start where to begin
@@ -23,7 +23,7 @@ ML_IMPORT CAReal CALerp(CAReal start, CAReal end, CAReal status);
 /// @param a Alpha channel.
 /// @return CAReal the returned alpha.
 ML_IMPORT CAReal CAFadeIn(CAReal r, CAReal g, CAReal b, CAReal a,
-						  MLCoreGraphicsContext* cgCtx, CAReal w, CAReal h);
+						  MLCoreGraphicsContext* cg_ctx, CAReal w, CAReal h);
 
 /// @brief Fade out animation.
 /// @param r Red channel.
@@ -32,4 +32,4 @@ ML_IMPORT CAReal CAFadeIn(CAReal r, CAReal g, CAReal b, CAReal a,
 /// @param a Alpha channel.
 /// @return CAReal the returned alpha.
 ML_IMPORT CAReal CAFadeOut(CAReal r, CAReal g, CAReal b, CAReal a,
-						   MLCoreGraphicsContext* cgCtx, CAReal w, CAReal h);
+						   MLCoreGraphicsContext* cg_ctx, CAReal w, CAReal h);

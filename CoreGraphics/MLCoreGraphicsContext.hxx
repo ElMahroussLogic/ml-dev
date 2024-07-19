@@ -8,7 +8,7 @@
 
 class MLString;
 
-#include <Private/MLCoreGraphicsBase.hxx>
+#include <CoreGraphics/Private/MLCoreGraphicsBase.hxx>
 
 /// @brief Core Graphics context.
 class MLCoreGraphicsContext : public MLObject
