@@ -1,0 +1,19 @@
+<mxfile host="app.diagrams.net" modified="2024-03-20T02:47:29.061Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0" etag="TibD4ANeSiV4cIQppOti" version="24.0.7" type="gitlab">
+  <diagram name="Page-1" id="bx8s_0-jrdB-hLQ5CJZw">
+    <mxGraphModel dx="1002" dy="569" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="zuTspCB6_aotI7X9exZ0-1" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Objective-Kit&lt;/h1&gt;&lt;p&gt;A C++ framework for Object Oriented programming.&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="40" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="f50nenwdZiMNjc3aahQp-1" value="&lt;div style=&quot;color: #bfbdb6;background-color: #0d1017;font-family: Iosevka, Consolas, &#39;Courier New&#39;, monospace;font-weight: normal;font-size: 14px;line-height: 19px;white-space: pre;&quot;&gt;&lt;div&gt;&lt;span style=&quot;color: #ff8f40;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #bfbdb6;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color: #59c2ff;&quot;&gt;MLObject&lt;/span&gt;&lt;span style=&quot;color: #bfbdb6;&quot;&gt;;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: #ff8f40;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #bfbdb6;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color: #59c2ff;&quot;&gt;MLString&lt;/span&gt;&lt;span style=&quot;color: #bfbdb6;&quot;&gt;;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: #ff8f40;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #bfbdb6;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color: #59c2ff;&quot;&gt;MLArray&lt;/span&gt;&lt;span style=&quot;color: #bfbdb6;&quot;&gt;;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: #ff8f40;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #bfbdb6;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color: #59c2ff;&quot;&gt;MLMutableArray&lt;/span&gt;&lt;span style=&quot;color: #bfbdb6;&quot;&gt;;&lt;/span&gt;&lt;/div&gt;&lt;br&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="30" width="150" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="f50nenwdZiMNjc3aahQp-2" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Framework description&lt;/h1&gt;&lt;p&gt;Written in C++ 20&lt;/p&gt;&lt;p&gt;Let the user harness the power of HCore. it implements many common classes and alogirthms to make software creation decent and easy.&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="160" width="300" height="140" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

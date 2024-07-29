@@ -1,11 +1,9 @@
-![Stack](Misc/Logo.svg)
+# New OS Kits.
 
-# New OS graphics stack.
+Currently contains:
 
-Contains
+- GraphicsKit framework.
+- AnimationKit framework.
+- FoundationKit framework.
 
-- CoreGraphics framework.
-- CoreAnimation framework.
-- CoreFoundation framework.
-
-#### Copyright ZKA Technologies, all rights reserved.
+###### Copyright ZKA Technologies, all rights reserved.
