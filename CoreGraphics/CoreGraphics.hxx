@@ -1,11 +1,11 @@
 /**
  *
- * Copyright (c) 2024 Zeta Electronics Corporation
+ * Copyright (c) 2024 ZKA Technologies
  *
  */
 
 
 #pragma once
 
-#include <MLCoreGraphicsPrelude.hxx>
-#include <MLCoreGraphicsContext.hxx>
+#include <CoreGraphics/MLCoreGraphicsPrelude.hxx>
+#include <CoreGraphics/MLCoreGraphicsContext.hxx>

@@ -1,7 +1,7 @@
 <MLApplication>
     <!-- Application name -->
     <MLAppName>
-        ma.zeta.canvasexample
+        com.zka.canvasexample
     </MLAppName>
     <MLAppVersion>
         1.0.0

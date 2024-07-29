@@ -5,9 +5,9 @@ CCFLAGS= -std=c++20 *.cxx -I../../CoreAnimation -I../../ -I../../CoreGraphics \
 	-lcairo
 
 .PHONY:
-all: CanvasExample
+all: GenerateQR
 	@echo "=> OK."
 
-.PHONY: CanvasExample
-CanvasExample:
-	$(CC) $(CCFLAGS) ../../CoreFoundation/Sources/*.cxx -o CanvasExample
+.PHONY: GenerateQR
+GenerateQR:
+	$(CC) $(CCFLAGS) ../../CoreFoundation/Sources/*.cxx -o GenerateQR

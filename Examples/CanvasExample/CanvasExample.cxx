@@ -1,13 +1,13 @@
 /*
  * Created on Sat May 11 2024
  *
- * Copyright (c) 2024 Zeta Electronics Corporation
+ * Copyright (c) 2024 ZKA Technologies
  */
 
-#include <CoreAnimation.hxx>
+#include <CoreAnimation/CoreAnimation.hxx>
 #include <CoreFoundation/CoreFoundation.hxx>
 #include <CoreGraphics.hxx>
-#include <MLString.hxx>
+#include <CoreFoundation/MLString.hxx>
 #include <stdio.h>
 #include <string.h>
 #include <thread>
@@ -21,7 +21,7 @@ int main(int argc, char const* argv[])
 
 	if (!context)
 	{
-		printf("Out of memory!\n");
+		perror("context");
 		return -1;
 	}
 

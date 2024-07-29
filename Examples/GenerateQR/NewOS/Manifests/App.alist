@@ -1,0 +1,12 @@
+<MLApplication>
+    <!-- Application name -->
+    <MLAppName>
+        com.zka.generate_qr
+    </MLAppName>
+    <MLAppVersion>
+        1.0.0
+    </MLAppVersion>
+    <MLExecutable>
+        GenerateQR
+    </MLExecutable>
+</MLApplication>

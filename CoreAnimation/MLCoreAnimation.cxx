@@ -1,10 +1,10 @@
 /*
  * Created on Fri May 17 2024
  *
- * Copyright (c) 2024 Zeta Electronics Corporation
+ * Copyright (c) 2024 ZKA Technologies
  */
 
-#include <MLCoreAnimation.hxx>
+#include <CoreAnimation/MLCoreAnimation.hxx>
 
 /// @brief Linear interop helper function.
 /// @param start where to begin

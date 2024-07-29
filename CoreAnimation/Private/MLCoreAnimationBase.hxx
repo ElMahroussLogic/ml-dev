@@ -1,12 +1,12 @@
 /*
  * Created on Thu Jun 20 02:43:48 CEST 2024
  *
- * Copyright (c) 2024 Zeta Electronics Corporation
+ * Copyright (c) 2024 ZKA Technologies
  */
 
 #pragma once
 
-#include <Foundation.hxx>
+#include <CoreFoundation/Foundation.hxx>
 
 struct MLCoreAnimationPoint;
 struct MLCoreAnimationRect;

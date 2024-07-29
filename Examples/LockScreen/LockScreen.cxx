@@ -1,12 +1,12 @@
 /*
  * Created on Sat May 11 2024
  *
- * Copyright (c) 2024 Zeta Electronics Corporation
+ * Copyright (c) 2024 ZKA Technologies
  */
 
 #include <CoreAnimation.hxx>
 #include <CoreGraphics.hxx>
-#include <MLString.hxx>
+#include <CoreFoundation/MLString.hxx>
 #include <stdio.h>
 #include <string.h>
 #include <thread>
@@ -95,7 +95,7 @@ namespace Events
 
 int main(int argc, char const* argv[])
 {
-	atexit([]() -> void {
+	std::atexit([]() -> void {
 		cImageRef.dispose();
 
 		if (!cContext)
@@ -109,13 +109,7 @@ int main(int argc, char const* argv[])
 
 	gtk_init(&argc, (char***)&argv);
 
-	GtkWidget* introDlg = gtk_message_dialog_new(
-        NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
-        "Hi!\nYou'll be introduced to a fake lock screen to demo Zeta OS\ncapabilities..");
-
-	int response = gtk_dialog_run(GTK_DIALOG(introDlg));
-
-	gtk_widget_destroy(introDlg);
+	MLAlertBox("Hi!\nYou'll be introduced to a fake lock screen to demo Zeta OS\ncapabilities..", "Hello!");
 
 	window		 = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	drawing_area = gtk_drawing_area_new();
