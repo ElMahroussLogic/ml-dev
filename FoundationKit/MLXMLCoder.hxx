@@ -8,13 +8,15 @@
 
 #include <FoundationKit/Foundation.hxx>
 #include <FoundationKit/MLString.hxx>
-#include <iostream>
-#include <stdexcept>
 
-extern "C"
+ML_EXTERN_C
 {
 	#include <string.h>
 }
+
+/// @brief Standard XML extension.
+inline const char* cXMLExtension = "xml";
+
 
 /// @brief XML parser class.
 class MLXMLCoder final ML_OBJECT

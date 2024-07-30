@@ -23,6 +23,7 @@ public:
 	MLString& operator=(const MLString& rhs);
 	MLString(const MLString& rhs);
 
+	MLString& operator+=(const MLChar chr);
 	MLString& operator+=(const MLChar* text);
 	MLString& operator+=(const MLString text);
 

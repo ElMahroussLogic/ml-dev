@@ -6,15 +6,11 @@
 
 #include <FoundationKit/Foundation.hxx>
 #include <FoundationKit/MLXMLCoder.hxx>
+#include <iostream>
+#include <stdexcept>
 #include <cstddef>
 
-/// @brief Standard XML extension.
-const char* cXMLExtension = "xml";
-
-/// @brief Standard App property list extension.
-const char* cPlistExtension = "plist";
-
-// ctor, dtor...
+/// ctor, dtors...
 
 MLXMLCoder::MLXMLCoder(const MLChar* blob)
 	: mBlob(strlen(blob))
@@ -48,7 +44,7 @@ MLString MLXMLCoder::getInnerXML(const char* name, MLSizeType bufSz, bool pureOu
 	{
 		ML_MUST_PASS(bufSz != 0);
 
-		MLString nameCls(bufSz);
+		MLString bufElement(bufSz);
 		bool	 insideElement = false;
 
 		MLSizeType indexType = 0UL;
@@ -173,20 +169,20 @@ MLString MLXMLCoder::getInnerXML(const char* name, MLSizeType bufSz, bool pureOu
 							}
 						}
 
-						nameCls[indexNewStr] = mBlob[y];
+						bufElement[indexNewStr] = mBlob[y];
 						++indexNewStr;
 					}
 
-					nameCls[indexNewStr] = 0;
+					bufElement[indexNewStr] = 0;
 				}
 			}
 		}
 
-		return nameCls;
+		return bufElement;
 	}
 	catch (const std::runtime_error& e)
 	{
-		printf("%s\n", e.what());
+		MLLog("%s\n", e.what());
 
 		const MLChar* errXml =
 			"<XmlError><Message>%s</Message></XmlError>";
@@ -214,9 +210,18 @@ const MLString MLXMLCoder::toString()
     cLen += this->mBlob.usedBytes();
 
 	MLString xmlAsJsonStr = MLString(cLen);
-	xmlAsJsonStr += "{ 'name': 'MLXMLCoder', 'blob': '";
-	xmlAsJsonStr += this->mBlob;
-	xmlAsJsonStr += "' }";
+	xmlAsJsonStr += "[{ 'name': 'MLXMLCoder', 'blob': '";
+	
+	for (size_t i = 0; i < this->mBlob.size(); i++)
+	{
+		if (this->mBlob[i] == '\'')
+			xmlAsJsonStr += "\\\\";
+		else
+			xmlAsJsonStr += this->mBlob[i];
+	}
+	
+
+	xmlAsJsonStr += "' }]";
 
 	return xmlAsJsonStr;
 }

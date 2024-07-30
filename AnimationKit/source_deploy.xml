@@ -1,7 +1,5 @@
 <SourceDeploy>
 <HiddenFiles>
-    <SourceFile>Private/*.inl</SourceFile>
-    <SourceFile>Private/*.hxx</SourceFile>
     <SourceFile>*.cxx</SourceFile>
 </HiddenFiles>
 </SourceDeploy>

@@ -25,7 +25,7 @@
 #define ML_UNUSED(X) ((void)(X))
 
 #ifndef ML_PACKED
-#if defined(__ZECC__) || defined(__MPCC__)
+#if defined(__ZECC__)
 #define ML_PACKED __attribute__((packed))
 #define ML_EXPORT __attribute__((libexport))
 #define ML_IMPORT __attribute__((libimport))
@@ -35,6 +35,14 @@
 #define ML_IMPORT
 #endif
 #endif // !PACKED
+
+#define ML_EXTERN extern
+
+#ifndef __cplusplus
+#define ML_EXTERN_C extern
+#else
+#define ML_EXTERN_C extern "C"
+#endif
 
 #include <thread>
 

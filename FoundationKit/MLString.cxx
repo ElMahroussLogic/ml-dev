@@ -20,8 +20,19 @@ MLString::~MLString() = default;
 
 MLString& MLString::operator+=(const MLString text)
 {
-    *this += text.mData;
-    return *this;
+	*this += text.mData;
+	return *this;
+}
+
+MLString& MLString::operator+=(const MLChar chr)
+{
+	MLChar buf[2];
+	buf[0] = chr;
+	buf[1] = 0;
+
+	*this += buf;
+
+	return *this;
 }
 
 MLString& MLString::operator+=(const MLChar* text)
@@ -71,7 +82,7 @@ void MLString::dispose()
 
 const MLString MLString::toString()
 {
-    const auto cLen = 512;
+	const auto cLen = 512;
 
 	MLString str(cLen);
 	str += "MLString";
