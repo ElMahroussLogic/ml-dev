@@ -27,7 +27,7 @@ ML_IMPORT CAReal CAFadeIn(CAReal r, CAReal g, CAReal b, CAReal a,
 {
 	if (!cgCtx)
 	{
-		MLLog("%s", "invalid pointer.");
+		MLLog("%s", "invalid pointer given to function.");
 		return 0.0;
 	}
 
@@ -50,7 +50,7 @@ ML_IMPORT CAReal CAFadeOut(CAReal r, CAReal g, CAReal b, CAReal a,
 {
 	if (!cgCtx)
 	{
-		MLLog("%s", "invalid pointer.");
+		MLLog("%s", "invalid pointer given to function.");
 		return 0.0;
 	}
 

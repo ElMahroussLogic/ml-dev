@@ -163,10 +163,6 @@ public:
 		return this;
 	}
 
-	/// @brief Overloaded ToString method to match naming convention.
-	/// @return the class name.
-	const MLString ToString();
-
 	/// @brief Set graphics context.
 	/// @param pvtCtx
 	virtual void SetContext(void* pvtCtx) = 0;

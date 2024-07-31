@@ -1,4 +1,8 @@
+FLAGS=-I../ -fPIC -I./Private -shared
+CC=g++
+OUT=libGraphics.so
+
 .PHONY: build-lib
 build-lib:
-	g++ *.cxx -I../ -fPIC -I./Private -shared -o libGraphics.so
+	$(CC) $(FLAGS) $(wildcard *.cxx) -o $(OUT)
 	@echo "=> OK."
