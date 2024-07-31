@@ -1,4 +1,4 @@
 .PHONY: build-lib
 build-lib:
-	g++ *.cxx -I../ -fPIC -I./Private -shared -o libFoundation.so
+	g++ *.cxx -I../ -fPIC -I./Private -shared -o libFoundation.lib
 	@echo "=> OK."

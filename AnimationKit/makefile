@@ -1,4 +1,4 @@
 .PHONY: build-lib
 build-lib:
-	g++ *.cxx -I../ -fPIC -I./Private -shared -o libAnimation.so
+	g++ *.cxx -I../ -fPIC -I./Private -shared -o libAnimation.lib
 	@echo "=> OK."
