@@ -6,8 +6,6 @@
 
 #pragma once
 
-class MLString;
-
 #include <GraphicsKit/Private/MLCoreGraphicsBase.hxx>
 
 /// @brief Core Graphics context.
