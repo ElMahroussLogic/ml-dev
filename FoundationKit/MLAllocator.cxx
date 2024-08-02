@@ -30,7 +30,7 @@ const MLString MLAllocator::toString()
     const auto cLen = 512;
 
 	MLString str = MLString(cLen);
-	str += "{'name': 'MLAllocator'}";
+	str += "[{'name': 'MLAllocator'}]";
 
 	return str;
 }

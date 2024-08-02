@@ -103,7 +103,6 @@ class MLThread;
 class MLProcess;
 class MLInternetSocket;
 class MLAllocator;
-class MLFont;
 
 /// @brief Base AppCore object.
 class MLObject
@@ -117,15 +116,8 @@ public:
 
 	virtual const MLString toString();
 
-	virtual const void encode(MLCodec* output)
-	{
-		ML_UNUSED(output);
-	}
-
-	virtual const void decode(MLCodec* output)
-	{
-		ML_UNUSED(output);
-	}
+	virtual const void encode(MLCodec* output);
+	virtual const void decode(MLCodec* output);
 
 };
 #endif

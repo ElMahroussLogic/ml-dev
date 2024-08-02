@@ -93,6 +93,6 @@ void MLApplication::showAboutModal() noexcept
 	ShellAboutA(nullptr, "FoundationKit for Windows", "FoundationKit is property of ZKA, all rights reserved.", nullptr);
 #else
     MLAlert alert;
-	alert.runModal("FoundationKit", "%s\n%s", "FoundationKit System API.", "FoundationKit is a property of ZKA, Copyright ZKA Technologies all rights reserved.");
+	alert.runModal("FoundationKit", "%s\n%s", "FoundationKit Framework.", "FoundationKit is a property of ZKA, Copyright ZKA Technologies all rights reserved.");
 #endif
 }

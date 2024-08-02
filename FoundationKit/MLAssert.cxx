@@ -15,7 +15,7 @@
 ML_EXPORT void MLAssert(const char* expr, const char* file, const int line)
 {
 	MLAlert* alert = MLAllocator::shared().init<MLAlert>();
-	auto	 res   = alert->runErrorModal("AppCore Runtime - Check failed!",
+	auto	 res   = alert->runErrorModal("FoundationKit Runtime.",
 									  "File: %s\nCause: %s\nLine: %i", file, expr, line);
 
 	MLAllocator::shared().dispose<MLAlert>(alert);
