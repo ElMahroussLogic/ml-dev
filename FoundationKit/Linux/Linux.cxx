@@ -15,7 +15,7 @@
 /// @param title title of dialog.
 /// @param msg message of dialog.
 /// @return which option was selected.
-ML_EXPORT int MLAlertBox(const char* title, const char* msg)
+ML_EXTERN_C int MLAlertBox(const char* title, const char* msg)
 {
 	printf("%s: %s\n", title, msg);
 

@@ -90,19 +90,17 @@ class MLObject;
 class MLString;
 class MLArray;
 class MLMutableArray;
-class MLJsonCoder;
+class MLJSONCoder;
 class MLCoder;
-class MLCodec;
-class MLSerializer;
-class MLWindow;
 class MLAlert;
 class MLURL;
 class MLXMLCoder;
 class MLApplication;
 class MLThread;
 class MLProcess;
-class MLInternetSocket;
+class MLSocket;
 class MLAllocator;
+class MLUUID;
 
 /// @brief Base AppCore object.
 class MLObject
@@ -116,8 +114,19 @@ public:
 
 	virtual const MLString toString();
 
-	virtual const void encode(MLCodec* output);
-	virtual const void decode(MLCodec* output);
+	virtual const void encode(MLCoder* output);
+	virtual const void decode(MLCoder* output);
+
+};
+
+class MLCoder final ML_OBJECT
+{
+public:
+	explicit MLCoder() = default;
+	virtual ~MLCoder() = default;
+
+	MLCoder& operator=(const MLCoder&) = default;
+	MLCoder(const MLCoder&)			 = default;
 
 };
 #endif
@@ -136,4 +145,4 @@ public:
 /// @param title title of dialog.
 /// @param msg message of dialog.
 /// @return which option was selected.
-ML_IMPORT int MLAlertBox(const char* title, const char* msg);
+ML_EXTERN_C int MLAlertBox(const char* title, const char* msg);

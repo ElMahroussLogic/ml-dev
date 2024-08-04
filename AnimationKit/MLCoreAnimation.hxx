@@ -7,7 +7,7 @@
 
 #include <FoundationKit/FoundationKit.hxx>
 #include <AnimationKit/Private/MLCoreAnimationBase.hxx>
-#include <GraphicsKit/CoreGraphics.hxx>
+#include <GraphicsKit/GraphicsKit.hxx>
 
 /// @brief Linear interop helper function.
 /// @param start where to begin

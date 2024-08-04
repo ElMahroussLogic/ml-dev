@@ -1,11 +1,18 @@
 /* -------------------------------------------
 
-	Copyright ZKA Technologies
+Copyright ZKA Technologies
 
 ------------------------------------------- */
 
 #pragma once
 
 #include <FoundationKit/Foundation.hxx>
+#include <FoundationKit/MLString.hxx>
 
-/// @brief TrueType fonts implementation.
+class MLJSONCoder final ML_OBJECT
+{
+public:
+
+};
+
+#error !!! Unimplemented !!!

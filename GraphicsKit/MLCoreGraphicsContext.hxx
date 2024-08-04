@@ -9,7 +9,7 @@
 #include <GraphicsKit/Private/MLCoreGraphicsBase.hxx>
 
 /// @brief Core Graphics context.
-class MLCoreGraphicsContext : public MLObject
+class MLCoreGraphicsContext ML_OBJECT
 {
 public:
 	explicit MLCoreGraphicsContext() = default;
@@ -37,30 +37,30 @@ public:
 	/// @brief Move to coord.
 	/// @param T the text itself.
 	/// @return the context.
-	virtual MLCoreGraphicsContext* Move(CGReal X, CGReal Y) = 0;
+	virtual MLCoreGraphicsContext* move(CGReal X, CGReal Y) = 0;
 
 	/// @brief Write Text to image.
 	/// @param T the text itself.
 	/// @return the context.
-	virtual MLCoreGraphicsContext* Text(const CGCharacter* T, CGBoolean Center, CGReal X = 0.0, CGReal Y = 0.0, CGReal W = 0.0, CGReal H = 0.0) = 0;
+	virtual MLCoreGraphicsContext* text(const CGCharacter* T, CGBoolean Center, CGReal X = 0.0, CGReal Y = 0.0, CGReal W = 0.0, CGReal H = 0.0) = 0;
 
 	/// @brief Set font.
 	/// @param T font name
 	/// @param isBold should the font be bold?
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* FontFamily(const CGCharacter* T,
+	virtual MLCoreGraphicsContext* fontFamily(const CGCharacter* T,
 											  const bool		 isBold) = 0;
 	/// @brief
 	/// @param T
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* FontSize(const CGReal T) = 0;
+	virtual MLCoreGraphicsContext* fontSize(const CGReal T) = 0;
 
 	/// @brief Draw rounded rectangle
 	/// @param width Rectangle width.
 	/// @param height Rectangle height.
 	/// @param radius Rectangle radius.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* Rectangle(CGReal width, CGReal height, CGReal radius) = 0;
+	virtual MLCoreGraphicsContext* rectangle(CGReal width, CGReal height, CGReal radius) = 0;
 
 	/// @brief Write to file as SVG using T as the filepath.
 	/// @param T file name to write.
@@ -75,17 +75,17 @@ public:
 	/// @brief Set the page label.
 	/// @param T page label name.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* PageLabel(const CGCharacter* T) = 0;
+	virtual MLCoreGraphicsContext* pageLabel(const CGCharacter* T) = 0;
 
 	/// @brief Set the thumbnail size.
 	/// @param W width.
 	/// @param H height.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* ThumbnailSize(const int W, const int H) = 0;
+	virtual MLCoreGraphicsContext* thumbnailSize(const int W, const int H) = 0;
 
 	/// @brief Present the context.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* Present() = 0;
+	virtual MLCoreGraphicsContext* present() = 0;
 
 	/// @brief Set color or current pen.
 	/// @param R Red channel.
@@ -93,41 +93,41 @@ public:
 	/// @param B Blue channel.
 	/// @param A Alpha channel.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* Color(CGReal R, CGReal G, CGReal B, CGReal A) = 0;
+	virtual MLCoreGraphicsContext* color(CGReal R, CGReal G, CGReal B, CGReal A) = 0;
 
 	/// @brief Set stroke of pen.
 	/// @param strokeStrength Stroke strength
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* Stroke(CGReal strokeStrength) = 0;
+	virtual MLCoreGraphicsContext* stroke(CGReal strokeStrength) = 0;
 
 	/// @brief Set line cap.
 	/// @param type type according to enum *MLCoreGraphicsLineCap*.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* LineCap(int type) = 0;
+	virtual MLCoreGraphicsContext* lineCap(int type) = 0;
 
 	/// @brief Line from **start** to **finish**.
 	/// @param start Start position.
 	/// @param finish End position.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* LineTo(CGReal start, CGReal finish) = 0;
+	virtual MLCoreGraphicsContext* lineTo(CGReal start, CGReal finish) = 0;
 
 	/// @brief Draws a gaussian blur.
 	/// @param radius blur's radius
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* Blur(CGReal	radius,
+	virtual MLCoreGraphicsContext* blur(CGReal	radius,
 										CGSizeT width,
 										CGSizeT height) = 0;
 
 	/// @brief Load image (PNG) from disk.
 	/// @param Path The PNG image path to read on.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* Image(const CGCharacter* Path, CGSizeT W, CGSizeT H, CGReal X, CGReal Y) = 0;
+	virtual MLCoreGraphicsContext* image(const CGCharacter* Path, CGSizeT W, CGSizeT H, CGReal X, CGReal Y) = 0;
 
 	/// @brief Scale context.
 	/// @param width the view's width.
 	/// @param height the view's height.
 	/// @return
-	virtual MLCoreGraphicsContext* Scale(CGReal width, CGReal height) = 0;
+	virtual MLCoreGraphicsContext* scale(CGReal width, CGReal height) = 0;
 
 	/// @brief To string method.
 	/// @return The class data as a string.
@@ -136,34 +136,35 @@ public:
 public:
 	/// @brief Start drawing.
 	/// @return
-	virtual MLCoreGraphicsContext* Start() = 0;
+	virtual MLCoreGraphicsContext* start() = 0;
 
 	/// @brief End drawing, flush.
 	/// @return
-	virtual MLCoreGraphicsContext* End() = 0;
+	virtual MLCoreGraphicsContext* end() = 0;
+
+	/// @brief Leak or set graphics context.
+	/// @param pvtCtx the new internal context.
+	/// @internal
+	virtual void leak(void** pvtCtx) = 0;
 
 public:
 	/// @brief Overloaded move, for MLCoreGraphicsPoint.
 	/// @param point the point to move to.
 	/// @return The context.
-	MLCoreGraphicsContext* Move(MLCoreGraphicsPoint& point)
+	MLCoreGraphicsContext* move(MLCoreGraphicsPoint& point)
 	{
-		this->Move(point.X, point.Y);
+		this->move(point.X, point.Y);
 		return this;
 	}
 
 	/// @brief Overloaded move, for MLCoreGraphicsPoint.
 	/// @param point the point to move to.
 	/// @return The context.
-	MLCoreGraphicsContext* Move(const MLCoreGraphicsPoint& point)
+	MLCoreGraphicsContext* move(const MLCoreGraphicsPoint& point)
 	{
-		this->Move(point.X, point.Y);
+		this->move(point.X, point.Y);
 		return this;
 	}
-
-	/// @brief Set graphics context.
-	/// @param pvtCtx
-	virtual void SetContext(void* pvtCtx) = 0;
 
 private:
 	friend class MLCoreGraphicsPen;

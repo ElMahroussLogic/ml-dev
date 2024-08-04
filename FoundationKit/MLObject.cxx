@@ -17,12 +17,12 @@ const MLString MLObject::toString()
 	return toStrObj;
 }
 
-const void MLObject::encode(MLCodec* output)
+const void MLObject::encode(MLCoder* output)
 {
 	ML_UNUSED(output);
 }
 
-const void MLObject::decode(MLCodec* output)
+const void MLObject::decode(MLCoder* output)
 {
 	ML_UNUSED(output);
 }

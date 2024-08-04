@@ -1,5 +1,7 @@
 <SourceDeploy>
 <HiddenFiles>
     <SourceFile>*.cxx</SourceFile>
+    <SourceFile>Private/*.hxx</SourceFile>
+    <SourceFile>Private/*.cxx</SourceFile>
 </HiddenFiles>
 </SourceDeploy>

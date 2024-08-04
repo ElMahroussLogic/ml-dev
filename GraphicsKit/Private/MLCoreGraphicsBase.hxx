@@ -7,7 +7,6 @@
 #pragma once
 
 #include <FoundationKit/Foundation.hxx>
-#include <FoundationKit/MLFont.hxx>
 #include <FoundationKit/MLString.hxx>
 #include <cstring>
 

@@ -84,5 +84,8 @@ y.tab.h
 
 settings.json
 
+Tests/*.svg
+Tests/*.pdf
+
 # intellij
 .idea

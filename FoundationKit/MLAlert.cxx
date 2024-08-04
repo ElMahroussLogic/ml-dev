@@ -48,9 +48,9 @@ bool MLAlert::runModal(const MLChar* title, const MLChar* format, ...)
 #ifdef _WIN32
 	auto isOk = ::MessageBoxA(nullptr, msg, title, MB_OKCANCEL | MB_ICONINFORMATION) == IDOK;
 #elif defined(__APPLE__)
-	auto isOk = !::MLAlertBox(msg, title);
+	auto isOk = !MLAlertBox(msg, title);
 #else
-	auto isOk = !::MLAlertBox(title, msg);
+	auto isOk = !MLAlertBox(title, msg);
 #endif
 
 	va_end(va);
@@ -75,9 +75,9 @@ int MLAlert::runErrorModal(const MLChar* title, const MLChar* format, ...)
 #ifdef _WIN32
 	int isOk = ::MessageBoxA(nullptr, msg, title, MB_ABORTRETRYIGNORE | MB_ICONERROR);
 #elif defined(__APPLE__)
-	auto isOk = !::MLAlertBox(msg, title);
+	auto isOk = !MLAlertBox(msg, title);
 #else
-	auto isOk = !::MLAlertBox(title, msg);
+	auto isOk = !MLAlertBox(title, msg);
 #endif
 
 	va_end(va);

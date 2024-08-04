@@ -4,5 +4,14 @@
 
 ------------------------------------------- */
 
+#pragma once
+
 #include <FoundationKit/Foundation.hxx>
-//#include <FoundationKit/MLVideoCodec.hxx>
+
+class MLUUID final ML_OBJECT
+{
+public:
+
+};
+
+#error !!! Unimplemented !!!

@@ -7,7 +7,7 @@
 #import <AppKit/AppKit.h>
 #import <Foundation/Foundation.h>
 
-int MLAlertBox(const char* title, const char* msg)
+ML_EXTERN_C int MLAlertBox(const char* title, const char* msg)
 {
     NSAlert* alert = [[NSAlert alloc] init];
     alert.alertStyle = NSAlertStyleCritical;
