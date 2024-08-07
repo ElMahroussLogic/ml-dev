@@ -3,7 +3,7 @@
     "compiler_std": "c++20",
     "headers_path": ["../Private ", "../../"],
     "sources_path": ["*.cxx"],
-    "output_name": "libLinuxFoundation.lib",
+    "output_name": "libLinuxFoundation.dll",
     "compiler_flags": ["-fPIC", "-shared"],
     "cpp_macros": ["__LINUX_SUPPORT__"],
     "run_after_build": false

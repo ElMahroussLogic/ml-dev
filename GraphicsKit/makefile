@@ -1,6 +1,6 @@
 FLAGS=-I../ -fPIC -I./Private -shared
 CC=g++
-OUT=libGraphics.lib
+OUT=libGraphics.dll
 
 .PHONY: build-lib
 build-lib:

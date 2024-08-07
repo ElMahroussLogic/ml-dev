@@ -3,7 +3,7 @@
     "compiler_std": "c++20",
     "headers_path": ["../"],
     "sources_path": ["*.cxx"],
-    "output_name": "libAnimation.lib",
+    "output_name": "libAnimation.dll",
     "compiler_flags": ["-fPIC", "-shared"],
     "cpp_macros": ["__ANIMATIONKIT__=202401"]
   }
