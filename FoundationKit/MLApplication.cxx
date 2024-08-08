@@ -7,7 +7,7 @@
 #include <FoundationKit/MLApplication.hxx>
 
 #ifdef _WIN32
-#include <Win32/Win32.hxx>
+#include <FoundationKit/Win32/Win32.hxx>
 #else
 #include <FoundationKit/MLAlert.hxx>
 #endif

@@ -5,7 +5,7 @@
 ------------------------------------------- */
 
 #include <FoundationKit/Foundation.hxx>
-#include <Win32/Win32.hxx>
+#include <FoundationKit/Win32/Win32.hxx>
 #include <cstdlib>
 #include <thread>
 
@@ -17,13 +17,13 @@ static int sLastExitCode = 0UL;
 void MLExitWithCode(MLInteger exitCode, std::thread& currentThread)
 {
 	sLastExitCode = exitCode;
-	ExitThread(exitCode);
+	::ExitThread(exitCode);
 }
 
 void MLExitWithCode(MLInteger exitCode)
 {
 	sLastExitCode = exitCode;
-	ExitThread(exitCode);
+	::ExitThread(exitCode);
 }
 
 /// @brief Get last exit code from any thread.

@@ -33,8 +33,8 @@ ML_IMPORT CAReal CAFadeIn(CAReal r, CAReal g, CAReal b, CAReal a,
 
 	a -= 0.001;
 
-	cgCtx->Color(r, g, b, a);
-	cgCtx->Rectangle(w, h, 0);
+	cgCtx->color(r, g, b, a);
+	cgCtx->rectangle(w, h, 0);
 
 	return a;
 }
@@ -56,8 +56,8 @@ ML_IMPORT CAReal CAFadeOut(CAReal r, CAReal g, CAReal b, CAReal a,
 
 	a += 0.001;
 
-	cgCtx->Color(r, g, b, a);
-	cgCtx->Rectangle(w, h, 0);
+	cgCtx->color(r, g, b, a);
+	cgCtx->rectangle(w, h, 0);
 
 	return a;
 }

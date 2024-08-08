@@ -6,7 +6,6 @@
 
 #include <FoundationKit/Foundation.hxx>
 #include <FoundationKit/MLURL.hxx>
-
 #include <cstring>
 
 MLURL::MLURL(const MLChar* url)

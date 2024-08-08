@@ -10,7 +10,6 @@
 #include <FoundationKit/MLAlert.hxx>
 #include <FoundationKit/MLAllocator.hxx>
 #include <FoundationKit/MLApplication.hxx>
-#include <FoundationKit/MLFont.hxx>
 #include <FoundationKit/MLString.hxx>
 #include <FoundationKit/MLURL.hxx>
 #include <FoundationKit/MLXMLCoder.hxx>
