@@ -23,9 +23,9 @@ ML_IMPORT CAReal CALerp(CAReal start, CAReal end, CAReal status)
 /// @param a Alpha channel.
 /// @return CAReal the returned alpha.
 ML_IMPORT CAReal CAFadeIn(CAReal r, CAReal g, CAReal b, CAReal a,
-						  MLCoreGraphicsContext* cgCtx, CAReal w, CAReal h)
+						  MLCoreGraphicsContext* cg_ctx, CAReal w, CAReal h)
 {
-	if (!cgCtx)
+	if (!cg_ctx)
 	{
 		MLLog("%s", "invalid pointer given to function.");
 		return 0.0;
@@ -33,8 +33,8 @@ ML_IMPORT CAReal CAFadeIn(CAReal r, CAReal g, CAReal b, CAReal a,
 
 	a -= 0.001;
 
-	cgCtx->color(r, g, b, a);
-	cgCtx->rectangle(w, h, 0);
+	cg_ctx->color(r, g, b, a);
+	cg_ctx->rectangle(w, h, 0);
 
 	return a;
 }
@@ -46,9 +46,9 @@ ML_IMPORT CAReal CAFadeIn(CAReal r, CAReal g, CAReal b, CAReal a,
 /// @param a Alpha channel.
 /// @return CAReal the returned alpha.
 ML_IMPORT CAReal CAFadeOut(CAReal r, CAReal g, CAReal b, CAReal a,
-						  MLCoreGraphicsContext* cgCtx, CAReal w, CAReal h)
+						  MLCoreGraphicsContext* cg_ctx, CAReal w, CAReal h)
 {
-	if (!cgCtx)
+	if (!cg_ctx)
 	{
 		MLLog("%s", "invalid pointer given to function.");
 		return 0.0;
@@ -56,8 +56,8 @@ ML_IMPORT CAReal CAFadeOut(CAReal r, CAReal g, CAReal b, CAReal a,
 
 	a += 0.001;
 
-	cgCtx->color(r, g, b, a);
-	cgCtx->rectangle(w, h, 0);
+	cg_ctx->color(r, g, b, a);
+	cg_ctx->rectangle(w, h, 0);
 
 	return a;
 }

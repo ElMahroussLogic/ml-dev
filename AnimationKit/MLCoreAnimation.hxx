@@ -1,5 +1,5 @@
 /*
- * CoreAnimation
+ * AnimationKit
  * Copyright (c) 2024 ZKA Technologies
  */
 
