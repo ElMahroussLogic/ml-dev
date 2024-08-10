@@ -3,8 +3,8 @@
     "compiler_std": "c++20",
     "headers_path": ["../"],
     "sources_path": ["*.cxx"],
-    "output_name": "animdll.dll",
-    "compiler_flags": ["-fPIC", "-shared", "-Wl,--subsystem=17"],
+    "output_name": "animation.dll",
+    "compiler_flags": ["-fPIC", "-shared", "-Wl,--subsystem=17", "-L../FoundationKit", "-lFoundation"],
     "cpp_macros": ["__ANIMATIONKIT__=202401"]
   }
   

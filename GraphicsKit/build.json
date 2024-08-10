@@ -3,8 +3,8 @@
     "compiler_std": "c++20",
     "headers_path": ["../"],
     "sources_path": ["*.cxx"],
-    "output_name": "2gxdll.dll",
-    "compiler_flags": ["-fPIC", "-shared"],
+    "output_name": "graphics.dll",
+    "compiler_flags": ["-fPIC", "-shared", "-Wl,--subsystem=17", "-L../FoundationKit", "-lFoundation"],
     "cpp_macros": ["__GRAPHICSKIT__=202401"]
   }
   
