@@ -1,8 +1,8 @@
-FLAGS=-I../ -fPIC -I./Private -shared -L../FoundationKit -lFoundation
+FLAGS=-I../ -fPIC -I./Private -shared -L../FoundationKit -lFoundation -Wl,--subsystem=17
 CC=x86_64-w64-mingw32-g++.exe
-OUT=libAnimation.dll
+OUT=animdll.dll
 
 .PHONY: build-lib
 build-lib:
 	$(CC) $(wildcard *.cxx) $(FLAGS) -o $(OUT)
-	@echo "=> OK."
+	@echo "[animdll.dll] => OK."
