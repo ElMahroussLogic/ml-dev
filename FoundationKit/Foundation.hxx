@@ -84,7 +84,7 @@ ML_IMPORT void MLAssert(const MLChar* expr, const MLChar* file, const MLInteger 
 	}
 
 #ifndef __cplusplus
-#error This is not C++, please use C++.
+#error !!! This is not C++, please use C++. !!!
 #else
 class MLObject;
 class MLString;

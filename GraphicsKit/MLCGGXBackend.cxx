@@ -18,7 +18,7 @@ MLCoreGraphicsContext*
 		  CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height)
 {
 	MLCoreGraphicsContext* context =
-		new MLCoreGraphicsContext3DKit(width, heigh, featureSet, strictt);
+		new MLCoreGraphicsContextGX(width, heigh, featureSet, strictt);
     ML_MUST_PASS(context);
 
 	return context;
@@ -31,7 +31,7 @@ const MLString MLCoreGraphicsContext::toString()
 	constexpr size_t cDefaultSz = 4096;
 
 	MLString ctxStr = MLString(cDefaultSz);
-	ctxStr += "[ { \'\': { \'DLL\': \'3DKit.dll\' } } ]";
+	ctxStr += "[ { \'\': { \'DLL\': \'usergx.dll\' } } ]";
 
 	return ctxStr;
 }

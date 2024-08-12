@@ -7,5 +7,5 @@
 
 #include <FoundationKit/FoundationKit.hxx>
 
-class ML3DShaderCompilerInterface;
-class ML3DShaderBlobInterface;
+class MLGXShaderCompilerInterface;
+class MLGXShaderBlobInterface;

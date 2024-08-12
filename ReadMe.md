@@ -1,4 +1,6 @@
-# New OS standard DLL.
+# New OS C++ SDK.
+
+A set of C++ Kits for New OS and Windows development.
 
 ## Installing:
 
@@ -18,6 +20,6 @@ make all
 btb build.json
 ```
 
-You can now use the programs.
+You can now use the DLLs.
 
 ###### Copyright ZKA Technologies, all rights reserved.

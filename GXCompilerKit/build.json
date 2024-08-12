@@ -3,8 +3,8 @@
     "compiler_std": "c++20",
     "headers_path": ["../"],
     "sources_path": ["*.cxx"],
-    "output_name": "lib3DCompiler.dll",
+    "output_name": "3dcompiler.dll",
     "compiler_flags": ["-fPIC", "-shared"],
-    "cpp_macros": ["__3DCOMPILERKIT__=202401"]
+    "cpp_macros": ["__3DCOMPILER__=202401"]
   }
   

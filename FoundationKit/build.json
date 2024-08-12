@@ -3,8 +3,8 @@
     "compiler_std": "c++20",
     "headers_path": ["../", "-I./Private"],
     "sources_path": ["*.cxx", "NewOS/*.cxx"],
-    "output_name": "foundation.dll",
+    "output_name": "corlib.dll",
     "compiler_flags": ["-fPIC", "-shared", "-Wl,--subsystem=17"],
-    "cpp_macros": ["__ANIMATIONKIT__=202401"]
+    "cpp_macros": ["__FOUNDATIONKIT__=202401"]
   }
   
