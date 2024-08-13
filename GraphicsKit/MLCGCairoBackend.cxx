@@ -30,7 +30,7 @@ const MLString MLCoreGraphicsContext::toString()
 	constexpr size_t cDefaultSz = 4096;
 
 	MLString ctxStr = MLString(cDefaultSz);
-	ctxStr += "[ { \'\': { \'Renderer\': \'Cairo\' } } ]";
+	ctxStr += "[ { \'\': { \'DLL\': \'libcairo.so\' } } ]";
 
 	return ctxStr;
 }
