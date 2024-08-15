@@ -4,7 +4,7 @@
     "headers_path": ["./", "../"],
     "sources_path": ["print_example.cxx"],
     "output_name": "print_example.exe",
-    "compiler_flags": ["-lWin32Foundation", "-lFoundation", "-L../FoundationKit", "-L../FoundationKit/Win32"],
+    "compiler_flags": ["-lWin32Foundation", "-lFoundation", "-L../dev/FoundationKit", "-L../dev/FoundationKit/Win32"],
     "cpp_macros": ["FOO_MACRO"],
     "run_after_build": false
   }
