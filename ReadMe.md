@@ -1,22 +1,20 @@
-# New OS C++ SDK.
+# ZKA C++ Private APIs.
 
-A set of C++ Kits for New OS and Windows development.
+A set of C++ Kits for ZKA development.
 
 ## Installing:
 
 Start by cloning the repo.
 
 ```
-git clone git@bitbucket.org:mahrouss/dll.git
+git clone git@bitbucket.org:mahrouss/priv-dll.git
 ```
 
-## Running makefiles:
+## Building:
 
-And then run the makefile according to your directory.
+Use btb to build the frameworks.
 
 ```
-make all
-# You can use that also.
 btb build.json
 ```
 

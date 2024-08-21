@@ -4,7 +4,6 @@
  *
  */
 
-
 #pragma once
 
 #include <GraphicsKit/MLCoreGraphicsPrelude.hxx>
