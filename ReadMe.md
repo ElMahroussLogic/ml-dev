@@ -1,4 +1,4 @@
-# ZKA C++ Private APIs.
+# ZKA C++ APIs and Tools.
 
 A set of C++ Kits for ZKA development.
 
