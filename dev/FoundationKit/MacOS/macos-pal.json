@@ -1,11 +1,10 @@
 {
-    "compiler_path": "g++",
-    "compiler_std": "c++20",
-    "headers_path": ["../Private ", "../../"],
-    "sources_path": ["*.cxx"],
-    "output_name": "libMacOSFoundation.dll",
-    "compiler_flags": ["-fPIC", "-shared"],
-    "cpp_macros": ["__LINUX_SUPPORT__"],
-    "run_after_build": false
+  "compiler_path": "g++",
+  "compiler_std": "c++20",
+  "headers_path": ["../Private ", "../../"],
+  "sources_path": ["*.mm"],
+  "output_name": "/usr/local/lib/libMacOSFoundation.dylib",
+  "compiler_flags": ["-fPIC", "-shared", "-lobjc", "-framework AppKit"],
+  "cpp_macros": ["__LINUX_SUPPORT__"],
+  "run_after_build": false
 }
-  

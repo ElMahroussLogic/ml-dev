@@ -21,13 +21,13 @@ extern "C"
 #include <string>
 #include <filesystem>
 
-#ifdef __MAHROUSS__
-#include <CoreCG/CoreCG.h>
-#else
+#ifndef M_PI
+#define M_PI       3.14159265358979323846
+#endif // !M_PI
+
 #include <cairo/cairo.h>
 #include <cairo/cairo-svg.h>
 #include <cairo/cairo-pdf.h>
-#endif // __MAHROUSS__ || !__MAHROUSS__
 
 /// @file: MLCoreGraphicsContextCairo.inl
 /// @brief: Cairo backend for multiplatform code.
