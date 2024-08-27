@@ -30,8 +30,8 @@ namespace details
 	};
 
 	/***********************************************************************************/
-    /* This handles the detection of a MZ header. */
-    /***********************************************************************************/
+	/* This handles the detection of a MZ header. */
+	/***********************************************************************************/
 
 	bool drvsign_check_for_mz(std::string mz_blob) noexcept
 	{
@@ -42,12 +42,20 @@ namespace details
 
 int main(int argc, char* argv[])
 {
-	if (!std::filesystem::exists(argv[1]) ||
-		!std::string(argv[1]).ends_with(kDriverExt))
-		return -1;
+	for (size_t i = 1ul; i < argc; ++i)
+	{
+		if (strcmp(argv[i], "/?") == 0)
+		{
+			std::cout << "drvsign: ZKA Driver Signing Tool.\n";
+			std::cout << "drvsign: © ZKA Technologies, all rights reserved.\n";
 
-	std::cout << "drvsign: ZKA Driver Signing Tool.\n";
-	std::cout << "drvsign: © ZKA Technologies, all rights reserved.\n";
+			return 0;
+		}
+	}
+
+	if (!std::filesystem::exists(argv[1]) ||
+			!std::string(argv[1]).ends_with(kDriverExt))
+			return -1;
 
 	details::SIGNED_DRIVER_HEADER sig{0};
 
