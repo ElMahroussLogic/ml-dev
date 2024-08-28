@@ -13,7 +13,7 @@
 *.ae
 *.lib
 
-tools/drvsign
+tools/execsign
 
 Examples/GenerateQR/GenerateQR
 Examples/GenerateQR/QR.pdf
