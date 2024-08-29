@@ -12,41 +12,109 @@
 #include <sstream>
 #include <filesystem>
 
+#define kAppSignedExtLen 3
+
 ///@note just add a sign indicator for a signed executable.
-#define kAppSignedExt            \
-	{                            \
-		".sign.exe", ".sign.dll" \
+#define kAppSignedExt                         \
+	{                                         \
+		".sign.exe", ".sign.dll", ".sign.sys" \
 	}
-#define kAppExt        \
-	{                  \
-		".exe", ".dll" \
+
+#define kAppExt                \
+	{                          \
+		".exe", ".dll", ".sys" \
 	}
+
 #define kSignedAppMagic "SEFF"
+
+#define kPaddingLen	 512
+#define kPathLen	 4096
+#define kChecksumLen 8
+#define kMagicLen	 5
+#define kSignVersion 2
 
 namespace details
 {
 	struct SIGNED_EXEC_HEADER final
 	{
 		// end of executable zone.
-		char d_binary_padding_end_of_exec[512];
+		char d_binary_padding_end_of_exec[kPaddingLen];
 		// doesn't change.
-		char d_binary_magic[5];
+		char d_binary_magic[kMagicLen];
 		int	 d_binary_version;
 		// can change according to version.
-		char		  d_binary_name[4096];
-		std::uint64_t d_binary_checksum;
+		char d_binary_name[kPathLen];
+
+		// checksum len
+		union {
+			struct
+			{
+				std::uint16_t d_binary_checksum_u16[kChecksumLen - 4];
+				std::uint16_t d_binary_checksum_u32[4];
+			};
+			std::uint32_t d_binary_checksum[kChecksumLen];
+		};
+
 		std::uint64_t d_binary_size;
-		char		  d_binary_padding[512];
+		char		  d_binary_padding[kPaddingLen];
 	};
 
 	/***********************************************************************************/
 	/* This handles the detection of a MZ header. */
 	/***********************************************************************************/
 
-	bool drvsign_check_for_mz(std::string mz_blob) noexcept
+	bool execsign_check_for_mz(std::string mz_blob) noexcept
 	{
 		return mz_blob[0] == 'M' &&
 			   mz_blob[1] == 'Z';
+	}
+
+	void execsign_print_exec_id(struct SIGNED_EXEC_HEADER& sig)
+	{
+		for (auto& id_num : sig.d_binary_checksum_u32)
+		{
+			std::cout << id_num;
+			std::cout << "-";
+		}
+
+		auto counter = 0;
+
+		for (auto& id_num : sig.d_binary_checksum_u16)
+		{
+			++counter;
+
+			std::cout << id_num;
+
+			if ((kChecksumLen - 4) > counter)
+				std::cout << "-";
+		}
+
+		std::cout << '\r';
+		std::cout << std::endl;
+	}
+
+	void execsign_write_sign_id(struct SIGNED_EXEC_HEADER& sig, std::string& ss_blob)
+	{
+		size_t index = 0UL;
+
+		// fill sign key.
+		for (auto& ch_byte : ss_blob)
+		{
+			if (index < kChecksumLen)
+			{
+				++index;
+				sig.d_binary_checksum[index] = ((ch_byte | (uint64_t)kSignedAppMagic));
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		sig.d_binary_checksum_u16[0] = kMagicLen;			 // magic number length
+		sig.d_binary_checksum_u16[1] = sig.d_binary_version; // the version of the signed executable.
+
+		sig.d_binary_checksum[index] = 0;
 	}
 } // namespace details
 
@@ -65,12 +133,12 @@ int main(int argc, char* argv[])
 	}
 
 	// for input exe/dll!
-	const char* ext[2]	= kAppExt;
+	const char* ext[kAppSignedExtLen]	= kAppExt;
 	const char* cur_ext = nullptr;
 
 	// for output exe/dll!
-	const char* ext_out[2]	= kAppSignedExt;
-	const char* cur_ext_dll = nullptr;
+	const char* ext_out[kAppSignedExtLen] = kAppSignedExt;
+	const char* cur_ext_dll				  = nullptr;
 
 	int index_cur = 0;
 
@@ -80,6 +148,7 @@ int main(int argc, char* argv[])
 		{
 			cur_ext		= ext_cur;
 			cur_ext_dll = ext_out[index_cur];
+
 			break;
 		}
 
@@ -92,17 +161,15 @@ int main(int argc, char* argv[])
 
 	details::SIGNED_EXEC_HEADER sig{0};
 
-	sig.d_binary_version = 1;
+	sig.d_binary_version = kSignVersion;
 
-	memcpy(sig.d_binary_magic, kSignedAppMagic, strlen(kSignedAppMagic));
+	memcpy(sig.d_binary_magic, kSignedAppMagic, kMagicLen);
 	memcpy(sig.d_binary_name, argv[1], strlen(argv[1]));
 
 	sig.d_binary_size = std::filesystem::file_size(argv[1]);
 
-	memset(sig.d_binary_padding, 0x00, 512);
-	memset(sig.d_binary_padding_end_of_exec, 0x00, 512);
-
-	sig.d_binary_checksum = 0;
+	memset(sig.d_binary_padding, 0x00, kPaddingLen);
+	memset(sig.d_binary_padding_end_of_exec, 0x00, kPaddingLen);
 
 	std::string signed_path = argv[1];
 	signed_path.erase(signed_path.find(cur_ext), strlen(cur_ext));
@@ -114,7 +181,7 @@ int main(int argc, char* argv[])
 	std::stringstream ss;
 	ss << if_drv.rdbuf();
 
-	if (!details::drvsign_check_for_mz(ss.str()))
+	if (!details::execsign_check_for_mz(ss.str()))
 	{
 		std::filesystem::remove(signed_path);
 		std::cout << "execsign: Couldn't sign current driver, Input executable isn't a valid.\n";
@@ -122,17 +189,15 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	for (auto ch : ss.str())
-	{
-		sig.d_binary_checksum |= (ch * rand());
-	}
+	auto blob_on_stack = ss.str();
 
-	sig.d_binary_checksum |= sig.d_binary_size;
+	details::execsign_write_sign_id(sig, blob_on_stack);
 
 	of_drv.write(ss.str().c_str(), ss.str().size());
 	of_drv.write((char*)&sig, sizeof(details::SIGNED_EXEC_HEADER));
 
-	std::cout << "execsign: Signing is done, quiting, here is the key: " << sig.d_binary_checksum << ".\n";
+	std::cout << "execsign: Executable's signature: ";
+	details::execsign_print_exec_id(sig);
 
 	return 0;
 }
