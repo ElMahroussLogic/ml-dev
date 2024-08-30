@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifdef __MAHROUSS__
+#ifdef __ZKA__
 #include <newstd.hxx>
 #error !!! define this backend. !!!
 #endif
