@@ -15,7 +15,7 @@
 
 #include <FoundationKit/Win32/Win32.hxx>
 #else
-#include <FoundationKit/NewOS/NewOS.hxx>
+#include <FoundationKit/ZKA/ZKA.hxx>
 #endif // ifdef _WIN32
 
 #ifdef _WIN32

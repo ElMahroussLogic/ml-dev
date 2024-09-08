@@ -1,6 +1,6 @@
 # ZKA C++ APIs and Tools.
 
-A set of C++ Kits for ZKA development.
+A set of C++ kits for ZKA engineers.
 
 ## Installing:
 

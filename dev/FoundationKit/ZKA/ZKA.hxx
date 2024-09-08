@@ -7,6 +7,6 @@
 #pragma once
 
 #ifdef __ZKA__
-#include <newstd.hxx>
+#include <xpcom.hxx>
 #error !!! define this backend. !!!
 #endif

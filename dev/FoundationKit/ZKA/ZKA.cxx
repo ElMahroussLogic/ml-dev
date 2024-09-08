@@ -4,7 +4,7 @@
 
 ------------------------------------------- */
 
-#include <FoundationKit/NewOS/NewOS.hxx>
+#include <FoundationKit/ZKA/ZKA.hxx>
 
 // ------------------------------------------ //
 // Not defined for now. We lack an implementation.

@@ -65,12 +65,12 @@ public:
 	/// @brief Write to file as SVG using T as the filepath.
 	/// @param T file name to write.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* SVG(const CGCharacter* T) = 0;
+	virtual MLCoreGraphicsContext* svg(const CGCharacter* T) = 0;
 
 	/// @brief Write to file as PDF using T as the filepath.
 	/// @param T file name to write.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* PDF(const CGCharacter* T) = 0;
+	virtual MLCoreGraphicsContext* pdf(const CGCharacter* T) = 0;
 
 	/// @brief Set the page label.
 	/// @param T page label name.

@@ -151,7 +151,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	MLCoreGraphicsContext* PDF(const CGCharacter* T) override
+	MLCoreGraphicsContext* pdf(const CGCharacter* T) override
 	{
 		if (mSurface)
 			return this;
@@ -172,7 +172,7 @@ public:
 		return this;
 	}
 
-	MLCoreGraphicsContext* SVG(const CGCharacter* T) override
+	MLCoreGraphicsContext* svg(const CGCharacter* T) override
 	{
 		if (mSurface)
 			return this;

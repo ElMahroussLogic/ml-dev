@@ -11,7 +11,7 @@
 
 #include <FoundationKit/Linux/Linux.hxx>
 #include <FoundationKit/MacOS/MacOS.hxx>
-#include <FoundationKit/NewOS/NewOS.hxx>
+#include <FoundationKit/ZKA/ZKA.hxx>
 #include <FoundationKit/Win32/Win32.hxx>
 
 /// @brief URL parser class.
