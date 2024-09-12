@@ -8,6 +8,7 @@
     "-lLinuxFoundation",
     "-lGraphicsKit",
     "-lFoundationKit",
+    "$(pkg-config --cflags --libs gtk+-3.0 cairo glib-2.0)",
     "$(pkg-config --cflags --libs gtk+-3.0)"
   ],
   "cpp_macros": ["__APPLAUNCHER__"],

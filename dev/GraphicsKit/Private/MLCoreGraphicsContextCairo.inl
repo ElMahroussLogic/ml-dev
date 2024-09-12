@@ -22,7 +22,7 @@ extern "C"
 #include <filesystem>
 
 #ifndef M_PI
-#define M_PI       3.14159265358979323846
+#define M_PI 3.14159265358979323846
 #endif // !M_PI
 
 #include <cairo/cairo.h>
@@ -481,15 +481,9 @@ public:
 
 	/// @brief Present PDF rendering of one page.
 	/// @return
-	MLCoreGraphicsContext* present() override
+	MLCoreGraphicsContext* present(CGReal r, CGReal g, CGReal b) override
 	{
-
-		if (!mSurface || !mCairo)
-			return this;
-
-		cairo_surface_copy_page(mSurface);
-
-		cairo_set_source_rgb(mCairo, 1, 1, 1);
+		cairo_set_source_rgb(mCairo, r, g, b);
 		cairo_paint(mCairo);
 
 		return this;
@@ -519,19 +513,9 @@ public:
 
 	/// @brief Leak or set private internal context
 	/// @param PvtCtx The cairo context.
-	void leak(void** pvtCtx) override
+	void leak(void*** pvtCtx) override
 	{
-		if (pvtCtx)
-		{
-			mCairo = (cairo_t*)*pvtCtx;
-
-			mCustomCairo   = *pvtCtx != nullptr;
-			mCustomSurface = *pvtCtx != nullptr;
-		}
-		else
-		{
-			*pvtCtx = mCairo;
-		}
+		*pvtCtx = (void**)&mCairo;
 	}
 
 	/// @brief

@@ -85,7 +85,7 @@ public:
 
 	/// @brief Present the context.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* present() = 0;
+	virtual MLCoreGraphicsContext* present(CGReal r = 0, CGReal g = 0, CGReal b = 0) = 0;
 
 	/// @brief Set color or current pen.
 	/// @param R Red channel.
@@ -145,7 +145,7 @@ public:
 	/// @brief Leak or set graphics context.
 	/// @param pvtCtx the new internal context.
 	/// @internal
-	virtual void leak(void** pvtCtx) = 0;
+	virtual void leak(void*** pvtCtx) = 0;
 
 public:
 	/// @brief Overloaded move, for MLCoreGraphicsPoint.
