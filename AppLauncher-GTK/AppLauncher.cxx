@@ -5,7 +5,7 @@
 ------------------------------------------- */
 
 #include <GraphicsKit/GraphicsKit.hxx>
-#include <filesystem>
+#include <AnimationKit/MLCoreAnimation.hxx>
 #include <ctime>
 
 extern "C"
@@ -19,8 +19,13 @@ extern "C"
 
 static bool					  cDeviceLocked = true;
 static std::string			  cHourFormat;
-static bool					  cPainting	 = false;
-static MLCoreGraphicsContext* cCGContext = CGRequestContext(0, false, cDeviceWidth, cDeviceHeight);
+static bool					  cPainting			 = false;
+static bool					  cDeviceLockTimeout = false;
+static MLCoreGraphicsContext* cCGContext		 = CGRequestContext(0, false, cDeviceWidth, cDeviceHeight);
+
+static CGReal cDeviceLockAlphaCurrent = 10.0;
+static CGReal cDeviceLockAlpha		  = 0.0;
+static CGReal cDeviceLockAlphaIndex	  = 0.0;
 
 int AL_ShowLockScreen(GtkWidget* widget, cairo_t* cr, void* user_data)
 {
@@ -32,30 +37,72 @@ int AL_ShowLockScreen(GtkWidget* widget, cairo_t* cr, void* user_data)
 		*data = cr;
 	}
 
-	cCGContext->present(0, 0.13, 0.6);
+	cCGContext->present(0.0, 0.0, 0.0);
 
 	if (cDeviceLocked)
 	{
-		cCGContext->color(1, 1, 1, 1)->fontSize(120.0)->fontFamily("Inter", true)->move(40, cDeviceHeight - 200 + 40)->text(cHourFormat.c_str(), false);
-		cCGContext->color(1, 1, 1, 1)->fontSize(20.0)->fontFamily("Inter", false)->move(40, cDeviceHeight - 60)->text("Swipe to Unlock.", false);
+		constexpr auto cStopAt = 255.0;
+
+		if (cDeviceLockAlphaCurrent < cStopAt)
+		{
+			cDeviceLockAlphaCurrent = CALerp(cDeviceLockAlphaCurrent, cStopAt, cDeviceLockAlphaIndex);
+			cDeviceLockAlphaIndex += 0.001;
+			cDeviceLockAlpha += 0.01;
+		}
 	}
 	else
 	{
-		cCGContext->color(0.0, 0.0, 0.0, 0.5)->move(0, 0)->rectangle(cDeviceWidth, cDeviceTaskBarHeight, 0);
+		constexpr auto cStopAt = 0.0;
+
+		if (cDeviceLockAlphaCurrent > cStopAt)
+		{
+			cDeviceLockAlphaCurrent = CALerp(cDeviceLockAlphaCurrent, cStopAt, cDeviceLockAlphaIndex);
+			cDeviceLockAlphaIndex += 0.001;
+			cDeviceLockAlpha -= 0.01;
+		}
 	}
 
-	return FALSE;
+	cCGContext->color(1, 1, 1, cDeviceLockAlpha)->fontSize(120.0)->fontFamily("Inter", true)->move(40, cDeviceHeight - 200 + 40)->text(cHourFormat.c_str(), false);
+	cCGContext->color(1, 1, 1, cDeviceLockAlpha)->fontSize(20.0)->fontFamily("Inter", false)->move(40, cDeviceHeight - 60)->text("Swipe to Unlock.", false);
+
+	return TRUE;
 }
 
-static gboolean AL_UpdateCanvas(gpointer user_data)
+gboolean AL_UpdateCanvas(gpointer user_data)
 {
-	if (!cPainting)
-		return FALSE;
-
 	GtkWidget* widget = GTK_WIDGET(user_data);
 	gtk_widget_queue_draw(widget);
 
 	return TRUE;
+}
+
+gboolean AL_EnableLockScreen(gpointer user_data)
+{
+	if (cDeviceLockTimeout)
+	{
+		return TRUE;
+	}
+
+	cDeviceLocked = !cDeviceLocked;
+
+	if (!cDeviceLocked)
+	{
+		cDeviceLockAlpha		= 1.0;
+		cDeviceLockAlphaCurrent = 255.0;
+	}
+	else
+	{
+		cDeviceLockAlpha		= 0.0;
+		cDeviceLockAlphaCurrent = 10.0;
+	}
+
+	cDeviceLockAlphaIndex = 0;
+	cDeviceLockTimeout	  = true;
+
+	GtkWidget* widget = GTK_WIDGET(user_data);
+	gtk_widget_queue_draw(widget);
+
+	return FALSE;
 }
 
 /* @brief Proxy function for lock screen. */
@@ -100,7 +147,10 @@ int main(int argc, char** argv)
 
 			cPainting = false;
 
-			sleep(1);
+			sleep(2);
+
+			if (cDeviceLockTimeout)
+				cDeviceLockTimeout = false;
 		}
 	});
 
@@ -118,15 +168,16 @@ int main(int argc, char** argv)
 
 	gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
 
-	g_signal_connect(G_OBJECT(drawing_area), "draw", G_CALLBACK(AL_ShowLockScreen), nullptr);
-	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), nullptr);
+	g_signal_connect(G_OBJECT(drawing_area), "draw", G_CALLBACK(AL_ShowLockScreen), drawing_area);
+	g_signal_connect(G_OBJECT(window), "button-press-event", G_CALLBACK(AL_EnableLockScreen), drawing_area);
+	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), drawing_area);
 
 	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 	gtk_window_set_default_size(GTK_WINDOW(window), cDeviceWidth, cDeviceHeight);
 	gtk_window_set_title(GTK_WINDOW(window), "AppLauncher");
 	gtk_widget_show_all(window);
 
-	g_timeout_add(24, AL_UpdateCanvas, drawing_area);
+	g_timeout_add(16, AL_UpdateCanvas, drawing_area);
 	gtk_main();
 
 	return 0;
