@@ -1,6 +1,6 @@
-# ZKA C++ APIs and Tools.
+# ZKA AppLauncher.
 
-A set of C++ kits for ZKA engineers.
+An Mobile app launcher written in C++, with it's own API.
 
 ## Installing:
 

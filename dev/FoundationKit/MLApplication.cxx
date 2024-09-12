@@ -20,7 +20,7 @@
 /// @return the app string.
 const MLString MLApplication::getAppName()
 {
-    constexpr auto cPkgXmlPath = "/NewOS/Manifests/App.alist";
+    constexpr auto cPkgXmlPath = "/ZKA/Manifests/App.alist";
 
     auto baseAppPath = std::filesystem::current_path().string();
     baseAppPath += cPkgXmlPath;
@@ -42,7 +42,7 @@ const MLString MLApplication::getAppName()
 /// @return the app string.
 const MLString MLApplication::getAppVersion()
 {
-    constexpr auto cPkgXmlPath = "/NewOS/Manifests/App.alist";
+    constexpr auto cPkgXmlPath = "/ZKA/Manifests/App.alist";
 
     auto baseAppPath = std::filesystem::current_path().string();
     baseAppPath += cPkgXmlPath;
@@ -75,7 +75,7 @@ MLApplication& MLApplication::shared()
 /// @brief returns the app path as a string.
 const MLString MLApplication::toString()
 {
-    constexpr auto cPkgPath = "/NewOS/";
+    constexpr auto cPkgPath = "/ZKA/";
 
     auto baseAppPath = std::filesystem::current_path().string();
     baseAppPath += cPkgPath;

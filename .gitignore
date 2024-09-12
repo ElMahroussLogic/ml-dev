@@ -12,8 +12,9 @@
 *.pef
 *.ae
 *.lib
+*.svg
 
-tools/execsign
+Background.png
 
 Examples/GenerateQR/GenerateQR
 Examples/GenerateQR/QR.pdf
