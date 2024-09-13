@@ -17,6 +17,7 @@ extern "C"
 #define cDeviceHeight		 (1750 / 2)
 #define cDeviceTaskBarHeight (40)
 
+static std::string            cTitle = "AppLauncher (GTK Backend)";
 static bool					  cDeviceLocked = true;
 static std::string			  cHourFormat;
 static bool					  cPainting			 = false;
@@ -173,7 +174,7 @@ int main(int argc, char** argv)
 
 	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 	gtk_window_set_default_size(GTK_WINDOW(window), cDeviceWidth, cDeviceHeight);
-	gtk_window_set_title(GTK_WINDOW(window), "AppLauncher (GTK backend)");
+	gtk_window_set_title(GTK_WINDOW(window), cTitle.c_str());
 	gtk_widget_show_all(window);
 
 	g_timeout_add(16, AL_UpdateCanvas, drawing_area);
