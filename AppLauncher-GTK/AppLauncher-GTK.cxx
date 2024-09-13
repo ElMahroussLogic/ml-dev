@@ -10,7 +10,7 @@
 
 extern "C"
 {
-#include <gtk/gtk.h>
+#   include <gtk/gtk.h>
 }
 
 #define cDeviceWidth		 (1045 / 2)
