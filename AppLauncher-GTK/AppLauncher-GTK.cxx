@@ -22,12 +22,11 @@ static std::string			  cHourFormat;
 static bool					  cPainting			 = false;
 static bool					  cDeviceLockTimeout = false;
 static MLCoreGraphicsContext* cCGContext		 = CGRequestContext(0, false, cDeviceWidth, cDeviceHeight);
-
 static CGReal cDeviceLockAlphaCurrent = 10.0;
 static CGReal cDeviceLockAlpha		  = 0.0;
 static CGReal cDeviceLockAlphaIndex	  = 0.0;
 
-int AL_ShowLockScreen(GtkWidget* widget, cairo_t* cr, void* user_data)
+static int AL_ShowLockScreen(GtkWidget* widget, cairo_t* cr, void* user_data)
 {
 	cairo_t** data;
 	cCGContext->leak((void***)&data);
@@ -68,7 +67,7 @@ int AL_ShowLockScreen(GtkWidget* widget, cairo_t* cr, void* user_data)
 	return TRUE;
 }
 
-gboolean AL_UpdateCanvas(gpointer user_data)
+static gboolean AL_UpdateCanvas(gpointer user_data)
 {
 	GtkWidget* widget = GTK_WIDGET(user_data);
 	gtk_widget_queue_draw(widget);
@@ -76,7 +75,7 @@ gboolean AL_UpdateCanvas(gpointer user_data)
 	return TRUE;
 }
 
-gboolean AL_EnableLockScreen(gpointer user_data)
+static gboolean AL_EnableLockScreen(gpointer user_data)
 {
 	if (cDeviceLockTimeout)
 	{
@@ -108,14 +107,14 @@ gboolean AL_EnableLockScreen(gpointer user_data)
 /* @brief Proxy function for lock screen. */
 int main(int argc, char** argv)
 {
-	atexit([]() -> void {
+	std::atexit([]() -> void {
 		if (!cCGContext)
 			return;
 
 		CGReleaseContext(cCGContext);
 	});
 
-	std::thread job([]() -> void {
+	std::thread hour_job([]() -> void {
 		while (true)
 		{
 			cPainting = true;
@@ -154,12 +153,12 @@ int main(int argc, char** argv)
 		}
 	});
 
-	job.detach();
+	hour_job.detach();
+
+	gtk_init(&argc, (char***)&argv);
 
 	GtkWidget* window		= nullptr;
 	GtkWidget* drawing_area = nullptr;
-
-	gtk_init(&argc, (char***)&argv);
 
 	window		 = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	drawing_area = gtk_drawing_area_new();
@@ -174,7 +173,7 @@ int main(int argc, char** argv)
 
 	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 	gtk_window_set_default_size(GTK_WINDOW(window), cDeviceWidth, cDeviceHeight);
-	gtk_window_set_title(GTK_WINDOW(window), "AppLauncher");
+	gtk_window_set_title(GTK_WINDOW(window), "AppLauncher (GTK backend)");
 	gtk_widget_show_all(window);
 
 	g_timeout_add(16, AL_UpdateCanvas, drawing_area);
