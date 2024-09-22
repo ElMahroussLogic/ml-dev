@@ -17,7 +17,7 @@ extern "C"
 #define cDeviceHeight		 (1750 / 2)
 #define cDeviceTaskBarHeight (40)
 
-static std::string            cTitle = "AppLauncher (GTK Backend)";
+static std::string            cTitle = "AppLauncher (GTK)";
 static bool					  cDeviceLocked = true;
 static std::string			  cHourFormat;
 static bool					  cPainting			 = false;
