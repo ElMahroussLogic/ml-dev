@@ -1,6 +1,6 @@
 # ZKA AppLauncher.
 
-An Mobile app launcher written in C++, with it's own API.
+A Mobile App API and launcher written in C++.
 
 ## Installing:
 
