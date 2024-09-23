@@ -10,34 +10,36 @@
 
 extern "C"
 {
-#   include <gtk/gtk.h>
+#include <gtk/gtk.h>
+#include <gdk/gdk.h>
+#include <gdk/gdkkeysyms.h>
 }
 
 #define cDeviceWidth		 (1045 / 2)
 #define cDeviceHeight		 (1750 / 2)
 #define cDeviceTaskBarHeight (40)
 
-static std::string            cTitle = "AppLauncher (GTK)";
+static std::string			  cDeviceTitle	= "StageBoard";
 static bool					  cDeviceLocked = true;
-static std::string			  cHourFormat;
-static bool					  cPainting			 = false;
-static bool					  cDeviceLockTimeout = false;
-static MLCoreGraphicsContext* cCGContext		 = CGRequestContext(0, false, cDeviceWidth, cDeviceHeight);
-static CGReal cDeviceLockAlphaCurrent = 10.0;
-static CGReal cDeviceLockAlpha		  = 0.0;
-static CGReal cDeviceLockAlphaIndex	  = 0.0;
+static std::string			  cDeviceHour;
+static bool					  cDevicePainting		  = false;
+static bool					  cDeviceLockTimeout	  = false;
+static MLCoreGraphicsContext* cDeviceCtx			  = CGRequestContext(0, false, cDeviceWidth, cDeviceHeight);
+static CGReal				  cDeviceLockAlphaCurrent = 10.0;
+static CGReal				  cDeviceLockAlpha		  = 0.0;
+static CGReal				  cDeviceLockAlphaIndex	  = 0.0;
 
-static int AL_ShowLockScreen(GtkWidget* widget, cairo_t* cr, void* user_data)
+static int zka_paint_screen(GtkWidget* widget, cairo_t* cr, void* user_data)
 {
 	cairo_t** data;
-	cCGContext->leak((void***)&data);
+	cDeviceCtx->leak((void***)&data);
 
 	if (!*data)
 	{
 		*data = cr;
 	}
 
-	cCGContext->present(0.0, 0.0, 0.0);
+	cDeviceCtx->present(0.0, 0.0, 0.0);
 
 	if (cDeviceLocked)
 	{
@@ -62,13 +64,13 @@ static int AL_ShowLockScreen(GtkWidget* widget, cairo_t* cr, void* user_data)
 		}
 	}
 
-	cCGContext->color(1, 1, 1, cDeviceLockAlpha)->fontSize(120.0)->fontFamily("Inter", true)->move(40, cDeviceHeight - 200 + 40)->text(cHourFormat.c_str(), false);
-	cCGContext->color(1, 1, 1, cDeviceLockAlpha)->fontSize(20.0)->fontFamily("Inter", false)->move(40, cDeviceHeight - 60)->text("Swipe to Unlock.", false);
+	cDeviceCtx->color(1, 1, 1, cDeviceLockAlpha)->fontSize(120.0)->fontFamily("Inter", true)->move(40, cDeviceHeight - 200 + 40)->text(cDeviceHour.c_str(), false);
+	cDeviceCtx->color(1, 1, 1, cDeviceLockAlpha)->fontSize(20.0)->fontFamily("Inter", false)->move(40, cDeviceHeight - 60)->text("Swipe to Unlock.", false);
 
 	return TRUE;
 }
 
-static gboolean AL_UpdateCanvas(gpointer user_data)
+static gboolean zka_paint_update(gpointer user_data)
 {
 	GtkWidget* widget = GTK_WIDGET(user_data);
 	gtk_widget_queue_draw(widget);
@@ -76,32 +78,40 @@ static gboolean AL_UpdateCanvas(gpointer user_data)
 	return TRUE;
 }
 
-static gboolean AL_EnableLockScreen(gpointer user_data)
+static gboolean zka_lock_screen(GtkWidget* widget, GdkEventKey* event, gpointer user_data)
 {
 	if (cDeviceLockTimeout)
 	{
 		return TRUE;
 	}
 
-	cDeviceLocked = !cDeviceLocked;
-
-	if (!cDeviceLocked)
+	switch (event->keyval)
 	{
-		cDeviceLockAlpha		= 1.0;
-		cDeviceLockAlphaCurrent = 255.0;
+	case GDK_KEY_L: {
+		cDeviceLocked = !cDeviceLocked;
+
+		if (!cDeviceLocked)
+		{
+			cDeviceLockAlpha		= 1.0;
+			cDeviceLockAlphaCurrent = 255.0;
+		}
+		else
+		{
+			cDeviceLockAlpha		= 0.0;
+			cDeviceLockAlphaCurrent = 10.0;
+		}
+
+		cDeviceLockAlphaIndex = 0;
+		cDeviceLockTimeout	  = true;
+
+		GtkWidget* widget = GTK_WIDGET(user_data);
+		gtk_widget_queue_draw(widget);
+
+		break;
 	}
-	else
-	{
-		cDeviceLockAlpha		= 0.0;
-		cDeviceLockAlphaCurrent = 10.0;
+	default:
+		break;
 	}
-
-	cDeviceLockAlphaIndex = 0;
-	cDeviceLockTimeout	  = true;
-
-	GtkWidget* widget = GTK_WIDGET(user_data);
-	gtk_widget_queue_draw(widget);
-
 	return FALSE;
 }
 
@@ -109,43 +119,43 @@ static gboolean AL_EnableLockScreen(gpointer user_data)
 int main(int argc, char** argv)
 {
 	std::atexit([]() -> void {
-		if (!cCGContext)
+		if (!cDeviceCtx)
 			return;
 
-		CGReleaseContext(cCGContext);
+		CGReleaseContext(cDeviceCtx);
 	});
 
 	std::thread hour_job([]() -> void {
-		while (true)
+		while (TRUE)
 		{
-			cPainting = true;
+			cDevicePainting = true;
 
 			auto		end		 = std::chrono::system_clock::now();
 			std::time_t end_time = std::chrono::system_clock::to_time_t(end);
 
 			std::tm* tm = std::localtime(&end_time);
 
-			cHourFormat = std::to_string(tm->tm_hour);
+			cDeviceHour = std::to_string(tm->tm_hour);
 
 			if (tm->tm_hour <= 9)
 			{
-				cHourFormat = "0";
-				cHourFormat += std::to_string(tm->tm_hour);
+				cDeviceHour = "0";
+				cDeviceHour += std::to_string(tm->tm_hour);
 			}
 
-			cHourFormat += ":";
+			cDeviceHour += ":";
 
 			if (tm->tm_min <= 9)
 			{
-				cHourFormat += "0";
-				cHourFormat += std::to_string(tm->tm_min);
+				cDeviceHour += "0";
+				cDeviceHour += std::to_string(tm->tm_min);
 			}
 			else
 			{
-				cHourFormat += std::to_string(tm->tm_min);
+				cDeviceHour += std::to_string(tm->tm_min);
 			}
 
-			cPainting = false;
+			cDevicePainting = false;
 
 			sleep(2);
 
@@ -168,16 +178,16 @@ int main(int argc, char** argv)
 
 	gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
 
-	g_signal_connect(G_OBJECT(drawing_area), "draw", G_CALLBACK(AL_ShowLockScreen), drawing_area);
-	g_signal_connect(G_OBJECT(window), "button-press-event", G_CALLBACK(AL_EnableLockScreen), drawing_area);
+	g_signal_connect(G_OBJECT(drawing_area), "draw", G_CALLBACK(zka_paint_screen), drawing_area);
+	g_signal_connect(G_OBJECT(window), "key-press-event", G_CALLBACK(zka_lock_screen), drawing_area);
 	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), drawing_area);
 
 	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 	gtk_window_set_default_size(GTK_WINDOW(window), cDeviceWidth, cDeviceHeight);
-	gtk_window_set_title(GTK_WINDOW(window), cTitle.c_str());
+	gtk_window_set_title(GTK_WINDOW(window), cDeviceTitle.c_str());
 	gtk_widget_show_all(window);
 
-	g_timeout_add(16, AL_UpdateCanvas, drawing_area);
+	g_timeout_add(16, zka_paint_update, drawing_area);
 	gtk_main();
 
 	return 0;

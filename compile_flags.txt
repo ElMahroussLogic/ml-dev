@@ -1,2 +1,2 @@
--I../dev
+-Idev/
 -std=c++20

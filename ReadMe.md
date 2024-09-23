@@ -1,6 +1,6 @@
-# ZKA AppLauncher.
+# ZKA StageBoard.
 
-A Mobile App API and launcher written in C++.
+A Mobile API and Launcher written in C++.
 
 ## Installing:
 
@@ -12,10 +12,10 @@ git clone git@bitbucket.org:mahrouss/priv-dll.git
 
 ## Building:
 
-Use btb to build the frameworks.
+Use __btb__ to build the frameworks.
 
 ```
-btb build.json
+btb launcher.json
 ```
 
 You can now use the DLLs.
