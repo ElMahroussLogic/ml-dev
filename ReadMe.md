@@ -16,6 +16,6 @@ Use __btb__ to build the frameworks.
 btb launcher.json
 ```
 
-You can now use the DLLs.
+You can now use the DLL for your project.
 
 ###### Copyright ZKA Technologies, all rights reserved.
