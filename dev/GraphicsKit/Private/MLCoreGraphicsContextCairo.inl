@@ -214,6 +214,14 @@ public:
 
 	MLCoreGraphicsContext* rectangle(CGReal width, CGReal height, CGReal radius) override
 	{
+		if (radius == 0.0)
+		{
+			cairo_rectangle(mCairo, mX, mY, width, height);
+			cairo_paint(mCairo);
+
+			return this;
+		}
+
 		double aspect	  = 1.0,		   /* aspect ratio */
 			corner_radius = height / 10.0; /* and corner curvature radius */
 
@@ -235,6 +243,8 @@ public:
 		cairo_close_path(mCairo);
 
 		cairo_fill_preserve(mCairo);
+
+		cairo_paint(mCairo);
 
 		return this;
 	}
@@ -459,6 +469,7 @@ public:
 
 			cairo_paint(mCairo);
 		}
+
 		return this;
 	}
 

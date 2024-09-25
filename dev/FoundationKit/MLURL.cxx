@@ -26,9 +26,9 @@ MLString MLURL::getPath() noexcept
 {
 	constexpr MLInteger bufLen = 4096;
 
-	MLChar protocolBuf[bufLen];
+	MLChar		protocolBuf[bufLen];
 	MLInteger64 cnter = 0UL;
-	MLString path(bufLen);
+	MLString	path(bufLen);
 
 	for (MLInteger i = 0U; i < mPath.usedBytes(); ++i)
 	{
@@ -55,9 +55,9 @@ MLString MLURL::getPath() noexcept
 /// @return MLInteger the protocol as an enum.
 MLInteger MLURL::getProtocol() noexcept
 {
-	constexpr MLInteger bufLen = 512;
-	MLChar protocolBuf[bufLen];
-	MLInteger64 cnter = 0UL;
+	MLInteger	bufLen		= mPath.usedBytes();
+	MLChar*		protocolBuf = new MLChar[bufLen];
+	MLInteger64 cnter		= 0UL;
 
 	for (MLInteger i = 0U; i < mPath.usedBytes(); ++i)
 	{
@@ -74,25 +74,36 @@ MLInteger MLURL::getProtocol() noexcept
 
 	if (strcmp("file://", protocolBuf) == 0)
 	{
+		delete[] protocolBuf;
 		return kFileProtocol;
 	}
 	else if (strcmp("http://", protocolBuf) == 0)
 	{
+		delete[] protocolBuf;
 		return kHttpProtocol;
 	}
 	else if (strcmp("https://", protocolBuf) == 0)
 	{
+		delete[] protocolBuf;
 		return kHttpsProtocol;
 	}
 	else if (strcmp("zup://", protocolBuf) == 0)
 	{
+		delete[] protocolBuf;
 		return kZUPProtocol;
+	}
+	else if (strcmp("zka://", protocolBuf) == 0)
+	{
+		delete[] protocolBuf;
+		return kZKAProtocol;
 	}
 	else if (strcmp("oscc://", protocolBuf) == 0)
 	{
+		delete[] protocolBuf;
 		return kParamProtocol;
 	}
 
+	delete[] protocolBuf;
 	return -1;
 }
 

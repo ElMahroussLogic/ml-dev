@@ -18,6 +18,7 @@ private:
 
 public:
 	explicit MLString(MLSizeType sizeOfBuffer);
+	explicit MLString(const MLChar* buffer);
 	~MLString() override;
 
 	MLString& operator=(const MLString& rhs);

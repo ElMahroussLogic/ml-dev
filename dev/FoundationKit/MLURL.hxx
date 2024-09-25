@@ -29,7 +29,7 @@ public:
 
 	~MLURL() override;
 
-	enum { kFileProtocol, kHttpProtocol, kHttpsProtocol, kZUPProtocol, kParamProtocol };
+	enum { kFileProtocol, kHttpProtocol, kHttpsProtocol, kZUPProtocol, kParamProtocol, kZKAProtocol };
 
 	/// @brief get path of URL.
 	/// @return MLString the path as a MLString.

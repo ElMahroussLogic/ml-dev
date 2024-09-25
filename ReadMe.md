@@ -1,10 +1,8 @@
-# ZKA StageBoard.
-
-A Mobile API and Launcher written in C++.
+# ZT Framework.
 
 ## Installing:
 
-Start by cloning the repo.
+Start by cloning the repo:
 
 ```
 git clone git@bitbucket.org:mahrouss/priv-dll.git

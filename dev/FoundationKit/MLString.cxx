@@ -13,7 +13,20 @@ MLString::MLString(MLSizeType sizeOfBuffer)
 	mCursor = 0;
 	mSize	= sizeOfBuffer;
 	mData	= MLAllocator::shared().initWithSize<MLChar>(sizeOfBuffer);
+
 	memset(mData, 0, mSize);
+}
+
+MLString::MLString(const MLChar* buffer)
+{
+    auto sizeOfBuffer = strlen(buffer);
+
+    mCursor = 0;
+	mSize	= sizeOfBuffer;
+	mData	= MLAllocator::shared().initWithSize<MLChar>(sizeOfBuffer);
+
+	memset(mData, 0, mSize);
+	memcpy(mData, buffer, mSize);
 }
 
 MLString::~MLString() = default;
