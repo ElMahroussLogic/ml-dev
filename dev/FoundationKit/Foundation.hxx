@@ -11,14 +11,14 @@
 #define ML_STATIC static
 
 #ifdef __x86_64__
-#define ML_AMD64 1
+#define ML_AMD64	1
 #define ML_PLATFORM "AMD64"
 #endif
 
 #define ML_OBJECT : public MLObject
 
 #ifdef __aarch64__
-#define ML_ARM64 1
+#define ML_ARM64	1
 #define ML_PLATFORM "ARM64"
 #endif
 
@@ -116,7 +116,6 @@ public:
 
 	virtual const void encode(MLCoder* output);
 	virtual const void decode(MLCoder* output);
-
 };
 
 class MLCoder final ML_OBJECT
@@ -126,8 +125,7 @@ public:
 	virtual ~MLCoder() = default;
 
 	MLCoder& operator=(const MLCoder&) = default;
-	MLCoder(const MLCoder&)			 = default;
-
+	MLCoder(const MLCoder&)			   = default;
 };
 #endif
 

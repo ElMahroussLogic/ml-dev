@@ -190,7 +190,6 @@ MLString MLXMLCoder::getInnerXML(const char* name, MLSizeType bufSz, bool pureOu
 		size_t length_xml = 4096;
 		length_xml += strlen(e.what());
 
-
 		MLChar* buf = new MLChar[length_xml];
 
 		sprintf(buf, errXml, e.what());
@@ -198,7 +197,7 @@ MLString MLXMLCoder::getInnerXML(const char* name, MLSizeType bufSz, bool pureOu
 		MLString strError(strlen(buf));
 		strError += buf;
 
-		delete []buf;
+		delete[] buf;
 
 		return strError;
 	}
@@ -206,12 +205,12 @@ MLString MLXMLCoder::getInnerXML(const char* name, MLSizeType bufSz, bool pureOu
 
 const MLString MLXMLCoder::toString()
 {
-    auto cLen = 4096;
-    cLen += this->mBlob.usedBytes();
+	auto cLen = 4096;
+	cLen += this->mBlob.usedBytes();
 
 	MLString xmlAsJsonStr = MLString(cLen);
 	xmlAsJsonStr += "[{ 'name': 'MLXMLCoder', 'blob': '";
-	
+
 	for (size_t i = 0; i < this->mBlob.size(); i++)
 	{
 		if (this->mBlob[i] == '\'')
@@ -219,7 +218,6 @@ const MLString MLXMLCoder::toString()
 		else
 			xmlAsJsonStr += this->mBlob[i];
 	}
-	
 
 	xmlAsJsonStr += "' }]";
 

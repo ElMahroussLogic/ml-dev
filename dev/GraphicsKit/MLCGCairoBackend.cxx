@@ -13,15 +13,14 @@
 /// @note if no, please check for feature with operator& inside MLCoreGraphicsContext.
 /// @return The new graphics context.
 MLCoreGraphicsContext*
-		  CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height)
+CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height)
 {
 	MLCoreGraphicsContext* context =
 		new MLCoreGraphicsContextCairo(width, height);
-    ML_MUST_PASS(context);
+	ML_MUST_PASS(context);
 
 	return context;
 }
-
 
 /// @brief To string method.
 /// @return the class as a string

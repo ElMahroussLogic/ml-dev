@@ -12,6 +12,6 @@
 #include <unistd.h>
 #include <cstdlib>
 
-#define ML_EXEC(PATH) 	 std::system(PATH)
+#define ML_EXEC(PATH) std::system(PATH)
 
 #endif

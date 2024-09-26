@@ -4,6 +4,12 @@
   "headers_path": ["../", "./Private", "../Private"],
   "sources_path": ["*.cxx", "Linux/*.cxx"],
   "output_name": "/usr/lib/libFoundationKit.so",
-  "compiler_flags": ["-fPIC", "-shared", "-lLinuxFoundation"],
+  "compiler_flags": [
+    "-fPIC",
+    "-shared",
+    "-lLinuxFoundation",
+    "$(pkg-config --cflags --libs gtk+-3.0 cairo glib-2.0)",
+    "$(pkg-config --cflags --libs gtk+-3.0)"
+  ],
   "cpp_macros": ["__FOUNDATIONKIT__=202401"]
 }

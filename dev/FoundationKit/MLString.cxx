@@ -19,9 +19,9 @@ MLString::MLString(MLSizeType sizeOfBuffer)
 
 MLString::MLString(const MLChar* buffer)
 {
-    auto sizeOfBuffer = strlen(buffer);
+	auto sizeOfBuffer = strlen(buffer);
 
-    mCursor = 0;
+	mCursor = 0;
 	mSize	= sizeOfBuffer;
 	mData	= MLAllocator::shared().initWithSize<MLChar>(sizeOfBuffer);
 

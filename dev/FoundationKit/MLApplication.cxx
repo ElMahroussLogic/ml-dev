@@ -20,10 +20,10 @@
 /// @return the app string.
 const MLString MLApplication::getAppName()
 {
-    constexpr auto cPkgXmlPath = "/ZKA/Manifests/App.alist";
+	constexpr auto cPkgXmlPath = "/ZKA/Manifests/App.alist";
 
-    auto baseAppPath = std::filesystem::current_path().string();
-    baseAppPath += cPkgXmlPath;
+	auto baseAppPath = std::filesystem::current_path().string();
+	baseAppPath += cPkgXmlPath;
 
 	std::ifstream streamXml(baseAppPath);
 
@@ -42,10 +42,10 @@ const MLString MLApplication::getAppName()
 /// @return the app string.
 const MLString MLApplication::getAppVersion()
 {
-    constexpr auto cPkgXmlPath = "/ZKA/Manifests/App.alist";
+	constexpr auto cPkgXmlPath = "/ZKA/Manifests/App.alist";
 
-    auto baseAppPath = std::filesystem::current_path().string();
-    baseAppPath += cPkgXmlPath;
+	auto baseAppPath = std::filesystem::current_path().string();
+	baseAppPath += cPkgXmlPath;
 
 	std::ifstream streamXml(baseAppPath);
 
@@ -75,10 +75,10 @@ MLApplication& MLApplication::shared()
 /// @brief returns the app path as a string.
 const MLString MLApplication::toString()
 {
-    constexpr auto cPkgPath = "/ZKA/";
+	constexpr auto cPkgPath = "/ZKA/";
 
-    auto baseAppPath = std::filesystem::current_path().string();
-    baseAppPath += cPkgPath;
+	auto baseAppPath = std::filesystem::current_path().string();
+	baseAppPath += cPkgPath;
 
 	MLString appName = MLString(baseAppPath.size());
 	appName += baseAppPath.data();
@@ -92,7 +92,7 @@ void MLApplication::showAboutModal() noexcept
 #ifdef _WIN32
 	ShellAboutA(nullptr, "FoundationKit for Windows", "FoundationKit is property of ZKA, all rights reserved.", nullptr);
 #else
-    MLAlert alert;
+	MLAlert alert;
 	alert.runModal("FoundationKit", "%s\n%s", "FoundationKit Framework.", "FoundationKit is a property of ZKA, Copyright ZKA Technologies all rights reserved.");
 #endif
 }

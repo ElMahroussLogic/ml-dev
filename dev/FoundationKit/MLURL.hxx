@@ -23,13 +23,20 @@ public:
 	explicit MLURL(const MLChar* url);
 	explicit MLURL() = delete;
 
-
 	MLURL& operator=(const MLURL&) = default;
 	MLURL(const MLURL&)			   = default;
 
 	~MLURL() override;
 
-	enum { kFileProtocol, kHttpProtocol, kHttpsProtocol, kZUPProtocol, kParamProtocol, kZKAProtocol };
+	enum
+	{
+		kFileProtocol,
+		kHttpProtocol,
+		kHttpsProtocol,
+		kZUPProtocol,
+		kParamProtocol,
+		kZKAProtocol
+	};
 
 	/// @brief get path of URL.
 	/// @return MLString the path as a MLString.
@@ -42,5 +49,4 @@ public:
 	/// @brief Open path using default app.
 	/// @return MLInteger exit code.
 	MLInteger64 openPath() noexcept;
-
 };

@@ -11,4 +11,3 @@ class MLCoreGraphicsShader;
 class MLCoreGraphicsContext;
 struct MLCoreGraphicsPoint;
 struct MLCoreGraphicsRect;
-

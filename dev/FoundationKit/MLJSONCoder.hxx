@@ -12,7 +12,6 @@ Copyright ZKA Technologies
 class MLJSONCoder final ML_OBJECT
 {
 public:
-
 };
 
 #error !!! Unimplemented !!!

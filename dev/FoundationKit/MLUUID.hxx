@@ -11,7 +11,6 @@
 class MLUUID final ML_OBJECT
 {
 public:
-
 };
 
 #error !!! Unimplemented !!!

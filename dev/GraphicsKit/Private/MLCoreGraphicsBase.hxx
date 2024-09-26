@@ -41,7 +41,7 @@ typedef struct MLCoreGraphicsRect final
 /// @return the resource as a string.
 inline const MLString r(const char* input)
 {
-    /// if input is invalid...
+	/// if input is invalid...
 	if (!input)
 	{
 		MLString textNil(1);
@@ -52,12 +52,12 @@ inline const MLString r(const char* input)
 
 	if (*input == 0)
 	{
-	   return textPath;
+		return textPath;
 	}
 	else
 	{
-	   textPath += kRsrcProtocol;
-	   textPath += input;
+		textPath += kRsrcProtocol;
+		textPath += input;
 	}
 
 	return textPath;

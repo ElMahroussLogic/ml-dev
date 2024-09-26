@@ -99,7 +99,7 @@ bool MLAlert::runModal(const MLChar* message)
 
 const MLString MLAlert::toString()
 {
-    constexpr auto cLen = 512;
+	constexpr auto cLen = 512;
 
 	MLString str = MLString(cLen);
 	str += "{}";

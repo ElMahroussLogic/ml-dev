@@ -11,12 +11,11 @@
 
 ML_EXTERN_C
 {
-	#include <string.h>
+#include <string.h>
 }
 
 /// @brief Standard XML extension.
 inline const char* cXMLExtension = "xml";
-
 
 /// @brief XML parser class.
 class MLXMLCoder final ML_OBJECT
@@ -25,7 +24,7 @@ public:
 	MLXMLCoder(const char* blob);
 
 	MLXMLCoder& operator=(const MLXMLCoder&) = default;
-	MLXMLCoder(const MLXMLCoder&)			   = default;
+	MLXMLCoder(const MLXMLCoder&)			 = default;
 
 	~MLXMLCoder() override;
 

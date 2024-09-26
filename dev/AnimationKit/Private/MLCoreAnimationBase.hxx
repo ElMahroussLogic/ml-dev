@@ -36,8 +36,8 @@ typedef struct MLCoreAnimationRect final
 
 enum
 {
-    eKineticAlgo,
-    eFadeInAlgo,
-    eFadeOutAlgo,
-    eSmartSmoothAlgo,
+	eKineticAlgo,
+	eFadeInAlgo,
+	eFadeOutAlgo,
+	eSmartSmoothAlgo,
 };
