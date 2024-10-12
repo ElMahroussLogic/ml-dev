@@ -5,9 +5,7 @@
   "sources_path": ["ModalExample.cxx"],
   "output_name": "ModalExample.exe",
   "compiler_flags": [
-    "-lLinuxFoundation",
-    "-lGraphicsKit",
-    "-lAnimationKit",
+    "-lMacOSFoundation",
     "-lFoundationKit",
     "$(pkg-config --cflags --libs gtk+-3.0 cairo glib-2.0)",
     "$(pkg-config --cflags --libs gtk+-3.0)"

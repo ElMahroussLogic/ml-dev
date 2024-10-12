@@ -1,0 +1,14 @@
+{
+  "compiler_path": "g++",
+  "compiler_std": "c++20",
+  "headers_path": ["../", "./Private", "../Private"],
+  "sources_path": ["*.cxx", "MacOS/*.mm"],
+  "output_name": "/usr/local/lib/libFoundationKit.dylib",
+  "compiler_flags": [
+    "-fPIC",
+    "-shared",
+    "-framework Foundation",
+    "-framework AppKit"
+  ],
+  "cpp_macros": ["__FOUNDATIONKIT__=202401"]
+}

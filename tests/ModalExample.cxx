@@ -5,6 +5,7 @@
 ------------------------------------------- */
 
 #include <FoundationKit/MLAlert.hxx>
+
 extern "C"
 {
 #include <gtk/gtk.h>
@@ -17,7 +18,7 @@ int main(int argc, char** argv)
     gtk_init(&argc, &argv);
 
     MLAlert alert;
-    alert.runModal("ZT Framework", "%s", "ZT Framework modal on Linux.");
+    alert.runModal("ZT Framework", "%s", "Modal on ZKA.");
 
     return 0;
 }
