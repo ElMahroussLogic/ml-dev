@@ -6,6 +6,8 @@
 
 #include <FoundationKit/ZKA/ZKA.hxx>
 
-// ------------------------------------------ //
-// Not defined for now. We lack an implementation.
-// ------------------------------------------ //
+EXTERN int MLAlertBox(CONST CHAR* title, CONST CHAR* msg)
+{
+    return W32MessageBox(W32GetDesktopWindow(), W32_TEXT(msg), W32_TEXT(title),
+        W32_MB_OKCANCEL | W32_MB_ICONINFORMATION) == W32_IDOK;
+}
