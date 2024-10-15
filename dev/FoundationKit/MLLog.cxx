@@ -17,6 +17,8 @@
 #include <codecvt>
 #include <locale>
 
+#define ML_PRINTF ::printf
+
 /// @brief MLLog advanced print function.
 ML_IMPORT void MLLog(const char* format, ...)
 {
@@ -62,7 +64,7 @@ ML_IMPORT void MLLog(const char* format, ...)
 			else if (fmtStr[index + 1] == 'r')
 			{
 				char buf[4096] = {0};
-				sprintf(buf, "%f", va_arg(va, double));
+				snprintf(buf, 4096, "%f", va_arg(va, double));
 
 				fmtStr.replace(index, 2, buf);
 			}
@@ -110,7 +112,7 @@ ML_IMPORT void MLLog(const char* format, ...)
 
 	va_end(va);
 
-	printf("%s [ %s ] : %s\n", formatted_time.c_str(), appName.asBytes(), fmtStr.c_str());
+	ML_PRINTF("%s [ %s ] : %s\n", formatted_time.c_str(), appName.asBytes(), fmtStr.c_str());
 
 	appName.dispose();
 }

@@ -6,6 +6,7 @@
 
 #include <FoundationKit/ZKA/ZKA.hxx>
 
+/** @brief Shows an alert box, with the message and title. */
 EXTERN int MLAlertBox(CONST CHAR* title, CONST CHAR* msg)
 {
     return W32MessageBox(W32GetDesktopWindow(), W32_TEXT(msg), W32_TEXT(title),

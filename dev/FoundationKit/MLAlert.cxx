@@ -41,9 +41,11 @@ bool MLAlert::runModal(const MLChar* title, const MLChar* format, ...)
 	va_list va;
 	va_start(va, format);
 
-	MLChar msg[256];
+	MLChar msg[4096];
 
-	vsnprintf(msg, 256, format, va);
+	vsnprintf(msg, 4096, format, va);
+
+	va_end(va);
 
 #ifdef _WIN32
 	auto isOk = ::MessageBoxA(nullptr, msg, title, MB_OKCANCEL | MB_ICONINFORMATION) == IDOK;
@@ -52,8 +54,6 @@ bool MLAlert::runModal(const MLChar* title, const MLChar* format, ...)
 #else
 	auto isOk = !MLAlertBox(title, msg);
 #endif
-
-	va_end(va);
 
 	return isOk;
 }
@@ -68,9 +68,11 @@ int MLAlert::runErrorModal(const MLChar* title, const MLChar* format, ...)
 	va_list va;
 	va_start(va, format);
 
-	MLChar msg[256];
+	MLChar msg[4096];
 
-	vsnprintf(msg, 256, format, va);
+	vsnprintf(msg, 4096, format, va);
+
+	va_end(va);
 
 #ifdef _WIN32
 	int isOk = ::MessageBoxA(nullptr, msg, title, MB_ABORTRETRYIGNORE | MB_ICONERROR);
@@ -79,8 +81,6 @@ int MLAlert::runErrorModal(const MLChar* title, const MLChar* format, ...)
 #else
 	auto isOk = !MLAlertBox(title, msg);
 #endif
-
-	va_end(va);
 
 	return isOk;
 }
@@ -99,7 +99,7 @@ bool MLAlert::runModal(const MLChar* message)
 
 const MLString MLAlert::toString()
 {
-	constexpr auto cLen = 512;
+	constexpr auto cLen = 4096;
 
 	MLString str = MLString(cLen);
 	str += "{}";
