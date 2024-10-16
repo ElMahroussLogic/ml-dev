@@ -6,6 +6,7 @@
 
 #include <FoundationKit/Foundation.hxx>
 #include <FoundationKit/MLXMLCoder.hxx>
+#include <cctype>
 #include <iostream>
 #include <stdexcept>
 #include <cstddef>
@@ -28,9 +29,9 @@ MLXMLCoder::~MLXMLCoder()
 /// @param bufSz the buffer size to allocate
 /// @param pureOutput strip \t, \n, \r and spaces if set to true.
 /// @return MLString the value of **name** as a MLString.
-MLString MLXMLCoder::getInnerXML(MLString name, MLSizeType bufSz, bool pureOutput)
+MLString MLXMLCoder::getXML(MLString name, MLSizeType bufSz, bool pureOutput)
 {
-	return this->getInnerXML(name.asBytes(), bufSz, pureOutput);
+	return this->getXML(name.asBytes(), bufSz, pureOutput);
 }
 
 /// @brief Gets the content of a unique markup.
@@ -38,7 +39,7 @@ MLString MLXMLCoder::getInnerXML(MLString name, MLSizeType bufSz, bool pureOutpu
 /// @param bufSz the buffer size to allocate
 /// @param pureOutput strip \t, \n, \r and spaces if set to true.
 /// @return MLString the value of **name** as a MLString.
-MLString MLXMLCoder::getInnerXML(const char* name, MLSizeType bufSz, bool pureOutput)
+MLString MLXMLCoder::getXML(const MLChar* name, MLSizeType bufSz, bool pureOutput, bool getAttribute)
 {
 	try
 	{
@@ -99,30 +100,62 @@ MLString MLXMLCoder::getInnerXML(const char* name, MLSizeType bufSz, bool pureOu
 				insideElement = false;
 			}
 
+			MLSizeType indexNewStr = 0ul;
+
 			if (insideElement)
 			{
 				size_t y = i;
-				for (; y < mBlob.size(); y++)
-				{
-					if (mBlob[y] == '>')
-						break;
 
+				for (; y < mBlob.size(); ++y)
+				{
 					if (mBlob[y] == name[indexType])
 					{
 						++indexType;
 					}
 					else
 					{
-						insideElement = false;
-						break;
+						if (mBlob[y] == ' ' &&
+							std::isalnum(mBlob[y + 1]))
+						{
+
+							for (; y < mBlob.size(); ++y)
+							{
+								if (mBlob[y] == '\"')
+								{
+									++y;
+
+									for (; y < mBlob.size(); ++y)
+									{
+										if (mBlob[y] == '\"')
+										{
+											break;
+										}
+
+										if (getAttribute)
+										{
+											bufElement[indexNewStr] = mBlob[y];
+											++indexNewStr;
+										}
+									}
+
+									if (getAttribute)
+										return bufElement;
+
+									break;
+								}
+							}
+						}
+
+						if (mBlob[y] == '>')
+						{
+							break;
+						}
 					}
 				}
 
 				if (insideElement)
 				{
 					++y;
-
-					MLSizeType indexNewStr = 0ul;
 
 					for (; y < mBlob.size(); y++)
 					{
@@ -192,7 +225,7 @@ MLString MLXMLCoder::getInnerXML(const char* name, MLSizeType bufSz, bool pureOu
 
 		MLChar* buf = new MLChar[length_xml];
 
-		sprintf(buf, errXml, e.what());
+		snprintf(buf, length_xml, errXml, e.what());
 
 		MLString strError(strlen(buf));
 		strError += buf;

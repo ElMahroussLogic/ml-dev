@@ -34,7 +34,7 @@ const MLString MLApplication::getAppName()
 
 	MLXMLCoder parser(strCxx.c_str());
 
-	MLString appName = parser.getInnerXML("MLAppName", 255, true);
+	MLString appName = parser.getXML("MLAppName", 255, true);
 	return appName;
 }
 
@@ -56,7 +56,7 @@ const MLString MLApplication::getAppVersion()
 
 	MLXMLCoder parser(strCxx.c_str());
 
-	MLString appName = parser.getInnerXML("MLAppVersion", 255, true);
+	MLString appName = parser.getXML("MLAppVersion", 255, true);
 	return appName;
 }
 

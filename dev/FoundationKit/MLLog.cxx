@@ -70,12 +70,9 @@ ML_IMPORT void MLLog(const char* format, ...)
 			}
 			else if (fmtStr[index + 1] == 'u')
 			{
-				std::wstring msgLog;
-				msgLog.push_back((wchar_t)va_arg(va, int));
+				std::string msgLog = va_arg(va, char*);
 
-				std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t> convert;
-
-				std::cout << convert.to_bytes(msgLog);
+				fmtStr.replace(index, 2, msgLog);
 			}
 			else if (fmtStr[index + 1] == 'x')
 			{

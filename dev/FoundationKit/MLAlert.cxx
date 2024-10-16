@@ -26,7 +26,7 @@ extern "C" int swprintf(
 	...);
 #endif // ifdef _WIN32
 
-/// @brief Defines the alert modal of the Objective Kit.
+/// @brief Defines the alert modal for the MLKit.
 
 MLAlert::MLAlert()	= default;
 MLAlert::~MLAlert() = default;

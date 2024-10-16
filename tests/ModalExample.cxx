@@ -4,7 +4,9 @@
 
 ------------------------------------------- */
 
+#include <FoundationKit/MLXMLCoder.hxx>
 #include <FoundationKit/MLAlert.hxx>
+#include <FoundationKit/MLString.hxx>
 
 #ifndef __NDK__
 extern "C"
@@ -21,8 +23,13 @@ int main(int argc, char** argv)
 	gtk_init(&argc, &argv);
 #endif
 
+    MLXMLCoder coder("<Phone phone_number=\"0658573014\" region_code=\"+33\">Amlal 📱.</Phone>");
+    auto phone = coder.getXML("phone_number", 4096, false, true);
+
+    MLLog("%u\n", phone.asBytes());
+
 	MLAlert alert;
-	alert.runModal("ZT Framework", "%s", "Modal on ZKA.");
+	alert.runModal("ZT Framework", "%s", "Modal on ZT.");
 
 	return 0;
 }
