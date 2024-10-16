@@ -97,7 +97,7 @@ MLInteger MLURL::getProtocol() noexcept
 		delete[] protocolBuf;
 		return kZKAProtocol;
 	}
-	else if (strcmp("oscc://", protocolBuf) == 0)
+	else if (strcmp("param://", protocolBuf) == 0)
 	{
 		delete[] protocolBuf;
 		return kParamProtocol;

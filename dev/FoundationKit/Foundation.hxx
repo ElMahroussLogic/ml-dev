@@ -143,4 +143,4 @@ public:
 /// @param title title of dialog.
 /// @param msg message of dialog.
 /// @return which option was selected.
-ML_EXTERN_C int MLAlertBox(const char* title, const char* msg);
+ML_EXTERN_C int MLAlertBox(const char* title, const char* msg, const char* link_provider = "about:blank");
