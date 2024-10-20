@@ -13,8 +13,8 @@ extern "C" int MLAlertBox(const MLChar* title, const MLChar* msg, const MLChar* 
 {
     NSAlert* alert = [[NSAlert alloc] init];
     alert.alertStyle = NSAlertStyleCritical;
-    alert.messageText = [NSString stringWithUTF8String:msg];
-    alert.informativeText = [NSString stringWithUTF8String:title];
+    alert.messageText = [NSString stringWithUTF8String:title];
+    alert.informativeText = [NSString stringWithUTF8String:msg];
 
     [alert addButtonWithTitle: @"Ok"];
     [alert addButtonWithTitle: @"Close"];

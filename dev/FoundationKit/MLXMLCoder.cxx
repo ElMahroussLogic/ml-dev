@@ -49,23 +49,24 @@ MLString MLXMLCoder::getXML(const MLChar* name, MLSizeType bufSz, bool pureOutpu
 		bool	 insideElement = false;
 
 		MLSizeType indexType = 0UL;
-		for (size_t i = 0; i < mBlob.size(); i++)
+
+		for (MLSizeType blobIndex = 0; blobIndex < mBlob.size(); ++blobIndex)
 		{
-			if (mBlob[i] == '<')
+			if (mBlob[blobIndex] == '<')
 			{
-				if (mBlob[i + 1] == '/' || mBlob[i + 1] == '?')
+				if (mBlob[blobIndex + 1] == '/' || mBlob[blobIndex + 1] == '?')
 				{
 					insideElement = false;
 				}
 				else
 				{
-					if (mBlob[i + 1] == '!' && mBlob[i + 2] == '-' &&
-						mBlob[i + 3] == '-')
+					if (mBlob[blobIndex + 1] == '!' && mBlob[blobIndex + 2] == '-' &&
+						mBlob[blobIndex + 3] == '-')
 					{
-						for (; i < mBlob.size(); i++)
+						for (; blobIndex < mBlob.size(); blobIndex++)
 						{
-							if (mBlob[i] == '-' && mBlob[i + 1] == '-' &&
-								mBlob[i + 2] == '>')
+							if (mBlob[blobIndex] == '-' && mBlob[blobIndex + 1] == '-' &&
+								mBlob[blobIndex + 2] == '>')
 							{
 								break;
 							}
@@ -73,16 +74,16 @@ MLString MLXMLCoder::getXML(const MLChar* name, MLSizeType bufSz, bool pureOutpu
 					}
 					else
 					{
-						if (isdigit(mBlob[i + 1]) || isalnum(mBlob[i + 1]))
+						if (isdigit(mBlob[blobIndex + 1]) || isalnum(mBlob[blobIndex + 1]))
 						{
-							if (mBlob[i + 1] != '!' && mBlob[i + 1] != '-')
+							if (mBlob[blobIndex + 1] != '!' && mBlob[blobIndex + 1] != '-')
 							{
 								goto xml_parse_good;
 							}
 						}
 
-						if (mBlob[i + 1] != '!' || mBlob[i + 2] != '-' ||
-							mBlob[i + 3] != '-')
+						if (mBlob[blobIndex + 1] != '!' || mBlob[blobIndex + 2] != '-' ||
+							mBlob[blobIndex + 3] != '-')
 						{
 							throw std::runtime_error("Invalid XML comment.");
 						}
@@ -95,7 +96,7 @@ MLString MLXMLCoder::getXML(const MLChar* name, MLSizeType bufSz, bool pureOutpu
 					continue;
 				}
 			}
-			else if (mBlob[i] == '>')
+			else if (mBlob[blobIndex] == '>')
 			{
 				insideElement = false;
 			}
@@ -104,36 +105,36 @@ MLString MLXMLCoder::getXML(const MLChar* name, MLSizeType bufSz, bool pureOutpu
 
 			if (insideElement)
 			{
-				size_t y = i;
+				MLSizeType blobIndexAt = blobIndex;
 
-				for (; y < mBlob.size(); ++y)
+				for (; blobIndexAt < mBlob.size(); ++blobIndexAt)
 				{
-					if (mBlob[y] == name[indexType])
+					if (mBlob[blobIndexAt] == name[indexType])
 					{
 						++indexType;
 					}
 					else
 					{
-						if (mBlob[y] == ' ' &&
-							std::isalnum(mBlob[y + 1]))
+						if (mBlob[blobIndexAt] == ' ' &&
+							std::isalnum(mBlob[blobIndexAt + 1]))
 						{
 
-							for (; y < mBlob.size(); ++y)
+							for (; blobIndexAt < mBlob.size(); ++blobIndexAt)
 							{
-								if (mBlob[y] == '\"')
+								if (mBlob[blobIndexAt] == '\"')
 								{
-									++y;
+									++blobIndexAt;
 
-									for (; y < mBlob.size(); ++y)
+									for (; blobIndexAt < mBlob.size(); ++blobIndexAt)
 									{
-										if (mBlob[y] == '\"')
+										if (mBlob[blobIndexAt] == '\"')
 										{
 											break;
 										}
 
 										if (getAttribute)
 										{
-											bufElement[indexNewStr] = mBlob[y];
+											bufElement[indexNewStr] = mBlob[blobIndexAt];
 											++indexNewStr;
 										}
 									}
@@ -146,7 +147,7 @@ MLString MLXMLCoder::getXML(const MLChar* name, MLSizeType bufSz, bool pureOutpu
 							}
 						}
 
-						if (mBlob[y] == '>')
+						if (mBlob[blobIndexAt] == '>')
 						{
 							break;
 						}
@@ -155,17 +156,17 @@ MLString MLXMLCoder::getXML(const MLChar* name, MLSizeType bufSz, bool pureOutpu
 
 				if (insideElement)
 				{
-					++y;
+					++blobIndexAt;
 
-					for (; y < mBlob.size(); y++)
+					for (; blobIndexAt < mBlob.size(); blobIndexAt++)
 					{
-						if (mBlob[y] == '<' && mBlob[y + 1] == '/')
+						if (mBlob[blobIndexAt] == '<' && mBlob[blobIndexAt + 1] == '/')
 						{
 							bool noMatch = false;
 
-							if (mBlob[y] == '<')
+							if (mBlob[blobIndexAt] == '<')
 							{
-								size_t yCpy = y + 2;
+								size_t yCpy = blobIndexAt + 2;
 
 								for (size_t x = 0; x < strlen(name); ++x)
 								{
@@ -195,14 +196,14 @@ MLString MLXMLCoder::getXML(const MLChar* name, MLSizeType bufSz, bool pureOutpu
 
 						if (pureOutput)
 						{
-							if (mBlob[y] == '\t' || mBlob[y] == '\n' || mBlob[y] == '\r' ||
-								mBlob[y] == ' ')
+							if (mBlob[blobIndexAt] == '\t' || mBlob[blobIndexAt] == '\n' || mBlob[blobIndexAt] == '\r' ||
+								mBlob[blobIndexAt] == ' ')
 							{
 								continue;
 							}
 						}
 
-						bufElement[indexNewStr] = mBlob[y];
+						bufElement[indexNewStr] = mBlob[blobIndexAt];
 						++indexNewStr;
 					}
 
@@ -244,12 +245,12 @@ const MLString MLXMLCoder::toString()
 	MLString xmlAsJsonStr = MLString(cLen);
 	xmlAsJsonStr += "[{ 'name': 'MLXMLCoder', 'blob': '";
 
-	for (size_t i = 0; i < this->mBlob.size(); i++)
+	for (size_t blobIndex = 0; blobIndex < this->mBlob.size(); blobIndex++)
 	{
-		if (this->mBlob[i] == '\'')
+		if (this->mBlob[blobIndex] == '\'')
 			xmlAsJsonStr += "\\\\";
 		else
-			xmlAsJsonStr += this->mBlob[i];
+			xmlAsJsonStr += this->mBlob[blobIndex];
 	}
 
 	xmlAsJsonStr += "' }]";

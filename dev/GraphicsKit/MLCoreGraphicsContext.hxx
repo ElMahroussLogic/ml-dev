@@ -179,7 +179,7 @@ private:
 /// MLCoreGraphicsContext.
 /// @return The new graphics context.
 ML_IMPORT MLCoreGraphicsContext*
-CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height);
+		  CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height);
 
 /// @brief Releases a Core Graphics context.
 /// @param context The context itself.

@@ -75,16 +75,22 @@ MLInteger MLURL::getProtocol() noexcept
 	if (strcmp("file://", protocolBuf) == 0)
 	{
 		delete[] protocolBuf;
+		protocolBuf = nullptr;
+
 		return kFileProtocol;
 	}
 	else if (strcmp("http://", protocolBuf) == 0)
 	{
 		delete[] protocolBuf;
+		protocolBuf = nullptr;
+
 		return kHttpProtocol;
 	}
 	else if (strcmp("https://", protocolBuf) == 0)
 	{
 		delete[] protocolBuf;
+		protocolBuf = nullptr;
+
 		return kHttpsProtocol;
 	}
 	else if (strcmp("zup://", protocolBuf) == 0)
@@ -95,15 +101,21 @@ MLInteger MLURL::getProtocol() noexcept
 	else if (strcmp("zka://", protocolBuf) == 0)
 	{
 		delete[] protocolBuf;
+		protocolBuf = nullptr;
+
 		return kZKAProtocol;
 	}
 	else if (strcmp("param://", protocolBuf) == 0)
 	{
 		delete[] protocolBuf;
+		protocolBuf = nullptr;
+
 		return kParamProtocol;
 	}
 
 	delete[] protocolBuf;
+	protocolBuf = nullptr;
+
 	return -1;
 }
 
