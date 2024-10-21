@@ -5,9 +5,16 @@
 
 #pragma once
 
+#include <FoundationKit/MLRect.hxx>
+#include <FoundationKit/MLPoint.hxx>
 #include <FoundationKit/FoundationKit.hxx>
 #include <AnimationKit/Private/MLCoreAnimationBase.hxx>
 #include <GraphicsKit/GraphicsKit.hxx>
+#include <FoundationKit/MLArray.hxx>
+
+class CAComposerFrame;
+class CAComposerKeyFrame;
+class CAComposerKeyFrameCell;
 
 /// @brief Linear interop helper function.
 /// @param start where to begin
@@ -31,3 +38,22 @@ ML_IMPORT CAReal CAFadeIn(CAReal r, CAReal g, CAReal b, CAReal a, MLCoreGraphics
 /// @param a Alpha channel.
 /// @return CAReal the returned alpha.
 ML_IMPORT CAReal CAFadeOut(CAReal r, CAReal g, CAReal b, CAReal a, MLCoreGraphicsContext* cg_ctx, CAReal w, CAReal h);
+
+#define kCAMaxFrameCells (255)
+
+struct CAComposerKeyFrameCell
+{
+	MLString mFrameName;
+	MLPoint	 mOrigin;
+	MLRect	 mSize;
+	MLInteger64 (*mAnimationFrame)(CAComposerKeyFrameCell* cell);
+};
+
+class CAComposerKeyFrame
+{
+protected:
+	MLArray<CAComposerKeyFrameCell, kCAMaxFrameCells> mFrames;
+
+public:
+	virtual void operator()() = 0;
+};

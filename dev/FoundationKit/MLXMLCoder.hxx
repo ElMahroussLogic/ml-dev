@@ -9,11 +9,6 @@
 #include <FoundationKit/Foundation.hxx>
 #include <FoundationKit/MLString.hxx>
 
-ML_EXTERN_C
-{
-#include <string.h>
-}
-
 /// @brief Standard XML extension.
 inline const char* cXMLExtension = "xml";
 

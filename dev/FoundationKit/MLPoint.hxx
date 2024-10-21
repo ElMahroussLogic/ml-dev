@@ -1,6 +1,6 @@
 /* -------------------------------------------
 
-	Copyright ZKA Web Services Co
+	Copyright ZKA Web Services Co.
 
 ------------------------------------------- */
 
@@ -8,7 +8,13 @@
 
 #include <FoundationKit/Foundation.hxx>
 
-class MLUUID final ML_OBJECT
+struct MLPoint
 {
-public:
+	MLReal x;
+	MLReal y;
+
+	operator bool()
+	{
+		return x > 0 && y > 0;
+	}
 };

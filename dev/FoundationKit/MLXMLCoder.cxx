@@ -6,12 +6,12 @@
 
 #include <FoundationKit/Foundation.hxx>
 #include <FoundationKit/MLXMLCoder.hxx>
+
 #include <cctype>
 #include <iostream>
 #include <stdexcept>
 #include <cstddef>
-
-/// ctor, dtors...
+#include <cstring>
 
 MLXMLCoder::MLXMLCoder(const MLChar* blob)
 	: mBlob(strlen(blob))

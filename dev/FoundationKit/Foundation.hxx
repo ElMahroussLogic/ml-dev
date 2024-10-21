@@ -55,6 +55,7 @@ typedef unsigned long long int MLUnsignedInteger64;
 typedef long long int		   MLLong;
 typedef void*				   MLPointer;
 typedef long long int		   MLSizeType;
+typedef float				   MLReal;
 
 /// @brief Exits the current thread.
 /// @param exitCode it's exit code.
@@ -88,7 +89,10 @@ ML_IMPORT void MLAssert(const MLChar* expr, const MLChar* file, const MLInteger 
 #else
 class MLObject;
 class MLString;
+
+template <typename T, MLSizeType N>
 class MLArray;
+
 class MLMutableArray;
 class MLJSONCoder;
 class MLCoder;
