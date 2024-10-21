@@ -1,5 +1,5 @@
 <SourceDeploy>
 <HiddenFiles>
-    <SourceFile>*.cxx</SourceFile>
+    <SourceFile>*.cc</SourceFile>
 </HiddenFiles>
 </SourceDeploy>

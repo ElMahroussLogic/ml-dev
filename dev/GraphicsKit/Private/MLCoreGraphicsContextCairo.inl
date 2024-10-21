@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include <GraphicsKit/MLCoreGraphicsContext.hxx>
+#include <GraphicsKit/MLCoreGraphicsContext.h>
 
 extern "C"
 {

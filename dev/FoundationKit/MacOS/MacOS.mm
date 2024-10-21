@@ -7,7 +7,7 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
-#include <FoundationKit/MLURL.hxx>
+#include <FoundationKit/MLURL.h>
 
 extern "C" int MLAlertBox(const MLChar* title, const MLChar* msg, const MLChar* link_provider)
 {
