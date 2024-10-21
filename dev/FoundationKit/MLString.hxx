@@ -40,3 +40,10 @@ public:
 
 	const MLString toString() override;
 };
+
+enum
+{
+	MLUnicodeStringEncodig = 0,
+	MLASCIIStringEncoding,
+	MLZKAOSStringEncoding,
+};

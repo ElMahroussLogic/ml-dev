@@ -20,44 +20,20 @@
 /// @return the app string.
 const MLString MLApplication::getAppName()
 {
-	constexpr auto cPkgXmlPath = "/ZKA/Manifests/App.alist";
+	MLString strKey("MLAppName");
+	auto	 strValue = this->getAppField(strKey);
 
-	auto baseAppPath = std::filesystem::current_path().string();
-	baseAppPath += cPkgXmlPath;
-
-	std::ifstream streamXml(baseAppPath);
-
-	std::stringstream ss;
-	ss << streamXml.rdbuf();
-
-	auto strCxx = ss.str();
-
-	MLXMLCoder parser(strCxx.c_str());
-
-	MLString appName = parser.getXML("MLAppName", 255, true);
-	return appName;
+	return strValue;
 }
 
 /// @brief Returns the application's version as given by the bundle.
 /// @return the app string.
 const MLString MLApplication::getAppVersion()
 {
-	constexpr auto cPkgXmlPath = "/ZKA/Manifests/App.alist";
+	MLString strKey("MLAppVersion");
+	auto	 strValue = this->getAppField(strKey);
 
-	auto baseAppPath = std::filesystem::current_path().string();
-	baseAppPath += cPkgXmlPath;
-
-	std::ifstream streamXml(baseAppPath);
-
-	std::stringstream ss;
-	ss << streamXml.rdbuf();
-
-	auto strCxx = ss.str();
-
-	MLXMLCoder parser(strCxx.c_str());
-
-	MLString appName = parser.getXML("MLAppVersion", 255, true);
-	return appName;
+	return strValue;
 }
 
 /// @brief Application singleton
@@ -72,13 +48,34 @@ MLApplication& MLApplication::shared()
 	return *app;
 }
 
+/// @brief Returns the application's field.
+/// @param fieldName The field's name. (such as MLAppName, MLFooField)
+/// @return the field's value.
+const MLString MLApplication::getAppField(MLString fieldName, MLSizeType fieldLen)
+{
+	constexpr auto kPkgPath = "/ZKA/Manifests/.alist";
+
+	auto baseAppPath = std::filesystem::current_path().string();
+	baseAppPath += kPkgPath;
+
+	std::ifstream streamXml(baseAppPath);
+
+	std::stringstream streamXmlSS;
+	streamXmlSS << streamXml.rdbuf();
+
+	MLXMLCoder parser(streamXmlSS.str().c_str());
+
+	MLString appName = parser.getXML(fieldName, fieldLen, NO);
+	return appName;
+}
+
 /// @brief returns the app path as a string.
 const MLString MLApplication::toString()
 {
-	constexpr auto cPkgPath = "/ZKA/";
+	constexpr auto kPkgPath = "/ZKA/";
 
 	auto baseAppPath = std::filesystem::current_path().string();
-	baseAppPath += cPkgPath;
+	baseAppPath += kPkgPath;
 
 	MLString appName = MLString(baseAppPath.size());
 	appName += baseAppPath.data();

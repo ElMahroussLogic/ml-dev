@@ -17,15 +17,15 @@ public:
 	~MLAllocator() override;
 
 	/// @brief init a new pointer from a size.
-	/// @param sz the size to give.
+	/// @param cnt the number of TypeInfo to create.
 	/// @return a pointer of it.
 	template <typename TypeInfo>
-	TypeInfo* initWithSize(MLSizeType sz)
+	TypeInfo* initWithSize(MLSizeType cnt)
 	{
-		if (!sz)
-			++sz;
+		if (!cnt)
+			++cnt;
 
-		return new TypeInfo[sz];
+		return new TypeInfo[cnt];
 	}
 
 	/// @brief Inits a new class with arguments.

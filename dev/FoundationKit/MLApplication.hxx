@@ -28,6 +28,11 @@ public:
 	/// @return the app string.
 	const MLString getAppVersion();
 
+	/// @brief Returns the application's field.
+	/// @param fieldName The field's name. (such as MLAppName, MLFooField)
+	/// @return the field's value.
+	const MLString getAppField(MLString fieldName, MLSizeType fieldLen = 512);
+
 	/// @brief Application singleton
 	/// @return the singleton.
 	static MLApplication& shared();

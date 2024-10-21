@@ -15,6 +15,12 @@
 #define ML_PLATFORM "AMD64"
 #endif
 
+#ifndef OBJC_BOOL_DEFINED
+#define BOOL bool
+#define YES true
+#define NO false
+#endif // ifndef __APPLE__
+
 #define ML_OBJECT : public MLObject
 
 #ifdef __aarch64__

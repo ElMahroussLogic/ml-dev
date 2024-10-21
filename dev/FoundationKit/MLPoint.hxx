@@ -22,9 +22,4 @@ struct MLPoint
 	{
 	    return point.x > x && point.y > y;
 	}
-
-	operator bool()
-	{
-		return x > 0 && y > 0;
-	}
 };
