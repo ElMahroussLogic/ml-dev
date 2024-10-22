@@ -12,8 +12,8 @@ struct MLRect
 {
 	MLInteger64 x;
 	MLInteger64 y;
-	MLInteger64	width;
-	MLInteger64	height;
+	MLInteger64 width;
+	MLInteger64 height;
 
 	operator bool()
 	{

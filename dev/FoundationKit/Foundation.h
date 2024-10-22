@@ -17,8 +17,8 @@
 
 #ifndef OBJC_BOOL_DEFINED
 #define BOOL bool
-#define YES true
-#define NO false
+#define YES	 true
+#define NO	 false
 #endif // ifndef __APPLE__
 
 #define ML_OBJECT : public MLObject
@@ -66,7 +66,7 @@ typedef float				   MLReal;
 /// @brief Exits the current thread.
 /// @param exitCode it's exit code.
 /// @return void, no return arguments.
-ML_IMPORT void MLExitWithCode(MLInteger exitCode, std::thread& currentThread);
+ML_IMPORT void MLExitWithCode(MLInteger exitCode, MLPointer currentThread);
 ML_IMPORT void MLExitWithCode(MLInteger exitCode);
 
 /// @brief Get last exit code from any thread.
@@ -137,8 +137,14 @@ public:
 	MLCoder& operator=(const MLCoder&) = default;
 	MLCoder(const MLCoder&)			   = default;
 
-	MLCoder& encode(MLObject* obj) { return *this; }
-	MLCoder& decode(MLObject* obj) { return *this; }
+	MLCoder& encode(MLObject* obj)
+	{
+		return *this;
+	}
+	MLCoder& decode(MLObject* obj)
+	{
+		return *this;
+	}
 };
 #endif
 

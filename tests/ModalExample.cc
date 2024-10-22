@@ -7,6 +7,7 @@
 #include <FoundationKit/MLXMLCoder.h>
 #include <FoundationKit/MLAlert.h>
 #include <FoundationKit/MLString.h>
+#include <FoundationKit/MLURL.h>
 
 #ifndef __NDK__
 extern "C"
@@ -30,6 +31,9 @@ int main(int argc, char** argv)
 
 	MLAlert alert;
 	alert.runModal("ZT Framework", "%s", "Modal on ZT.");
+    
+    MLURL url("https://www.google.com");
+    url.openPath();
 
 	return 0;
 }

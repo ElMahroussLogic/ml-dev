@@ -20,6 +20,6 @@ struct MLPoint
 	/// @retval validations failed.
 	bool isWithin(MLPoint& point)
 	{
-	    return point.x > x && point.y > y;
+		return point.x > x && point.y > y;
 	}
 };

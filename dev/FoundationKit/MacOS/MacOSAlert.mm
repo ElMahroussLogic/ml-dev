@@ -7,9 +7,11 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
-#include <FoundationKit/MLURL.h>
+#include <FoundationKit/Foundation.h>
 
-extern "C" int MLAlertBox(const MLChar* title, const MLChar* msg, const MLChar* link_provider)
+#define ML_EXEC(PATH) system(PATH)
+
+int MLAlertBox(const MLChar* title, const MLChar* msg, const MLChar* link_provider)
 {
     NSAlert* alert = [[NSAlert alloc] init];
     alert.alertStyle = NSAlertStyleCritical;
@@ -24,7 +26,7 @@ extern "C" int MLAlertBox(const MLChar* title, const MLChar* msg, const MLChar* 
 
     while (response == 1002)
     {
-        ML_EXEC("-a 'Help Viewer'");
+        ML_EXEC("open -a 'Help Viewer'");
         response = [alert runModal];
     }
 

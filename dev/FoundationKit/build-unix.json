@@ -1,7 +1,7 @@
 {
   "compiler_path": "g++",
   "compiler_std": "c++20",
-  "headers_path": ["../", "./Private", "../Private"],
+  "headers_path": ["../"],
   "sources_path": ["*.cc", "Linux/*.cc"],
   "output_name": "/usr/lib/libFoundationKit.so",
   "compiler_flags": [

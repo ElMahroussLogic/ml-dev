@@ -7,6 +7,7 @@
 #include <FoundationKit/Foundation.h>
 #include <FoundationKit/MLURL.h>
 #include <cstring>
+#include <sstream>
 
 MLURL::MLURL(const MLChar* url)
 	: mPath(strlen(url))
@@ -123,5 +124,9 @@ MLInteger MLURL::getProtocol() noexcept
 /// @return MLInteger exit code.
 MLInteger64 MLURL::openPath() noexcept
 {
-	return (MLInteger64)ML_EXEC(mPath.asConstBytes());
+    std::stringstream ss_url;
+    ss_url << "open ";
+    ss_url << mPath.asConstBytes();
+    
+	return (MLInteger64)std::system(ss_url.str().c_str());
 }

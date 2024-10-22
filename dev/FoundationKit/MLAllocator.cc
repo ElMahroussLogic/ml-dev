@@ -7,6 +7,7 @@
 #include <FoundationKit/MLAllocator.h>
 
 MLAllocator::MLAllocator() = default;
+
 MLAllocator::~MLAllocator()
 {
 	delete this;
