@@ -26,10 +26,6 @@ CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height)
 /// @return the class as a string
 const MLString MLCoreGraphicsContext::toString()
 {
-	constexpr size_t cDefaultSz = 4096;
-
-	MLString ctxStr = MLString(cDefaultSz);
-	ctxStr += "Cairo Backend";
-
-	return ctxStr;
+	MLString ctxBackendJson = MLString("['Backend': 'Cairo']");
+	return ctxBackendJson;
 }

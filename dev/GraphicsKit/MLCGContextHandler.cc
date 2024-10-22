@@ -14,5 +14,6 @@ void CGReleaseContext(MLCoreGraphicsContext* context)
 	if (context)
 	{
 		delete context;
+		context = nullptr;
 	}
 }
