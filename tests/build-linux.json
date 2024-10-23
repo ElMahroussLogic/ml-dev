@@ -5,8 +5,8 @@
   "sources_path": ["ModalExample.cc"],
   "output_name": "ModalExample.exe",
   "compiler_flags": [
-    "-lMacOSFoundation",
     "-lFoundationKit",
+    "-luuid",
     "$(pkg-config --cflags --libs gtk+-3.0 cairo glib-2.0)",
     "$(pkg-config --cflags --libs gtk+-3.0)"
   ],

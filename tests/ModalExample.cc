@@ -8,14 +8,12 @@
 #include <FoundationKit/MLAlert.h>
 #include <FoundationKit/MLString.h>
 #include <FoundationKit/MLURL.h>
+#include <FoundationKit/MLUUID.h>
 
 #ifndef __TOOLCHAINKIT__
-extern "C"
-{
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
-}
 #endif
 
 int main(int argc, char** argv)
@@ -30,7 +28,9 @@ int main(int argc, char** argv)
 	MLLog("%u\n", phone.asBytes());
 
 	MLAlert alert;
-	alert.runModal("ZT Framework", "%s", "Modal on ZT.");
+	MLUUID uuid;
+
+	alert.runModal("ZT Framework", "%s %s", "Modal on ZT.", uuid.uuidAsString().asConstBytes());
     
     MLURL url("https://www.google.com");
     url.openPath();

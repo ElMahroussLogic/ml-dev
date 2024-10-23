@@ -58,5 +58,5 @@ dev/GraphicsKit/build-unix.json
 dev/GraphicsKit/source_deploy.xml
 tests/ModalExample.cc
 tests/build-linux.json
-tests/build-posix.json
+tests/build-mac.json
 tests/build-zka.json

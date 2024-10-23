@@ -6,12 +6,9 @@
 
 #include <FoundationKit/Linux/Linux.h>
 
-extern "C"
-{
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
-}
 
 /// @brief Launches an alert box from the API.
 /// @param title title of dialog.
