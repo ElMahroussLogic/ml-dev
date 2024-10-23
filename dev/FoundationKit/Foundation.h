@@ -15,6 +15,11 @@
 #define ML_PLATFORM "AMD64"
 #endif
 
+#ifdef __aarch64__
+#define ML_ARM64	1
+#define ML_PLATFORM "ARM64"
+#endif
+
 #ifndef OBJC_BOOL_DEFINED
 #define BOOL bool
 #define YES	 true
@@ -23,15 +28,10 @@
 
 #define ML_OBJECT : public MLObject
 
-#ifdef __aarch64__
-#define ML_ARM64	1
-#define ML_PLATFORM "ARM64"
-#endif
-
 #define ML_UNUSED(X) ((void)(X))
 
 #ifndef ML_PACKED
-#if defined(__ZECC__)
+#if defined(__NDK__)
 #define ML_PACKED __attribute__((packed))
 #define ML_EXPORT __attribute__((libexport))
 #define ML_IMPORT __attribute__((libimport))
@@ -50,10 +50,9 @@
 #define ML_EXTERN_C extern "C"
 #endif
 
-#include <thread>
-
 typedef char				   MLChar;
 typedef unsigned char		   MLUtf8Char;
+typedef wchar_t				   MLUtf16Char;
 typedef int					   MLInteger;
 typedef long long int		   MLInteger64;
 typedef unsigned int		   MLUnsignedInteger;
@@ -63,10 +62,15 @@ typedef void*				   MLPointer;
 typedef long long int		   MLSizeType;
 typedef float				   MLReal;
 
+/// @brief Exits thread with code.
+/// @param exitCode it's exit code.
+/// @param currentThread the current thread to exit.
+/// @return void, no return arguments.
+ML_IMPORT void MLExitThreadWithCode(MLInteger exitCode, MLPointer currentThread);
+
 /// @brief Exits the current thread.
 /// @param exitCode it's exit code.
 /// @return void, no return arguments.
-ML_IMPORT void MLExitWithCode(MLInteger exitCode, MLPointer currentThread);
 ML_IMPORT void MLExitWithCode(MLInteger exitCode);
 
 /// @brief Get last exit code from any thread.
@@ -112,7 +116,6 @@ class MLSocket;
 class MLAllocator;
 class MLUUID;
 
-/// @brief Base AppCore object.
 class MLObject
 {
 public:
@@ -137,15 +140,22 @@ public:
 	MLCoder& operator=(const MLCoder&) = default;
 	MLCoder(const MLCoder&)			   = default;
 
-	MLCoder& encode(MLObject* obj)
+	virtual MLObject* getResult()
+	{
+		return nullptr;
+	}
+
+	virtual MLCoder& encode(MLObject* obj)
 	{
 		return *this;
 	}
-	MLCoder& decode(MLObject* obj)
+
+	virtual MLCoder& decode(MLObject* obj)
 	{
 		return *this;
 	}
 };
+
 #endif
 
 #ifdef _WIN32

@@ -31,17 +31,17 @@ public:
 		return fArray[At];
 	}
 
-	bool Empty() const
+	bool isEmpty() const
 	{
 		return false;
 	}
 
-	const MLSizeType Capacity()
+	const MLSizeType capacity()
 	{
 		return N;
 	}
 
-	const MLSizeType Count()
+	const MLSizeType count()
 	{
 		MLSizeType count = 0;
 
@@ -54,14 +54,14 @@ public:
 		return count;
 	}
 
-	const T* CData()
+	const T* dataAsUnsafeArray()
 	{
 		return fArray;
 	}
 
 	operator bool()
 	{
-		return !Empty();
+		return !this->isEmpty();
 	}
 
 private:
