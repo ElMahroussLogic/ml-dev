@@ -31,7 +31,7 @@
 #define ML_UNUSED(X) ((void)(X))
 
 #ifndef ML_PACKED
-#if defined(__NDK__)
+#if defined(__TOOLCHAINKIT__)
 #define ML_PACKED __attribute__((packed))
 #define ML_EXPORT __attribute__((libexport))
 #define ML_IMPORT __attribute__((libimport))

@@ -9,7 +9,7 @@
 #include <FoundationKit/MLString.h>
 #include <FoundationKit/MLURL.h>
 
-#ifndef __NDK__
+#ifndef __TOOLCHAINKIT__
 extern "C"
 {
 #include <gtk/gtk.h>
@@ -20,7 +20,7 @@ extern "C"
 
 int main(int argc, char** argv)
 {
-#ifndef __NDK__
+#ifndef __TOOLCHAINKIT__
 	gtk_init(&argc, &argv);
 #endif
 

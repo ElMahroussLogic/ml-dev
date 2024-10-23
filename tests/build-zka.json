@@ -4,6 +4,6 @@
   "headers_path": ["../dev", "./"],
   "sources_path": ["ModalExample.cc"],
   "output_name": "ZKAModal.exe",
-  "cpp_macros": ["__NDK__"],
+  "cpp_macros": ["__TOOLCHAINKIT__"],
   "run_after_build": false
 }
