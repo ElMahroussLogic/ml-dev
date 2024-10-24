@@ -10,16 +10,12 @@
 #pragma once
 
 #include <GraphicsKit/MLCoreGraphicsContext.h>
+#include <filesystem>
 
-extern "C"
-{
-
-#include <math.h>
-#include <string.h>
-}
+#include <cmath>
+#include <cstring>
 
 #include <string>
-#include <filesystem>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846

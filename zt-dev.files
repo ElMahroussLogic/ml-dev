@@ -54,6 +54,7 @@ dev/GraphicsKit/MLCoreGraphicsContext.cc
 dev/GraphicsKit/MLCoreGraphicsContext.h
 dev/GraphicsKit/MLCoreGraphicsPrelude.h
 dev/GraphicsKit/Private/MLCoreGraphicsBase.h
+dev/GraphicsKit/Private/MLCoreGraphicsContextCairo.inl
 dev/GraphicsKit/build-unix.json
 dev/GraphicsKit/source_deploy.xml
 tests/ModalExample.cc
