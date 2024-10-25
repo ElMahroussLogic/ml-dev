@@ -6,7 +6,12 @@
 
 #pragma once
 
-#ifdef __ZKA__
-#include <w32.h>
-#error !!! TODO: define XPCOM based backend. !!!
-#endif
+#ifdef __zka__
+
+#include <FoundationKit/Foundation.h>
+#include <unistd.h>
+#include <cstdlib>
+
+#define ML_EXEC(PATH) std::system(PATH)
+
+#endif // __zka__

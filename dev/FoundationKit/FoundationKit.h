@@ -13,3 +13,6 @@
 #include <FoundationKit/MLString.h>
 #include <FoundationKit/MLURL.h>
 #include <FoundationKit/MLXMLCoder.h>
+#include <FoundationKit/MLArray.h>
+#include <FoundationKit/MLRect.h>
+#include <FoundationKit/MLPoint.h>

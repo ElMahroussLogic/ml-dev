@@ -4,18 +4,16 @@
 
 ------------------------------------------- */
 
-#include <FoundationKit/Foundation.h>
-#include <cstdlib>
-#include <thread>
+#include <FoundationKit/Linux/Linux.h>
 
-static int sLastExitCode = 0UL;
+ML_STATIC int kLastExitCode = 0UL;
 
 /// @brief Exits the current thread.
 /// @param exitCode it's exit code.
 /// @return void, no return arguments.
 void MLExitWithCode(MLInteger exitCode, std::thread& currentThread)
 {
-	sLastExitCode = exitCode;
+	kLastExitCode = exitCode;
 	pthread_exit((void*)currentThread.native_handle());
 }
 
@@ -23,7 +21,7 @@ void MLExitWithCode(MLInteger exitCode, std::thread& currentThread)
 /// @param exitCode the exitcode.
 void MLExitWithCode(MLInteger exitCode)
 {
-	sLastExitCode = exitCode;
+	kLastExitCode = exitCode;
 	pthread_exit((void*)pthread_self());
 }
 
@@ -31,5 +29,5 @@ void MLExitWithCode(MLInteger exitCode)
 /// @return the exit code of the thread.
 int MLGetExitCode(void)
 {
-	return sLastExitCode;
+	return kLastExitCode;
 }

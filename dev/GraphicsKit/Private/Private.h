@@ -22,6 +22,7 @@
 
 typedef MLReal	   GKReal;
 typedef MLSizeType GKSizeType;
+typedef MLInteger  GKInteger;
 typedef MLChar	   GKCharacter;
 typedef BOOL	   GKBoolean;
 
