@@ -94,8 +94,24 @@ ML_IMPORT void MLAssert(const MLChar* expr, const MLChar* file, const MLInteger 
 		MLAssert(#X, __FILE__, __LINE__); \
 	}
 
+#define ML_COPY_DELETE(KLASS)                \
+	KLASS& operator=(const KLASS&) = delete; \
+	KLASS(const KLASS&)			   = delete;
+
+#define ML_COPY_DEFAULT(KLASS)                \
+	KLASS& operator=(const KLASS&) = default; \
+	KLASS(const KLASS&)			   = default;
+
+#define ML_MOVE_DELETE(KLASS)           \
+	KLASS& operator=(KLASS&&) = delete; \
+	KLASS(KLASS&&)			  = delete;
+
+#define ML_MOVE_DEFAULT(KLASS)           \
+	KLASS& operator=(KLASS&&) = default; \
+	KLASS(KLASS&&)			  = default;
+
 #ifndef __cplusplus
-#error !!! This is not C++, please use C++. !!!
+#error !!! This is not C++ please use standard C++ !!!
 #else
 class MLObject;
 class MLString;

@@ -54,7 +54,7 @@ public:
 	/// @param isBold should the font be bold?
 	/// @return The graphics context.
 	virtual GKContext* fontFamily(const GKCharacter* T,
-											  const bool		 isBold) = 0;
+								  const bool		 isBold) = 0;
 	/// @brief
 	/// @param T
 	/// @return The graphics context.
@@ -119,9 +119,9 @@ public:
 	/// @brief Draws a gaussian blur.
 	/// @param radius blur's radius
 	/// @return The graphics context.
-	virtual GKContext* blur(GKReal	radius,
-										GKSizeType width,
-										GKSizeType height) = 0;
+	virtual GKContext* blur(GKReal	   radius,
+							GKSizeType width,
+							GKSizeType height) = 0;
 
 	/// @brief Load image (PNG) from disk.
 	/// @param Path The PNG image path to read on.

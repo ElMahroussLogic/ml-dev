@@ -20,10 +20,10 @@
 
 /// CORE TYPES ///
 
-typedef MLReal GKReal;
+typedef MLReal	   GKReal;
 typedef MLSizeType GKSizeType;
-typedef MLChar   GKCharacter;
-typedef BOOL   GKBoolean;
+typedef MLChar	   GKCharacter;
+typedef BOOL	   GKBoolean;
 
 /// CORE STRUCTS ///
 

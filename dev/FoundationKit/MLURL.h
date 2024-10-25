@@ -7,12 +7,11 @@
 #pragma once
 
 #include <FoundationKit/Foundation.h>
-#include <FoundationKit/MLString.h>
-
 #include <FoundationKit/Linux/Linux.h>
 #include <FoundationKit/MacOS/MacOS.h>
 #include <FoundationKit/ZKA/ZKA.h>
 #include <FoundationKit/Win32/Win32.h>
+#include <FoundationKit/MLString.h>
 
 /// @brief URL parser class.
 class MLURL final ML_OBJECT
@@ -30,12 +29,14 @@ public:
 
 	enum
 	{
+		kInvalidProtocol,
 		kFileProtocol,
 		kHttpProtocol,
 		kHttpsProtocol,
 		kZUPProtocol,
 		kParamProtocol,
-		kZKAProtocol
+		kZKAProtocol,
+		kProtocolCount,
 	};
 
 	/// @brief get path of URL.
