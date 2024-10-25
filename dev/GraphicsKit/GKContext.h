@@ -6,86 +6,91 @@
 
 #pragma once
 
-#include <GraphicsKit/Private/MLCoreGraphicsBase.h>
+#include <GraphicsKit/Private/Private.h>
 
 /// @brief Core Graphics context.
-class MLCoreGraphicsContext ML_OBJECT
+class GKContext ML_OBJECT
 {
 public:
-	explicit MLCoreGraphicsContext() = default;
-	virtual ~MLCoreGraphicsContext() = default;
+	explicit GKContext() = default;
+	virtual ~GKContext() = default;
 
 	/// @brief Copy constructor.
-	MLCoreGraphicsContext& operator=(const MLCoreGraphicsContext&) = default;
-	MLCoreGraphicsContext(const MLCoreGraphicsContext&)			   = default;
+	GKContext& operator=(const GKContext&) = default;
+	GKContext(const GKContext&)			   = default;
 
 public:
 	/// @brief Grants a new feature to Context.
 	/// @param flag the feature flag.
-	virtual MLCoreGraphicsContext* operator|=(const CGSizeT flag) = 0;
+	virtual GKContext* operator|=(const GKSizeType flag) = 0;
 
 	/// @brief Revokes a new feature to Context.
 	/// @param flag the feature flag.
-	virtual MLCoreGraphicsContext* operator&=(const CGSizeT flag) = 0;
+	virtual GKContext* operator&=(const GKSizeType flag) = 0;
 
 	/// @brief Check for a feature.
 	/// @param flag The feature in question.
 	/// @retval true feature exists.
 	/// @retval false not supported by this context.
-	virtual bool operator&(const CGSizeT flag) = 0;
+	virtual bool operator&(const GKSizeType flag) = 0;
 
 	/// @brief Move to coord.
-	/// @param T the text itself.
+	/// @param X the x coord.
+	/// @param Y the y coord.
 	/// @return the context.
-	virtual MLCoreGraphicsContext* move(CGReal X, CGReal Y) = 0;
+	virtual GKContext* move(GKReal X, GKReal Y) = 0;
 
 	/// @brief Write Text to image.
 	/// @param T the text itself.
+	/// @param X the x coord.
+	/// @param Y the y coord.
+	/// @param W the width.
+	/// @param H the height.
 	/// @return the context.
-	virtual MLCoreGraphicsContext* text(const CGCharacter* T, CGBoolean Center, CGReal X = 0.0, CGReal Y = 0.0, CGReal W = 0.0, CGReal H = 0.0) = 0;
+	virtual GKContext* text(const GKCharacter* T, GKBoolean Center, GKReal X = 0.0, GKReal Y = 0.0, GKReal W = 0.0, GKReal H = 0.0) = 0;
 
 	/// @brief Set font.
 	/// @param T font name
 	/// @param isBold should the font be bold?
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* fontFamily(const CGCharacter* T,
+	virtual GKContext* fontFamily(const GKCharacter* T,
 											  const bool		 isBold) = 0;
 	/// @brief
 	/// @param T
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* fontSize(const CGReal T) = 0;
+	virtual GKContext* fontSize(const GKReal T) = 0;
 
 	/// @brief Draw rounded rectangle
 	/// @param width Rectangle width.
 	/// @param height Rectangle height.
 	/// @param radius Rectangle radius.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* rectangle(CGReal width, CGReal height, CGReal radius) = 0;
+	virtual GKContext* rectangle(GKReal width, GKReal height, GKReal radius) = 0;
 
 	/// @brief Write to file as SVG using T as the filepath.
 	/// @param T file name to write.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* svg(const CGCharacter* T) = 0;
+	virtual GKContext* svg(const GKCharacter* T) = 0;
 
 	/// @brief Write to file as PDF using T as the filepath.
 	/// @param T file name to write.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* pdf(const CGCharacter* T) = 0;
+	virtual GKContext* pdf(const GKCharacter* T) = 0;
 
 	/// @brief Set the page label.
 	/// @param T page label name.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* pageLabel(const CGCharacter* T) = 0;
+	virtual GKContext* pageLabel(const GKCharacter* T) = 0;
 
 	/// @brief Set the thumbnail size.
 	/// @param W width.
 	/// @param H height.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* thumbnailSize(const int W, const int H) = 0;
+	virtual GKContext* thumbnailSize(const GKInteger W, const GKInteger H) = 0;
 
 	/// @brief Present the context.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* present(CGReal r = 0, CGReal g = 0, CGReal b = 0) = 0;
+	virtual GKContext* present(GKReal R = 0, GKReal G = 0, GKReal B = 0) = 0;
 
 	/// @brief Set color or current pen.
 	/// @param R Red channel.
@@ -93,41 +98,43 @@ public:
 	/// @param B Blue channel.
 	/// @param A Alpha channel.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* color(CGReal R, CGReal G, CGReal B, CGReal A) = 0;
+	virtual GKContext* color(GKReal R = 1, GKReal G = 1, GKReal B = 1, GKReal A = 1) = 0;
 
 	/// @brief Set stroke of pen.
 	/// @param strokeStrength Stroke strength
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* stroke(CGReal strokeStrength) = 0;
+	virtual GKContext* stroke(GKReal strokeStrength) = 0;
 
 	/// @brief Set line cap.
-	/// @param type type according to enum *MLCoreGraphicsLineCap*.
+	/// @param Type type according to enum *GKLineCap*.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* lineCap(int type) = 0;
+	virtual GKContext* lineCap(MLInteger Type) = 0;
 
 	/// @brief Line from **start** to **finish**.
-	/// @param start Start position.
-	/// @param finish End position.
+	/// @param Start Start position.
+	/// @param Finish End position.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* lineTo(CGReal start, CGReal finish) = 0;
+	virtual GKContext* lineTo(GKReal Start, GKReal Finish) = 0;
 
 	/// @brief Draws a gaussian blur.
 	/// @param radius blur's radius
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* blur(CGReal	radius,
-										CGSizeT width,
-										CGSizeT height) = 0;
+	virtual GKContext* blur(GKReal	radius,
+										GKSizeType width,
+										GKSizeType height) = 0;
 
 	/// @brief Load image (PNG) from disk.
 	/// @param Path The PNG image path to read on.
+	/// @param W width.
+	/// @param H height.
 	/// @return The graphics context.
-	virtual MLCoreGraphicsContext* image(const CGCharacter* Path, CGSizeT W, CGSizeT H, CGReal X, CGReal Y) = 0;
+	virtual GKContext* image(const GKCharacter* Path, GKSizeType W, GKSizeType H, GKReal X, GKReal Y) = 0;
 
 	/// @brief Scale context.
 	/// @param width the view's width.
 	/// @param height the view's height.
 	/// @return
-	virtual MLCoreGraphicsContext* scale(CGReal width, CGReal height) = 0;
+	virtual GKContext* scale(GKReal width, GKReal height) = 0;
 
 	/// @brief To string method.
 	/// @return The class data as a string.
@@ -136,11 +143,11 @@ public:
 public:
 	/// @brief Start drawing.
 	/// @return
-	virtual MLCoreGraphicsContext* start() = 0;
+	virtual GKContext* start() = 0;
 
 	/// @brief End drawing, flush.
 	/// @return
-	virtual MLCoreGraphicsContext* end() = 0;
+	virtual GKContext* end() = 0;
 
 	/// @brief Leak or set graphics context.
 	/// @param pvtCtx the new internal context.
@@ -148,48 +155,48 @@ public:
 	virtual void leak(void*** pvtCtx) = 0;
 
 public:
-	/// @brief Overloaded move, for MLCoreGraphicsPoint.
+	/// @brief Overloaded move, for GKPoint.
 	/// @param point the point to move to.
 	/// @return The context.
-	MLCoreGraphicsContext* move(MLCoreGraphicsPoint& point)
+	GKContext* move(GKPoint& point)
 	{
 		this->move(point.X, point.Y);
 		return this;
 	}
 
-	/// @brief Overloaded move, for MLCoreGraphicsPoint.
+	/// @brief Overloaded move, for GKPoint.
 	/// @param point the point to move to.
 	/// @return The context.
-	MLCoreGraphicsContext* move(const MLCoreGraphicsPoint& point)
+	GKContext* move(const GKPoint& point)
 	{
 		this->move(point.X, point.Y);
 		return this;
 	}
 
 private:
-	friend class MLCoreGraphicsPen;
-	friend class MLCoreGraphicsShape;
-	friend class MLCoreGraphicsShader;
+	friend class GKPen;
+	friend class GKShape;
+	friend class GKShader;
 };
 
 /// @brief Request a context regarding the features set.
 /// @param featureSet the feature set.
 /// @param strict should we require all the features to be here?
 /// @note if no, please check for feature with operator& inside
-/// MLCoreGraphicsContext.
+/// GKContext.
 /// @return The new graphics context.
-ML_IMPORT MLCoreGraphicsContext*
-CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height);
+ML_IMPORT GKContext*
+GKRequestContext(GKSizeType featureSet, bool strict, GKReal width, GKReal height);
 
 /// @brief Releases a Core Graphics context.
 /// @param context The context itself.
 /// @return This function returns void.
-ML_IMPORT void CGReleaseContext(MLCoreGraphicsContext* context);
+ML_IMPORT void GKReleaseContext(GKContext* context);
 
 /// @brief Line cap enum.
-enum MLCoreGraphicsLineCap
+enum GKLineCap
 {
-	MLCoreGraphicsLineCapNormal,  /// no cap.
-	MLCoreGraphicsLineCapRounded, /// rounded cap.
-	MLCoreGraphicsLineCapSquare	  /// square cap.
+	GKLineCapNormal,  /// no cap.
+	GKLineCapRounded, /// rounded cap.
+	GKLineCapSquare	  /// square cap.
 };

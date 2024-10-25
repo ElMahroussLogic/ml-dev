@@ -9,13 +9,8 @@
 
 #pragma once
 
-#include <GraphicsKit/MLCoreGraphicsContext.h>
+#include <GraphicsKit/GKContext.h>
 #include <filesystem>
-
-#include <cmath>
-#include <cstring>
-
-#include <string>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -25,20 +20,20 @@
 #include <cairo/cairo-svg.h>
 #include <cairo/cairo-pdf.h>
 
-/// @file: MLCoreGraphicsContextCairo.inl
+/// @file: GKContextCairo.inl
 /// @brief: Cairo backend for multiplatform code.
 
 /// @brief Cairo implement of GraphicsKit.
-class MLCoreGraphicsContextCairo : public MLCoreGraphicsContext
+class GKContextCairo : public GKContext
 {
 public:
-	explicit MLCoreGraphicsContextCairo(const CGReal width, const CGReal height);
-	~MLCoreGraphicsContextCairo();
+	explicit GKContextCairo(const GKReal width, const GKReal height);
+	~GKContextCairo();
 
 public:
 	/// @brief Grants a new feature to Context.
 	/// @param flag the feature flag.
-	MLCoreGraphicsContext* operator|=(const CGSizeT flag) override
+	GKContext* operator|=(const GKSizeType flag) override
 	{
 		mContextFlags |= flag;
 		return this;
@@ -46,7 +41,7 @@ public:
 
 	/// @brief Revokes a new feature to Context.
 	/// @param flag the feature flag.
-	MLCoreGraphicsContext* operator&=(const CGSizeT flag) override
+	GKContext* operator&=(const GKSizeType flag) override
 	{
 		mContextFlags &= flag;
 		return this;
@@ -56,7 +51,7 @@ public:
 	/// @param flag The feature in question.
 	/// @retval true feature exists.
 	/// @retval false not supported by this context.
-	bool operator&(const CGSizeT flag) override
+	bool operator&(const GKSizeType flag) override
 	{
 		return mContextFlags & flag;
 	}
@@ -87,7 +82,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	MLCoreGraphicsContext* move(CGReal X, CGReal Y) override
+	GKContext* move(GKReal X, GKReal Y) override
 	{
 		cairo_move_to(mCairo, X, Y);
 
@@ -99,7 +94,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	MLCoreGraphicsContext* text(const CGCharacter* T, CGBoolean Center, CGReal X, CGReal Y, CGReal W, CGReal H) override
+	GKContext* text(const GKCharacter* T, GKBoolean Center, GKReal X, GKReal Y, GKReal W, GKReal H) override
 	{
 		if (Center)
 		{
@@ -129,7 +124,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	MLCoreGraphicsContext* fontFamily(const CGCharacter* T, const bool isBold) override
+	GKContext* fontFamily(const GKCharacter* T, const bool isBold) override
 	{
 		cairo_select_font_face(mCairo, T, CAIRO_FONT_SLANT_NORMAL,
 							   isBold ? CAIRO_FONT_WEIGHT_BOLD
@@ -139,7 +134,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	MLCoreGraphicsContext* fontSize(const CGReal T) override
+	GKContext* fontSize(const GKReal T) override
 	{
 		cairo_set_font_size(mCairo, T);
 		return this;
@@ -147,12 +142,12 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	MLCoreGraphicsContext* pdf(const CGCharacter* T) override
+	GKContext* pdf(const GKCharacter* T) override
 	{
 		if (mSurface)
 			return this;
 
-		std::basic_string<CGCharacter> strPath = T;
+		std::basic_string<GKCharacter> strPath = T;
 
 		constexpr auto dirSeparator = "/";
 
@@ -168,12 +163,12 @@ public:
 		return this;
 	}
 
-	MLCoreGraphicsContext* svg(const CGCharacter* T) override
+	GKContext* svg(const GKCharacter* T) override
 	{
 		if (mSurface)
 			return this;
 
-		std::basic_string<CGCharacter> strPath = T;
+		std::basic_string<GKCharacter> strPath = T;
 
 		constexpr auto dirSeparator = "/";
 
@@ -191,7 +186,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	MLCoreGraphicsContext* color(CGReal R, CGReal G, CGReal B, CGReal A) override
+	GKContext* color(GKReal R, GKReal G, GKReal B, GKReal A) override
 	{
 		cairo_set_source_rgba(mCairo, R, G, B, A);
 		return this;
@@ -199,7 +194,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	MLCoreGraphicsContext* stroke(CGReal strokeStrength) override
+	GKContext* stroke(GKReal strokeStrength) override
 	{
 		cairo_set_line_width(mCairo, strokeStrength);
 		cairo_stroke(mCairo);
@@ -208,7 +203,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	MLCoreGraphicsContext* rectangle(CGReal width, CGReal height, CGReal radius) override
+	GKContext* rectangle(GKReal width, GKReal height, GKReal radius) override
 	{
 		if (radius == 0.0)
 		{
@@ -225,8 +220,8 @@ public:
 
 		cairo_new_sub_path(mCairo);
 
-		CGReal x = mX;
-		CGReal y = mY;
+		GKReal x = mX;
+		GKReal y = mY;
 
 		cairo_arc(mCairo, x + width - radius, y + radius, radius, -90 * degrees,
 				  0 * degrees);
@@ -247,7 +242,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	MLCoreGraphicsContext* lineTo(CGReal start, CGReal finish) override
+	GKContext* lineTo(GKReal start, GKReal finish) override
 	{
 		cairo_line_to(mCairo, start, finish);
 
@@ -256,17 +251,17 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	MLCoreGraphicsContext* lineCap(int32_t type) override
+	GKContext* lineCap(int32_t type) override
 	{
 		switch (type)
 		{
-		case MLCoreGraphicsLineCap::MLCoreGraphicsLineCapNormal:
+		case GKLineCap::GKLineCapNormal:
 		default:
 			cairo_set_line_cap(mCairo, CAIRO_LINE_CAP_BUTT);
 			break;
-		case MLCoreGraphicsLineCap::MLCoreGraphicsLineCapRounded:
+		case GKLineCap::GKLineCapRounded:
 			cairo_set_line_cap(mCairo, CAIRO_LINE_CAP_ROUND);
-		case MLCoreGraphicsLineCap::MLCoreGraphicsLineCapSquare:
+		case GKLineCap::GKLineCapSquare:
 			cairo_set_line_cap(mCairo, CAIRO_LINE_CAP_SQUARE);
 			break;
 		}
@@ -278,9 +273,9 @@ public:
 	/// @param radius blur's radius
 	/// @return the context.
 	/// @note the blur doesn't work on PDF backends.
-	MLCoreGraphicsContext* blur(CGReal	radius,
-								CGSizeT width,
-								CGSizeT height) override
+	GKContext* blur(GKReal	radius,
+								GKSizeType width,
+								GKSizeType height) override
 	{
 		cairo_surface_t* tmp;
 		int				 src_stride, dst_stride;
@@ -428,20 +423,20 @@ public:
 	}
 
 	/// @note This only supports the PNG format.
-	MLCoreGraphicsContext* image(const CGCharacter* Path,
-								 CGSizeT			W,
-								 CGSizeT			H,
-								 CGReal				X,
-								 CGReal				Y) override
+	GKContext* image(const GKCharacter* Path,
+								 GKSizeType			W,
+								 GKSizeType			H,
+								 GKReal				X,
+								 GKReal				Y) override
 	{
-		static std::basic_string<CGCharacter> cPath;
-		static std::basic_string<CGCharacter> cPathReal;
+		static std::basic_string<GKCharacter> cPath;
+		static std::basic_string<GKCharacter> cPathReal;
 
 		if (cPath != Path)
 		{
 			cPath = Path;
 
-			std::basic_string<CGCharacter> strPath = Path;
+			std::basic_string<GKCharacter> strPath = Path;
 
 			constexpr auto cDirSeparator = "/";
 
@@ -469,14 +464,14 @@ public:
 		return this;
 	}
 
-	MLCoreGraphicsContext* scale(CGReal X, CGReal Y) override
+	GKContext* scale(GKReal X, GKReal Y) override
 	{
 		cairo_scale(mCairo, X, Y);
 		return this;
 	}
 
 	/// @note placeholder for now.
-	MLCoreGraphicsContext* start() override
+	GKContext* start() override
 	{
 		if (mCairo)
 			return this;
@@ -488,7 +483,7 @@ public:
 
 	/// @brief Present PDF rendering of one page.
 	/// @return
-	MLCoreGraphicsContext* present(CGReal r, CGReal g, CGReal b) override
+	GKContext* present(GKReal r, GKReal g, GKReal b) override
 	{
 		cairo_set_source_rgb(mCairo, r, g, b);
 		cairo_paint(mCairo);
@@ -498,7 +493,7 @@ public:
 
 	/// @note Placeholder for now.
 	/// @brief End draw command.
-	MLCoreGraphicsContext* end() override
+	GKContext* end() override
 	{
 		if (!mSurface || !mCairo)
 			return this;
@@ -528,7 +523,7 @@ public:
 	/// @brief
 	/// @param T
 	/// @return
-	MLCoreGraphicsContext* pageLabel(const CGCharacter* T) override
+	GKContext* pageLabel(const GKCharacter* T) override
 	{
 		cairo_pdf_surface_set_page_label(mSurface, T);
 		return this;
@@ -537,26 +532,26 @@ public:
 	/// @brief
 	/// @param T
 	/// @return
-	MLCoreGraphicsContext* thumbnailSize(const int Width, const int Height) override
+	GKContext* thumbnailSize(const int Width, const int Height) override
 	{
 		cairo_pdf_surface_set_thumbnail_size(mSurface, Width, Height);
 		return this;
 	}
 
 private:
-	typedef cairo_surface_t* CGSurfacePtr;
-	typedef cairo_t*		 CGPtr;
+	typedef cairo_surface_t* GKSurfacePtr;
+	typedef cairo_t*		 GKPtr;
 
-	CGSizeT		 mContextFlags{0};
-	CGSurfacePtr mSurface{nullptr};
-	CGPtr		 mCairo{nullptr};
-	CGReal		 mWidth{0};
-	CGReal		 mHeight{0};
-	CGCharacter	 mOutputPath[255] = {0};
-	CGBoolean	 mCustomCairo{false};
-	CGBoolean	 mCustomSurface{false};
-	CGReal		 mX{0};
-	CGReal		 mY{0};
+	GKSizeType		 mContextFlags{0};
+	GKSurfacePtr mSurface{nullptr};
+	GKPtr		 mCairo{nullptr};
+	GKReal		 mWidth{0};
+	GKReal		 mHeight{0};
+	GKCharacter	 mOutputPath[255] = {0};
+	GKBoolean	 mCustomCairo{false};
+	GKBoolean	 mCustomSurface{false};
+	GKReal		 mX{0};
+	GKReal		 mY{0};
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -564,15 +559,15 @@ private:
 /// @brief Cairo context constructor.
 /// @param width the width.
 /// @param height the height.
-MLCoreGraphicsContextCairo::MLCoreGraphicsContextCairo(const CGReal width,
-													   const CGReal height)
+GKContextCairo::GKContextCairo(const GKReal width,
+													   const GKReal height)
 	: mWidth(width), mHeight(height)
 {
 	ML_MUST_PASS(width > 0 && height > 0);
 }
 
 /// @brief C++ destrcutor, the End() method is called as well.
-MLCoreGraphicsContextCairo::~MLCoreGraphicsContextCairo()
+GKContextCairo::~GKContextCairo()
 {
 	this->end();
 }

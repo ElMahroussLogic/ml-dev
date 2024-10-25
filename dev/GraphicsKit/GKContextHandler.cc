@@ -4,12 +4,12 @@
  * Copyright (c) 2024 ZKA Web Services Co
  */
 
-#include <GraphicsKit/MLCoreGraphicsContext.h>
+#include <GraphicsKit/GKContext.h>
 
 /// @brief Releases a Core Graphics context.
 /// @param context The context itself.
 /// @return This function returns void.
-void CGReleaseContext(MLCoreGraphicsContext* context)
+void GKReleaseContext(GKContext* context)
 {
 	if (context)
 	{

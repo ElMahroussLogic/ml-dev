@@ -6,5 +6,4 @@
 
 #pragma once
 
-#include <GraphicsKit/MLCoreGraphicsPrelude.h>
-#include <GraphicsKit/MLCoreGraphicsContext.h>
+#include <GraphicsKit/Foundation.h>

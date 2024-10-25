@@ -29,7 +29,7 @@ ML_IMPORT CAReal CALerp(CAReal start, CAReal end, CAReal status);
 /// @param b Blue channel.
 /// @param a Alpha channel.
 /// @return CAReal the returned alpha.
-ML_IMPORT CAReal CAFadeIn(CAReal r, CAReal g, CAReal b, CAReal a, MLCoreGraphicsContext* cg_ctx, CAReal w, CAReal h);
+ML_IMPORT CAReal CAFadeIn(CAReal r, CAReal g, CAReal b, CAReal a, GKContext* cg_ctx, CAReal w, CAReal h);
 
 /// @brief Fade out animation.
 /// @param r Red channel.
@@ -37,7 +37,7 @@ ML_IMPORT CAReal CAFadeIn(CAReal r, CAReal g, CAReal b, CAReal a, MLCoreGraphics
 /// @param b Blue channel.
 /// @param a Alpha channel.
 /// @return CAReal the returned alpha.
-ML_IMPORT CAReal CAFadeOut(CAReal r, CAReal g, CAReal b, CAReal a, MLCoreGraphicsContext* cg_ctx, CAReal w, CAReal h);
+ML_IMPORT CAReal CAFadeOut(CAReal r, CAReal g, CAReal b, CAReal a, GKContext* cg_ctx, CAReal w, CAReal h);
 
 #define kCAMaxFrameCells (255)
 

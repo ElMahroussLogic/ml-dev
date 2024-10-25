@@ -1,6 +1,6 @@
 /*
  * Created on Thu May 16 2024
- *
+ * Last Edited: Fri Oct 25 08:51:19 AM CEST 2024
  * Copyright (c) 2024 ZKA Web Services Co
  */
 
@@ -8,38 +8,42 @@
 
 #include <FoundationKit/Foundation.h>
 #include <FoundationKit/MLString.h>
+#include <FoundationKit/MLRect.h>
+
+#include <filesystem>
 #include <cstring>
+#include <cmath>
 
 /// CORE MACROS ///
 
-#define kRsrcProtocol "cg://"
+#define kRsrcProtocol "gk://"
 
 /// CORE TYPES ///
 
-typedef double CGReal;
-typedef size_t CGSizeT;
-typedef char   CGCharacter;
-typedef bool   CGBoolean;
+typedef MLReal GKReal;
+typedef MLSizeType GKSizeType;
+typedef MLChar   GKCharacter;
+typedef BOOL   GKBoolean;
 
 /// CORE STRUCTS ///
 
-typedef struct MLCoreGraphicsPoint final
+typedef struct GKPoint final
 {
-	CGReal X, Y;
-} MLCoreGraphicsPoint;
+	GKReal X, Y;
+} GKPoint;
 
-typedef struct MLCoreGraphicsRect final
+typedef struct GKRect final
 {
-	CGReal X1, Y1;
-	CGReal X2, Y2;
-} MLCoreGraphicsRect;
+	GKReal X1, Y1;
+	GKReal X2, Y2;
+} GKRect;
 
 /// CORE FUNCTIONS ///
 
 /// @brief Fetch resource as a string.
 /// @param input
 /// @return the resource as a string.
-inline const MLString r(const char* input)
+inline const MLString gk_rsrc_path(const char* input)
 {
 	/// if input is invalid...
 	if (!input)
@@ -50,7 +54,8 @@ inline const MLString r(const char* input)
 
 	MLString textPath(strlen(input) + strlen(kRsrcProtocol));
 
-	if (*input == 0)
+	if (*input == 0 ||
+		!std::filesystem::exists(input))
 	{
 		return textPath;
 	}

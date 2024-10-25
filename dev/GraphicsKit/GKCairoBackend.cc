@@ -4,19 +4,19 @@
  * Copyright (c) 2024 ZKA Web Services Co
  */
 
-#include <GraphicsKit/MLCoreGraphicsContext.h>
-#include <GraphicsKit/Private/MLCoreGraphicsContextCairo.inl>
+#include <GraphicsKit/GKContext.h>
+#include <GraphicsKit/Private/GKGraphicsContextCairo.inl>
 
 /// @brief Request a context regarding the features set.
 /// @param featureSet the feature set.
 /// @param strict should we require all the features to be here?
-/// @note if no, please check for feature with operator& inside MLCoreGraphicsContext.
+/// @note if no, please check for feature with operator& inside GKContext.
 /// @return The new graphics context.
-MLCoreGraphicsContext*
-CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height)
+GKContext*
+GKequestContext(GKSizeType featureSet, bool strict, GKReal width, GKReal height)
 {
-	MLCoreGraphicsContext* context =
-		new MLCoreGraphicsContextCairo(width, height);
+	GKContext* context =
+		new GKContextCairo(width, height);
 	ML_MUST_PASS(context);
 
 	return context;
@@ -24,7 +24,7 @@ CGRequestContext(CGSizeT featureSet, bool strict, CGReal width, CGReal height)
 
 /// @brief To string method.
 /// @return the class as a string
-const MLString MLCoreGraphicsContext::toString()
+const MLString GKContext::toString()
 {
 	MLString ctxBackendJson = MLString("['Backend': 'Cairo']");
 	return ctxBackendJson;

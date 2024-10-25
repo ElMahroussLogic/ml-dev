@@ -1,5 +1,5 @@
 <SourceDeploy>
 <HiddenFiles>
-    <SourceFile>*.sh</SourceFile>
+    <SourceFile>*.cc</SourceFile>
 </HiddenFiles>
 </SourceDeploy>
