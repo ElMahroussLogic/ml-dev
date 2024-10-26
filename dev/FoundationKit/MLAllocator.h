@@ -20,7 +20,7 @@ public:
 	/// @param cnt the number of TypeInfo to create.
 	/// @return a pointer of it.
 	template <typename TypeInfo>
-	TypeInfo* initWithSize(MLSizeType cnt)
+	TypeInfo* initArray(MLSizeType cnt)
 	{
 		if (!cnt)
 			++cnt;

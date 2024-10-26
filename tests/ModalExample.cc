@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 #endif
 
 	MLXMLMarkup coder("<Phone phone_number=\"0658573014\" region_code=\"+33\">Amlal 📱.</Phone>");
-	auto	   phone = coder.getXMLDataFromMarkup("phone_number", 4096, false, true);
+	auto	   phone = coder.getXMLDataFromMarkup("Phone", 4096, false, false);
 
 	MLLog("%u\n", phone.asBytes());
 

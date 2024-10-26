@@ -12,8 +12,9 @@ MLUUID::MLUUID()
 {
 	uuid_t uuidOut;
 	uuid_generate_random(uuidOut);
+	MLSizeType indexUuid = 0UL;
 
-	for (MLSizeType indexUuid = 0UL; indexUuid < kUUIDMaxLen; ++indexUuid)
+	for (; indexUuid < kUUIDMaxLen; ++indexUuid)
 	{
 		mArray[indexUuid] = uuidOut[indexUuid];
 	}

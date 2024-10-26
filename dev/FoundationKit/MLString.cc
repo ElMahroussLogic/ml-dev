@@ -12,7 +12,7 @@ MLString::MLString(MLSizeType sizeOfBuffer)
 {
 	mCursor = 0;
 	mSize	= sizeOfBuffer;
-	mData	= MLAllocator::shared().initWithSize<MLChar>(sizeOfBuffer);
+	mData	= MLAllocator::shared().initArray<MLChar>(sizeOfBuffer);
 
 	memset(mData, 0, mSize);
 }
@@ -23,7 +23,7 @@ MLString::MLString(const MLChar* buffer)
 
 	mCursor = 0;
 	mSize	= sizeOfBuffer;
-	mData	= MLAllocator::shared().initWithSize<MLChar>(sizeOfBuffer);
+	mData	= MLAllocator::shared().initArray<MLChar>(sizeOfBuffer);
 
 	memset(mData, 0, mSize);
 	memcpy(mData, buffer, mSize);
@@ -90,7 +90,11 @@ const MLChar* MLString::asConstBytes() const
 
 void MLString::dispose()
 {
-	MLAllocator::shared().disposeArray(mData);
+	if (mData)
+	{
+		MLAllocator::shared().disposeArray(mData);
+		mData = nullptr;
+	}
 }
 
 const MLString MLString::toString()
