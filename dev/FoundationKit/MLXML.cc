@@ -19,6 +19,12 @@ MLXMLMarkup::MLXMLMarkup(const MLChar* blob)
 	mBlob += blob;
 }
 
+MLXMLMarkup::MLXMLMarkup(const MLString blob)
+	: mBlob(blob)
+{
+
+}
+
 MLXMLMarkup::~MLXMLMarkup()
 {
 	mBlob.dispose();

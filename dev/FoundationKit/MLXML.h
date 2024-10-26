@@ -21,6 +21,7 @@ class MLXMLMarkup final ML_OBJECT
 {
 public:
 	MLXMLMarkup(const char* blob);
+	MLXMLMarkup(const MLString blob);
 
 	MLXMLMarkup& operator=(const MLXMLMarkup&) = default;
 	MLXMLMarkup(const MLXMLMarkup&)			 = default;
