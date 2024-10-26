@@ -11,8 +11,8 @@
 /// @brief A X, Y point within a display.
 struct MLPoint
 {
-	MLReal x;
-	MLReal y;
+	MLInteger64 x;
+	MLInteger64 y;
 
 	/// @brief Check if point is within the current MLPoint.
 	/// @param point the current point to check.

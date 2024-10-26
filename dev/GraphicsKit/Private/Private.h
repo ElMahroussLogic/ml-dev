@@ -26,19 +26,6 @@ typedef MLInteger  GKInteger;
 typedef MLChar	   GKCharacter;
 typedef BOOL	   GKBoolean;
 
-/// CORE STRUCTS ///
-
-typedef struct GKPoint final
-{
-	GKReal X, Y;
-} GKPoint;
-
-typedef struct GKRect final
-{
-	GKReal X1, Y1;
-	GKReal X2, Y2;
-} GKRect;
-
 /// CORE FUNCTIONS ///
 
 /// @brief Fetch resource as a string.

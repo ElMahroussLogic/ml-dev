@@ -6,10 +6,4 @@
 
 #pragma once
 
-/// @brief Forward declarations of struct classes.
-class GKShader;
-class GKContext;
-struct GKPoint;
-struct GKRect;
-
 #include <GraphicsKit/GKContext.h>

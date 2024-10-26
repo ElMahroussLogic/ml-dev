@@ -7,6 +7,10 @@
 #pragma once
 
 #include <GraphicsKit/Private/Private.h>
+#include <FoundationKit/MLPoint.h>
+
+/// @brief Forward declaration of context class.
+class GKContext;
 
 /// @brief Core Graphics context.
 class GKContext ML_OBJECT
@@ -155,21 +159,21 @@ public:
 	virtual void leak(void*** pvtCtx) = 0;
 
 public:
-	/// @brief Overloaded move, for GKPoint.
+	/// @brief Overloaded move, for MLPoint.
 	/// @param point the point to move to.
 	/// @return The context.
-	GKContext* move(GKPoint& point)
+	GKContext* move(MLPoint& point)
 	{
-		this->move(point.X, point.Y);
+		this->move(point.x, point.y);
 		return this;
 	}
 
-	/// @brief Overloaded move, for GKPoint.
+	/// @brief Overloaded move, for MLPoint.
 	/// @param point the point to move to.
 	/// @return The context.
-	GKContext* move(const GKPoint& point)
+	GKContext* move(const MLPoint& point)
 	{
-		this->move(point.X, point.Y);
+		this->move(point.x, point.y);
 		return this;
 	}
 
@@ -186,7 +190,7 @@ private:
 /// GKContext.
 /// @return The new graphics context.
 ML_IMPORT GKContext*
-GKRequestContext(GKSizeType featureSet, bool strict, GKReal width, GKReal height);
+GKRequestContext(GKSizeType featureSet, BOOL strict, GKReal width, GKReal height);
 
 /// @brief Releases a Core Graphics context.
 /// @param context The context itself.
