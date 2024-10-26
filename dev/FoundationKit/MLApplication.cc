@@ -65,7 +65,7 @@ const MLString MLApplication::getAppField(MLString fieldName, MLSizeType fieldLe
 
 	MLXMLMarkup parser(streamXmlSS.str().c_str());
 
-	MLString appName = parser.getXML(fieldName, fieldLen, NO);
+	MLString appName = parser.getXMLDataFromMarkup(fieldName, fieldLen, NO);
 	return appName;
 }
 
