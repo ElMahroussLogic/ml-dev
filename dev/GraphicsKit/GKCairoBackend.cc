@@ -5,7 +5,7 @@
  */
 
 #include <GraphicsKit/GKContext.h>
-#include <GraphicsKit/Private/GKGraphicsContextCairo.inl>
+#include <GraphicsKit/Private/GKContextCairo.inl>
 
 /// @brief Request a context regarding the features set.
 /// @param featureSet the feature set.

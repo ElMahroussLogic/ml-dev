@@ -18,6 +18,7 @@ class MLUUID final ML_OBJECT
 
 public:
 	explicit MLUUID();
+	explicit MLUUID(MLArray<MLUtf8Char, kUUIDMaxLen>& array);
 
 	MLString						 uuidAsString();
 	MLArray<MLUtf8Char, kUUIDMaxLen> uuidAsArray();

@@ -4,7 +4,7 @@
 
 ------------------------------------------- */
 
-#include <FoundationKit/MLXMLCoder.h>
+#include <FoundationKit/MLXML.h>
 #include <FoundationKit/MLAlert.h>
 #include <FoundationKit/MLString.h>
 #include <FoundationKit/MLURL.h>
@@ -22,8 +22,8 @@ int main(int argc, char** argv)
 	gtk_init(&argc, &argv);
 #endif
 
-	MLXMLCoder coder("<Phone phone_number=\"0658573014\" region_code=\"+33\">Amlal 📱.</Phone>");
-	auto	   phone = coder.getXML("phone_number", 4096, false, true);
+	MLXMLMarkup coder("<Phone phone_number=\"0658573014\" region_code=\"+33\">Amlal 📱.</Phone>");
+	auto	   phone = coder.getXMLDataFromMarkup("phone_number", 4096, false, true);
 
 	MLLog("%u\n", phone.asBytes());
 

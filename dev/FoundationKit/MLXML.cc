@@ -5,7 +5,7 @@
 ------------------------------------------- */
 
 #include <FoundationKit/Foundation.h>
-#include <FoundationKit/MLXMLCoder.h>
+#include <FoundationKit/MLXML.h>
 
 #include <cctype>
 #include <iostream>
@@ -13,13 +13,13 @@
 #include <cstddef>
 #include <cstring>
 
-MLXMLCoder::MLXMLCoder(const MLChar* blob)
+MLXMLMarkup::MLXMLMarkup(const MLChar* blob)
 	: mBlob(strlen(blob))
 {
 	mBlob += blob;
 }
 
-MLXMLCoder::~MLXMLCoder()
+MLXMLMarkup::~MLXMLMarkup()
 {
 	mBlob.dispose();
 }
@@ -29,9 +29,9 @@ MLXMLCoder::~MLXMLCoder()
 /// @param bufSz the buffer size to allocate
 /// @param pureOutput strip \t, \n, \r and spaces if set to true.
 /// @return MLString the value of **name** as a MLString.
-MLString MLXMLCoder::getXML(MLString name, MLSizeType bufSz, bool pureOutput)
+MLString MLXMLMarkup::getXMLDataFromMarkup(MLString name, MLSizeType bufSz, bool pureOutput, bool getAttribute)
 {
-	return this->getXML(name.asBytes(), bufSz, pureOutput);
+	return this->getXMLDataFromMarkup(name.asBytes(), bufSz, pureOutput, getAttribute);
 }
 
 /// @brief Gets the content of a unique markup.
@@ -39,7 +39,7 @@ MLString MLXMLCoder::getXML(MLString name, MLSizeType bufSz, bool pureOutput)
 /// @param bufSz the buffer size to allocate
 /// @param pureOutput strip \t, \n, \r and spaces if set to true.
 /// @return MLString the value of **name** as a MLString.
-MLString MLXMLCoder::getXML(const MLChar* name, MLSizeType bufSz, bool pureOutput, bool getAttribute)
+MLString MLXMLMarkup::getXMLDataFromMarkup(const MLChar* name, MLSizeType bufSz, bool pureOutput, bool getAttribute)
 {
 	try
 	{
@@ -237,13 +237,13 @@ MLString MLXMLCoder::getXML(const MLChar* name, MLSizeType bufSz, bool pureOutpu
 	}
 }
 
-const MLString MLXMLCoder::toString()
+const MLString MLXMLMarkup::toString()
 {
 	auto cLen = 4096;
 	cLen += this->mBlob.usedBytes();
 
 	MLString xmlAsJsonStr = MLString(cLen);
-	xmlAsJsonStr += "[{ 'name': 'MLXMLCoder', 'blob': '";
+	xmlAsJsonStr += "[{ 'name': 'MLXMLMarkup', 'blob': '";
 
 	for (size_t blobIndex = 0; blobIndex < this->mBlob.size(); blobIndex++)
 	{

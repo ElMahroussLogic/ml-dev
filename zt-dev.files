@@ -34,8 +34,8 @@ dev/FoundationKit/MLURL.cc
 dev/FoundationKit/MLURL.h
 dev/FoundationKit/MLUUID.cc
 dev/FoundationKit/MLUUID.h
-dev/FoundationKit/MLXMLCoder.cc
-dev/FoundationKit/MLXMLCoder.h
+dev/FoundationKit/MLXML.cc
+dev/FoundationKit/MLXML.h
 dev/FoundationKit/MacOS/MacOS.h
 dev/FoundationKit/MacOS/build.json
 dev/FoundationKit/Win32/GDI.h
@@ -69,7 +69,7 @@ dev/GraphicsKit/GKContext.cc
 dev/GraphicsKit/GKContext.h
 dev/GraphicsKit/GKContextHandler.cc
 dev/GraphicsKit/GraphicsKit.h
-dev/GraphicsKit/Private/GKGraphicsContextCairo.inl
+dev/GraphicsKit/Private/GKContextCairo.inl
 dev/GraphicsKit/Private/Private.h
 dev/GraphicsKit/build-unix.json
 dev/GraphicsKit/source_deploy.xml

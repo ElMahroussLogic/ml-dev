@@ -8,7 +8,7 @@
 
 #include <FoundationKit/Foundation.h>
 #include <FoundationKit/MLString.h>
-#include <FoundationKit/MLXMLCoder.h>
+#include <FoundationKit/MLXML.h>
 
 class MLApplication final ML_OBJECT
 {

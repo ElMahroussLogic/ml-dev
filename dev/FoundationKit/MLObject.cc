@@ -19,10 +19,10 @@ const MLString MLObject::toString()
 
 const void MLObject::encode(MLCoder* output)
 {
-	ML_UNUSED(output);
+	*output = output->encode(this);
 }
 
 const void MLObject::decode(MLCoder* output)
 {
-	ML_UNUSED(output);
+	*output = output->decode(this);
 }

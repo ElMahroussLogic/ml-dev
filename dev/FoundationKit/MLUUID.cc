@@ -19,6 +19,11 @@ MLUUID::MLUUID()
 	}
 }
 
+MLUUID::MLUUID(MLArray<MLUtf8Char, kUUIDMaxLen>& array)
+{
+	this->mArray = array;
+}
+
 MLString MLUUID::uuidAsString()
 {
     MLChar out[255] = { 0 };

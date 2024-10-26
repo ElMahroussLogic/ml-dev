@@ -22,6 +22,7 @@
 
 /// @file: GKContextCairo.inl
 /// @brief: Cairo backend for multiplatform code.
+/// @note: Cairo will be used for SVG rendering. so that an AbstractScreen can render it.
 
 /// @brief Cairo implement of GraphicsKit.
 class GKContextCairo : public GKContext

@@ -124,13 +124,14 @@ class MLJSONCoder;
 class MLCoder;
 class MLAlert;
 class MLURL;
-class MLXMLCoder;
+class MLXMLMarkup;
 class MLApplication;
 class MLThread;
 class MLProcess;
 class MLSocket;
 class MLAllocator;
 class MLUUID;
+class MLXMLCoder;
 
 class MLObject
 {
