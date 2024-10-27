@@ -10,16 +10,18 @@
 
 // DEFINE CORE TYPES
 
-typedef float  CAReal;
-typedef size_t CASizeT;
-typedef bool   CABoolean;
+typedef MLReal  CAReal;
+typedef MLSizeType CASizeT;
+typedef BOOL   CABoolean;
 
 // DEFINE CORE ALGORITHMS ENUMS.
 
 enum
 {
-	eKineticAlgo,
-	eFadeInAlgo,
-	eFadeOutAlgo,
-	eSmartSmoothAlgo,
+	kInvlAlgo,
+	kKineticAlgo,
+	kFadeInAlgo,
+	kFadeOutAlgo,
+	kSmartAnimAlgo,
+	kAlgoCount,
 };
