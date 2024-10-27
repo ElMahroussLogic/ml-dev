@@ -13,19 +13,19 @@
 #include <cstddef>
 #include <cstring>
 
-MLXMLMarkup::MLXMLMarkup(const MLChar* blob)
+MLXMLNode::MLXMLNode(const MLChar* blob)
 	: mBlob(strlen(blob))
 {
 	mBlob += blob;
 }
 
-MLXMLMarkup::MLXMLMarkup(const MLString blob)
+MLXMLNode::MLXMLNode(const MLString blob)
 	: mBlob(blob)
 {
 
 }
 
-MLXMLMarkup::~MLXMLMarkup()
+MLXMLNode::~MLXMLNode()
 {
 	mBlob.dispose();
 }
@@ -35,7 +35,7 @@ MLXMLMarkup::~MLXMLMarkup()
 /// @param bufSz the buffer size to allocate
 /// @param pureOutput strip \t, \n, \r and spaces if set to true.
 /// @return MLString the value of **name** as a MLString.
-MLString MLXMLMarkup::getXMLDataFromMarkup(MLString name, MLSizeType bufSz, bool pureOutput, bool getAttribute)
+MLString MLXMLNode::getXMLDataFromMarkup(MLString name, MLSizeType bufSz, bool pureOutput, bool getAttribute)
 {
 	return this->getXMLDataFromMarkup(name.asBytes(), bufSz, pureOutput, getAttribute);
 }
@@ -45,7 +45,7 @@ MLString MLXMLMarkup::getXMLDataFromMarkup(MLString name, MLSizeType bufSz, bool
 /// @param bufSz the buffer size to allocate
 /// @param pureOutput strip \t, \n, \r and spaces if set to true.
 /// @return MLString the value of **name** as a MLString.
-MLString MLXMLMarkup::getXMLDataFromMarkup(const MLChar* name, MLSizeType bufSz, bool pureOutput, bool getAttribute)
+MLString MLXMLNode::getXMLDataFromMarkup(const MLChar* name, MLSizeType bufSz, bool pureOutput, bool getAttribute)
 {
 	try
 	{
@@ -243,13 +243,13 @@ MLString MLXMLMarkup::getXMLDataFromMarkup(const MLChar* name, MLSizeType bufSz,
 	}
 }
 
-const MLString MLXMLMarkup::toString()
+const MLString MLXMLNode::toString()
 {
 	auto cLen = 4096;
 	cLen += this->mBlob.usedBytes();
 
 	MLString xmlAsJsonStr = MLString(cLen);
-	xmlAsJsonStr += "[{ 'name': 'MLXMLMarkup', 'blob': '";
+	xmlAsJsonStr += "[{ 'name': 'MLXMLNode', 'blob': '";
 
 	for (size_t blobIndex = 0; blobIndex < this->mBlob.size(); blobIndex++)
 	{

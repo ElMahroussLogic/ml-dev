@@ -1,18 +1,26 @@
 /*
  * Created on Fri May 10 2024
- *
+ * Last Updated: Sun Oct 27 06:55:01 PM CET 2024
  * Copyright (c) 2024 ZKA Web Services Co
  */
 
 #pragma once
 
-#include <GraphicsKit/Private/Private.h>
-#include <FoundationKit/MLPoint.h>
+#include <GraphicsKit/Foundation.h>
 
 /// @brief Forward declaration of context class.
 class GKContext;
+enum class GKLineCap;
 
-/// @brief Core Graphics context.
+/// @brief Line cap enum.
+enum class GKLineCap
+{
+	kLineCapNormal,  /// no cap.
+	kLineCapRounded, /// rounded cap.
+	kLineCapSquare	  /// square cap.
+};
+
+/// @brief GraphicsKit context class.
 class GKContext ML_OBJECT
 {
 public:
@@ -36,7 +44,7 @@ public:
 	/// @param flag The feature in question.
 	/// @retval true feature exists.
 	/// @retval false not supported by this context.
-	virtual bool operator&(const GKSizeType flag) = 0;
+	virtual BOOL operator&(const GKSizeType flag) = 0;
 
 	/// @brief Move to coord.
 	/// @param X the x coord.
@@ -51,25 +59,25 @@ public:
 	/// @param W the width.
 	/// @param H the height.
 	/// @return the context.
-	virtual GKContext* text(const GKCharacter* T, GKBoolean Center, GKReal X = 0.0, GKReal Y = 0.0, GKReal W = 0.0, GKReal H = 0.0) = 0;
+	virtual GKContext* text(const GKCharacter* Text, GKBoolean Center, GKReal X = 0.0, GKReal Y = 0.0, GKReal W = 0.0, GKReal H = 0.0) = 0;
 
 	/// @brief Set font.
 	/// @param T font name
 	/// @param isBold should the font be bold?
 	/// @return The graphics context.
-	virtual GKContext* fontFamily(const GKCharacter* T,
-								  const bool		 isBold) = 0;
+	virtual GKContext* fontFamily(const GKCharacter* Text,
+								  const BOOL		 IsBold) = 0;
 	/// @brief
 	/// @param T
 	/// @return The graphics context.
-	virtual GKContext* fontSize(const GKReal T) = 0;
+	virtual GKContext* fontSize(const GKReal Text) = 0;
 
 	/// @brief Draw rounded rectangle
 	/// @param width Rectangle width.
 	/// @param height Rectangle height.
 	/// @param radius Rectangle radius.
 	/// @return The graphics context.
-	virtual GKContext* rectangle(GKReal width, GKReal height, GKReal radius) = 0;
+	virtual GKContext* rectangle(GKReal Width, GKReal Height, GKReal Radius) = 0;
 
 	/// @brief Write to file as SVG using T as the filepath.
 	/// @param T file name to write.
@@ -112,7 +120,7 @@ public:
 	/// @brief Set line cap.
 	/// @param Type type according to enum *GKLineCap*.
 	/// @return The graphics context.
-	virtual GKContext* lineCap(MLInteger Type) = 0;
+	virtual GKContext* lineCap(GKLineCap Type) = 0;
 
 	/// @brief Line from **start** to **finish**.
 	/// @param Start Start position.
@@ -176,11 +184,6 @@ public:
 		this->move(point.x, point.y);
 		return this;
 	}
-
-private:
-	friend class GKPen;
-	friend class GKShape;
-	friend class GKShader;
 };
 
 /// @brief Request a context regarding the features set.
@@ -197,10 +200,3 @@ GKRequestContext(GKSizeType featureSet, BOOL strict, GKReal width, GKReal height
 /// @return This function returns void.
 ML_IMPORT void GKReleaseContext(GKContext* context);
 
-/// @brief Line cap enum.
-enum GKLineCap
-{
-	GKLineCapNormal,  /// no cap.
-	GKLineCapRounded, /// rounded cap.
-	GKLineCapSquare	  /// square cap.
-};

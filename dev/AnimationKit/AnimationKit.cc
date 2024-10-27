@@ -4,7 +4,7 @@
  * Copyright (c) 2024 ZKA Web Services Co
  */
 
-#include <AnimationKit/MLCoreAnimation.h>
+#include <AnimationKit/AnimationKit.h>
 
 /// @brief Linear interop helper function.
 /// @param start where to begin
@@ -22,7 +22,7 @@ ML_IMPORT CAReal CALerp(CAReal start, CAReal end, CAReal status)
 /// @param b Blue channel.
 /// @param a Alpha channel.
 /// @return CAReal the returned alpha.
-ML_IMPORT CAReal CAFadeIn(CAReal r, CAReal g, CAReal b, CAReal a, GKContext* cg_ctx, CAReal w, CAReal h)
+ML_IMPORT CAReal CAFadeIn(CAReal red, CAReal green, CAReal blue, CAReal alpha, GKContext* cg_ctx, CAReal width, CAReal height)
 {
 	if (!cg_ctx)
 	{
@@ -30,21 +30,21 @@ ML_IMPORT CAReal CAFadeIn(CAReal r, CAReal g, CAReal b, CAReal a, GKContext* cg_
 		return 0.0;
 	}
 
-	a -= 0.001;
+	alpha -= 0.001;
 
-	cg_ctx->color(r, g, b, a);
-	cg_ctx->rectangle(w, h, 0);
+	cg_ctx->color(red, green, blue, alpha);
+	cg_ctx->rectangle(width, height, 0);
 
-	return a;
+	return alpha;
 }
 
 /// @brief Fade out animation.
-/// @param r Red channel.
-/// @param g Green channel.
-/// @param b Blue channel.
-/// @param a Alpha channel.
+/// @param red Red channel.
+/// @param green Green channel.
+/// @param blue Blue channel.
+/// @param alpha Alpha channel.
 /// @return CAReal the returned alpha.
-ML_IMPORT CAReal CAFadeOut(CAReal r, CAReal g, CAReal b, CAReal a, GKContext* cg_ctx, CAReal w, CAReal h)
+ML_IMPORT CAReal CAFadeOut(CAReal red, CAReal green, CAReal blue, CAReal alpha, GKContext* cg_ctx, CAReal width, CAReal height)
 {
 	if (!cg_ctx)
 	{
@@ -52,10 +52,10 @@ ML_IMPORT CAReal CAFadeOut(CAReal r, CAReal g, CAReal b, CAReal a, GKContext* cg
 		return 0.0;
 	}
 
-	a += 0.001;
+	alpha += 0.001;
 
-	cg_ctx->color(r, g, b, a);
-	cg_ctx->rectangle(w, h, 0);
+	cg_ctx->color(red, green, blue, alpha);
+	cg_ctx->rectangle(width, height, 0);
 
-	return a;
+	return alpha;
 }

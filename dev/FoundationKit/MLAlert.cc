@@ -19,10 +19,10 @@
 #endif // ifdef _WIN32
 
 #ifdef _WIN32
-extern "C" int swprintf(
-	wchar_t* const		 _Buffer,
-	size_t const		 _BufferCount,
-	wchar_t const* const _Format,
+ML_IMPORT MLInteger swprintf(
+	wchar_t* const		 buffer,
+	size_t const		 bufferCount,
+	wchar_t const* const format,
 	...);
 #endif // ifdef _WIN32
 

@@ -12,14 +12,15 @@
 
 class MLApplication final ML_OBJECT
 {
+private:
 	MLApplication() = default;
 
 public:
 	~MLApplication() override = default;
 
-	MLApplication& operator=(const MLApplication&) = default;
-	MLApplication(const MLApplication&)			   = default;
+	ML_COPY_DEFAULT(MLApplication);
 
+public:
 	/// @brief Returns the application's name as given by the bundle.
 	/// @return the app string.
 	const MLString getAppName();

@@ -102,7 +102,7 @@ const MLString MLString::toString()
 	const auto cLen = 512;
 
 	MLString str(cLen);
-	str += "MLString";
+	str += "['ClassName': 'MLString']";
 
 	return str;
 }

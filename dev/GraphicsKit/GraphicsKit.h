@@ -6,6 +6,5 @@
 
 #pragma once
 
-#include <GraphicsKit/Foundation.h>
 #include <GraphicsKit/GKContext.h>
 

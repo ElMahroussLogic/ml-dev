@@ -18,10 +18,10 @@ typedef BOOL   CABoolean;
 
 enum
 {
-	kInvlAlgo,
-	kKineticAlgo,
-	kFadeInAlgo,
-	kFadeOutAlgo,
-	kSmartAnimAlgo,
-	kAlgoCount,
+	kInvalidAlgorithm,
+	kKineticAlgorithm,
+	kFadeInAlgorithm,
+	kFadeOutAlgorithm,
+	kSmartAnimationAlgorithm,
+	kAlgorithmCount,
 };

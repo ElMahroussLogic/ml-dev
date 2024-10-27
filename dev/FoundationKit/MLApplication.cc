@@ -5,13 +5,7 @@
 ------------------------------------------- */
 
 #include <FoundationKit/MLApplication.h>
-
-#ifdef _WIN32
-#include <FoundationKit/Win32/Win32.h>
-#else
 #include <FoundationKit/MLAlert.h>
-#endif
-
 #include <filesystem>
 #include <fstream>
 #include <sstream>
@@ -53,7 +47,7 @@ MLApplication& MLApplication::shared()
 /// @return the field's value.
 const MLString MLApplication::getAppField(MLString fieldName, MLSizeType fieldLen)
 {
-	constexpr auto kPkgPath = "/ZKA/Manifests/.alist";
+	constexpr auto kPkgPath = "/ZKA/Manifests/property.xml";
 
 	auto baseAppPath = std::filesystem::current_path().string();
 	baseAppPath += kPkgPath;
@@ -63,7 +57,7 @@ const MLString MLApplication::getAppField(MLString fieldName, MLSizeType fieldLe
 	std::stringstream streamXmlSS;
 	streamXmlSS << streamXml.rdbuf();
 
-	MLXMLMarkup parser(streamXmlSS.str().c_str());
+	MLXMLNode parser(streamXmlSS.str().c_str());
 
 	MLString appName = parser.getXMLDataFromMarkup(fieldName, fieldLen, NO);
 	return appName;
@@ -86,10 +80,6 @@ const MLString MLApplication::toString()
 /// @brief Show about modal.
 void MLApplication::showAboutModal() noexcept
 {
-#ifdef _WIN32
-	ShellAboutA(nullptr, "FoundationKit for Windows", "FoundationKit is property of ZKA, all rights reserved.", nullptr);
-#else
 	MLAlert alert;
-	alert.runModal("FoundationKit", "%s\n%s", "FoundationKit Framework.", "FoundationKit is a property of ZKA, Copyright ZKA Web Services Co all rights reserved.");
-#endif
+	alert.runModal("FoundationKit", "%s\n%s", "FoundationKit Framework", "Copyright ZKA Web Services Co, all rights reserved.");
 }

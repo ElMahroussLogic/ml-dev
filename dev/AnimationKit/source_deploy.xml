@@ -1,7 +1,0 @@
-<SourceDeploy>
-<HiddenFiles>
-    <SourceFile>*.cc</SourceFile>
-    <SourceFile>Private/*.h</SourceFile>
-    <SourceFile>Private/*.cc</SourceFile>
-</HiddenFiles>
-</SourceDeploy>

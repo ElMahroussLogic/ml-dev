@@ -53,6 +53,11 @@ public:
 		delete[] obj;
 	}
 
+	void disposeAllocator() noexcept
+	{
+		delete this;
+	}
+
 public:
 	/// @brief Get allocator singleton.
 	/// @return the allocator reference.

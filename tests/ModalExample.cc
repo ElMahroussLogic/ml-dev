@@ -22,7 +22,7 @@ int main(int argc, char** argv)
 	gtk_init(&argc, &argv);
 #endif
 
-	MLXMLMarkup coder("<Phone phone_number=\"0658573014\" region_code=\"+33\">Amlal 📱.</Phone>");
+	MLXMLNode coder("<Phone phone_number=\"0658573014\" region_code=\"+33\">Amlal 📱.</Phone>");
 	auto	   phone = coder.getXMLDataFromMarkup("Phone", 4096, false, false);
 
 	MLLog("%u\n", phone.asBytes());

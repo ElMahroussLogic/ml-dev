@@ -6,12 +6,11 @@
 
 #include <FoundationKit/MLAllocator.h>
 
+/// @brief Allocator constructor.
 MLAllocator::MLAllocator() = default;
 
-MLAllocator::~MLAllocator()
-{
-	delete this;
-}
+/// @brief Allocator desctructor.
+MLAllocator::~MLAllocator() = default;
 
 /// @brief Get allocator singleton.
 /// @return the allocator reference.
@@ -20,9 +19,7 @@ MLAllocator& MLAllocator::shared()
 	static MLAllocator* alloc = nullptr;
 
 	if (!alloc)
-	{
 		alloc = new MLAllocator();
-	}
 
 	return *alloc;
 }
@@ -34,7 +31,7 @@ const MLString MLAllocator::toString()
 	const auto cLen = 512;
 
 	MLString str = MLString(cLen);
-	str += "[{'name': 'MLAllocator'}]";
+	str += "['ClassName': 'MLAllocator']";
 
 	return str;
 }

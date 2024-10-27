@@ -22,10 +22,16 @@ public:
 	MLInteger64 (*mAnimationFrame)(CAComposerKeyFrameCell* cell);
 };
 
-class CAComposerKeyFrame final ML_OBJECT
+class CAComposer ML_OBJECT
 {
 protected:
 	MLArray<CAComposerKeyFrameCell, kCAMaxFrameCells> mFrames;
+
+public:
+	CAComposer() = default;
+	~CAComposer() = default;
+
+	ML_COPY_DEFAULT(CAComposer);
 
 public:
 	virtual void setKeyFrame(const MLString name) = 0;

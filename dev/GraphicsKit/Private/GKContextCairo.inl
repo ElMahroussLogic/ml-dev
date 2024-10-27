@@ -1,8 +1,8 @@
 /*
- * ========================================================
+ *	========================================================
  *
- * GraphicsKit
- * Copyright ZKA Web Services Co, all rights reserved.
+ *	GraphicsKit
+ *	Copyright ZKA Web Services Co, all rights reserved.
  *
  *  ========================================================
  */
@@ -252,17 +252,17 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	GKContext* lineCap(int32_t type) override
+	GKContext* lineCap(GKLineCap type) override
 	{
 		switch (type)
 		{
-		case GKLineCap::GKLineCapNormal:
+		case GKLineCap::kLineCapNormal:
 		default:
 			cairo_set_line_cap(mCairo, CAIRO_LINE_CAP_BUTT);
 			break;
-		case GKLineCap::GKLineCapRounded:
+		case GKLineCap::kLineCapRounded:
 			cairo_set_line_cap(mCairo, CAIRO_LINE_CAP_ROUND);
-		case GKLineCap::GKLineCapSquare:
+		case GKLineCap::kLineCapSquare:
 			cairo_set_line_cap(mCairo, CAIRO_LINE_CAP_SQUARE);
 			break;
 		}

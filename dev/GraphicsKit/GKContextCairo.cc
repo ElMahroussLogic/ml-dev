@@ -22,11 +22,3 @@ GKContext* GKequestContext(GKSizeType feature_sets, BOOL strict, GKReal width, G
 
 	return context;
 }
-
-/// @brief To string method.
-/// @return the class as a string
-const MLString GKContext::toString()
-{
-	MLString ctxBackendJson = MLString("['Backend': 'Cairo']");
-	return ctxBackendJson;
-}

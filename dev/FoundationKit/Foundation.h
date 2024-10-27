@@ -124,7 +124,7 @@ class MLJSONCoder;
 class MLCoder;
 class MLAlert;
 class MLURL;
-class MLXMLMarkup;
+class MLXMLNode;
 class MLApplication;
 class MLThread;
 class MLProcess;
