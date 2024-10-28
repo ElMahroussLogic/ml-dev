@@ -5,13 +5,13 @@
 
 #pragma once
 
-#include <FoundationKit/FoundationKit.h>
-#include <AnimationKit/Private/Private.h>
-#include <GraphicsKit/GraphicsKit.h>
-
 class CAComposerFrame;
 class CAComposerKeyFrame;
 class CAComposerKeyFrameCell;
+
+#include <FoundationKit/FoundationKit.h>
+#include <AnimationKit/Private/Private.h>
+#include <GraphicsKit/GraphicsKit.h>
 
 /// @brief Linear interop helper function.
 /// @param start where to begin

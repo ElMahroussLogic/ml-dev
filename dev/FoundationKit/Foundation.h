@@ -132,6 +132,9 @@ class MLSocket;
 class MLAllocator;
 class MLUUID;
 class MLXMLCoder;
+class MLXMLNode;
+class MLRect;
+class MLPoint;
 
 class MLObject
 {

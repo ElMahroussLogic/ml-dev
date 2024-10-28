@@ -16,7 +16,7 @@ public:
 	explicit IKAbstractControl() = default;
 	virtual IKAbstractControl() = default;
 
-	ML_COPY_DELETE(IKAbstractControl);
+	ML_COPY_DEFAULT(IKAbstractControl);
 
 	virtual const MLString toString()
 	{
