@@ -6,9 +6,7 @@
 
 #pragma once
 
-#include <GraphicsKit/GraphicsKit.h>
-
-class IKAbstractScreen;
+#include <GUIKit/Foundation.h>
 
 class IKAbstractScreen ML_OBJECT
 {

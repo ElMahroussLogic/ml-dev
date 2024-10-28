@@ -6,9 +6,7 @@
 
 #pragma once
 
-#include <GraphicsKit/GraphicsKit.h>
-
-class IKAbstractControl;
+#include <GUIKit/Foundation.h>
 
 class IKAbstractControl ML_OBJECT
 {

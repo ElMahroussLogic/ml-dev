@@ -58,6 +58,8 @@ dev/GUIKit/ListBox.cc
 dev/GUIKit/ListBox.h
 dev/GUIKit/TextBox.cc
 dev/GUIKit/TextBox.h
+dev/GUIKit/View.h
+dev/GUIKit/Window.h
 dev/GraphicsKit/Foundation.h
 dev/GraphicsKit/GKContext.cc
 dev/GraphicsKit/GKContext.h
