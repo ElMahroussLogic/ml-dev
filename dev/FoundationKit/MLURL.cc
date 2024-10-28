@@ -125,7 +125,7 @@ MLInteger MLURL::getProtocol() noexcept
 MLInteger64 MLURL::openPath() noexcept
 {
     std::stringstream ss_url;
-    ss_url << "open ";
+    ss_url << "open "; // 'open' also exists in ZKA.
     ss_url << mPath.asConstBytes();
     
 	return (MLInteger64)std::system(ss_url.str().c_str());

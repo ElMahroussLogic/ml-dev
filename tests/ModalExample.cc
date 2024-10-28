@@ -10,30 +10,30 @@
 #include <FoundationKit/MLURL.h>
 #include <FoundationKit/MLUUID.h>
 
-#ifndef __TOOLCHAINKIT__
+#ifdef __linux__
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
-#endif
+#endif // __linux__
 
 int main(int argc, char** argv)
 {
-#ifndef __TOOLCHAINKIT__
+#ifdef __linux__
 	gtk_init(&argc, &argv);
-#endif
+#endif // __linux__
 
 	MLXMLNode coder("<Phone phone_number=\"0658573014\" region_code=\"+33\">Amlal 📱.</Phone>");
-	auto	   phone = coder.getXMLDataFromMarkup("Phone", 4096, false, false);
+	MLString	   phone = coder.getXMLDataFromMarkup("Phone", 4096, false, false);
 
-	MLLog("%u\n", phone.asBytes());
+	MLLog("%s\n", phone.asBytes());
 
 	MLAlert alert;
 	MLUUID uuid;
 
 	alert.runModal("ZT Framework", "%s %s", "Modal on ZT.", uuid.uuidAsString().asConstBytes());
     
-    MLURL url("https://www.google.com");
-    url.openPath();
+	MLURL url("https://www.google.com");
+	url.openPath();
 
 	return 0;
 }

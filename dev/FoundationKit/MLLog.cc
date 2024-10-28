@@ -54,29 +54,23 @@ ML_IMPORT void MLLog(const char* format, ...)
 				char* msgLog = va_arg(va, char*);
 				fmtStr.replace(index, 2, msgLog);
 			}
-			else if (fmtStr[index + 1] == 'c')
+			else if (fmtStr[index + 1] == 'n')
 			{
 				std::string msgLog;
-				msgLog.push_back(va_arg(va, int));
+				msgLog.push_back(va_arg(va, MLInteger));
 
 				fmtStr.replace(index, 2, msgLog);
 			}
 			else if (fmtStr[index + 1] == 'r')
 			{
 				char buf[4096] = {0};
-				snprintf(buf, 4096, "%f", va_arg(va, double));
+				snprintf(buf, 4096, "%f", va_arg(va, MLReal));
 
 				fmtStr.replace(index, 2, buf);
 			}
-			else if (fmtStr[index + 1] == 'u')
-			{
-				std::string msgLog = va_arg(va, char*);
-
-				fmtStr.replace(index, 2, msgLog);
-			}
 			else if (fmtStr[index + 1] == 'x')
 			{
-				long long numberInsideVarArg = va_arg(va, long long);
+				MLInteger64 numberInsideVarArg = va_arg(va, MLInteger64);
 
 				std::stringstream ss;
 				ss << std::hex << numberInsideVarArg;
@@ -85,9 +79,9 @@ ML_IMPORT void MLLog(const char* format, ...)
 
 				fmtStr.replace(index, 2, hexString);
 			}
-			else if (fmtStr[index + 1] == 'i')
+			else if (fmtStr[index + 1] == 'd')
 			{
-				long long numberInsideVarArg = va_arg(va, long long);
+				MLInteger64 numberInsideVarArg = va_arg(va, MLInteger64);
 
 				fmtStr.replace(index, 2, std::to_string(numberInsideVarArg));
 			}
@@ -95,7 +89,7 @@ ML_IMPORT void MLLog(const char* format, ...)
 			{
 				bool boolInsideVarArg = va_arg(va, int);
 
-				fmtStr.replace(index, 2, boolInsideVarArg ? "yes" : "no");
+				fmtStr.replace(index, 2, boolInsideVarArg ? "YES" : "NO");
 			}
 			else if (fmtStr[index + 1] == 0)
 			{
