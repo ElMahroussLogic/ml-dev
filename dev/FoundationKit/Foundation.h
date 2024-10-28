@@ -60,7 +60,7 @@ typedef unsigned long long int MLUnsignedInteger64;
 typedef long long int		   MLLong;
 typedef void*				   MLPointer;
 typedef long long int		   MLSizeType;
-typedef float				   MLReal;
+typedef double				   MLReal;
 
 /// @brief Exits thread with code.
 /// @param exitCode it's exit code.

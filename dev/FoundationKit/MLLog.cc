@@ -63,8 +63,8 @@ ML_IMPORT void MLLog(const char* format, ...)
 			}
 			else if (fmtStr[index + 1] == 'r')
 			{
-				char buf[4096] = {0};
-				snprintf(buf, 4096, "%f", va_arg(va, MLReal));
+				char buf[64] = {0};
+				snprintf(buf, 64, "%lf", va_arg(va, MLReal));
 
 				fmtStr.replace(index, 2, buf);
 			}
