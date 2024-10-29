@@ -24,7 +24,7 @@
 #define BOOL bool
 #define YES	 true
 #define NO	 false
-#endif // ifndef __APPLE__
+#endif // ifndef OBJC_BOOL_DEFINED
 
 #define ML_OBJECT : public MLObject
 
