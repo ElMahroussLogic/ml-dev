@@ -12,11 +12,8 @@ struct MLRange;
 
 struct MLRange final
 {
-	MLInteger64 location;
-	MLInteger64 length;
+	MLInteger64 location{0UL};
+	MLInteger64 length{0UL};
 
-	operator bool()
-	{
-		return location <= length;
-	}
+	operator bool();
 };

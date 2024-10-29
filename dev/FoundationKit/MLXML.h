@@ -17,11 +17,11 @@ class MLXMLNode;
 class MLXMLCoder;
 
 /// @brief XML node class.
-class MLXMLNode final ML_OBJECT
+class MLXMLNode ML_OBJECT
 {
 public:
-	MLXMLNode(const char* blob);
-	MLXMLNode(const MLString blob);
+	explicit MLXMLNode(const char* blob);
+	explicit MLXMLNode(const MLString blob);
 
 	~MLXMLNode() override;
 
@@ -35,7 +35,7 @@ public:
 	/// @param pureOutput strip \t, \n, \r and spaces if set to true.
 	/// @param getAttribute get attribute instead of value.
 	/// @return
-	MLString getXMLDataFromMarkup(MLString name, MLSizeType valueMaxSz, bool pureOutput = false, bool getAttribute = false);
+	MLString getXMLDataFromMarkup(MLString name, MLSizeType valueMaxSz, BOOL pureOutput = false, BOOL getAttribute = false);
 
 	/// @brief Gets the content of a unique markup.
 	/// @param name the markup name
@@ -43,7 +43,7 @@ public:
 	/// @param pureOutput strip \t, \n, \r and spaces if set to true.
 	/// @param getAttribute get attribute instead of value.
 	/// @return
-	MLString getXMLDataFromMarkup(const MLChar* name, MLSizeType valueMaxSz, bool pureOutput = false, bool getAttribute = false);
+	MLString getXMLDataFromMarkup(const MLChar* name, MLSizeType valueMaxSz, BOOL pureOutput = false, BOOL getAttribute = false);
 
 	/// @brief Cast XML to string.
 	const MLString toString() override;

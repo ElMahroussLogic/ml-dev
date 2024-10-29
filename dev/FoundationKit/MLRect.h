@@ -10,13 +10,10 @@
 
 struct MLRect
 {
-	MLInteger64 x;
-	MLInteger64 y;
-	MLInteger64 width;
-	MLInteger64 height;
+	MLInteger64 x{0UL};
+	MLInteger64 y{0UL};
+	MLInteger64 width{0UL};
+	MLInteger64 height{0UL};
 
-	operator bool()
-	{
-		return width > 0 && height > 0;
-	}
+	operator bool();
 };

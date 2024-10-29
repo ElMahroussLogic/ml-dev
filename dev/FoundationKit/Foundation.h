@@ -162,18 +162,24 @@ public:
 
 	virtual MLObject* getResult()
 	{
-		return nullptr;
+		return mContainedObject;
 	}
 
 	virtual MLCoder& encode(MLObject* obj)
 	{
+		mContainedObject = obj;
 		return *this;
 	}
 
 	virtual MLCoder& decode(MLObject* obj)
 	{
+		mContainedObject = obj;
 		return *this;
 	}
+
+protected:
+	MLObject* mContainedObject{nullptr};
+
 };
 
 #endif

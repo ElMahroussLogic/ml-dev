@@ -22,7 +22,7 @@ MLXMLNode::MLXMLNode(const MLChar* blob)
 MLXMLNode::MLXMLNode(const MLString blob)
 	: mBlob(blob)
 {
-
+	ML_MUST_PASS(mBlob.size() > 0);
 }
 
 MLXMLNode::~MLXMLNode()
@@ -45,7 +45,8 @@ MLString MLXMLNode::getXMLDataFromMarkup(MLString name, MLSizeType bufSz, bool p
 /// @param bufSz the buffer size to allocate
 /// @param pureOutput strip \t, \n, \r and spaces if set to true.
 /// @return MLString the value of **name** as a MLString.
-MLString MLXMLNode::getXMLDataFromMarkup(const MLChar* name, MLSizeType bufSz, bool pureOutput, bool getAttribute)
+MLString MLXMLNode::getXMLDataFromMarkup(const MLChar* name, MLSizeType bufSz,
+										 BOOL pureOutput, BOOL getAttribute)
 {
 	try
 	{
@@ -172,9 +173,9 @@ MLString MLXMLNode::getXMLDataFromMarkup(const MLChar* name, MLSizeType bufSz, b
 
 							if (mBlob[blobIndexAt] == '<')
 							{
-								size_t yCpy = blobIndexAt + 2;
+								MLSizeType yCpy = blobIndexAt + 2;
 
-								for (size_t x = 0; x < strlen(name); ++x)
+								for (MLSizeType nameIndexToMatch = 0; nameIndexToMatch < strlen(name); ++nameIndexToMatch)
 								{
 									if (mBlob[yCpy] == '/')
 									{
@@ -186,7 +187,7 @@ MLString MLXMLNode::getXMLDataFromMarkup(const MLChar* name, MLSizeType bufSz, b
 										break;
 									}
 
-									if (mBlob[yCpy] != name[x])
+									if (mBlob[yCpy] != name[nameIndexToMatch])
 									{
 										noMatch = true;
 										break;
@@ -227,7 +228,7 @@ MLString MLXMLNode::getXMLDataFromMarkup(const MLChar* name, MLSizeType bufSz, b
 		const MLChar* errXml =
 			"<XmlError><Message>%s</Message></XmlError>";
 
-		size_t length_xml = 4096;
+		MLSizeType length_xml = 4096;
 		length_xml += strlen(e.what());
 
 		MLChar* buf = new MLChar[length_xml];
@@ -245,13 +246,13 @@ MLString MLXMLNode::getXMLDataFromMarkup(const MLChar* name, MLSizeType bufSz, b
 
 const MLString MLXMLNode::toString()
 {
-	auto cLen = 4096;
-	cLen += this->mBlob.usedBytes();
+	MLSizeType kLengthOfXML = this->mBlob.usedBytes();
+	kLengthOfXML += this->mBlob.usedBytes();
 
-	MLString xmlAsJsonStr = MLString(cLen);
-	xmlAsJsonStr += "[{ 'name': 'MLXMLNode', 'blob': '";
+	MLString xmlAsJsonStr = MLString(kLengthOfXML);
+	xmlAsJsonStr += "[ 'ClassName': 'MLXMLNode', 'ClassBlob': '";
 
-	for (size_t blobIndex = 0; blobIndex < this->mBlob.size(); blobIndex++)
+	for (MLSizeType blobIndex = 0; blobIndex < this->mBlob.size(); ++blobIndex)
 	{
 		if (this->mBlob[blobIndex] == '\'')
 			xmlAsJsonStr += "\\\\";
@@ -259,7 +260,7 @@ const MLString MLXMLNode::toString()
 			xmlAsJsonStr += this->mBlob[blobIndex];
 	}
 
-	xmlAsJsonStr += "' }]";
+	xmlAsJsonStr += "' ]";
 
 	return xmlAsJsonStr;
 }

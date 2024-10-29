@@ -12,7 +12,7 @@ const MLString MLObject::toString()
 	const auto max_json_len = 255;
 
 	MLString toStrObj = MLString(max_json_len);
-	toStrObj += "[{'name': 'MLObject'}]";
+	toStrObj += "['ClassName': 'MLObject']";
 
 	return toStrObj;
 }

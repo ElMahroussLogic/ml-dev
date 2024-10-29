@@ -57,7 +57,7 @@ bool MLAlert::runModal(const MLChar* title, const MLChar* format, ...)
 /// @param format the message format.
 /// @param va_list params of format.
 /// @return what the user choose.
-int MLAlert::runErrorModal(const MLChar* title, const MLChar* format, ...)
+MLInteger MLAlert::runErrorModal(const MLChar* title, const MLChar* format, ...)
 {
 	va_list va;
 	va_start(va, format);
@@ -70,8 +70,6 @@ int MLAlert::runErrorModal(const MLChar* title, const MLChar* format, ...)
 
 #ifdef _WIN32
 	int isOk = ::MessageBoxA(nullptr, msg, title, MB_ABORTRETRYIGNORE | MB_ICONERROR);
-#elif defined(__APPLE__)
-	auto isOk = !MLAlertBox(msg, title);
 #else
 	auto isOk = !MLAlertBox(title, msg);
 #endif

@@ -9,6 +9,8 @@
 #include <cstring>
 #include <sstream>
 
+#define kURLSeparator '/'
+
 MLURL::MLURL(const MLChar* url)
 	: mPath(strlen(url))
 {
@@ -28,20 +30,20 @@ MLString MLURL::getPath() noexcept
 	constexpr MLInteger bufLen = 4096;
 
 	MLChar		protocolBuf[bufLen];
-	MLInteger64 cnter = 0UL;
+	MLInteger64 cnterIndex = 0UL;
 	MLString	path(bufLen);
 
-	for (MLInteger i = 0U; i < mPath.usedBytes(); ++i)
+	for (MLInteger pathIndex = 0U; pathIndex < mPath.usedBytes(); ++pathIndex)
 	{
-		if (mPath[i] == '/' &&
-			mPath[i - 1] == '/')
+		if (mPath[pathIndex] == kURLSeparator &&
+			mPath[pathIndex - 1] == kURLSeparator)
 		{
-			++i;
+			++pathIndex;
 
-			for (; i < mPath.usedBytes(); ++i)
+			for (; pathIndex < mPath.usedBytes(); ++pathIndex)
 			{
-				protocolBuf[cnter] = mPath[i];
-				++cnter;
+				protocolBuf[cnterIndex] = mPath[pathIndex];
+				++cnterIndex;
 			}
 
 			break;
@@ -60,53 +62,52 @@ MLInteger MLURL::getProtocol() noexcept
 	MLChar*		protocolBuf = new MLChar[bufLen];
 	MLInteger64 cnter		= 0UL;
 
-	for (MLInteger i = 0U; i < mPath.usedBytes(); ++i)
+	for (MLInteger protoIndex = 0U; protoIndex < mPath.usedBytes(); ++protoIndex)
 	{
-		if (mPath[i] == '/' &&
-			mPath[i - 1] == '/')
+		if (mPath[protoIndex] == kURLSeparator &&
+			mPath[protoIndex - 1] == kURLSeparator)
 		{
-			protocolBuf[cnter] = mPath[i];
 			break;
 		}
 
-		protocolBuf[cnter] = mPath[i];
+		protocolBuf[cnter] = mPath[protoIndex];
 		++cnter;
 	}
 
-	if (strcmp("file://", protocolBuf) == 0)
+	if (strcmp("file", protocolBuf) == 0)
 	{
 		delete[] protocolBuf;
 		protocolBuf = nullptr;
 
 		return kFileProtocol;
 	}
-	else if (strcmp("http://", protocolBuf) == 0)
+	else if (strcmp("http", protocolBuf) == 0)
 	{
 		delete[] protocolBuf;
 		protocolBuf = nullptr;
 
 		return kHttpProtocol;
 	}
-	else if (strcmp("https://", protocolBuf) == 0)
+	else if (strcmp("https", protocolBuf) == 0)
 	{
 		delete[] protocolBuf;
 		protocolBuf = nullptr;
 
 		return kHttpsProtocol;
 	}
-	else if (strcmp("zup://", protocolBuf) == 0)
+	else if (strcmp("zup", protocolBuf) == 0)
 	{
 		delete[] protocolBuf;
 		return kZUPProtocol;
 	}
-	else if (strcmp("zka://", protocolBuf) == 0)
+	else if (strcmp("zka", protocolBuf) == 0)
 	{
 		delete[] protocolBuf;
 		protocolBuf = nullptr;
 
 		return kZKAProtocol;
 	}
-	else if (strcmp("param://", protocolBuf) == 0)
+	else if (strcmp("param", protocolBuf) == 0)
 	{
 		delete[] protocolBuf;
 		protocolBuf = nullptr;
@@ -124,9 +125,9 @@ MLInteger MLURL::getProtocol() noexcept
 /// @return MLInteger exit code.
 MLInteger64 MLURL::openPath() noexcept
 {
-    std::stringstream ss_url;
-    ss_url << "open "; // 'open' also exists in ZKA.
-    ss_url << mPath.asConstBytes();
+	std::stringstream ssUrl;
+	ssUrl << "open "; // 'open' also exists in ZKA.
+	ssUrl << mPath.asConstBytes();
 
-	return (MLInteger64)std::system(ss_url.str().c_str());
+	return (MLInteger64)std::system(ssUrl.str().c_str());
 }

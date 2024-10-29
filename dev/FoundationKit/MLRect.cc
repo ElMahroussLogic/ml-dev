@@ -5,3 +5,8 @@
 ------------------------------------------- */
 
 #include <FoundationKit/MLRect.h>
+
+MLRect::operator bool()
+{
+	return width > 0 && height > 0;
+}

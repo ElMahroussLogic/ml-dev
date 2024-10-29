@@ -54,6 +54,7 @@ MLString& MLString::operator+=(const MLChar* text)
 
 	if (sz_rhs == 0)
 		return *this;
+
 	if (mCursor > mSize || sz_rhs > mSize)
 		return *this;
 
