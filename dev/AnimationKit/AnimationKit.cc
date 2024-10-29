@@ -1,7 +1,7 @@
 /*
  * Created on Fri May 17 2024
  *
- * Copyright (c) 2024 ZKA Web Services Co
+ * Copyright (c) 2024 EL Mahrouss Logic
  */
 
 #include <AnimationKit/AnimationKit.h>

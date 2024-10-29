@@ -1,6 +1,6 @@
 /* -------------------------------------------
 
-	Copyright ZKA Web Services Co
+	Copyright EL Mahrouss Logic
 
 ------------------------------------------- */
 
@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 	MLUUID uuid;
 
 	alert.runModal("ZT Framework", "%s %s", "Modal on ZT.", uuid.uuidAsString().asConstBytes());
-    
+
 	MLURL url("https://www.google.com");
 	url.openPath();
 

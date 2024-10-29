@@ -1,7 +1,7 @@
 /*
  * Created on Fri May 10 2024
  * Last Updated: Sun Oct 27 06:55:01 PM CET 2024
- * Copyright (c) 2024 ZKA Web Services Co
+ * Copyright (c) 2024 EL Mahrouss Logic
  */
 
 #pragma once
@@ -199,4 +199,3 @@ GKRequestContext(GKSizeType featureSet, BOOL strict, GKReal width, GKReal height
 /// @param context The context itself.
 /// @return This function returns void.
 ML_IMPORT void GKReleaseContext(GKContext* context);
-

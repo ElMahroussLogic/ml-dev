@@ -1,6 +1,6 @@
 /*
  * AnimationKit
- * Copyright (c) 2024 ZKA Web Services Co
+ * Copyright (c) 2024 EL Mahrouss Logic
  */
 
 #ifndef MLCOMPOSER_H

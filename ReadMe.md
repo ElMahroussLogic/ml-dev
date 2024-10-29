@@ -33,4 +33,4 @@ btb FoundationKit.json # For instance.
 
 You can now use the DLL/SO/DYLIB for your project.
 
-###### Copyright ZKA Web Services Co, all rights reserved.
+###### Copyright EL Mahrouss Logic, all rights reserved.

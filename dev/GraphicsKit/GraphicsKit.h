@@ -1,10 +1,9 @@
 /**
  *
- * Copyright (c) 2024 ZKA Web Services Co
+ * Copyright (c) 2024 EL Mahrouss Logic
  *
  */
 
 #pragma once
 
 #include <GraphicsKit/GKContext.h>
-
