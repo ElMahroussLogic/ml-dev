@@ -58,7 +58,7 @@ MLString MLURL::getPath() noexcept
 /// @return MLInteger the protocol as an enum.
 MLInteger MLURL::getProtocol() noexcept
 {
-	MLInteger	bufLen		= mPath.usedBytes();
+	MLInteger64	bufLen		= mPath.usedBytes();
 	MLChar*		protocolBuf = new MLChar[bufLen];
 	MLInteger64 cnter		= 0UL;
 
@@ -118,7 +118,7 @@ MLInteger MLURL::getProtocol() noexcept
 	delete[] protocolBuf;
 	protocolBuf = nullptr;
 
-	return -1;
+	return kInvalidProtocol;
 }
 
 /// @brief Open path using default app.
