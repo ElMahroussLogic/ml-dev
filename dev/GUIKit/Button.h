@@ -9,11 +9,11 @@
 #include <GUIKit/Foundation.h>
 #include <GUIKit/AbstractControl.h>
 
-class IKButton ML_OBJECT, public IKAbstractControl
+class IKButton IK_CONTROL
 {
 public:
 	explicit IKButton() = default;
-	virtual IKButton() = default;
+	virtual ~IKButton() = default;
 
 	ML_COPY_DEFAULT(IKButton);
 

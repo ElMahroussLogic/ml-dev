@@ -20,7 +20,7 @@ class MLXMLCoder;
 class MLXMLNode ML_OBJECT
 {
 public:
-	explicit MLXMLNode(const char* blob);
+	explicit MLXMLNode(const MLChar* blob);
 	explicit MLXMLNode(const MLString blob);
 
 	~MLXMLNode() override;

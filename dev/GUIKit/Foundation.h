@@ -12,6 +12,7 @@
 
 class IKAbstractControl;
 class IKAbstractScreen;
+class IKFBScreen;
 class IKWindow;
 class IKButton;
 class IKView;

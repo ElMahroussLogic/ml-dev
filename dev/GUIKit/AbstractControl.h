@@ -8,11 +8,13 @@
 
 #include <GUIKit/Foundation.h>
 
+#define IK_CONTROL : public IKAbstractControl
+
 class IKAbstractControl ML_OBJECT
 {
 public:
 	explicit IKAbstractControl() = default;
-	virtual IKAbstractControl() = default;
+	virtual ~IKAbstractControl() = default;
 
 	ML_COPY_DEFAULT(IKAbstractControl);
 
