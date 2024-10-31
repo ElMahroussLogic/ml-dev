@@ -4,11 +4,7 @@ The ZT framework for C++ is the ZKA Web Services's Official SDK.
 </br>
 It can be used to develop:
 
-- Desktop Apps in Mac OS/Windows.
-- Backend Apps in ZKA OS/Linux/Windows.
-- ZKA OS based apps for your IoT, Embedded Solutions.
-- Mobile apps (via NDK on Android or a Bridge header for Obj-C/Swift)
-  - Please note that ARM64 is also supported because of ARM64 releases of ZKA and macOS.
+- Desktop apps for ZKA OS.
 
 ## Installing/Building:
 
