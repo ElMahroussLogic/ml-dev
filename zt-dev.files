@@ -3,6 +3,11 @@ dev/AnimationKit/AnimationKit.h
 dev/AnimationKit/Private/CAComposer.h
 dev/AnimationKit/Private/Private.h
 dev/AnimationKit/build.json
+dev/FontsKit/Inter-Black.ttf
+dev/FontsKit/Inter-Medium.ttf
+dev/FontsKit/Inter-SemiBold.ttf
+dev/FontsKit/Inter-Thin.ttf
+dev/FontsKit/ReadMe.md
 dev/FoundationKit/Foundation.h
 dev/FoundationKit/FoundationKit.h
 dev/FoundationKit/Linux/Linux.h
