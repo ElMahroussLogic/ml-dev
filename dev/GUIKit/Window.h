@@ -8,18 +8,15 @@
 
 #include <GUIKit/Foundation.h>
 
-class IKWindow final ML_OBJECT
+class IKWindow ML_OBJECT
 {
 public:
-	explicit IKWindow() = default;
-	virtual IKWindow() = default;
+	explicit IKWindow();
+	virtual ~IKWindow();
 
 	ML_COPY_DELETE(IKWindow);
 
-	virtual const MLString toString()
-	{
-		return "IKWindow";
-	}
+	virtual const MLString toString();
 
 public:
 	MLPoint fPosition;
