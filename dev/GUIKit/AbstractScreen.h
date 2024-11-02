@@ -18,19 +18,16 @@ public:
 
 	ML_COPY_DELETE(IKAbstractScreen);
 
-	virtual const MLString toString()
-	{
-		return MLString("IKAbstractScreen");
-	}
-
+public:
+	virtual const MLString toString() = 0;
 	virtual void draw() = 0;
 
 public:
-	BOOL shouldDraw{false};
+	BOOL shouldDraw{NO};
 
 protected:
-	MLRect	mDimensions;
-	MLPoint mPosition;
+	MLRect	mFrame;
+	MLPoint mOrigin;
 };
 
 #define kIKMaxDisplayPerWorkstation (14U)

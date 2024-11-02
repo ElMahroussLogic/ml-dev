@@ -7,6 +7,9 @@
 #pragma once
 
 #include <GUIKit/AbstractScreen.h>
+
+#ifdef GUIKIT_USE_CAIRO
+
 #include <cairo/cairo.h>
 
 class IKCairoScreen final IK_SCREEN
@@ -23,3 +26,5 @@ private:
 	MLRect			 mDim;
 	cairo_surface_t* mSurface{nullptr};
 };
+
+#endif // GUIKIT_USE_CAIRO

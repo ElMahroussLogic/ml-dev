@@ -7,15 +7,18 @@
 #include <GUIKit/IKCairoScreen.h>
 #include <cstring>
 
+#ifdef GUIKIT_USE_CAIRO
+
 IKCairoScreen::IKCairoScreen(const MLRect& dimensions, cairo_surface_t* surface)
 {
 	mDim = dimensions;
-	mFramebuffer = new MLInteger8[dim.width * dim.height];
-	mSurface = surface;
-
-	ML_MUST_PASS(mSurface);
-	ML_MUST_PASS(mFramebuffer);
 	ML_MUST_PASS(mDim);
+
+	mFramebuffer = new MLInteger8[mDim.width * mDim.height];
+	ML_MUST_PASS(mFramebuffer);
+
+	mSurface = surface;
+	ML_MUST_PASS(mSurface);
 }
 
 IKCairoScreen::~IKCairoScreen()
@@ -53,3 +56,5 @@ const MLString IKCairoScreen::toString()
 {
 	return MLString("IKCairoScreen");
 }
+
+#endif // ifdef GUIKIT_USE_CAIRO

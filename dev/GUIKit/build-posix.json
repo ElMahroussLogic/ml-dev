@@ -11,5 +11,5 @@
     "$(pkg-config --cflags --libs gtk+-3.0 cairo glib-2.0)",
     "$(pkg-config --cflags --libs gtk+-3.0)"
   ],
-  "cpp_macros": ["__FOUNDATIONKIT__=202401"]
+  "cpp_macros": ["__GUIKIT_=202401"]
 }
