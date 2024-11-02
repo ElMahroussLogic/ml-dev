@@ -20,6 +20,5 @@ public:
 
 public:
 	MLPoint fPosition;
-	MLRect fFrame;
-
+	MLRect	fFrame;
 };

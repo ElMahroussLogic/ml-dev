@@ -16,4 +16,7 @@ struct MLRect
 	MLInteger64 height{0UL};
 
 	operator bool();
+
+	BOOL sizeMatches(MLRect& rect) noexcept;
+	BOOL positionMatches(MLRect& rect) noexcept;
 };

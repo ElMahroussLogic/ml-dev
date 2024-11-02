@@ -14,22 +14,23 @@ class IKAbstractScreen ML_OBJECT
 {
 public:
 	explicit IKAbstractScreen() = default;
-	~IKAbstractScreen() = default;
+	~IKAbstractScreen()			= default;
 
 	ML_COPY_DELETE(IKAbstractScreen);
 
 	virtual const MLString toString()
 	{
-		return "IKAbstractScreen";
+		return MLString("IKAbstractScreen");
 	}
 
 	virtual void draw() = 0;
-	virtual bool shouldDraw() = 0;
+
+public:
+	BOOL shouldDraw{false};
 
 protected:
-	MLRect mDimensions;
+	MLRect	mDimensions;
 	MLPoint mPosition;
-	BOOL mShouldDraw{false};
 };
 
 #define kIKMaxDisplayPerWorkstation (14U)

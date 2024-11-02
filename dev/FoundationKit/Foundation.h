@@ -55,6 +55,7 @@ typedef unsigned char		   MLUtf8Char;
 typedef wchar_t				   MLUtf16Char;
 typedef int					   MLInteger;
 typedef long long int		   MLInteger64;
+typedef unsigned char		   MLInteger8;
 typedef unsigned int		   MLUnsignedInteger;
 typedef unsigned long long int MLUnsignedInteger64;
 typedef long long int		   MLLong;
@@ -179,7 +180,6 @@ public:
 
 protected:
 	MLObject* mContainedObject{nullptr};
-
 };
 
 #endif

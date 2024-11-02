@@ -10,9 +10,9 @@
 
 // DEFINE CORE TYPES
 
-typedef MLReal  CAReal;
+typedef MLReal	   CAReal;
 typedef MLSizeType CASizeT;
-typedef BOOL   CABoolean;
+typedef BOOL	   CABoolean;
 
 // DEFINE CORE ALGORITHMS ENUMS.
 

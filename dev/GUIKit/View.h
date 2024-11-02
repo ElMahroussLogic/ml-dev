@@ -11,7 +11,7 @@
 class IKView ML_OBJECT
 {
 	explicit IKView() = default;
-	virtual IKView() = default;
+	virtual IKView()  = default;
 
 	ML_COPY_DELETE(IKView);
 

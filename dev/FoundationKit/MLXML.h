@@ -11,7 +11,7 @@
 
 /// @brief Standard XML extension.
 inline const char* kXMLExtension = "xml";
-inline const char* kXMLMime = "application/xml";
+inline const char* kXMLMime		 = "application/xml";
 
 class MLXMLNode;
 class MLXMLCoder;

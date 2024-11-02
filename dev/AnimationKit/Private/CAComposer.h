@@ -28,17 +28,17 @@ protected:
 	MLArray<CAComposerKeyFrameCell, kCAMaxFrameCells> mFrames;
 
 public:
-	CAComposer() = default;
+	CAComposer()  = default;
 	~CAComposer() = default;
 
 	ML_COPY_DEFAULT(CAComposer);
 
 public:
-	virtual void setKeyFrame(const MLString name) = 0;
-	virtual MLString getKeyFrame() = 0;
-	virtual MLArray<CAComposerKeyFrameCell, kCAMaxFrameCells> & getFrames() = 0;
-	virtual bool runFrames() = 0;
-	virtual bool runFrameAt(MLInteger64 at) = 0;
+	virtual void											   setKeyFrame(const MLString name) = 0;
+	virtual MLString										   getKeyFrame()					= 0;
+	virtual MLArray<CAComposerKeyFrameCell, kCAMaxFrameCells>& getFrames()						= 0;
+	virtual bool											   runFrames()						= 0;
+	virtual bool											   runFrameAt(MLInteger64 at)		= 0;
 };
 
 #endif // MLCOMPOSER_H

@@ -15,9 +15,9 @@ enum class GKLineCap;
 /// @brief Line cap enum.
 enum class GKLineCap
 {
-	kLineCapNormal,  /// no cap.
+	kLineCapNormal,	 /// no cap.
 	kLineCapRounded, /// rounded cap.
-	kLineCapSquare	  /// square cap.
+	kLineCapSquare	 /// square cap.
 };
 
 /// @brief GraphicsKit context class.
