@@ -3,42 +3,55 @@
  * Copyright (c) 2024 EL Mahrouss Logic
  */
 
-#ifndef MLCOMPOSER_H
-#define MLCOMPOSER_H
+#ifndef AK_CACOMPOSER_H
+#define AK_CACOMPOSER_H
 
 #include <FoundationKit/FoundationKit.h>
 
-#define kCAMaxFrameCells (255)
+/* 255 frames per cells. */
+#define kCAMaxFrameCells (255U)
 
 class CAComposerKeyFrameCell;
-class CAComposerKeyFrame;
+class CAAbstractComposerKeyFrame;
 
-class CAComposerKeyFrameCell final ML_OBJECT
+/// @brief Cell frame structure.
+class CAComposerKeyFrameCell ML_OBJECT
 {
-public:
-	MLString mFrameName;
+protected:
+	MLString mName;
 	MLPoint	 mOrigin;
-	MLRect	 mSize;
-	MLInteger64 (*mAnimationFrame)(CAComposerKeyFrameCell* cell);
+	MLRect	 mScale;
+
+public:
+	explicit CAComposerKeyFrameCell() = default;
+	virtual ~CAComposerKeyFrameCell() = default;
+
+	ML_COPY_DEFAULT(CAComposerKeyFrameCell);
+
+protected:
+	/// @brief Plays the frame of this cell.
+	/// @param composer the CAAbstractComposer parent instance.
+	virtual MLInteger64 playFrame(CAAbstractComposer* composer) = 0;
 };
 
-class CAComposer ML_OBJECT
+class CAAbstractComposer ML_OBJECT
 {
 protected:
 	MLArray<CAComposerKeyFrameCell, kCAMaxFrameCells> mFrames;
 
 public:
-	CAComposer()  = default;
-	~CAComposer() = default;
-
-	ML_COPY_DEFAULT(CAComposer);
+	CAAbstractComposer()  = default;
+	~CAAbstractComposer() = default;
 
 public:
-	virtual void											   setKeyFrame(const MLString name) = 0;
-	virtual MLString										   getKeyFrame()					= 0;
-	virtual MLArray<CAComposerKeyFrameCell, kCAMaxFrameCells>& getFrames()						= 0;
-	virtual bool											   runFrames()						= 0;
-	virtual bool											   runFrameAt(MLInteger64 at)		= 0;
+	ML_COPY_DEFAULT(CAAbstractComposer);
+
+public:
+	virtual void											   setKeyFrameID(const MLString name) = 0;
+	virtual MLString										   getKeyFrameByID()				  = 0;
+	virtual MLArray<CAComposerKeyFrameCell, kCAMaxFrameCells>& getFrames()						  = 0;
+	virtual BOOL											   runFrames()						  = 0;
+	virtual BOOL											   runFrameAt(MLInteger64 at)		  = 0;
 };
 
-#endif // MLCOMPOSER_H
+#endif // AK_CACOMPOSER_H
