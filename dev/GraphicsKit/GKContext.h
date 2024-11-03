@@ -192,8 +192,7 @@ public:
 /// @note if no, please check for feature with operator& inside
 /// GKContext.
 /// @return The new graphics context.
-ML_IMPORT GKContext*
-GKRequestContext(GKSizeType featureSet, BOOL strict, GKReal width, GKReal height);
+ML_IMPORT GKContext* GKRequestContext(GKSizeType featureSet, BOOL strict, GKReal width, GKReal height);
 
 /// @brief Releases a Core Graphics context.
 /// @param context The context itself.

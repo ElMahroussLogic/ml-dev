@@ -19,10 +19,16 @@ const MLString MLObject::toString()
 
 const void MLObject::encode(MLCoder* output)
 {
+    if (!output)
+        return;
+
 	*output = output->encode(this);
 }
 
 const void MLObject::decode(MLCoder* output)
 {
+    if (!output)
+        return;
+
 	*output = output->decode(this);
 }

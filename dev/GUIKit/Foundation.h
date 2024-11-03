@@ -17,6 +17,3 @@ class IKFBScreen;
 class IKWindow;
 class IKButton;
 class IKView;
-
-#define IK_KIT_VERSION_BCD 0x0100
-#define IK_KIT_VERSION_STR "1.0.0"

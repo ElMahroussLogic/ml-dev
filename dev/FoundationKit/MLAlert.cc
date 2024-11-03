@@ -12,10 +12,7 @@
 
 #ifdef _WIN32
 #define _WIN32_IE 0x0300
-
 #include <FoundationKit/Win32/Win32.h>
-#else
-#include <FoundationKit/ZKA/ZKA.h>
 #endif // ifdef _WIN32
 
 #ifdef _WIN32
@@ -28,7 +25,10 @@ ML_IMPORT MLInteger swprintf(
 
 /// @brief Defines the alert modal for the MLKit.
 
+/// @brief C++ constructor.
 MLAlert::MLAlert()	= default;
+
+/// @brief C++ desctructor.
 MLAlert::~MLAlert() = default;
 
 /// @brief Shows a modal with title and message.
@@ -47,7 +47,7 @@ bool MLAlert::runModal(const MLChar* title, const MLChar* format, ...)
 
 	va_end(va);
 
-	auto isOk = !MLAlertBox(title, msg);
+	auto isOk = !::MLAlertBox(title, msg);
 
 	return isOk;
 }
@@ -71,7 +71,7 @@ MLInteger MLAlert::runErrorModal(const MLChar* title, const MLChar* format, ...)
 #ifdef _WIN32
 	int isOk = ::MessageBoxA(nullptr, msg, title, MB_ABORTRETRYIGNORE | MB_ICONERROR);
 #else
-	auto isOk = !MLAlertBox(title, msg);
+	auto isOk = !::MLAlertBox(title, msg);
 #endif
 
 	return isOk;
@@ -91,10 +91,6 @@ bool MLAlert::runModal(const MLChar* message)
 
 const MLString MLAlert::toString()
 {
-	constexpr auto cLen = 4096;
-
-	MLString str = MLString(cLen);
-	str += "{}";
-
+	MLString str = MLString("['ClassName': 'MLAlert']");
 	return str;
 }

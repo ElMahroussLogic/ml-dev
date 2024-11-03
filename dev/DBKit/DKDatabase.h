@@ -4,4 +4,6 @@
  *
  */
 
-#include <DBKit/DBKit.h>
+#pragma once
+ 
+#include <DBKit/Foundation.h>

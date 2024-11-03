@@ -4,7 +4,7 @@
  * Copyright (c) 2024 EL Mahrouss Logic
  */
 
-#include <AnimationKit/AnimationKit.h>
+#include <AnimationKit/Foundation.h>
 
 /// @brief Linear interop helper function.
 /// @param start where to begin
