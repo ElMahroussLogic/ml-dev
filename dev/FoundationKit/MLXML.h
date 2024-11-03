@@ -46,6 +46,7 @@ public:
 	MLString getXMLDataFromMarkup(const MLChar* name, MLSizeType valueMaxSz, BOOL pureOutput = false, BOOL getAttribute = false);
 
 	/// @brief Cast XML to string.
+	/// @return MLString value as JSON.
 	const MLString toString() override;
 
 private:

@@ -8,6 +8,7 @@
     "-fPIC",
     "-shared",
     "-lLinuxFoundation",
+    "-lFoundation",
     "$(pkg-config --cflags --libs gtk+-3.0 cairo glib-2.0)",
     "$(pkg-config --cflags --libs gtk+-3.0)"
   ],

@@ -38,7 +38,7 @@ MLInteger MLRemoveDisplay(MLDisplayRef& display)
 {
     if (display == 0) return 1;
 
-    MLAllocator::shared().dispose((MLDisplay*)display);
+    MLAllocator::shared().dispose<MLDisplay>(reinterpret_cast<MLDisplay*>(display));
     display = 0;
 
     return 0;
