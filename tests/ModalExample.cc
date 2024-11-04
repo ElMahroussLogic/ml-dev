@@ -4,11 +4,14 @@
 
 ------------------------------------------- */
 
+#include "FoundationKit/Foundation.h"
 #include <FoundationKit/MLXML.h>
 #include <FoundationKit/MLAlert.h>
 #include <FoundationKit/MLString.h>
 #include <FoundationKit/MLURL.h>
 #include <FoundationKit/MLUUID.h>
+
+#include <FoundationKit/MLProcess.h>
 
 #ifdef __linux__
 #include <gtk/gtk.h>

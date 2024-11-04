@@ -15,6 +15,11 @@ struct MLDisplay
         : d_name(name)
     {}
 
+    ~MLDisplay() noexcept
+    {
+        d_name.dispose();
+    }
+
     MLString d_name;
     MLPoint d_point;
     MLRect d_frame;
@@ -34,12 +39,14 @@ MLDisplayRef MLCreateDisplay(const MLChar* name, const MLInteger& x, const MLInt
     return *reinterpret_cast<MLDisplayRef*>(object);
 }
 
-MLInteger MLRemoveDisplay(MLDisplayRef& display)
+#define kInvalidAddressAsIntPtr 0UL
+
+BOOL MLRemoveDisplay(MLDisplayRef& display)
 {
-    if (display == 0) return 1;
+    if (display == kInvalidAddressAsIntPtr) return NO;
 
     MLAllocator::shared().dispose<MLDisplay>(reinterpret_cast<MLDisplay*>(display));
     display = 0;
 
-    return 0;
+    return YES;
 }

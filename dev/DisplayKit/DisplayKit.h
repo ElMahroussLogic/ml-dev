@@ -17,4 +17,4 @@ MLDisplayRef MLCreateDisplay(const MLChar* name, const MLInteger& x,
 
 /// @brief Removes a display from the renderables.
 /// @param display display reference.
-MLInteger MLRemoveDisplay(MLDisplayRef& display);
+BOOL MLRemoveDisplay(MLDisplayRef& display);
