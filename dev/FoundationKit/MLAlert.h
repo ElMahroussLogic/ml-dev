@@ -15,6 +15,8 @@ public:
 	explicit MLAlert();
 	~MLAlert() override;
 
+	ML_COPY_DEFAULT(MLAlert);
+
 	MLInteger runErrorModal(const MLChar* title, const MLChar* format, ...);
 	BOOL	  runModal(const MLChar* title, const MLChar* format, ...);
 	BOOL	  runModal(const MLChar* message);
