@@ -1,5 +1,6 @@
 dev/AnimationKit/AnimationKit.cc
 dev/AnimationKit/AnimationKit.h
+dev/AnimationKit/Animator.cc
 dev/AnimationKit/Private/CAComposer.h
 dev/AnimationKit/Private/Private.h
 dev/AnimationKit/build.json
@@ -28,6 +29,8 @@ dev/FoundationKit/MLLog.cc
 dev/FoundationKit/MLObject.cc
 dev/FoundationKit/MLPoint.cc
 dev/FoundationKit/MLPoint.h
+dev/FoundationKit/MLProcess.cc
+dev/FoundationKit/MLProcess.h
 dev/FoundationKit/MLRange.cc
 dev/FoundationKit/MLRange.h
 dev/FoundationKit/MLRect.cc

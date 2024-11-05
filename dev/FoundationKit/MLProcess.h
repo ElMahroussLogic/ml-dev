@@ -12,15 +12,14 @@
 class MLProcess final ML_OBJECT
 {
 public:
-    MLProcess(const MLChar* path, const MLChar* argv, MLChar* const* envp);
-    ~MLProcess() override;
+	MLProcess(const MLChar* path, const MLChar* argv, MLChar* const* envp);
+	~MLProcess() override;
 
-    ML_COPY_DEFAULT(MLProcess);
+	ML_COPY_DEFAULT(MLProcess);
 
-    void exitThread() noexcept;
+	void exitThread() noexcept;
 
 private:
-    MLString mProcessPath;
-    MLInteger64 mProcessHandle{0};
-
+	MLString	mProcessPath;
+	MLInteger64 mProcessHandle{0};
 };

@@ -25,7 +25,6 @@ private:
 	MLInteger8*		 mFramebuffer{nullptr};
 	MLRect			 mDim;
 	cairo_surface_t* mSurface{nullptr};
-    
 };
 
 #endif // GUIKIT_USE_CAIRO

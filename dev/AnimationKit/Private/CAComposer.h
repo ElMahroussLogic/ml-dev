@@ -47,11 +47,11 @@ public:
 	ML_COPY_DEFAULT(CAAbstractComposer);
 
 public:
-	virtual void											   setKeyFrameID(const MLString name) = 0;
-	virtual MLString										   getKeyFrameByID()				  = 0;
-	virtual MLArray<CAComposerKeyFrameCell, kCAMaxFrameCells>& getFrames()						  = 0;
-	virtual BOOL											   runFrames()						  = 0;
-	virtual BOOL											   runFrameAt(MLInteger64 at)		  = 0;
+	virtual void											   setKeyFrameID(const MLString& name) = 0;
+	virtual MLString										   getKeyFrameByID()				   = 0;
+	virtual MLArray<CAComposerKeyFrameCell, kCAMaxFrameCells>& getFrames()						   = 0;
+	virtual BOOL											   runFrames()						   = 0;
+	virtual BOOL											   runFrameAt(const MLInteger64& at)   = 0;
 };
 
 #endif // AK_CACOMPOSER_H

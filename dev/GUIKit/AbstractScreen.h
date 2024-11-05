@@ -20,7 +20,7 @@ public:
 
 public:
 	virtual const MLString toString() = 0;
-	virtual void draw() = 0;
+	virtual void		   draw()	  = 0;
 
 public:
 	BOOL shouldDraw{NO};
