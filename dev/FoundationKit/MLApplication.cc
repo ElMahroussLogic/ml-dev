@@ -1,6 +1,6 @@
 /* -------------------------------------------
 
-	Copyright Amlal EL Mahrouss
+	Copyright (C) 2024, EL Mahrouss Logic, all rights reserved
 
 ------------------------------------------- */
 
@@ -81,5 +81,5 @@ const MLString MLApplication::toString()
 void MLApplication::showAboutModal() noexcept
 {
 	MLAlert alert;
-	alert.runModal("FoundationKit", "%s\n%s", "FoundationKit Framework", "Copyright Amlal EL Mahrouss, all rights reserved.");
+	alert.runModal("FoundationKit", "%s\n%s", "FoundationKit Framework", "Copyright (C) 2024, EL Mahrouss Logic, all rights reserved, all rights reserved.");
 }

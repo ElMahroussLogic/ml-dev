@@ -1,6 +1,6 @@
 # ZT Framework.
 
-The ZT framework for C++ is the ZKA Web Services's Official SDK.
+The ZT framework for C++ is the minOS's official framework.
 </br>
 It can be used to develop:
 
@@ -29,4 +29,4 @@ btb FoundationKit.json # For instance.
 
 You can now use the DLL/SO/DYLIB for your project.
 
-###### Copyright Amlal EL Mahrouss, all rights reserved.
+###### Copyright (C) 2024, EL Mahrouss Logic, all rights reserved, all rights reserved.
