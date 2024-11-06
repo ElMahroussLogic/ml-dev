@@ -1,11 +1,21 @@
 dev/AnimationKit/AnimationKit.cc
 dev/AnimationKit/AnimationKit.h
 dev/AnimationKit/Animator.cc
+dev/AnimationKit/Foundation.h
 dev/AnimationKit/Private/CAComposer.h
 dev/AnimationKit/Private/Private.h
+dev/AnimationKit/build-posix.json
 dev/AnimationKit/build.json
 dev/DBKit/DBKit.cc
 dev/DBKit/DBKit.h
+dev/DBKit/DKDatabase.h
+dev/DBKit/Foundation.h
+dev/DisplayKit/DisplayKit.h
+dev/DisplayKit/DisplayMgr.cc
+dev/DisplayKit/build-posix.json
+dev/DriverKit/DeviceInterface.h
+dev/DriverKit/Foundation.h
+dev/DriverKit/Port.h
 dev/FontsKit/Inter-Black.ttf
 dev/FontsKit/Inter-Medium.ttf
 dev/FontsKit/Inter-SemiBold.ttf
@@ -44,6 +54,8 @@ dev/FoundationKit/MLUUID.h
 dev/FoundationKit/MLXML.cc
 dev/FoundationKit/MLXML.h
 dev/FoundationKit/MacOS/MacOS.h
+dev/FoundationKit/MacOS/MacOSAlert.mm
+dev/FoundationKit/MacOS/MacOSExit.mm
 dev/FoundationKit/MacOS/build.json
 dev/FoundationKit/Win32/GDI.h
 dev/FoundationKit/Win32/Win32.cc
@@ -53,6 +65,7 @@ dev/FoundationKit/Win32/build.json
 dev/FoundationKit/ZKA/ZKA.h
 dev/FoundationKit/ZKA/ZKAAlert.cc
 dev/FoundationKit/build-mac.json
+dev/FoundationKit/build-posix.json
 dev/FoundationKit/build-unix.json
 dev/GUIKit/AbstractControl.h
 dev/GUIKit/AbstractScreen.h
@@ -70,6 +83,7 @@ dev/GUIKit/TextBox.cc
 dev/GUIKit/TextBox.h
 dev/GUIKit/View.h
 dev/GUIKit/Window.h
+dev/GUIKit/build-posix.json
 dev/GraphicsKit/Foundation.h
 dev/GraphicsKit/GKContext.cc
 dev/GraphicsKit/GKContext.h
@@ -77,7 +91,10 @@ dev/GraphicsKit/GKContextCairo.cc
 dev/GraphicsKit/GraphicsKit.h
 dev/GraphicsKit/Private/GKContextCairo.inl
 dev/GraphicsKit/Private/Private.h
+dev/GraphicsKit/build-mac.json
+dev/GraphicsKit/build-posix.json
 dev/GraphicsKit/build-unix.json
+dev/modulemap.conf
 tests/ModalExample.cc
 tests/build-linux.json
 tests/build-mac.json
