@@ -12,7 +12,6 @@
 *.pef
 *.ae
 *.lib
-*.svg
 
 html
 latex
