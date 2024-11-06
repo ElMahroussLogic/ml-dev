@@ -47,7 +47,7 @@ MLApplication& MLApplication::shared()
 /// @return the field's value.
 const MLString MLApplication::getAppField(MLString fieldName, MLSizeType fieldLen)
 {
-	constexpr auto kPkgPath = "/ML/Manifests/plist.xml";
+	constexpr auto kPkgPath = "/ML/Resources/plist.xml";
 
 	auto baseAppPath = std::filesystem::current_path().string();
 	baseAppPath += kPkgPath;
