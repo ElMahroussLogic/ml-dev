@@ -4,20 +4,20 @@
  * Copyright (c) 2024 EL Mahrouss Logic
  */
 
-#include <GraphicsKit/GKContext.h>
+#include <GraphicsKit/GKContextInterface.h>
 
 /// @brief To string method.
 /// @return the class as a string
-const MLString GKContext::toString()
+const MLString GKContextInterface::toString()
 {
-	MLString ctxBackendJson = MLString("['ClassName': 'GKContext']");
+	MLString ctxBackendJson = MLString("['ClassName': 'GKContextInterface']");
 	return ctxBackendJson;
 }
 
 /// @brief Releases a GraphicsKit context.
 /// @param context The context itself.
 /// @return This function returns void.
-void GKReleaseContext(GKContext* context)
+void GKReleaseContext(GKContextInterface* context)
 {
 	if (context)
 	{

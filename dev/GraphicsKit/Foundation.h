@@ -8,4 +8,4 @@
 
 #include <GraphicsKit/Private/Private.h>
 #include <FoundationKit/MLPoint.h>
-#include <GraphicsKit/GKContext.h>
+#include <GraphicsKit/GKContextInterface.h>

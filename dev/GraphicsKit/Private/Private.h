@@ -16,6 +16,7 @@
 
 /// CORE MACROS ///
 
+#define kMathPI 3.14159265358979323846
 #define kRsrcProtocol "gk://"
 
 /// CORE TYPES ///
@@ -29,14 +30,15 @@ typedef BOOL	   GKBoolean;
 /// CORE FUNCTIONS ///
 
 /// @brief Fetch resource as a string.
-/// @param input
+/// @param input resource path.
 /// @return the resource as a string.
-inline const MLString gk_rsrc_path(const char* input)
+inline const MLString gk_rsrc_path(const MLChar* input)
 {
+	MLString textNil(1);
+
 	/// if input is invalid...
 	if (!input)
 	{
-		MLString textNil(1);
 		return textNil;
 	}
 
@@ -45,13 +47,11 @@ inline const MLString gk_rsrc_path(const char* input)
 	if (*input == 0 ||
 		!std::filesystem::exists(input))
 	{
-		return textPath;
+		return textNil;
 	}
-	else
-	{
-		textPath += kRsrcProtocol;
-		textPath += input;
-	}
+
+	textPath += kRsrcProtocol;
+	textPath += input;
 
 	return textPath;
 }

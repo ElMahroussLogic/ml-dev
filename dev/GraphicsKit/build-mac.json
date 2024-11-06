@@ -10,5 +10,5 @@
     "-lFoundationKit",
     "-lLinuxFoundation"
   ],
-  "cpp_macros": ["__GRAPHICSKIT__=202401"]
+  "cpp_macros": ["__GRAPHICSKIT__=202401", "GK_CAIRO_SUPPORT"]
 }

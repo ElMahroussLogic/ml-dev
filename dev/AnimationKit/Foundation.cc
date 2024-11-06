@@ -22,7 +22,7 @@ ML_IMPORT CAReal CALerp(CAReal start, CAReal end, CAReal status)
 /// @param b Blue channel.
 /// @param a Alpha channel.
 /// @return CAReal the returned alpha.
-ML_IMPORT CAReal CAFadeIn(CAReal red, CAReal green, CAReal blue, CAReal alpha, GKContext* cg_ctx, CAReal width, CAReal height)
+ML_IMPORT CAReal CAFadeIn(CAReal red, CAReal green, CAReal blue, CAReal alpha, GKContextInterface* cg_ctx, CAReal width, CAReal height)
 {
 	if (!cg_ctx)
 	{
@@ -44,7 +44,7 @@ ML_IMPORT CAReal CAFadeIn(CAReal red, CAReal green, CAReal blue, CAReal alpha, G
 /// @param blue Blue channel.
 /// @param alpha Alpha channel.
 /// @return CAReal the returned alpha.
-ML_IMPORT CAReal CAFadeOut(CAReal red, CAReal green, CAReal blue, CAReal alpha, GKContext* cg_ctx, CAReal width, CAReal height)
+ML_IMPORT CAReal CAFadeOut(CAReal red, CAReal green, CAReal blue, CAReal alpha, GKContextInterface* cg_ctx, CAReal width, CAReal height)
 {
 	if (!cg_ctx)
 	{

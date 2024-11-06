@@ -85,8 +85,8 @@ dev/GUIKit/View.h
 dev/GUIKit/Window.h
 dev/GUIKit/build-posix.json
 dev/GraphicsKit/Foundation.h
-dev/GraphicsKit/GKContext.cc
-dev/GraphicsKit/GKContext.h
+dev/GraphicsKit/GKContextInterface.cc
+dev/GraphicsKit/GKContextInterface.h
 dev/GraphicsKit/GKContextCairo.cc
 dev/GraphicsKit/GraphicsKit.h
 dev/GraphicsKit/Private/GKContextCairo.inl
