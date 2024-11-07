@@ -10,12 +10,10 @@
 
 #ifdef GUIKIT_USE_IBKIT
 
-#include <IBKit/IBKit.h>
-
 class IKIBScreen final IK_SCREEN
 {
 public:
-	IKIBScreen(const MLRect& dim, ib_surface_t* surface);
+	IKIBScreen(const MLRect& dim, MLInteger8* surface);
 	~IKIBScreen() override;
 
 	const MLString toString() override;
@@ -23,8 +21,8 @@ public:
 
 private:
 	MLInteger8*		 mFramebuffer{nullptr};
-	MLRect			 mDim;
-	ib_surface_t* mSurface{nullptr};
+	MLInteger8*      mTargetFramebuffer{nullptr};
+	MLRect			 mFrame;
 };
 
 #endif // GUIKIT_USE_CAIRO

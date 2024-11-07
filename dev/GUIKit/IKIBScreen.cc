@@ -9,16 +9,16 @@
 
 #ifdef GUIKIT_USE_IBKIT
 
-IKIBScreen::IKIBScreen(const MLRect& dimensions, ib_surface_t* surface)
+IKIBScreen::IKIBScreen(const MLRect& dimensions, MLInteger8* framebuffer)
 {
-	mDim = dimensions;
-	ML_MUST_PASS(mDim);
+	mFrame = dimensions;
+	ML_MUST_PASS(mFrame);
 
-	mFramebuffer = new MLInteger8[mDim.width * mDim.height];
+	mTargetFramebuffer = framebuffer;
+	ML_MUST_PASS(mTargetFramebuffer);
+
+	mFramebuffer = new MLInteger8[mFrame.width * mFrame.height];
 	ML_MUST_PASS(mFramebuffer);
-
-	mSurface = surface;
-	ML_MUST_PASS(mSurface);
 }
 
 IKIBScreen::~IKIBScreen()
@@ -35,20 +35,7 @@ void IKIBScreen::draw()
 {
 	if (this->shouldDraw)
 	{
-		MLInteger tex_w = ib_image_surface_get_width(mSurface);
-		MLInteger tex_h = ib_image_surface_get_height(mSurface);
-
-		MLInteger8* dataOfIB = ib_image_surface_get_data(mSurface);
-
-		MLRect texDim;
-
-		texDim.width = tex_w;
-		texDim.height = tex_h;
-
-		if (mDim.sizeMatches(texDim))
-		{
-			memcpy(mFramebuffer, dataOfIB, tex_w * tex_h);
-		}
+		memcpy(mFramebuffer, mTargetFramebuffer, mFrame.width * mFrame.height);
 	}
 }
 

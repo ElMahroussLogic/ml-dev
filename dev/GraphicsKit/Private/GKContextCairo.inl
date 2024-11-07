@@ -568,4 +568,4 @@ GKContextCairo::~GKContextCairo()
 	this->end();
 }
 
-/// TODO: Cairo as GX.framework
+/// TODO: Cairo as Cairo.fwrk

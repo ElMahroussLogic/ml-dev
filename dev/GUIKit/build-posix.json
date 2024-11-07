@@ -1,7 +1,7 @@
 {
   "compiler_path": "g++",
   "compiler_std": "c++20",
-  "headers_path": ["../"],
+  "headers_path": ["../", "../../ibkit-dev/dev"],
   "sources_path": ["*.cc"],
   "output_name": "/usr/lib/libGUIKit.so",
   "compiler_flags": [
@@ -12,5 +12,5 @@
     "$(pkg-config --cflags --libs gtk+-3.0 cairo glib-2.0)",
     "$(pkg-config --cflags --libs gtk+-3.0)"
   ],
-  "cpp_macros": ["__GUIKIT__=202401"]
+  "cpp_macros": ["__GUIKIT__=202401", "GUIKIT_USE_IBKIT", "GUIKIT_USE_CAIRO"]
 }
