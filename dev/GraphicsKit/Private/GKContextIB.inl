@@ -10,21 +10,19 @@
 #pragma once
 
 #include <GraphicsKit/Foundation.h>
-#include <cairo/cairo-svg.h>
-#include <cairo/cairo-pdf.h>
-#include <cairo/cairo.h>
+#include <IBKit/IBKit.h>
 #include <filesystem>
 
-/// @file: GKContextCairo.inl
+/// @file: GKContextIB.inl
 /// @brief: Cairo backend for multiplatform code.
 /// @note: Cairo will be used for SVG rendering. so that an AbstractScreen can render it.
 
 /// @brief Cairo implement of GraphicsKit.
-class GKContextCairo : public GKContextInterface
+class GKContextIB : public GKContextInterface
 {
 public:
-	GKContextCairo(const GKReal width, const GKReal height);
-	~GKContextCairo();
+	GKContextIB(const GKReal width, const GKReal height);
+	~GKContextIB();
 
 public:
 	/// @brief Grants a new feature to Context.
@@ -80,7 +78,7 @@ public:
 
 	GKContextInterface* move(GKReal X, GKReal Y) override
 	{
-		cairo_move_to(mCairo, X, Y);
+		ib_move_to(mIB, X, Y);
 
 		mX = X;
 		mY = Y;
@@ -94,25 +92,25 @@ public:
 	{
 		if (Center)
 		{
-			cairo_text_extents_t extents;
-			cairo_font_extents_t font_extents;
+			ib_text_extents_t extents;
+			ib_font_extents_t font_extents;
 
-			cairo_text_extents(mCairo, T, &extents);
-			cairo_font_extents(mCairo, &font_extents);
+			ib_text_extents(mIB, T, &extents);
+			ib_font_extents(mIB, &font_extents);
 
 			// Calculate the position to center the text
 			double x_center = X + (W - extents.width) / 2 - extents.x_bearing;
 			double y_center = Y + (H - font_extents.height) / 2 + font_extents.ascent;
 
 			// Move to the calculated position and show the text
-			cairo_move_to(mCairo, x_center, y_center);
+			ib_move_to(mIB, x_center, y_center);
 		}
 
-		cairo_show_text(mCairo, T);
+		ib_show_text(mIB, T);
 
 		if (Center)
 		{
-			cairo_move_to(mCairo, mX, mY);
+			ib_move_to(mIB, mX, mY);
 		}
 
 		return this;
@@ -122,7 +120,7 @@ public:
 
 	GKContextInterface* fontFamily(const GKChar* T, const bool isBold) override
 	{
-		cairo_select_font_face(mCairo, T, CAIRO_FONT_SLANT_NORMAL,
+		ib_select_font_face(mIB, T, CAIRO_FONT_SLANT_NORMAL,
 							   isBold ? CAIRO_FONT_WEIGHT_BOLD
 									  : CAIRO_FONT_WEIGHT_NORMAL);
 		return this;
@@ -132,7 +130,7 @@ public:
 
 	GKContextInterface* fontSize(const GKReal T) override
 	{
-		cairo_set_font_size(mCairo, T);
+		ib_set_font_size(mIB, T);
 		return this;
 	}
 
@@ -154,7 +152,7 @@ public:
 		}
 
 		memcpy(mOutputPath, strPath.c_str(), strPath.size());
-		mSurface = cairo_pdf_surface_create(mOutputPath, mWidth, mHeight);
+		mSurface = ib_pdf_surface_create(mOutputPath, mWidth, mHeight);
 
 		return this;
 	}
@@ -175,7 +173,7 @@ public:
 		}
 
 		memcpy(mOutputPath, strPath.c_str(), strPath.size());
-		mSurface = cairo_svg_surface_create(mOutputPath, mWidth, mHeight);
+		mSurface = ib_svg_surface_create(mOutputPath, mWidth, mHeight);
 
 		return this;
 	}
@@ -184,7 +182,7 @@ public:
 
 	GKContextInterface* color(GKReal R, GKReal G, GKReal B, GKReal A) override
 	{
-		cairo_set_source_rgba(mCairo, R, G, B, A);
+		ib_set_source_rgba(mIB, R, G, B, A);
 		return this;
 	}
 
@@ -192,8 +190,8 @@ public:
 
 	GKContextInterface* stroke(GKReal strokeStrength) override
 	{
-		cairo_set_line_width(mCairo, strokeStrength);
-		cairo_stroke(mCairo);
+		ib_set_line_width(mIB, strokeStrength);
+		ib_stroke(mIB);
 		return this;
 	}
 
@@ -203,8 +201,8 @@ public:
 	{
 		if (radius == 0.0)
 		{
-			cairo_rectangle(mCairo, mX, mY, width, height);
-			cairo_paint(mCairo);
+			ib_rectangle(mIB, mX, mY, width, height);
+			ib_paint(mIB);
 
 			return this;
 		}
@@ -214,24 +212,24 @@ public:
 
 		double degrees = kMathPI / 180.0;
 
-		cairo_new_sub_path(mCairo);
+		ib_new_sub_path(mIB);
 
 		GKReal x = mX;
 		GKReal y = mY;
 
-		cairo_arc(mCairo, x + width - radius, y + radius, radius, -90 * degrees,
+		ib_arc(mIB, x + width - radius, y + radius, radius, -90 * degrees,
 				  0 * degrees);
-		cairo_arc(mCairo, x + width - radius, y + height - radius, radius, 0 * degrees,
+		ib_arc(mIB, x + width - radius, y + height - radius, radius, 0 * degrees,
 				  90 * degrees);
-		cairo_arc(mCairo, x + radius, y + height - radius, radius, 90 * degrees,
+		ib_arc(mIB, x + radius, y + height - radius, radius, 90 * degrees,
 				  180 * degrees);
-		cairo_arc(mCairo, x + radius, y + radius, radius, 180 * degrees, 270 * degrees);
+		ib_arc(mIB, x + radius, y + radius, radius, 180 * degrees, 270 * degrees);
 
-		cairo_close_path(mCairo);
+		ib_close_path(mIB);
 
-		cairo_fill_preserve(mCairo);
+		ib_fill_preserve(mIB);
 
-		cairo_paint(mCairo);
+		ib_paint(mIB);
 
 		return this;
 	}
@@ -240,7 +238,7 @@ public:
 
 	GKContextInterface* lineTo(GKReal start, GKReal finish) override
 	{
-		cairo_line_to(mCairo, start, finish);
+		ib_line_to(mIB, start, finish);
 
 		return this;
 	}
@@ -253,12 +251,12 @@ public:
 		{
 		case GKLineCap::kLineCapNormal:
 		default:
-			cairo_set_line_cap(mCairo, CAIRO_LINE_CAP_BUTT);
+			ib_set_line_cap(mIB, CAIRO_LINE_CAP_BUTT);
 			break;
 		case GKLineCap::kLineCapRounded:
-			cairo_set_line_cap(mCairo, CAIRO_LINE_CAP_ROUND);
+			ib_set_line_cap(mIB, CAIRO_LINE_CAP_ROUND);
 		case GKLineCap::kLineCapSquare:
-			cairo_set_line_cap(mCairo, CAIRO_LINE_CAP_SQUARE);
+			ib_set_line_cap(mIB, CAIRO_LINE_CAP_SQUARE);
 			break;
 		}
 
@@ -273,7 +271,7 @@ public:
 								GKSizeType width,
 								GKSizeType height) override
 	{
-		cairo_surface_t* tmp;
+		ib_surface_t* tmp;
 		int				 src_stride, dst_stride;
 		long long		 x, y, z, w;
 		uint8_t *		 src, *dst;
@@ -284,12 +282,12 @@ public:
 		const int		 half = size / 2;
 
 		if (!mSurface)
-			mSurface = cairo_get_target(mCairo);
+			mSurface = ib_get_target(mIB);
 
-		if (cairo_surface_status(mSurface))
+		if (ib_surface_status(mSurface))
 			return this;
 
-		switch (cairo_image_surface_get_format(mSurface))
+		switch (ib_image_surface_get_format(mSurface))
 		{
 		case CAIRO_FORMAT_A1:
 		default:
@@ -311,17 +309,17 @@ public:
 		}
 		}
 
-		tmp = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, mWidth,
+		tmp = ib_image_surface_create(CAIRO_FORMAT_ARGB32, mWidth,
 										 mHeight);
 
-		if (cairo_surface_status(tmp))
+		if (ib_surface_status(tmp))
 			return this;
 
-		src		   = cairo_image_surface_get_data(mSurface);
-		src_stride = cairo_image_surface_get_stride(mSurface);
+		src		   = ib_image_surface_get_data(mSurface);
+		src_stride = ib_image_surface_get_stride(mSurface);
 
-		dst		   = cairo_image_surface_get_data(tmp);
-		dst_stride = cairo_image_surface_get_stride(tmp);
+		dst		   = ib_image_surface_get_data(tmp);
+		dst_stride = ib_image_surface_get_stride(tmp);
 
 		a = 0;
 		for (i = 0; i < size; i++)
@@ -411,9 +409,9 @@ public:
 			}
 		}
 
-		cairo_surface_destroy(tmp);
+		ib_surface_destroy(tmp);
 
-		cairo_surface_mark_dirty(mSurface);
+		ib_surface_mark_dirty(mSurface);
 
 		return this;
 	}
@@ -444,17 +442,17 @@ public:
 
 			cPathReal = strPath;
 
-			auto image = cairo_image_surface_create_from_png(strPath.c_str());
-			cairo_set_source_surface(mCairo, image, X, Y);
+			auto image = ib_image_surface_create_from_png(strPath.c_str());
+			ib_set_source_surface(mIB, image, X, Y);
 
-			cairo_paint(mCairo);
+			ib_paint(mIB);
 		}
 		else
 		{
-			auto image = cairo_image_surface_create_from_png(cPathReal.c_str());
-			cairo_set_source_surface(mCairo, image, X, Y);
+			auto image = ib_image_surface_create_from_png(cPathReal.c_str());
+			ib_set_source_surface(mIB, image, X, Y);
 
-			cairo_paint(mCairo);
+			ib_paint(mIB);
 		}
 
 		return this;
@@ -462,17 +460,17 @@ public:
 
 	GKContextInterface* scale(GKReal X, GKReal Y) override
 	{
-		cairo_scale(mCairo, X, Y);
+		ib_scale(mIB, X, Y);
 		return this;
 	}
 
 	/// @note placeholder for now.
 	GKContextInterface* start() override
 	{
-		if (mCairo)
+		if (mIB)
 			return this;
 
-		mCairo = cairo_create(mSurface);
+		mIB = ib_create(mSurface);
 
 		return this;
 	}
@@ -481,8 +479,8 @@ public:
 	/// @return
 	GKContextInterface* present(GKReal r, GKReal g, GKReal b) override
 	{
-		cairo_set_source_rgb(mCairo, r, g, b);
-		cairo_paint(mCairo);
+		ib_set_source_rgb(mIB, r, g, b);
+		ib_paint(mIB);
 
 		return this;
 	}
@@ -491,19 +489,19 @@ public:
 	/// @brief End draw command.
 	GKContextInterface* end() override
 	{
-		if (!mSurface || !mCairo)
+		if (!mSurface || !mIB)
 			return this;
 
 		if (!mCustomSurface && mSurface)
 		{
-			cairo_surface_destroy(mSurface);
+			ib_surface_destroy(mSurface);
 			mSurface = nullptr;
 		}
 
-		if (!mCustomCairo && mCairo)
+		if (!mCustomCairo && mIB)
 		{
-			cairo_destroy(mCairo);
-			mCairo = nullptr;
+			ib_destroy(mIB);
+			mIB = nullptr;
 		}
 
 		return this;
@@ -513,7 +511,7 @@ public:
 	/// @param PvtCtx The cairo context.
 	void leak(void*** pvtCtx) override
 	{
-		*pvtCtx = (void**)&mCairo;
+		*pvtCtx = (void**)&mIB;
 	}
 
 	/// @brief
@@ -521,7 +519,7 @@ public:
 	/// @return
 	GKContextInterface* pageLabel(const GKChar* T) override
 	{
-		cairo_pdf_surface_set_page_label(mSurface, T);
+		ib_pdf_surface_set_page_label(mSurface, T);
 		return this;
 	}
 
@@ -530,17 +528,17 @@ public:
 	/// @return
 	GKContextInterface* thumbnailSize(const int Width, const int Height) override
 	{
-		cairo_pdf_surface_set_thumbnail_size(mSurface, Width, Height);
+		ib_pdf_surface_set_thumbnail_size(mSurface, Width, Height);
 		return this;
 	}
 
 private:
-	typedef cairo_surface_t* GKSurfacePtr;
-	typedef cairo_t*		 GKPtr;
+	typedef ib_surface_t* GKSurfacePtr;
+	typedef ib_t*		 GKPtr;
 
 	GKSizeType		 mContextFlags{0};
 	GKSurfacePtr mSurface{nullptr};
-	GKPtr		 mCairo{nullptr};
+	GKPtr		 mIB{nullptr};
 	GKReal		 mWidth{0};
 	GKReal		 mHeight{0};
 	GKChar	 mOutputPath[255] = {0};
@@ -555,7 +553,7 @@ private:
 /// @brief Cairo context constructor.
 /// @param width the width.
 /// @param height the height.
-GKContextCairo::GKContextCairo(const GKReal width,
+GKContextIB::GKContextIB(const GKReal width,
 													   const GKReal height)
 	: mWidth(width), mHeight(height)
 {
@@ -563,7 +561,7 @@ GKContextCairo::GKContextCairo(const GKReal width,
 }
 
 /// @brief C++ destrcutor, the End() method is called as well.
-GKContextCairo::~GKContextCairo()
+GKContextIB::~GKContextIB()
 {
 	this->end();
 }

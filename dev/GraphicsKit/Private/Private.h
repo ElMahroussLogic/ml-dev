@@ -1,7 +1,7 @@
 /*
  * Created on Thu May 16 2024
  * Last Edited: Fri Oct 25 08:51:19 AM CEST 2024
- * Copyright (c) 2024 Amlal EL Mahrouss
+ * Copyright (c) 2024 EL Mahrouss Logic
  */
 
 #pragma once
@@ -24,7 +24,7 @@
 typedef MLReal	   GKReal;
 typedef MLSizeType GKSizeType;
 typedef MLInteger  GKInteger;
-typedef MLChar	   GKCharacter;
+typedef MLChar	   GKChar;
 typedef BOOL	   GKBoolean;
 
 /// CORE FUNCTIONS ///

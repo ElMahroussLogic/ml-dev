@@ -4,12 +4,12 @@
  *
  */
 
-#include <GUIKit/IKCairoScreen.h>
+#include <GUIKit/IKIBScreen.h>
 #include <cstring>
 
-#ifdef GUIKIT_USE_CAIRO
+#ifdef GUIKIT_USE_IBKIT
 
-IKCairoScreen::IKCairoScreen(const MLRect& dimensions, cairo_surface_t* surface)
+IKIBScreen::IKIBScreen(const MLRect& dimensions, ib_surface_t* surface)
 {
 	mDim = dimensions;
 	ML_MUST_PASS(mDim);
@@ -21,7 +21,7 @@ IKCairoScreen::IKCairoScreen(const MLRect& dimensions, cairo_surface_t* surface)
 	ML_MUST_PASS(mSurface);
 }
 
-IKCairoScreen::~IKCairoScreen()
+IKIBScreen::~IKIBScreen()
 {
 	if (mFramebuffer)
 	{
@@ -31,14 +31,14 @@ IKCairoScreen::~IKCairoScreen()
 }
 
 
-void IKCairoScreen::draw()
+void IKIBScreen::draw()
 {
 	if (this->shouldDraw)
 	{
-		MLInteger tex_w = cairo_image_surface_get_width(mSurface);
-		MLInteger tex_h = cairo_image_surface_get_height(mSurface);
+		MLInteger tex_w = ib_image_surface_get_width(mSurface);
+		MLInteger tex_h = ib_image_surface_get_height(mSurface);
 
-		MLInteger8* data = cairo_image_surface_get_data(mSurface);
+		MLInteger8* dataOfIB = ib_image_surface_get_data(mSurface);
 
 		MLRect texDim;
 
@@ -47,14 +47,14 @@ void IKCairoScreen::draw()
 
 		if (mDim.sizeMatches(texDim))
 		{
-			memcpy(mFramebuffer, data, tex_w * tex_h);
+			memcpy(mFramebuffer, dataOfIB, tex_w * tex_h);
 		}
 	}
 }
 
-const MLString IKCairoScreen::toString()
+const MLString IKIBScreen::toString()
 {
-	return MLString("IKCairoScreen");
+	return MLString("IKIBScreen");
 }
 
 #endif // ifdef GUIKIT_USE_CAIRO

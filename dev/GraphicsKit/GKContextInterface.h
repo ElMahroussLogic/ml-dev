@@ -1,7 +1,7 @@
 /*
  * Created on Fri May 10 2024
  * Last Updated: Sun Oct 27 06:55:01 PM CET 2024
- * Copyright (c) 2024 Amlal EL Mahrouss
+ * Copyright (c) 2024 EL Mahrouss Logic
  */
 
 #pragma once
@@ -59,13 +59,13 @@ public:
 	/// @param W the width.
 	/// @param H the height.
 	/// @return the context.
-	virtual GKContextInterface* text(const GKCharacter* Text, GKBoolean Center, GKReal X = 0.0, GKReal Y = 0.0, GKReal W = 0.0, GKReal H = 0.0) = 0;
+	virtual GKContextInterface* text(const GKChar* Text, GKBoolean Center, GKReal X = 0.0, GKReal Y = 0.0, GKReal W = 0.0, GKReal H = 0.0) = 0;
 
 	/// @brief Set font.
 	/// @param T font name
 	/// @param isBold should the font be bold?
 	/// @return The graphics context.
-	virtual GKContextInterface* fontFamily(const GKCharacter* Text,
+	virtual GKContextInterface* fontFamily(const GKChar* Text,
 										   const BOOL		  IsBold) = 0;
 	/// @brief
 	/// @param T
@@ -82,17 +82,17 @@ public:
 	/// @brief Write to file as SVG using T as the filepath.
 	/// @param T file name to write.
 	/// @return The graphics context.
-	virtual GKContextInterface* svg(const GKCharacter* T) = 0;
+	virtual GKContextInterface* svg(const GKChar* T) = 0;
 
 	/// @brief Write to file as PDF using T as the filepath.
 	/// @param T file name to write.
 	/// @return The graphics context.
-	virtual GKContextInterface* pdf(const GKCharacter* T) = 0;
+	virtual GKContextInterface* pdf(const GKChar* T) = 0;
 
 	/// @brief Set the page label.
 	/// @param T page label name.
 	/// @return The graphics context.
-	virtual GKContextInterface* pageLabel(const GKCharacter* T) = 0;
+	virtual GKContextInterface* pageLabel(const GKChar* T) = 0;
 
 	/// @brief Set the thumbnail size.
 	/// @param W width.
@@ -140,7 +140,7 @@ public:
 	/// @param W width.
 	/// @param H height.
 	/// @return The graphics context.
-	virtual GKContextInterface* image(const GKCharacter* Path, GKSizeType W, GKSizeType H, GKReal X, GKReal Y) = 0;
+	virtual GKContextInterface* image(const GKChar* Path, GKSizeType W, GKSizeType H, GKReal X, GKReal Y) = 0;
 
 	/// @brief Scale context.
 	/// @param width the view's width.

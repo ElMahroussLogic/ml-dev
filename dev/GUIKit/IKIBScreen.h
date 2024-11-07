@@ -8,15 +8,15 @@
 
 #include <GUIKit/AbstractScreen.h>
 
-#ifdef GUIKIT_USE_CAIRO
+#ifdef GUIKIT_USE_IBKIT
 
-#include <cairo/cairo.h>
+#include <IBKit/IBKit.h>
 
-class IKCairoScreen final IK_SCREEN
+class IKIBScreen final IK_SCREEN
 {
 public:
-	IKCairoScreen(const MLRect& dim, cairo_surface_t* surface);
-	~IKCairoScreen() override;
+	IKIBScreen(const MLRect& dim, ib_surface_t* surface);
+	~IKIBScreen() override;
 
 	const MLString toString() override;
 	void		   draw() override;
@@ -24,7 +24,7 @@ public:
 private:
 	MLInteger8*		 mFramebuffer{nullptr};
 	MLRect			 mDim;
-	cairo_surface_t* mSurface{nullptr};
+	ib_surface_t* mSurface{nullptr};
 };
 
 #endif // GUIKIT_USE_CAIRO
