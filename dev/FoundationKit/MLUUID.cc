@@ -8,7 +8,7 @@
 #include <FoundationKit/MLString.h>
 #include <uuid/uuid.h>
 
-/// @brief UUID constructor.
+/// @brief UUID class constructor.
 MLUUID::MLUUID()
 {
 	uuid_t uuidOut;
@@ -22,7 +22,7 @@ MLUUID::MLUUID()
 	}
 }
 
-/// @brief Constructs with ByteArray.
+/// @brief Construct with MLArray of UUID.
 MLUUID::MLUUID(MLArray<MLUtf8Char, kUUIDMaxLen>& array)
 {
 	this->mArray = array;

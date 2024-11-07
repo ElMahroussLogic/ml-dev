@@ -1,10 +1,4 @@
-# ZT Framework.
-
-The ZT framework for C++ is the minOS's official framework.
-</br>
-It can be used to develop:
-
-- Desktop apps for ZKA OS.
+# ML Kits.
 
 ## Installing/Building:
 
