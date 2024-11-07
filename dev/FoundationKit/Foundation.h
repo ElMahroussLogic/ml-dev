@@ -22,7 +22,7 @@ class MLJSONCoder;
 class MLCoder;
 class MLAlert;
 class MLURL;
-class MLXMLNode;
+class MLXMLParser;
 class MLApplication;
 class MLThread;
 class MLProcess;
@@ -30,7 +30,6 @@ class MLSocket;
 class MLAllocator;
 class MLUUID;
 class MLXMLCoder;
-class MLXMLNode;
 class MLRect;
 class MLPoint;
 

@@ -29,7 +29,7 @@ public:
 
 	/// @brief Copy constructor.
 	GKContextInterface& operator=(const GKContextInterface&) = default;
-	GKContextInterface(const GKContextInterface&)			   = default;
+	GKContextInterface(const GKContextInterface&)			 = default;
 
 public:
 	/// @brief Grants a new feature to Context.
@@ -66,7 +66,7 @@ public:
 	/// @param isBold should the font be bold?
 	/// @return The graphics context.
 	virtual GKContextInterface* fontFamily(const GKCharacter* Text,
-								  const BOOL		 IsBold) = 0;
+										   const BOOL		  IsBold) = 0;
 	/// @brief
 	/// @param T
 	/// @return The graphics context.
@@ -131,9 +131,9 @@ public:
 	/// @brief Draws a gaussian blur.
 	/// @param radius blur's radius
 	/// @return The graphics context.
-	virtual GKContextInterface* blur(GKReal	   radius,
-							GKSizeType width,
-							GKSizeType height) = 0;
+	virtual GKContextInterface* blur(GKReal		radius,
+									 GKSizeType width,
+									 GKSizeType height) = 0;
 
 	/// @brief Load image (PNG) from disk.
 	/// @param Path The PNG image path to read on.

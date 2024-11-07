@@ -13,40 +13,46 @@
 inline const char* kXMLExtension = "xml";
 inline const char* kXMLMime		 = "application/xml";
 
-class MLXMLNode;
+class MLXMLParser;
 class MLXMLCoder;
 
 /// @brief XML node class.
-class MLXMLNode ML_OBJECT
+class MLXMLParser ML_OBJECT
 {
 public:
-	explicit MLXMLNode(const MLChar* blob);
-	explicit MLXMLNode(const MLString blob);
+	explicit MLXMLParser(const MLChar* blob);
+	explicit MLXMLParser(const MLString blob);
 
-	~MLXMLNode() override;
-
-public:
-	ML_COPY_DEFAULT(MLXMLNode);
+	~MLXMLParser() override;
 
 public:
+	ML_COPY_DEFAULT(MLXMLParser);
+
+public:
+	/***********************************************************************************/
 	/// @brief Gets the content of a unique markup.
 	/// @param name the markup name
 	/// @param valueMaxSz the buffer size to allocate
 	/// @param pureOutput strip \t, \n, \r and spaces if set to true.
 	/// @param getAttribute get attribute instead of value.
-	/// @return
-	MLString getXMLDataFromMarkup(MLString name, MLSizeType valueMaxSz, BOOL pureOutput = false, BOOL getAttribute = false);
+	/// @return XML as string.
+	/***********************************************************************************/
+	MLString parseXML(MLString name, MLSizeType valueMaxSz, BOOL pureOutput = false, BOOL getAttribute = false);
 
+	/***********************************************************************************/
 	/// @brief Gets the content of a unique markup.
 	/// @param name the markup name
 	/// @param valueMaxSz the buffer size to allocate
 	/// @param pureOutput strip \t, \n, \r and spaces if set to true.
 	/// @param getAttribute get attribute instead of value.
-	/// @return
-	MLString getXMLDataFromMarkup(const MLChar* name, MLSizeType valueMaxSz, BOOL pureOutput = false, BOOL getAttribute = false);
+	/// @return XML as string.
+	/***********************************************************************************/
+	MLString parseXML(const MLChar* name, MLSizeType valueMaxSz, BOOL pureOutput = false, BOOL getAttribute = false);
 
+	/***********************************************************************************/
 	/// @brief Cast XML to string.
 	/// @return MLString value as JSON.
+	/***********************************************************************************/
 	const MLString toString() override;
 
 private:

@@ -16,7 +16,7 @@
 
 /// CORE MACROS ///
 
-#define kMathPI 3.14159265358979323846
+#define kMathPI		  3.14159265358979323846
 #define kRsrcProtocol "gk://"
 
 /// CORE TYPES ///
