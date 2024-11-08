@@ -28,10 +28,6 @@ MLAllocator& MLAllocator::shared()
 /// @return the allocator as a string.
 const MLString MLAllocator::toString()
 {
-	const auto cLen = 512;
-
-	MLString str = MLString(cLen);
-	str += "['ClassName': 'MLAllocator']";
-
+	MLString str = MLString("['ClassName': 'MLAllocator']");
 	return str;
 }
