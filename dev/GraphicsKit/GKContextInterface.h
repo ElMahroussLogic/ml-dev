@@ -1,7 +1,7 @@
 /*
  * Created on Fri May 10 2024
  * Last Updated: Sun Oct 27 06:55:01 PM CET 2024
- * Copyright (c) 2024 EL Mahrouss Logic
+ * Copyright (c) 2024 Amlal EL Mahrouss
  */
 
 #pragma once
