@@ -1,4 +1,4 @@
-# ML Kits.
+# ML Developer Kit.
 
 ## Installing/Building:
 

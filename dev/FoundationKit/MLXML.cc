@@ -13,19 +13,19 @@
 #include <cstddef>
 #include <cstring>
 
-MLXMLParser::MLXMLParser(const MLChar* blob)
+MLXMLNode::MLXMLNode(const MLChar* blob)
 	: mBlob(strlen(blob))
 {
 	mBlob += blob;
 }
 
-MLXMLParser::MLXMLParser(const MLString blob)
+MLXMLNode::MLXMLNode(const MLString blob)
 	: mBlob(blob)
 {
 	ML_MUST_PASS(mBlob.size() > 0);
 }
 
-MLXMLParser::~MLXMLParser()
+MLXMLNode::~MLXMLNode()
 {
 	mBlob.dispose();
 }
@@ -33,204 +33,83 @@ MLXMLParser::~MLXMLParser()
 /***********************************************************************************/
 /// @brief Gets the content of a unique markup.
 /// @param name the markup name
-/// @param bufSz the buffer size to allocate
-/// @param pureOutput strip \t, \n, \r and spaces if set to true.
+/// @param buffer_size the buffer size to allocate
 /// @return MLString the value of **name** as a MLString.
 /***********************************************************************************/
-MLString MLXMLParser::parseXML(MLString name, MLSizeType bufSz, bool pureOutput, bool getAttribute)
+MLString MLXMLNode::getValue(MLString name, MLSizeType buffer_size)
 {
-	return this->parseXML(name.asBytes(), bufSz, pureOutput, getAttribute);
+	return this->getValue(name.asBytes(), buffer_size);
 }
 
 /***********************************************************************************/
 /// @brief Gets the content of a unique markup.
 /// @param name the markup name
-/// @param bufSz the buffer size to allocate
-/// @param pureOutput strip \t, \n, \r and spaces if set to true.
+/// @param buffer_size the buffer size to allocate.
 /// @return MLString the value of **name** as a MLString.
 /***********************************************************************************/
-MLString MLXMLParser::parseXML(const MLChar* name, MLSizeType bufSz,
-										 BOOL pureOutput, BOOL getAttribute)
+MLString MLXMLNode::getValue(const MLChar* name, MLSizeType buffer_size)
 {
 	try
 	{
-		ML_MUST_PASS(bufSz != 0);
+		ML_MUST_PASS(buffer_size != 0);
 
-		MLString bufElement(bufSz);
-		bool	 insideElement = false;
+		MLString xml_data(buffer_size);
 
-		MLSizeType indexType = 0UL;
-
-		for (MLSizeType blobIndex = 0; blobIndex < mBlob.size(); ++blobIndex)
+		for (MLSizeType blob_index = 0; blob_index < mBlob.size(); ++blob_index)
 		{
-			if (mBlob[blobIndex] == '<')
+			if (mBlob[blob_index] == '<' &&
+				mBlob[blob_index + 1] == '/')
 			{
-				if (mBlob[blobIndex + 1] == '/' || mBlob[blobIndex + 1] == '?')
+				for (; blob_index < mBlob.size(); ++blob_index)
 				{
-					insideElement = false;
-				}
-				else
-				{
-					if (mBlob[blobIndex + 1] == '!' && mBlob[blobIndex + 2] == '-' &&
-						mBlob[blobIndex + 3] == '-')
+					if (mBlob[blob_index] == '>')
 					{
-						for (; blobIndex < mBlob.size(); blobIndex++)
-						{
-							if (mBlob[blobIndex] == '-' && mBlob[blobIndex + 1] == '-' &&
-								mBlob[blobIndex + 2] == '>')
-							{
-								break;
-							}
-						}
+						break;
 					}
-					else
-					{
-						if (isdigit(mBlob[blobIndex + 1]) || isalnum(mBlob[blobIndex + 1]))
-						{
-							if (mBlob[blobIndex + 1] != '!' && mBlob[blobIndex + 1] != '-')
-							{
-								goto xml_parse_good;
-							}
-						}
-
-						if (mBlob[blobIndex + 1] != '!' || mBlob[blobIndex + 2] != '-' ||
-							mBlob[blobIndex + 3] != '-')
-						{
-							throw std::runtime_error("Invalid XML comment.");
-						}
-					}
-
-				xml_parse_good:
-					insideElement = true;
-					indexType	  = 0UL;
-
-					continue;
 				}
-			}
-			else if (mBlob[blobIndex] == '>')
-			{
-				insideElement = false;
+
+				break;
 			}
 
-			MLSizeType indexNewStr = 0ul;
-
-			if (insideElement)
+			if (mBlob[blob_index] == '<')
 			{
-				MLSizeType blobIndexAt = blobIndex;
+				MLInteger64 name_idx = 0UL;
 
-				for (; blobIndexAt < mBlob.size(); ++blobIndexAt)
+				++blob_index;
+
+				for (; blob_index < mBlob.size(); ++blob_index)
 				{
-					if (mBlob[blobIndexAt] == name[indexType])
+					if (mBlob[blob_index] == '>')
+						break;
+
+					if (name[name_idx] == 0)
+						break;
+
+					if (mBlob[blob_index] == name[name_idx])
 					{
-						++indexType;
+						++name_idx;
+						continue;
 					}
-					else
-					{
-						if (mBlob[blobIndexAt] == ' ' &&
-							std::isalnum(mBlob[blobIndexAt + 1]))
-						{
 
-							for (; blobIndexAt < mBlob.size(); ++blobIndexAt)
-							{
-								if (mBlob[blobIndexAt] == '\"')
-								{
-									++blobIndexAt;
-
-									for (; blobIndexAt < mBlob.size(); ++blobIndexAt)
-									{
-										if (mBlob[blobIndexAt] == '\"')
-										{
-											break;
-										}
-
-										if (getAttribute)
-										{
-											bufElement[indexNewStr] = mBlob[blobIndexAt];
-											++indexNewStr;
-										}
-									}
-
-									if (getAttribute)
-										return bufElement;
-
-									break;
-								}
-							}
-						}
-
-						if (mBlob[blobIndexAt] == '>')
-						{
-							break;
-						}
-					}
+					xml_data += '\0';
+					return xml_data;
 				}
 
-				if (insideElement)
-				{
-					++blobIndexAt;
-
-					for (; blobIndexAt < mBlob.size(); blobIndexAt++)
-					{
-						if (mBlob[blobIndexAt] == '<' && mBlob[blobIndexAt + 1] == '/')
-						{
-							bool noMatch = false;
-
-							if (mBlob[blobIndexAt] == '<')
-							{
-								MLSizeType yCpy = blobIndexAt + 2;
-
-								for (MLSizeType nameIndexToMatch = 0; nameIndexToMatch < strlen(name); ++nameIndexToMatch)
-								{
-									if (mBlob[yCpy] == '/')
-									{
-										++yCpy;
-										continue;
-									}
-									if (mBlob[yCpy] == '>')
-									{
-										break;
-									}
-
-									if (mBlob[yCpy] != name[nameIndexToMatch])
-									{
-										noMatch = true;
-										break;
-									}
-
-									++yCpy;
-								}
-
-								if (!noMatch)
-									break;
-							}
-						}
-
-						if (pureOutput)
-						{
-							if (mBlob[blobIndexAt] == '\t' || mBlob[blobIndexAt] == '\n' || mBlob[blobIndexAt] == '\r' ||
-								mBlob[blobIndexAt] == ' ')
-							{
-								continue;
-							}
-						}
-
-						bufElement[indexNewStr] = mBlob[blobIndexAt];
-						++indexNewStr;
-					}
-
-					bufElement[indexNewStr] = 0;
-				}
+				++blob_index;
 			}
+
+			xml_data += mBlob[blob_index];
 		}
 
-		return bufElement;
+		xml_data += '\0';
+		return xml_data;
 	}
 	catch (const std::runtime_error& e)
 	{
 		MLLog("%s\n", e.what());
 
 		const MLChar* errXml =
-			"<XmlError><Message>%s</Message></XmlError>";
+			"<XmlError>%s</XmlError>";
 
 		MLSizeType length_xml = 4096;
 		length_xml += strlen(e.what());
@@ -252,20 +131,20 @@ MLString MLXMLParser::parseXML(const MLChar* name, MLSizeType bufSz,
 /// @brief returns the XML node information, alongside it's blob.
 /// @return An MLString class.
 /***********************************************************************************/
-const MLString MLXMLParser::toString()
+const MLString MLXMLNode::toString()
 {
 	MLSizeType kLengthOfXML = this->mBlob.usedBytes();
 	kLengthOfXML += this->mBlob.usedBytes();
 
 	MLString xmlAsJsonStr = MLString(kLengthOfXML);
-	xmlAsJsonStr += "[ 'ClassName': 'MLXMLParser', 'ClassBlob': '";
+	xmlAsJsonStr += "[ 'ClassName': 'MLXMLNode', 'ClassBlob': '";
 
-	for (MLSizeType blobIndex = 0; blobIndex < this->mBlob.size(); ++blobIndex)
+	for (MLSizeType blob_index = 0; blob_index < this->mBlob.size(); ++blob_index)
 	{
-		if (this->mBlob[blobIndex] == '\'')
+		if (this->mBlob[blob_index] == '\'')
 			xmlAsJsonStr += "\\\\";
 		else
-			xmlAsJsonStr += this->mBlob[blobIndex];
+			xmlAsJsonStr += this->mBlob[blob_index];
 	}
 
 	xmlAsJsonStr += "' ]";

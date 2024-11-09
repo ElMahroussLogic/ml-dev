@@ -115,7 +115,7 @@ make_docs.sh
 resources/ZT.svg
 run_format.sh
 tests/ModalExample.cc
-tests/URLExample.cc
+tests/Tests.cc
 tests/build-linux.json
 tests/build-mac.json
 tests/build-zka.json

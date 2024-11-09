@@ -2,8 +2,8 @@
   "compiler_path": "g++",
   "compiler_std": "c++20",
   "headers_path": ["../dev", "./"],
-  "sources_path": ["URLExample.cc"],
-  "output_name": "URLExample.cc.exe",
+  "sources_path": ["Tests.cc"],
+  "output_name": "Tests.cc.o",
   "compiler_flags": [
     "-lMacOSFoundation",
     "-lFoundationKit",

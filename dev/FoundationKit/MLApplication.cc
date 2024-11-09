@@ -57,9 +57,9 @@ const MLString MLApplication::getAppField(MLString fieldName, MLSizeType fieldLe
 	std::stringstream streamXmlSS;
 	streamXmlSS << streamXml.rdbuf();
 
-	MLXMLParser parser(streamXmlSS.str().c_str());
+	MLXMLNode parser(streamXmlSS.str().c_str());
 
-	MLString appName = parser.parseXML(fieldName, fieldLen, NO);
+	MLString appName = parser.getValue(fieldName, fieldLen);
 	return appName;
 }
 

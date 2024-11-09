@@ -41,6 +41,14 @@ ML_IMPORT void MLLog(const char* format, ...)
 	{
 		if (fmtStr[index] == '%')
 		{
+			if (fmtStr[index + 1] == '$')
+			{
+				MLString* object = va_arg(va, MLString*);
+
+				std::string stlString = object->asConstBytes();
+
+				fmtStr.replace(index, 2, stlString);
+			}
 			if (fmtStr[index + 1] == '@')
 			{
 				MLObject* object = va_arg(va, MLObject*);
@@ -78,6 +86,12 @@ ML_IMPORT void MLLog(const char* format, ...)
 				std::string hexString = ss.str();
 
 				fmtStr.replace(index, 2, hexString);
+			}
+			else if (fmtStr[index + 1] == 'c')
+			{
+				char charInside = va_arg(va, int);
+
+				fmtStr.replace(index, 2, 1, charInside);
 			}
 			else if (fmtStr[index + 1] == 'd')
 			{

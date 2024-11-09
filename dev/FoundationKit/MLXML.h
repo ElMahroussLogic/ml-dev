@@ -13,41 +13,37 @@
 inline const char* kXMLExtension = "xml";
 inline const char* kXMLMime		 = "application/xml";
 
-class MLXMLParser;
+class MLXMLNode;
 class MLXMLCoder;
 
 /// @brief XML node class.
-class MLXMLParser ML_OBJECT
+class MLXMLNode ML_OBJECT
 {
 public:
-	explicit MLXMLParser(const MLChar* blob);
-	explicit MLXMLParser(const MLString blob);
+	explicit MLXMLNode(const MLChar* blob);
+	explicit MLXMLNode(const MLString blob);
 
-	~MLXMLParser() override;
-
-public:
-	ML_COPY_DEFAULT(MLXMLParser);
+	~MLXMLNode() override;
 
 public:
+	ML_COPY_DEFAULT(MLXMLNode);
+
+public:
 	/***********************************************************************************/
-	/// @brief Gets the content of a unique markup.
+	/// @brief Gets the content of a unique markup (with no attributes)
 	/// @param name the markup name
-	/// @param valueMaxSz the buffer size to allocate
-	/// @param pureOutput strip \t, \n, \r and spaces if set to true.
-	/// @param getAttribute get attribute instead of value.
-	/// @return XML as string.
+	/// @param buffer_size the buffer size to allocate.
+	/// @return MLString the value of **name** as a MLString.
 	/***********************************************************************************/
-	MLString parseXML(MLString name, MLSizeType valueMaxSz, BOOL pureOutput = false, BOOL getAttribute = false);
+	MLString getValue(MLString name, MLSizeType valueMaxSz);
 
 	/***********************************************************************************/
-	/// @brief Gets the content of a unique markup.
+	/// @brief Gets the content of a unique markup (with no attributes)
 	/// @param name the markup name
-	/// @param valueMaxSz the buffer size to allocate
-	/// @param pureOutput strip \t, \n, \r and spaces if set to true.
-	/// @param getAttribute get attribute instead of value.
-	/// @return XML as string.
+	/// @param buffer_size the buffer size to allocate.
+	/// @return MLString the value of **name** as a MLString.
 	/***********************************************************************************/
-	MLString parseXML(const MLChar* name, MLSizeType valueMaxSz, BOOL pureOutput = false, BOOL getAttribute = false);
+	MLString getValue(const MLChar* name, MLSizeType valueMaxSz);
 
 	/***********************************************************************************/
 	/// @brief Cast XML to string.
