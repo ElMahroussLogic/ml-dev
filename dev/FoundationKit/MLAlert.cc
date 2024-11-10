@@ -15,14 +15,6 @@
 #include <FoundationKit/Win32/Win32.h>
 #endif // ifdef _WIN32
 
-#ifdef _WIN32
-ML_IMPORT MLInteger swprintf(
-	wchar_t* const		 buffer,
-	size_t const		 bufferCount,
-	wchar_t const* const format,
-	...);
-#endif // ifdef _WIN32
-
 /// @brief Defines the alert modal for the MLKit.
 
 /// @brief C++ constructor.
