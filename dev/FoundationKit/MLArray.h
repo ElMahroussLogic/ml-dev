@@ -23,8 +23,7 @@ public:
 
 	~MLArray() = default;
 
-	MLArray& operator=(const MLArray&) = default;
-	MLArray(const MLArray&)			   = default;
+	ML_COPY_DEFAULT(MLArray);
 
 	T& operator[](const MLSizeType& At)
 	{
@@ -33,7 +32,15 @@ public:
 
 	bool isEmpty() const
 	{
-		return false;
+		MLSizeType count = 0;
+
+		for (MLSizeType i = 0; i < N; i++)
+		{
+			if (fArray[i])
+				++count;
+		}
+
+		return count == 0;
 	}
 
 	const MLSizeType capacity()
