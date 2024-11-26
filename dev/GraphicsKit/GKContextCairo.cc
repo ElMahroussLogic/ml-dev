@@ -1,7 +1,7 @@
 /*
  * Created on Fri May 10 2024
  *
- * Copyright (c) 2024 EL Mahrouss Logic
+ * Copyright (c) 2024 ELMH Group
  */
 
 #include <GraphicsKit/GKContextInterface.h>

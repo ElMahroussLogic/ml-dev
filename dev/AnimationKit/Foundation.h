@@ -1,6 +1,6 @@
 /*
  * AnimationKit
- * Copyright (c) 2024 EL Mahrouss Logic.
+ * Copyright (c) 2024 ELMH Group.
  */
 
 #pragma once
