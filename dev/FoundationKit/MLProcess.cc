@@ -12,8 +12,10 @@
 MLProcess::MLProcess(const MLChar* path, const MLChar* argv, MLChar* const* envp)
 	: mProcessPath(path)
 {
-	mProcessHandle = fork();
+	// fork current image into a separate process.
+	mProcessHandle = ::fork();
 
+	// if successful (in this fork) execute the process from path.
 	if (mProcessHandle == 0)
 		::execlp(mProcessPath.asBytes(), argv, envp);
 }
