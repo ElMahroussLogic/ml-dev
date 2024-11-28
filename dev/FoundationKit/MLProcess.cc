@@ -6,8 +6,11 @@
 
 #include <FoundationKit/MLProcess.h>
 
+ML_EXTERN_C
+{
 #include <unistd.h>
 #include <signal.h>
+};
 
 MLProcess::MLProcess(const MLChar* path, const MLChar* argv, MLChar* const* envp)
 	: mProcessPath(path)
