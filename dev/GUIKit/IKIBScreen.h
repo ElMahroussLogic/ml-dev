@@ -20,9 +20,9 @@ public:
 	void		   draw() override;
 
 private:
-	MLInteger8*		 mFramebuffer{nullptr};
-	MLInteger8*      mTargetFramebuffer{nullptr};
-	MLRect			 mFrame;
+	MLInteger8* mFramebuffer{nullptr};
+	MLInteger8* mTargetFramebuffer{nullptr};
+	MLRect		mFrame;
 };
 
 #endif // GUIKIT_USE_CAIRO

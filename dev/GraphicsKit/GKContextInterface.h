@@ -66,7 +66,7 @@ public:
 	/// @param isBold should the font be bold?
 	/// @return The graphics context.
 	virtual GKContextInterface* fontFamily(const GKChar* Text,
-										   const BOOL		  IsBold) = 0;
+										   const BOOL	 IsBold) = 0;
 	/// @brief
 	/// @param T
 	/// @return The graphics context.
