@@ -1,6 +1,6 @@
 /* -------------------------------------------
 
-	Copyright (C) 2024, EL Mahrouss Logic, all rights reserved
+	Copyright (C) 2024, ELMH Group, all rights reserved
 
 ------------------------------------------- */
 
@@ -12,7 +12,7 @@
 /// @brief Raised when an assertion fails.
 /// @param none.
 /// @return none.
-ML_EXPORT void MLAssert(const char* expr, const char* file, const int line)
+ML_EXPORT void MLAssert(const MLChar* expr, const MLChar* file, const MLInteger line)
 {
 	MLAlert* alert = MLAllocator::shared().init<MLAlert>();
 	auto	 res   = alert->runErrorModal("FoundationKit Runtime.",

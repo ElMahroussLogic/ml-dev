@@ -110,6 +110,7 @@ dev/GraphicsKit/Private/Private.h
 dev/GraphicsKit/build-mac.json
 dev/GraphicsKit/build-posix.json
 dev/GraphicsKit/build-unix.json
+dev/POSIXKit/unistd.h
 dev/modulemap.conf
 make_docs.sh
 resources/ZT.svg
