@@ -197,4 +197,4 @@ ML_IMPORT GKContextInterface* GKRequestContext(GKSizeType featureSet, BOOL stric
 /// @brief Releases a Core Graphics context.
 /// @param context The context itself.
 /// @return This function returns void.
-ML_IMPORT void GKReleaseContext(GKContextInterface* context);
+ML_IMPORT BOOL GKReleaseContext(GKContextInterface* context);

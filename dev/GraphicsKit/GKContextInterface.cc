@@ -17,11 +17,15 @@ const MLString GKContextInterface::toString()
 /// @brief Releases a GraphicsKit context.
 /// @param context The context itself.
 /// @return This function returns void.
-void GKReleaseContext(GKContextInterface* context)
+BOOL GKReleaseContext(GKContextInterface* context)
 {
 	if (context)
 	{
 		delete context;
 		context = nullptr;
+	
+		return YES;
 	}
+
+	return NO;
 }
