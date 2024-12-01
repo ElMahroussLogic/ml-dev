@@ -10,11 +10,11 @@
 
 #ifdef GUIKIT_USE_IBKIT
 
-class IKIBScreen final IK_SCREEN
+class IKFBScreen final IK_SCREEN
 {
 public:
-	IKIBScreen(const MLRect& dim, MLInteger8* surface);
-	~IKIBScreen() override;
+	IKFBScreen(const MLRect& dim, MLInteger8* surface);
+	~IKFBScreen() override;
 
 	const MLString toString() override;
 	void		   draw() override;

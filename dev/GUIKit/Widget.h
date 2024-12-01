@@ -8,15 +8,15 @@
 
 #include <GUIKit/Foundation.h>
 
-class IKView ML_OBJECT
+class IKWidget ML_OBJECT
 {
-	explicit IKView() = default;
-	virtual IKView()  = default;
+	explicit IKWidget() = default;
+	virtual IKWidget()  = default;
 
-	ML_COPY_DELETE(IKView);
+	ML_COPY_DELETE(IKWidget);
 
 	virtual const MLString toString()
 	{
-		return "IKView";
+		return "IKWidget";
 	}
 };

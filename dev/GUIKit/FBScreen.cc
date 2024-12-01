@@ -4,12 +4,11 @@
  *
  */
 
-#include <GUIKit/IKIBScreen.h>
-#include <cstring>
+#include <GUIKit/FBScreen.h>
 
 #ifdef GUIKIT_USE_IBKIT
 
-IKIBScreen::IKIBScreen(const MLRect& dimensions, MLInteger8* framebuffer)
+IKFBScreen::IKFBScreen(const MLRect& dimensions, MLInteger8* framebuffer)
 {
 	mFrame = dimensions;
 	ML_MUST_PASS(mFrame);
@@ -21,7 +20,7 @@ IKIBScreen::IKIBScreen(const MLRect& dimensions, MLInteger8* framebuffer)
 	ML_MUST_PASS(mFramebuffer);
 }
 
-IKIBScreen::~IKIBScreen()
+IKFBScreen::~IKFBScreen()
 {
 	if (mFramebuffer)
 	{
@@ -31,7 +30,7 @@ IKIBScreen::~IKIBScreen()
 }
 
 
-void IKIBScreen::draw()
+void IKFBScreen::draw()
 {
 	if (this->shouldDraw)
 	{
@@ -39,9 +38,9 @@ void IKIBScreen::draw()
 	}
 }
 
-const MLString IKIBScreen::toString()
+const MLString IKFBScreen::toString()
 {
-	return MLString("IKIBScreen");
+	return MLString("IKFBScreen");
 }
 
 #endif // ifdef GUIKIT_USE_CAIRO
