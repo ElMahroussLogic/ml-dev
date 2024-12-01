@@ -1,0 +1,14 @@
+{
+  "compiler_path": "g++.exe",
+  "compiler_std": "c++20",
+  "headers_path": ["../"],
+  "sources_path": ["*.cc", "Private/*.cc"],
+  "output_name": "libGraphicsKit.dll",
+  "compiler_flags": [
+    "-fPIC",
+    "-shared",
+    "-lFoundationKit",
+    "-lWindowsFoundation"
+  ],
+  "cpp_macros": ["__GRAPHICSKIT__=202401", "GK_CAIRO_SUPPORT"]
+}

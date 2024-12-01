@@ -4,8 +4,6 @@
  * Copyright (c) 2024 ELMH Group
  */
 
-#pragma once
-
 #include <GraphicsKit/Foundation.h>
 
 /// @brief Process framebuffer array.
@@ -59,7 +57,7 @@ MLArray<MLPoint, N> GKBezierCurve(const MLArray<MLPoint, N>& control_points, MLI
 /// @param c2 color 2
 /// @param t inertia
 // ================================================ //
-MLColor GKInterpolateColor(const MLColor& c1, const MLColor& c2, MLReal t)
+MLColor GKInterpolateColor(const MLColor& c1, const MLColor& c2, MLInteger t)
 {
 	return {
 		(1 - t) * c1.r + t * c2.r,
@@ -78,7 +76,7 @@ void GKDrawLinearGradient(const MLPoint& p0, const MLPoint& p1, const MLColor& c
 {
 	for (MLInteger x = p0.x; x <= p1.x; ++x)
 	{
-		MLReal t = (x - p0.x) / (p1.x - p0.x);
+		MLInteger t = (x - p0.x) / (p1.x - p0.x);
 
 		MLColor color = GKInterpolateColor(c0, c1, t);
 		GKDrawPixel(x, p0.y, color); // Implement `drawPixel` for your stack
