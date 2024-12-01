@@ -90,7 +90,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 
-	GKContextInterface* text(const GKChar* T, GKBoolean Center, GKReal X, GKReal Y, GKReal W, GKReal H) override
+	GKContextInterface* text(const GKChar* T, GKBOOL Center, GKReal X, GKReal Y, GKReal W, GKReal H) override
 	{
 		if (Center)
 		{
@@ -544,8 +544,8 @@ private:
 	GKReal		 mWidth{0};
 	GKReal		 mHeight{0};
 	GKChar	 mOutputPath[255] = {0};
-	GKBoolean	 mCustomCairo{false};
-	GKBoolean	 mCustomSurface{false};
+	GKBOOL	 mCustomCairo{false};
+	GKBOOL	 mCustomSurface{false};
 	GKReal		 mX{0};
 	GKReal		 mY{0};
 };

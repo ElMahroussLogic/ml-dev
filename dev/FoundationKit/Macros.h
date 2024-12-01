@@ -22,11 +22,12 @@
 #define ML_PLATFORM "ARM64"
 #endif
 
-#ifndef OBJC_BOOL_DEFINED
+#if !defined(OBJC_BOOL_DEFINED) && !defined(_WIN32)
 #define BOOL bool
-#define YES	 true
-#define NO	 false
-#endif // ifndef OBJC_BOOL_DEFINED
+#endif // if !defined(OBJC_BOOL_DEFINED)  || !defined(_WIN32)
+
+#define YES true
+#define NO	false
 
 #define ML_OBJECT : public MLObject
 

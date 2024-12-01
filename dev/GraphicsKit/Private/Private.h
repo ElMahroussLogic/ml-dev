@@ -25,7 +25,7 @@ typedef MLReal	   GKReal;
 typedef MLSizeType GKSizeType;
 typedef MLInteger  GKInteger;
 typedef MLChar	   GKChar;
-typedef BOOL	   GKBoolean;
+typedef BOOL	   GKBOOL;
 
 /// CORE FUNCTIONS ///
 

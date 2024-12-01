@@ -59,7 +59,7 @@ public:
 	/// @param W the width.
 	/// @param H the height.
 	/// @return the context.
-	virtual GKContextInterface* text(const GKChar* Text, GKBoolean Center, GKReal X = 0.0, GKReal Y = 0.0, GKReal W = 0.0, GKReal H = 0.0) = 0;
+	virtual GKContextInterface* text(const GKChar* Text, GKBOOL Center, GKReal X = 0.0, GKReal Y = 0.0, GKReal W = 0.0, GKReal H = 0.0) = 0;
 
 	/// @brief Set font.
 	/// @param T font name

@@ -11,6 +11,9 @@
 /// @brief Process framebuffer array.
 ML_EXTERN_C MLColor* kFBArray;
 
+// ================================================ //
+/// @brief Combination algorithm for Bezier Curves.
+// ================================================ //
 MLInteger GKCombination(MLInteger n, MLInteger k)
 {
 	if (k == 0 || k == n)
@@ -19,6 +22,11 @@ MLInteger GKCombination(MLInteger n, MLInteger k)
 	return GKCombination(n - 1, k - 1) + GKCombination(n - 1, k);
 }
 
+// ================================================ //
+/// @brief Implementation of the Bezier Curve algorithm.
+/// @param controls_points points as an array.
+/// @param resolution resolution of bezier curve.
+// ================================================ //
 template <MLInteger N>
 MLArray<MLPoint, N> GKBezierCurve(const MLArray<MLPoint, N>& control_points, MLInteger resolution)
 {
@@ -45,6 +53,12 @@ MLArray<MLPoint, N> GKBezierCurve(const MLArray<MLPoint, N>& control_points, MLI
 	return curve_points;
 }
 
+// ================================================ //
+/// @brief Implementation of color interpolation.
+/// @param c1 color 1
+/// @param c2 color 2
+/// @param t inertia
+// ================================================ //
 MLColor GKInterpolateColor(const MLColor& c1, const MLColor& c2, MLReal t)
 {
 	return {
@@ -53,6 +67,13 @@ MLColor GKInterpolateColor(const MLColor& c1, const MLColor& c2, MLReal t)
 		(1 - t) * c1.b + t * c2.b};
 }
 
+// ================================================ //
+/// @brief Draws a linear gradient.
+/// @param p0 point 0.
+/// @param p1 point 1.
+/// @param c0 color 0.
+/// @param c1 color 1.
+// ================================================ //
 void GKDrawLinearGradient(const MLPoint& p0, const MLPoint& p1, const MLColor& c0, const MLColor& c1)
 {
 	for (MLInteger x = p0.x; x <= p1.x; ++x)
@@ -64,6 +85,15 @@ void GKDrawLinearGradient(const MLPoint& p0, const MLPoint& p1, const MLColor& c
 	}
 }
 
+// ================================================ //
+/// @brief Draws an arc.
+/// @param cx x pos.
+/// @param cy y pos.
+/// @param r r position.
+/// @param start_angle start angle.
+/// @param end_angle end angle.
+/// @param color color variable.
+// ================================================ //
 void GKDrawArc(MLReal cx, MLReal cy, MLReal r, MLReal start_angle, MLReal end_angle, MLColor color)
 {
 	const MLInteger resolution = 100;
@@ -78,6 +108,12 @@ void GKDrawArc(MLReal cx, MLReal cy, MLReal r, MLReal start_angle, MLReal end_an
 	}
 }
 
+// ================================================ //
+/// @brief Draws a line.
+/// @param p1 point 1.
+/// @param p2 point 2.
+/// @param color color variable.
+// ================================================ //
 void GKDrawLine(MLPoint p1, MLPoint p2, MLColor color)
 {
 	// Calculate the differences in the x and y directions
@@ -117,6 +153,15 @@ void GKDrawLine(MLPoint p1, MLPoint p2, MLColor color)
 	}
 }
 
+// ================================================ //
+/// @brief Draws a rounded rectangle.
+/// @param x x position of rectangle.
+/// @param x y position of rectangle.
+/// @param width width of rectangle.
+/// @param height height of rectangle.
+/// @param radius raidus of rectangle.
+/// @param color color variable.
+// ================================================ //
 void GKDrawRoundedRectangle(MLReal x, MLReal y, MLReal width, MLReal height, MLReal radius, MLColor color)
 {
 	// Top-left corner
@@ -135,6 +180,12 @@ void GKDrawRoundedRectangle(MLReal x, MLReal y, MLReal width, MLReal height, MLR
 	GKDrawLine(x, y + radius, x, y + height - radius, color);					// Left edge
 }
 
+// ================================================ //
+/// @brief Puts a pixel into the framebuffer.
+/// @param cx x position.
+/// @param cy y position.
+/// @param color color variable.
+// ================================================ //
 void GKDrawPixel(MLInteger cx, MLInteger cy, MLColor color)
 {
 	kFBArray[cx * cy] = color;
