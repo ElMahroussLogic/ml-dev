@@ -11,6 +11,10 @@
 #ifndef __cplusplus
 #error !!! This is not C++ please use standard C++ !!!
 #else
+
+#define kMathPI (3.14159265358979323846)
+#define kMathEuler (2.718281828459045235360287471352)
+
 class MLObject;
 class MLString;
 

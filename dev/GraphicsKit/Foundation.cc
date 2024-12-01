@@ -5,9 +5,7 @@
  */
 
 #include <GraphicsKit/Foundation.h>
-
-/// @brief Process framebuffer array.
-ML_EXTERN_C MLColor* kFBArray;
+#include <cmath>
 
 // ================================================ //
 /// @brief Combination algorithm for Bezier Curves.
@@ -76,7 +74,7 @@ void GKDrawLinearGradient(const MLPoint& p0, const MLPoint& p1, const MLColor& c
 {
 	for (MLInteger x = p0.x; x <= p1.x; ++x)
 	{
-		MLInteger t = (x - p0.x) / (p1.x - p0.x);
+		MLInteger8 t = (x - p0.x) / (p1.x - p0.x);
 
 		MLColor color = GKInterpolateColor(c0, c1, t);
 		GKDrawPixel(x, p0.y, color); // Implement `drawPixel` for your stack
@@ -99,8 +97,8 @@ void GKDrawArc(MLReal cx, MLReal cy, MLReal r, MLReal start_angle, MLReal end_an
 	for (MLInteger i = 0; i <= resolution; ++i)
 	{
 		MLReal theta = start_angle + (end_angle - start_angle) * i / resolution;
-		MLReal x	 = cx + r * cos(theta);
-		MLReal y	 = cy + r * sin(theta);
+		MLReal x	 = cx + r * std::cos(theta);
+		MLReal y	 = cy + r * std::sin(theta);
 
 		GKDrawPixel(x, y, color); // Implement `drawPixel`
 	}

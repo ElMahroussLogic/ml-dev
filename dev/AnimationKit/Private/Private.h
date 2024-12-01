@@ -7,21 +7,11 @@
 #pragma once
 
 #include <FoundationKit/Foundation.h>
-
-// DEFINE CORE TYPES
+#include <FoundationKit/MLString.h>
+#include <FoundationKit/MLRect.h>
+#include <FoundationKit/MLArray.h>
+#include <FoundationKit/MLPoint.h>
 
 typedef MLReal	   CAReal;
 typedef MLSizeType CASizeT;
 typedef BOOL	   CABOOL;
-
-// DEFINE CORE ALGORITHMS ENUMS.
-
-enum
-{
-	kAnimationInvalidAlgorithm,
-	kAnimationKineticAlgorithm,
-	kAnimationFadeInAlgorithm,
-	kAnimationFadeOutAlgorithm,
-	kAnimationSmartAlgorithm,
-	kAnimationAlgorithmCount,
-};

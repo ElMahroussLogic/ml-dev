@@ -9,17 +9,8 @@
 #include <FoundationKit/Foundation.h>
 #include <FoundationKit/MLString.h>
 #include <FoundationKit/MLRect.h>
-
-#include <filesystem>
-#include <cstring>
-#include <cmath>
-
-/// CORE MACROS ///
-
-#define kMathPI		  3.14159265358979323846
-#define kRsrcProtocol "gk://"
-
-/// CORE TYPES ///
+#include <FoundationKit/MLArray.h>
+#include <FoundationKit/MLPoint.h>
 
 typedef MLReal	   GKReal;
 typedef MLSizeType GKSizeType;
@@ -27,33 +18,28 @@ typedef MLInteger  GKInteger;
 typedef MLChar	   GKChar;
 typedef BOOL	   GKBOOL;
 
-/// CORE FUNCTIONS ///
+ML_EXTERN_C const MLInteger kColorProfile;
 
-/// @brief Fetch resource as a string.
-/// @param input resource path.
-/// @return the resource as a string.
-inline const MLString gk_rsrc_path(const MLChar* input)
+struct MLColor;
+struct MLColorAlpha;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+/// @brief Color data structure, consists of three MLIntegers representing RGB values.
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+struct MLColor final
 {
-	MLString textNil(1);
+	MLInteger r, g, b, a;
+};
 
-	/// if input is invalid...
-	if (!input)
-	{
-		return textNil;
-	}
+/// @brief Process framebuffer array.
+ML_EXTERN_C const MLColor* kFBArray;
 
-	MLString textPath(strlen(input) + strlen(kRsrcProtocol));
+enum
+{
+	kColorProfileSRGB,
+	kColorProfileRGBA,
+	kColorProfileRGB,
+};
 
-	if (*input == 0 ||
-		!std::filesystem::exists(input))
-	{
-		return textNil;
-	}
-
-	textPath += kRsrcProtocol;
-	textPath += input;
-
-	return textPath;
-}
-
-extern const MLInteger cColorProfile;
+static_assert(sizeof(MLReal) == 8, "MLReal isn't a 64-bit IEEE float.");
