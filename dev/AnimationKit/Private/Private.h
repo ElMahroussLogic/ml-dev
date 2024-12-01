@@ -12,16 +12,16 @@
 
 typedef MLReal	   CAReal;
 typedef MLSizeType CASizeT;
-typedef BOOL	   CABoolean;
+typedef BOOL	   CABOOL;
 
 // DEFINE CORE ALGORITHMS ENUMS.
 
 enum
 {
-	kInvalidAlgorithm,
-	kKineticAlgorithm,
-	kFadeInAlgorithm,
-	kFadeOutAlgorithm,
-	kSmartAnimationAlgorithm,
-	kAlgorithmCount,
+	kAnimationInvalidAlgorithm,
+	kAnimationKineticAlgorithm,
+	kAnimationFadeInAlgorithm,
+	kAnimationFadeOutAlgorithm,
+	kAnimationSmartAlgorithm,
+	kAnimationAlgorithmCount,
 };

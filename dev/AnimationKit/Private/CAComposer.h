@@ -12,32 +12,13 @@
 #define kCAMaxFrameCells (255U)
 
 class CAComposerKeyFrameCell;
-class CAAbstractComposerKeyFrame;
+class CAAbstractComposer;
 
-/// @brief Cell frame structure.
-class CAComposerKeyFrameCell ML_OBJECT
-{
-protected:
-	MLString mName;
-	MLPoint	 mOrigin;
-	MLRect	 mScale;
-
-public:
-	explicit CAComposerKeyFrameCell() = default;
-	virtual ~CAComposerKeyFrameCell() = default;
-
-	ML_COPY_DEFAULT(CAComposerKeyFrameCell);
-
-protected:
-	/// @brief Plays the frame of this cell.
-	/// @param composer the CAAbstractComposer parent instance.
-	virtual MLInteger64 playFrame(CAAbstractComposer* composer) = 0;
-};
-
+/// @brief Animation composer class.
 class CAAbstractComposer ML_OBJECT
 {
 protected:
-	MLArray<CAComposerKeyFrameCell, kCAMaxFrameCells> mFrames;
+	MLArray<CAComposerKeyFrameCell*, kCAMaxFrameCells> mFrames;
 
 public:
 	CAAbstractComposer()  = default;
@@ -52,6 +33,26 @@ public:
 	virtual MLArray<CAComposerKeyFrameCell, kCAMaxFrameCells>& getFrames()						   = 0;
 	virtual BOOL											   runFrames()						   = 0;
 	virtual BOOL											   runFrameAt(const MLInteger64& at)   = 0;
+};
+
+/// @brief Cell frame structure.
+class CAComposerKeyFrameCell ML_OBJECT
+{
+protected:
+	MLString mName;
+	MLPoint	 mOrigin;
+	MLRect	 mScale;
+
+public:
+	explicit CAComposerKeyFrameCell();
+	virtual ~CAComposerKeyFrameCell();
+
+	ML_COPY_DEFAULT(CAComposerKeyFrameCell);
+
+protected:
+	/// @brief Plays the frame of this cell.
+	/// @param composer the CAAbstractComposer parent instance.
+	virtual MLInteger64 playFrame(CAAbstractComposer* composer) = 0;
 };
 
 #endif // AK_CACOMPOSER_H
