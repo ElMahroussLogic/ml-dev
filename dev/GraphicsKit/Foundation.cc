@@ -30,14 +30,14 @@ MLArray<MLPoint, N> GKBezierCurve(const MLArray<MLPoint, N>& control_points, MLI
 
 	for (MLInteger i = 0; i <= resolution; ++i)
 	{
-		MLReal	t	  = i / static_cast<MLReal>(resolution);
+		MLInteger	t	  = i / static_cast<MLInteger>(resolution);
 		MLPoint point = {0, 0};
 
 		MLInteger n = N - 1;
 
 		for (MLInteger j = 0; j <= n; ++j)
 		{
-			MLReal bernstein = GKCombination(n, j) * std::pow(1 - t, n - j) * std::pow(t, j);
+			MLInteger bernstein = GKCombination(n, j) * std::pow(1 - t, n - j) * std::pow(t, j);
 
 			point.x += bernstein * control_points[j].x;
 			point.y += bernstein * control_points[j].y;
@@ -90,15 +90,15 @@ void GKDrawLinearGradient(const MLPoint& p0, const MLPoint& p1, const MLColor& c
 /// @param end_angle end angle.
 /// @param color color variable.
 // ================================================ //
-void GKDrawArc(MLReal cx, MLReal cy, MLReal r, MLReal start_angle, MLReal end_angle, MLColor color)
+void GKDrawArc(MLInteger cx, MLInteger cy, MLReal r, MLReal start_angle, MLReal end_angle, MLColor color)
 {
 	const MLInteger resolution = 100;
 
 	for (MLInteger i = 0; i <= resolution; ++i)
 	{
-		MLReal theta = start_angle + (end_angle - start_angle) * i / resolution;
-		MLReal x	 = cx + r * std::cos(theta);
-		MLReal y	 = cy + r * std::sin(theta);
+		MLInteger theta = start_angle + (end_angle - start_angle) * i / resolution;
+		MLInteger x	 = cx + r * std::cos(theta);
+		MLInteger y	 = cy + r * std::sin(theta);
 
 		GKDrawPixel(x, y, color); // Implement `drawPixel`
 	}
@@ -110,7 +110,7 @@ void GKDrawArc(MLReal cx, MLReal cy, MLReal r, MLReal start_angle, MLReal end_an
 /// @param p2 point 2.
 /// @param color color variable.
 // ================================================ //
-void GKDrawLine(MLPoint p1, MLPoint p2, MLColor color)
+void GKDrawLineEx(MLPoint& p1, MLPoint& p2, MLColor& color)
 {
 	// Calculate the differences in the x and y directions
 	MLInteger dx = std::abs(p2.x - p1.x);
@@ -158,7 +158,7 @@ void GKDrawLine(MLPoint p1, MLPoint p2, MLColor color)
 /// @param radius raidus of rectangle.
 /// @param color color variable.
 // ================================================ //
-void GKDrawRoundedRectangle(MLReal x, MLReal y, MLReal width, MLReal height, MLReal radius, MLColor color)
+void GKDrawRoundedRectangle(MLInteger x, MLInteger y, MLInteger width, MLInteger height, MLReal radius, MLColor color)
 {
 	// Top-left corner
 	GKDrawArc(x + radius, y + radius, radius, kMathPI, 1.5 * kMathPI, color);
@@ -184,5 +184,26 @@ void GKDrawRoundedRectangle(MLReal x, MLReal y, MLReal width, MLReal height, MLR
 // ================================================ //
 void GKDrawPixel(MLInteger cx, MLInteger cy, MLColor color)
 {
+	if (!kFBArray)
+		return;
+
 	kFBArray[cx * cy] = color;
+}
+
+// ================================================ //
+/// @brief Overloaded version of GKDrawLine.
+/// @param cx x position.
+/// @param cy y position.
+/// @param cx1 dst x position.
+/// @param cy1 dst y position.
+/// @param color color variable.
+// ================================================ //
+void GKDrawLine(MLInteger cx, MLInteger cy, MLInteger cx1, MLInteger cy1, MLColor color)
+{
+	MLPoint sp, dp;
+
+	sp = {.x = cx, .y = cy};
+	dp = { .x = cx1, .y = cy1};
+
+	return GKDrawLineEx(sp, dp, color);
 }

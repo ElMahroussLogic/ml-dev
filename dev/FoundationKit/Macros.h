@@ -24,10 +24,15 @@
 
 #if !defined(OBJC_BOOL_DEFINED) && !defined(_WIN32)
 #define BOOL bool
-#endif // if !defined(OBJC_BOOL_DEFINED)  || !defined(_WIN32)
 
 #define YES true
 #define NO	false
+#endif // if !defined(OBJC_BOOL_DEFINED)  || !defined(_WIN32)
+
+#if defined(_WIN32)
+#define YES true
+#define NO	false
+#endif // defined(_WIN32)
 
 #define ML_OBJECT : public MLObject
 

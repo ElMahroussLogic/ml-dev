@@ -4,8 +4,6 @@
  * Copyright (c) 2024 ELMH Group
  */
 
-#include "GraphicsKit/Foundation.h"
-#include "FoundationKit/Macros.h"
 #include <AnimationKit/Foundation.h>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

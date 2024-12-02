@@ -33,7 +33,7 @@ struct MLColor final
 };
 
 /// @brief Process framebuffer array.
-ML_EXTERN_C const MLColor* kFBArray;
+ML_EXTERN_C MLColor* kFBArray;
 
 enum
 {

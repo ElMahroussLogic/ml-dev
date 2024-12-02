@@ -10,19 +10,17 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-void GKDrawArc(MLReal cx, MLReal cy, MLReal r, MLReal startAngle, MLReal endAngle, MLColor color);
+void GKDrawLine(MLInteger cx, MLInteger cy, MLInteger cx1, MLInteger cy1, MLColor color);
 
-void GKDrawLine(MLReal cx, MLReal cy, MLReal cx1, MLReal cy1, MLColor color);
+void GKDrawPixel(MLInteger cx, MLInteger cy, MLColor color);
 
-void GKDrawPixel(MLReal cx, MLReal cy, MLColor color);
+void GKDrawLinearGradient(const MLPoint& p_src, const MLPoint& p_dst, const MLColor& c_src, const MLColor& c_dst);
 
-void GKDrawLinearGradient(const MLPoint& p0, const MLPoint& p1, const MLColor& c0, const MLColor& c1);
+void GKDrawArc(MLInteger rx, MLInteger ry, MLReal rp, MLReal start_angle, MLReal end_angle, MLColor color);
 
-void GKDrawArc(MLReal cx, MLReal cy, MLReal r, MLReal start_angle, MLReal end_angle, MLColor color);
+void GKDrawLineEx(MLPoint& p_src, MLPoint& p_dst, MLColor& color);
 
-void GKDrawLine(MLPoint p1, MLPoint p2, MLColor color);
-
-void GKDrawRoundedRectangle(MLReal x, MLReal y, MLReal width, MLReal height, MLReal radius, MLColor color);
+void GKDrawRoundedRectangle(MLInteger x, MLInteger y, MLInteger width, MLInteger height, MLInteger radius, MLColor color);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 

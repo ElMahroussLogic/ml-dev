@@ -5,12 +5,8 @@
 ------------------------------------------- */
 
 #include <FoundationKit/MLProcess.h>
-
-ML_EXTERN_C
-{
-#include <unistd.h>
-#include <signal.h>
-};
+#include <POSIXKit/unistd.h>
+#include <POSIXKit/signal.h>
 
 MLProcess::MLProcess(const MLChar* path, const MLChar* argv, MLChar* const* envp)
 	: mProcessPath(path)
@@ -20,7 +16,7 @@ MLProcess::MLProcess(const MLChar* path, const MLChar* argv, MLChar* const* envp
 
 	// if successful (in this fork) execute the process from path.
 	if (mProcessHandle == 0)
-		::execlp(mProcessPath.asBytes(), argv, envp);
+		posix::execlp(mProcessPath.asBytes(), argv, envp);
 }
 
 MLProcess::~MLProcess()
@@ -33,7 +29,7 @@ void MLProcess::exitThread() noexcept
 
 	if (mProcessHandle != 0)
 	{
-		::kill(mProcessHandle, SIGKILL);
+		posix::kill(mProcessHandle, SIGKILL);
 		mProcessHandle = 0;
 	}
 }
