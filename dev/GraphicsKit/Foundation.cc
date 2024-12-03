@@ -184,10 +184,10 @@ void GKDrawRoundedRectangle(MLInteger x, MLInteger y, MLInteger width, MLInteger
 // ================================================ //
 void GKDrawPixel(MLInteger cx, MLInteger cy, MLColor color)
 {
-	if (!kFBArray)
+	if (!kWindowServerFB)
 		return;
 
-	kFBArray[cx * cy] = color;
+	kWindowServerFB[cx * cy] = color;
 }
 
 // ================================================ //

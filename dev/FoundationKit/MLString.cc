@@ -4,29 +4,20 @@
 
 ------------------------------------------- */
 
+#include "FoundationKit/Foundation.h"
 #include <FoundationKit/MLAllocator.h>
 #include <FoundationKit/MLString.h>
 #include <cstring>
 
 MLString::MLString(MLSizeType sizeOfBuffer)
 {
-	mCursor = 0;
-	mSize	= sizeOfBuffer;
-	mData	= MLAllocator::shared().initArray<MLChar>(sizeOfBuffer);
-
-	memset(mData, 0, mSize);
+	this->reserve(sizeOfBuffer);
 }
 
 MLString::MLString(const MLChar* buffer)
 {
-	auto sizeOfBuffer = strlen(buffer);
-
-	mCursor = 0;
-	mSize	= sizeOfBuffer;
-	mData	= MLAllocator::shared().initArray<MLChar>(sizeOfBuffer);
-
-	memset(mData, 0, mSize);
-	memcpy(mData, buffer, mSize);
+	this->reserve(::strlen(buffer));
+	*this += buffer;
 }
 
 MLString::~MLString() = default;
@@ -34,6 +25,16 @@ MLString::~MLString() = default;
 MLString& MLString::operator+=(const MLString text)
 {
 	*this += text.mData;
+	return *this;
+}
+
+MLString& MLString::operator=(const MLChar* rhs)
+{
+	this->dispose();
+	this->reserve(::strlen(rhs));
+	
+	*this += rhs;
+
 	return *this;
 }
 
@@ -89,7 +90,7 @@ const MLChar* MLString::asConstBytes() const
 	return mData;
 }
 
-void MLString::dispose()
+void MLString::dispose() noexcept
 {
 	if (mData)
 	{
@@ -98,11 +99,23 @@ void MLString::dispose()
 	}
 }
 
+void MLString::reserve(MLSizeType length) noexcept
+{
+	if (mData)
+		return;
+
+	mCursor = 0;
+	mSize	= length;
+	mData	= MLAllocator::shared().initArray<MLChar>(mSize);
+
+	memset(mData, 0, mSize);
+}
+
 const MLString MLString::toString()
 {
-	const auto cLen = 512;
+	const auto length_buffer = 4096;
 
-	MLString str(cLen);
+	MLString str(length_buffer);
 	str += "['ClassName': 'MLString']";
 
 	return str;

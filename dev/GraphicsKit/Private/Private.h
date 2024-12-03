@@ -32,9 +32,6 @@ struct MLColor final
 	MLInteger r, g, b, a;
 };
 
-/// @brief Process framebuffer array.
-ML_EXTERN_C MLColor* kFBArray;
-
 enum
 {
 	kColorProfileSRGB,
@@ -42,4 +39,7 @@ enum
 	kColorProfileRGB,
 };
 
-static_assert(sizeof(MLReal) == 8, "MLReal isn't a 64-bit IEEE float.");
+static_assert(sizeof(MLReal) == 8, "GK: MLReal type isn't a 64-bit IEEE float.");
+
+/// @brief Process framebuffer array.
+ML_EXTERN_C MLColor* kWindowServerFB;

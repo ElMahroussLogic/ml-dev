@@ -23,6 +23,7 @@ public:
 	~MLString() override;
 
 	MLString& operator=(const MLString& rhs);
+	MLString& operator=(const MLChar* rhs);
 	MLString(const MLString& rhs);
 
 	MLString& operator+=(const MLChar chr);
@@ -35,7 +36,8 @@ public:
 	MLChar*		  asBytes();
 	const MLChar* asConstBytes() const;
 
-	void dispose();
+	void dispose() noexcept;
+	void reserve(MLSizeType length) noexcept;
 
 	MLChar& operator[](MLSizeType index);
 

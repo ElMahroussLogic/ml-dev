@@ -18,6 +18,8 @@ public:
 	ML_COPY_DEFAULT(MLProcess);
 
 	void exitThread() noexcept;
+	void sendSignal(MLInteger sig) noexcept;
+	void spawnProcess(const MLChar* path, const MLChar* argv, MLChar* const* envp);
 
 private:
 	MLString	mProcessPath;
