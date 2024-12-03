@@ -11,4 +11,4 @@ cd dev/FoundationKit && btb build-posix.json
 
 ###  You can now use the DLL/SO/DYLIB for your project.
 
-###### Copyright (C) 2024, ELMH Group, all rights reserved.
+###### Copyright (C) 2024, Amlal EL Mahrouss, all rights reserved.

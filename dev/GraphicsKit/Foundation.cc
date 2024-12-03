@@ -1,7 +1,7 @@
 /*
  * Created on Thu May 16 2024
  *
- * Copyright (c) 2024 ELMH Group
+ * Copyright (c) 2024 Amlal EL Mahrouss
  */
 
 #include <GraphicsKit/Foundation.h>
