@@ -30,7 +30,7 @@ MLProcess::~MLProcess()
 /// @brief Exit process.
 // ================================================ //
 
-void MLProcess::exitThread() noexcept
+void MLProcess::disposeProcess() noexcept
 {
 	if (mProcessHandle != 0)
 	{

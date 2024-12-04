@@ -12,8 +12,31 @@
 #error !!! This is not C++ please use standard C++ !!!
 #else
 
-#define kMathPI (3.14159265358979323846)
-#define kMathEuler (2.718281828459045235360287471352)
+/// @brief Exits thread with code.
+/// @param exitCode it's exit code.
+/// @param currentThread the current thread to exit.
+/// @return void, no return arguments.
+ML_IMPORT void MLDisposeThreadWithCode(MLInteger exitCode, MLPointer currentThread);
+
+/// @brief Exits the current thread.
+/// @param exitCode it's exit code.
+/// @return void, no return arguments.
+ML_IMPORT void MLExitWithCode(MLInteger exitCode);
+
+/// @brief Get last exit code from any thread.
+/// @return the exit code of the thread.
+ML_IMPORT MLInteger MLGetExitCode(void);
+
+/// @brief Writes to stdout using a custom formating.
+/// @param format the format itself.
+/// @param ... variable arguments.
+/// @return void.
+ML_IMPORT void MLLog(const MLChar* format, ...);
+
+/// @brief Trigerred when an assertion fails.
+/// @param expr the expression converted to string.
+/// @param file the file.
+ML_IMPORT void MLAssert(const MLChar* expr, const MLChar* file, const MLInteger line);
 
 class MLObject;
 class MLString;
